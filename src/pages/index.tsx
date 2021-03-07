@@ -1,6 +1,6 @@
-import { Link } from 'gatsby'
-import React from 'react'
-import Header from '../components/header'
+import { Link } from 'gatsby';
+import React from 'react';
+import Header from '../components/header';
 
 export default function Home() {
   return (
@@ -14,5 +14,5 @@ export default function Home() {
       <Header headerText='Hello Gatsby!' />
       <img src='https://source.unsplash.com/random/400x200' alt='' />
     </div>
-  )
+  );
 }
