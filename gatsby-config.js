@@ -5,6 +5,8 @@
  */
 
 module.exports = {
-  /* Your site config here */
-  plugins: [],
+  siteMetadata: {
+    title: 'EveRecon',
+  },
+  plugins: [`gatsby-plugin-postcss`],
 };
