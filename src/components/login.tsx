@@ -4,39 +4,39 @@ export default function Login() {
   return (
     <div>
       <h1>EveRecon</h1>
-      <h2>Welcome!</h2>
       <text>Sign In</text>
       <form>
         <label>
-          Username
+          Name
           <input type='email' name='email' />
+        </label>
+        <br />
+        <label>
+          Mobile Number
+          <input type='text' name='name' />
+        </label>
+        <br />
+        <label>
+          email id
+          <input type='text' name='name' />
         </label>
         <br />
         <label>
           Password
           <input type='text' name='name' />
+        </label>{' '}
+        <br />
+        <label>
+          Confirm password
+          <input type='text' name='name' />
         </label>
       </form>
-      <hr />
-      <text>OR</text>
-      <hr />
-      <br />
-      <button>
-        <text> Continue with Google </text>
-      </button>
-      <br />
-      <button>
-        <text> Continue with Facebook </text>
-      </button>
-      <br />
       <text>
-        Forgot password? <text>Reset</text>
+        <text>Location</text>
+        <text>Bharuch</text>
+        <text>(change)</text>
       </text>
-      <br />
-      <button>
-        <text> Login </text>
-      </button>
-      <br />
+
       <button>
         <text> Create account </text>
       </button>
