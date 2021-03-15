@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Login() {
-  const input_class =
+  const input_class: string =
     'border-black text-xs block w-full my-4 rounded-xl';
   return (
     <div className='flex flex-col items-center h-screen mx-auto w-1/3'>
