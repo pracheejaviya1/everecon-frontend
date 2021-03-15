@@ -6,30 +6,35 @@ export default function Login() {
       <h1>EveRecon</h1>
       <text>Sign In</text>
       <form>
-        <label>
-          Name
-          <input type='email' name='email' />
-        </label>
+        <input
+          type='email'
+          className='border-black m-2 rounded-xl'
+          placeholder='Name'
+        />
         <br />
-        <label>
-          Mobile Number
-          <input type='text' name='name' />
-        </label>
+        <input
+          type='tel'
+          className='border-black m-2 rounded-xl'
+          placeholder='Mobile Number'
+        />
         <br />
-        <label>
-          email id
-          <input type='text' name='name' />
-        </label>
+        <input
+          type='email'
+          className='border-black m-2 rounded-xl'
+          placeholder='Email ID'
+        />
         <br />
-        <label>
-          Password
-          <input type='text' name='name' />
-        </label>{' '}
+        <input
+          type='password'
+          className='border-black m-2 rounded-xl'
+          placeholder='Password'
+        />
         <br />
-        <label>
-          Confirm password
-          <input type='text' name='name' />
-        </label>
+        <input
+          type='password'
+          className='border-black m-2 rounded-xl'
+          placeholder='Confirm Password'
+        />
       </form>
       <text>
         <text>Location</text>
