@@ -1,7 +1,12 @@
 import React from 'react';
-import Signup from '../components/signup';
 import Signin from '../components/signin';
+import Signup from '../components/signup';
 
 export default function Home() {
-  return <Signin />;
+  return (
+    <div>
+      <Signup />
+      <Signin />
+    </div>
+  );
 }
