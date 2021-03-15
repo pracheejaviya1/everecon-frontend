@@ -1,6 +1,6 @@
 import React from 'react';
 import landingImage from '../assets/Images/default.jpg';
-import CommunityCard from '../components/cards/community';
+import CommunityCard from './cards/community';
 import EventsCard from '../components/cards/events';
 import Header from './header';
 
