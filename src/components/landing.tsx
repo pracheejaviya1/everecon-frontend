@@ -1,7 +1,7 @@
 import React from 'react';
 import landingImage from '../assets/Images/default.jpg';
-import CommunityCard from './cards/community';
-import EventsCard from '../components/cards/events';
+import CommunityCard from './cards/landingCommunity';
+import EventsCard from './cards/landingEvents';
 import Header from './header';
 
 export default function Landing() {
@@ -18,8 +18,14 @@ export default function Landing() {
       </text>
       <h1>Explore Communities</h1>
       <CommunityCard />
+      <CommunityCard />
+      <CommunityCard />
+      <text>See more</text>
       <h1>Explore Events</h1>
       <EventsCard />
+      <EventsCard />
+      <EventsCard />
+      <text>See more</text>
     </div>
   );
 }
