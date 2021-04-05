@@ -32,7 +32,7 @@ export default function Events(props: Props) {
           />
           <EventCard
             datetime={new Date()}
-            numAttendees={100}
+            numAttendees={120}
             title='Some another title'
           />
         </div>
