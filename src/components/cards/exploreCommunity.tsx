@@ -9,6 +9,7 @@ export default function exploreCommunity() {
         <text>Name</text>
         <text>Location</text>
         <text>100 members</text>
+        <button>Follow</button>
       </div>
     </div>
   );
