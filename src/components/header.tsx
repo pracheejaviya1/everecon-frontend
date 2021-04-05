@@ -9,7 +9,7 @@ export default function Header() {
         <input
           type='text'
           placeholder='What you looking for?'
-          className='placeholder-gray-400 text-xs w-full bg-gray-100'
+          className='placeholder-gray-400 border-none text-xs w-full bg-gray-100'
         />
       </div>
       <ul className='links flex flex-row justify-evenly'>
