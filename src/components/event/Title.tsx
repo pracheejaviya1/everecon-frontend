@@ -5,7 +5,7 @@ type Props = {
   datetime: Date;
 };
 
-export default function CommunityTitle(props: Props) {
+export default function EventTitle(props: Props) {
   return (
     <div className='flex border-b border-gray-400 mx-auto my-4 p-4 w-3/4 items-center justify-between'>
       <div>

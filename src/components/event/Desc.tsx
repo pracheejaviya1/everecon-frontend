@@ -1,7 +1,7 @@
 import React from 'react';
 import image from '../../assets/Images/community.jpg';
 
-export default function CommunityDesc() {
+export default function EventDesc() {
   return (
     <div className='flex items-center justify-between w-3/4 mx-auto my-2'>
       <div className='w-1/2 my-2'>
@@ -15,6 +15,7 @@ export default function CommunityDesc() {
         </p>
       </div>
       <div>
+        {/* Add cards here */}
         <button className='bg-blue-500 rounded-md text-white py-2 px-4'>
           Register
         </button>

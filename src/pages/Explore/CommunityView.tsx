@@ -1,17 +1,17 @@
 import React from 'react';
-import CommunityDesc from '../../components/community/Desc';
-import CommunityTitle from '../../components/community/Title';
+import EventDesc from '../../components/event/Desc';
+import EventTitle from '../../components/event/Title';
 import Header from '../../components/header';
 
-export default function ViewCommunity() {
+export default function ViewEvent() {
   return (
-    <div>
+    <div className='m-2 border-b-2 border-black'>
       <Header />
-      <CommunityTitle
+      <EventTitle
         datetime={new Date()}
         title='Talking Tech with Feeling Ineium'
       />
-      <CommunityDesc />
+      <EventDesc />
     </div>
   );
 }
