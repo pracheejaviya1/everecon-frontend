@@ -22,6 +22,7 @@ export default function Landing() {
           <li>Tickets</li>
           <li>Favourites</li>
           <li>Hisotry</li>
+          <li>My Communities</li>
         </ul>
       </div>
       <hr />
