@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../header';
 import communityImage from '../../assets/Images/default.jpg';
 
-export default function createCommunityOne() {
+export default function createCommunityTwo() {
   return (
     <div>
       <Header />
