@@ -25,6 +25,7 @@ export default function Landing() {
           <li>My Communities</li>
         </ul>
       </div>
+      {/*Add respective cards */}
       <hr />
     </div>
   );

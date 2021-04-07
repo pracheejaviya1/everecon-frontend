@@ -1,7 +1,7 @@
 import React from 'react';
 import landingImage from '../assets/Images/default.jpg';
-import CommunityCard from './cards/landingCommunity';
-import EventsCard from './cards/landingEvents';
+import CommunityCard from './cards/landingCommunityCard';
+import EventsCard from './cards/landingEventsCard';
 import Header from './header';
 
 export default function Landing() {

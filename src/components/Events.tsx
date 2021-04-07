@@ -1,6 +1,6 @@
 import React from 'react';
 import image from '../assets/Images/ahmedabad.jpeg';
-import EventCard from './cards/EventCard';
+import EventCard from './cards/eventCard';
 import Header from './header';
 
 type Props = {

@@ -7,7 +7,10 @@ export default function exploreCommunity() {
       <img src={communityImage}></img>
       <div>
         <text>Name</text>
-        <text>Location</text>
+        <text>Location</text> {/*Add tags horizontal recycler */}
+        <div>
+          <text>Tag1</text>
+        </div>
         <text>100 members</text>
         <button>Follow</button>
       </div>
