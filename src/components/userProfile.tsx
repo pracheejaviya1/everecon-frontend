@@ -18,14 +18,13 @@ export default function Landing() {
       </div>
       <div>
         <ul>
-          <li>Following</li>
+          <li>Following</li> {/*Add respective cards */}
           <li>Tickets</li>
           <li>Favourites</li>
           <li>Hisotry</li>
           <li>My Communities</li>
         </ul>
       </div>
-      {/*Add respective cards */}
       <hr />
     </div>
   );

@@ -13,6 +13,7 @@ export default function exploreCommunity() {
         </div>
         <text>100 members</text>
         <button>Follow</button>
+        <button>Delete</button> {/*Either delete or follow */}
       </div>
     </div>
   );
