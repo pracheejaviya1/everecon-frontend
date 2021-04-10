@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../header';
 
-export default function createEventTwo() {
+export default function createEventOne() {
   return (
     <div>
       <Header />
