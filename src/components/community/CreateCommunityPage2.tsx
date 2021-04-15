@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from '../header';
 import communityImage from '../../assets/Images/default.jpg';
+import Header from '../header';
 
-export default function createCommunityTwo() {
+export default function CreateCommunityTwo() {
   return (
     <div>
       <Header />

@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from '../header';
 import eventImage from '../../assets/Images/community.jpg';
+import Header from '../header';
 
-export default function createEventOne() {
+export default function CreateEventOne() {
   return (
     <div>
       <Header />
