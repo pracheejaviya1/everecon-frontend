@@ -5,7 +5,6 @@ export default function CreateEventTwo() {
   return (
     <div className='h-screen'>
       <Header />
-      {/*Add back icon */}
       <div className='flex flex-col my-8 justify-start h-5/6 items-center'>
         <div className='flex items-center justify-between border-b-2 pb-2 w-1/2'>
           <svg

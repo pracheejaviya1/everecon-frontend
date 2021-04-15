@@ -6,6 +6,7 @@ import CreateEventOne from '../components/event/createEventPage1';
 import CreateEventTwo from '../components/event/createEventPage2';
 import EventRegister from '../components/event/Register';
 import UpdateEvent from '../components/event/updateEvent';
+import UpdateEventTwo from '../components/event/UpdateEvent2';
 import Events from '../components/Events';
 import Landing from '../components/landing';
 import Signin from '../components/signin';
@@ -29,6 +30,7 @@ export default function Home() {
       <CreateEventOne />
       <CreateEventTwo />
       <UpdateEvent />
+      <UpdateEventTwo />
     </div>
   );
 }
