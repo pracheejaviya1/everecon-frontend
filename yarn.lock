@@ -2141,9 +2141,9 @@
     form-data "^3.0.0"
 
 "@types/node@*", "@types/node@^14.14.10":
-  version "14.14.39"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.39.tgz#9ef394d4eb52953d2890e4839393c309aa25d2d1"
-  integrity sha512-Qipn7rfTxGEDqZiezH+wxqWYR8vcXq5LRpZrETD19Gs4o8LbklbmqotSUsMU+s5G3PJwMRDfNEYoxrcBwIxOuw==
+  version "14.14.40"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.40.tgz#05a7cd31154487f357ca0bec4334ed1b1ab825a0"
+  integrity sha512-2HoZZGylcnz19ZSbvWhgWHqvprw1ZGHanxIrDWYykPD4CauLW4gcyLzCVfUN2kv/1t1F3CurQIdi+s1l9+XgEA==
 
 "@types/node@^8.5.7":
   version "8.10.66"
@@ -4062,9 +4062,9 @@ content-type@^1.0.4, content-type@~1.0.4:
   integrity sha512-hIP3EEPs8tB9AT1L+NUqtwOAps4mk2Zob89MWXMHjHWg9milF/j4osnnQLXBCBFBk/tvIG/tUc9mOUJiPBhPXA==
 
 contentful-management@^7.5.1:
-  version "7.15.0"
-  resolved "https://registry.yarnpkg.com/contentful-management/-/contentful-management-7.15.0.tgz#a6c8d3147a5323cc1557116f15f5329dbd122408"
-  integrity sha512-/K0OrnE/8M38rvY41tBmij5imZOfmC3mZaLv9KdpPZ6bpSXYzfsYTX3VMPqZp93Kw2yyUSPGYZzNsT1W5M3Heg==
+  version "7.15.1"
+  resolved "https://registry.yarnpkg.com/contentful-management/-/contentful-management-7.15.1.tgz#868237fbe7354f02fafdfda7fdafad61928b3efd"
+  integrity sha512-Wk4gpoNDXThkof49W0S3WgdW42T9kKQZj+7V7aDs+VrW0/WfTiNh5fMiMt0rxLqkWjxFrsa1TMAxR0WzT3lLyQ==
   dependencies:
     "@types/json-patch" "0.0.30"
     axios "^0.21.0"
@@ -4496,9 +4496,9 @@ dataloader@2.0.0:
   integrity sha512-YzhyDAwA4TaQIhM5go+vCLmU0UikghC/t9DTQYZR2M/UvZ1MdOhPezSDZcjj9uqQJOMqjLcpWtyW2iNINdlatQ==
 
 date-fns@^2.14.0:
-  version "2.21.0"
-  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.21.0.tgz#4672b8e926d1b37d5353dc14da44b883481ac927"
-  integrity sha512-lbAFpaKz7QuVxm6m1rmioh4BB2gmLx1r1JMYXU2A/ufT5ly4zEG7HYH4fvS/QfbdyC5rkYyiS30mYz4Q7XCO+w==
+  version "2.21.1"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.21.1.tgz#679a4ccaa584c0706ea70b3fa92262ac3009d2b0"
+  integrity sha512-m1WR0xGiC6j6jNFAyW4Nvh4WxAi4JF4w9jRJwSI8nBmNcyZXPcP9VUQG+6gHQXAmqaGEKDKhOqAtENDC941UkA==
 
 debug@2, debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.0, debug@^2.6.9:
   version "2.6.9"

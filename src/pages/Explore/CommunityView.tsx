@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import EventDesc from '../../components/event/Desc';
 import EventTitle from '../../components/event/Title';
 import Header from '../../components/header';

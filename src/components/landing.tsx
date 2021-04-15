@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import landingImage from '../assets/Images/default.jpg';
 import CommunityCard from './cards/landingCommunityCard';
 import EventsCard from './cards/landingEventsCard';

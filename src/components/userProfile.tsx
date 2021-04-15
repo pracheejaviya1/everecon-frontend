@@ -1,6 +1,6 @@
-import React from 'react';
-import Header from './header';
+import * as React from 'react';
 import landingImage from '../assets/Images/default.jpg';
+import Header from './header';
 
 export default function Landing() {
   return (

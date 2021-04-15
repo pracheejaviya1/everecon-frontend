@@ -1,36 +1,17 @@
-import React from 'react';
-import Header from '../header';
+import * as React from 'react';
+import EventDesc from '../../components/event/Desc';
+import EventTitle from '../../components/event/Title';
+import Header from '../../components/header';
 
-export default function createEventOne() {
+export default function UpdateEvent() {
   return (
-    <div>
+    <div className='m-2 border-b-2 border-black'>
       <Header />
-      <div>
-        <text>Create Event</text>
-      </div>
-      <hr />
-      <div>
-        <text>Date</text>
-        <input>Date</input> {/*Check validity */}
-      </div>
-
-      <div>
-        <text>Time</text>
-        <input>Time</input> {/*Check Validity*/}
-      </div>
-
-      <div>
-        <text>Tags</text>
-        <input>Search Tags</input>
-        <div>{/*Insert tag chips here */}</div>
-      </div>
-
-      <div>
-        <text>Participant Limit</text>
-        <input>Limit</input>
-      </div>
-      {/*Fees part pending, we don have in out diagrams */}
-      <button>Next</button>
+      <EventTitle
+        datetime={new Date()}
+        title='Talking Tech with Feeling Ineium'
+      />
+      <EventDesc />
     </div>
   );
 }

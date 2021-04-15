@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import image from '../../assets/Images/community.jpg';
 
 export default function EventDesc() {

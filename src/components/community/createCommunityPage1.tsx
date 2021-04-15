@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import communityImage from '../../assets/Images/default.jpg';
 import Header from '../header';
 
@@ -10,7 +10,7 @@ export default function CreateCommunityOne() {
       <div className='flex flex-col h-5/6 my-8 justify-center items-center'>
         <div className='flex items-center justify-between border-b-2 pb-2 w-1/2'>
           <svg
-            xmlns='http://www.w3.org/2000/svg'
+            xmlns='https://www.w3.org/2000/svg'
             className='h-6 w-6'
             fill='none'
             viewBox='0 0 24 24'
