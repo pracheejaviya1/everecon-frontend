@@ -32,7 +32,8 @@ export default function Home() {
       <CreateEventTwo />
       <UpdateEvent />
       <UpdateEventTwo />
-      <Link to='/Settings/SettingsSecurity'>Settings</Link>
+      <Link to='/Settings/SettingsAccount'>Settings</Link>
+      <Link to='/Settings/SettingsSecurity'>Setting</Link>
     </div>
   );
 }

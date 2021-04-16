@@ -1,6 +1,7 @@
 import * as React from 'react';
 import profilepic from '../../assets/Images/community.jpg';
 import Header from '../../components/header';
+import { Link } from 'gatsby';
 
 export default function SettingAccount() {
   return (
@@ -28,9 +29,9 @@ export default function SettingAccount() {
             </svg>
             <p className='ml-1'>Account</p>
           </button>
-          <button
+          <Link
             className='py-2 px-4 m-2 flex items-center justify-center'
-            onClick={e => e.preventDefault()}
+            to='/Settings/SettingsSecurity'
           >
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -47,7 +48,7 @@ export default function SettingAccount() {
               />
             </svg>
             <p className='ml-1'>Security</p>
-          </button>
+          </Link>
         </div>
         <div className='flex flex-col my-8 justify-center items-start ml-16 mr-0 w-full'>
           <div className='flex items-end justify-between border-b-2 pb-4 w-2/3'>
