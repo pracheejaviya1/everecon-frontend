@@ -12,5 +12,18 @@ module.exports = {
     FAST_DEV: true,
     PARALLEL_SOURCING: true,
   },
-  plugins: [`gatsby-plugin-postcss`],
+  plugins:   
+  [
+    `gatsby-plugin-postcss`,
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          `Inter\:300,400,700`,
+          `Mulish`, // second font
+        ],
+        display: 'swap'
+      }
+    }
+  ],
 };
