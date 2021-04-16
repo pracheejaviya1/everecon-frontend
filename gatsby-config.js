@@ -21,6 +21,7 @@ module.exports = {
           `Inter`,
           `Mulish`, // second font
           `Karantina`,
+          'Roboto'
         ],
         display: 'swap',
       },

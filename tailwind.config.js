@@ -7,6 +7,7 @@ module.exports = {
         mulish: ['Mulish', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],
         karantina: ['Karantina', 'cursive'],
+        roboto: ['Roboto', 'sans-serif'],
       },
     },
   },
