@@ -11,7 +11,7 @@ export default function Signin() {
   const btn_class_facebook: string =
     'p-3 my-2 rounded-xl w-full border border-solid border-blue-500 text-blue-400	font-roboto';
   return (
-    <div className='flex flex-col items-center h-screen mx-auto w-1/3'>
+    <div className='flex flex-col items-center h-screen mx-auto w-1/3 mt-10'>
       <img src={LandingTitle} width='487' height='118' alt='EveRecon' />
       <text className='m-1 mt-16 font-mulish text-2xl'>Sign In</text>
       <form className='w-1/2'>
@@ -45,7 +45,7 @@ export default function Signin() {
       </div>
       <div className='w-1/4'>
         <button className={btn_class}>Login</button>
-        <button className={btn_class}>Create account</button>
+        <button className={btn_class}>Sign Up</button>
       </div>
     </div>
   );
