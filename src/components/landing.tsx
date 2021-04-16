@@ -35,18 +35,22 @@ export default function Landing() {
             <CommunityCard />
             <CommunityCard />
           </div>
-          <text className='font-mulish font-light text-xs text-right'>
+          <text className='m-10 text-center font-mulish text-blue-400 underline'>
             See more
           </text>
         </div>
         <div className='m-10 flex flex-col'>
-          <h1 className='m-4 text-lg text-center'>Explore Events</h1>
+          <h1 className='m-4 text-xl text-center font-mulish font-medium'>
+            Explore Events
+          </h1>
           <div className='flex align-items-center justify-evenly'>
             <EventsCard />
             <EventsCard />
             <EventsCard />
           </div>
-          <text className='m-10 text-center'>See more</text>
+          <text className='m-10 text-center font-mulish text-blue-400 underline'>
+            See more
+          </text>
         </div>
       </div>
     </div>
