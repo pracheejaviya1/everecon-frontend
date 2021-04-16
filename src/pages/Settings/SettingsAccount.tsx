@@ -4,7 +4,7 @@ import Header from '../../components/header';
 
 export default function SettingAccount() {
   return (
-    <div className='h-screen'>
+    <div className='h-screen bg-landing bg-no-repeat bg-left-bottom'>
       <Header />
       <div className='flex'>
         <div className='flex flex-col w-1/6 items-center justify-center'>
