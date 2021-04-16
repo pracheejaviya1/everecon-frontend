@@ -1,4 +1,5 @@
 import * as React from 'react';
+import LandingTitle from '../assets/Images/evereconLanding.png';
 
 export default function Login() {
   const input_class: string =
@@ -6,8 +7,8 @@ export default function Login() {
 
   return (
     <div className='flex flex-col items-center h-screen mx-auto w-1/3'>
-      <h1 className='mb-12 mt-10 text-3xl'>EveRecon</h1>
-      <text className='m-6'>Sign In</text>
+      <img src={LandingTitle} width='487' height='118' alt='EveRecon' />
+      <text className='m-6'>Sign Up</text>
       <form className='w-1/2'>
         <input type='email' className={input_class} placeholder='Name' />
         <input type='tel' className={input_class} placeholder='Mobile Number' />

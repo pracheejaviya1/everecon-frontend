@@ -1,4 +1,5 @@
 import * as React from 'react';
+import LandingTitle from '../assets/Images/evereconLanding.png';
 
 export default function Signin() {
   const input_class: string =
@@ -7,8 +8,7 @@ export default function Signin() {
     'p-3 my-2 rounded-xl w-full border border-solid border-black';
   return (
     <div className='flex flex-col items-center h-screen mx-auto w-1/3'>
-      <h1 className='mt-10 text-3xl'>EveRecon</h1>
-      <h2 className='mb-12 text-xl'>Welcome!</h2>
+      <img src={LandingTitle} width='487' height='118' alt='EveRecon' />
       <text className='m-6'>Sign In</text>
       <form className='w-1/2'>
         <input
