@@ -11,6 +11,7 @@ module.exports = {
       },
       backgroundImage: theme => ({
         landing: "url('../assets/Designs/LandingDesign.png')",
+        landing_signin: "url('../assets/Designs/LandingDesign2.png')",
       }),
     },
   },

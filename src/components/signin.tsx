@@ -11,10 +11,10 @@ export default function Signin() {
   const btn_class_facebook: string =
     'p-3 my-2 rounded-xl w-full border border-solid border-blue-500 text-blue-400	font-roboto';
   return (
-    <div className='flex flex-col items-center h-screen mx-auto w-1/3 mt-10'>
+    <div className='flex flex-col bg-landing_signin bg-no-repeat bg-right-bottom items-center h-screen mx-auto w-full mt-10'>
       <img src={LandingTitle} width='487' height='118' alt='EveRecon' />
       <text className='m-1 mt-16 font-mulish text-2xl'>Sign In</text>
-      <form className='w-1/2'>
+      <form className='w-1/6'>
         <input
           type='email'
           className={input_class}
@@ -33,7 +33,7 @@ export default function Signin() {
         {'\u00A0   '}OR{'   \u00A0'}
         {'\u2015\u2015\u2015\u2015\u2015\u2015\u2015'}
       </text>
-      <div className='w-1/2 mb-3'>
+      <div className='w-1/6 mb-3'>
         <button className={btn_class_google}>Continue with Google</button>
         <button className={btn_class_facebook}>Continue with Facebook</button>
         <text className='p-1 text-sm text-left font-roboto'>
@@ -43,7 +43,10 @@ export default function Signin() {
           Reset
         </text>
       </div>
-      <div className='w-1/4'>
+      <text className='text-left w-1/6 font-mulish text-sm text-red-400'>
+        Enter valid data
+      </text>
+      <div className='w-1/6'>
         <button className={btn_class}>Login</button>
         <button className={btn_class}>Sign Up</button>
       </div>

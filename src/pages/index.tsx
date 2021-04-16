@@ -16,7 +16,7 @@ import ViewEvent from './Explore/CommunityView';
 
 export default function Home() {
   return (
-    <div className='divide-y-2 divide-black'>
+    <div className='divide-y'>
       <Signin />
       <Signup />
       <Landing />
