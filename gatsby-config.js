@@ -19,10 +19,10 @@ module.exports = {
       options: {
         fonts: [
           `Inter`,
-          `Inter\:300,600`
+          `Inter\:300,600`,
           `Mulish`, // second font
           `Karantina`,
-          'Roboto'
+          'Roboto',
         ],
         display: 'swap',
       },
