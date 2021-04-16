@@ -36,7 +36,7 @@ export default function SettingSecurity() {
           </button>
         </div>
         <div className='flex flex-col my-8 justify-start items-start mx-auto w-full'>
-          <div className='flex items-end justify-between border-b-2 pb-4 w-1/2'>
+          <div className='flex items-end justify-between border-b-2 pb-4 w-2/3'>
             <div className='flex items-center justify-center'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -60,7 +60,7 @@ export default function SettingSecurity() {
             </ul>
           </div>
 
-          <div className='w-1/2 pt-4 flex items-start justify-between'>
+          <div className='w-2/3 pt-4 flex items-start justify-between'>
             <div>
               <h2 className='font-bold text-2xl'>Profile</h2>
               <p className='text-gray-500'>
@@ -76,7 +76,7 @@ export default function SettingSecurity() {
             </button>
           </div>
 
-          <form className='flex w-full'>
+          <form className='flex w-2/3'>
             <div className='flex my-4 mr-4 flex-col'>
               <label htmlFor='firstname' className='mb-1'>
                 First Name <span className='text-red-500'>*</span>
