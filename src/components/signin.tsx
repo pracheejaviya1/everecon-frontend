@@ -9,9 +9,7 @@ export default function Signin() {
   return (
     <div className='flex flex-col items-center h-screen mx-auto w-1/3'>
       <img src={LandingTitle} width='487' height='118' alt='EveRecon' />
-      <text className='m-6' fontFamily='Mulish'>
-        Sign In
-      </text>
+      <text className='m-6 font-karantina'>Sign In</text>
       <form className='w-1/2'>
         <input
           type='email'

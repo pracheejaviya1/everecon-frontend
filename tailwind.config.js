@@ -1,7 +1,15 @@
 module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}'],
   darkMode: false, // or 'media' or 'class'
-  theme: {},
+  theme: {
+    extend: {
+      fontFamily: {
+        mulish: ['Mulish', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
+        karantina: ['Karantina', 'cursive'],
+      },
+    },
+  },
   variants: {
     extend: {},
   },
