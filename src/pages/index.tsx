@@ -8,7 +8,7 @@ import CreateEventTwo from '../components/event/createEventPage2';
 import EventRegister from '../components/event/Register';
 import UpdateEvent from '../components/event/updateEvent';
 import UpdateEventTwo from '../components/event/UpdateEvent2';
-import Events from '../components/Events';
+//import Events from '../components/Events';
 import Landing from '../components/landing';
 import Signin from '../components/signin';
 import Signup from '../components/signup';
@@ -25,7 +25,7 @@ export default function Home() {
       <Communities />
       <ExploreEvents />
       <ViewEvent />
-      <Events title='Random Title' />
+      {/* <Events title='Random Title' /> */}
       <EventRegister title='Talking Tech with Ingenium' datetime={new Date()} />
       <CreateCommunityOne />
       <CreateCommunityTwo />
