@@ -8,10 +8,10 @@ export default function Login() {
     'border-gray p-3 text-xs block w-full my-4 rounded-xl font-roboto';
 
   return (
-    <div className='flex flex-col items-center h-screen mx-auto w-1/3 mt-10'>
+    <div className='flex flex-col bg-landing bg-no-repeat bg-left-bottom items-center h-screen mx-auto w-full mt-10'>
       <img src={LandingTitle} width='487' height='118' alt='EveRecon' />
       <text className='m-1 mt-16 font-mulish text-2xl'>Sign Up</text>
-      <form className='w-1/2'>
+      <form className='w-1/6'>
         <input type='email' className={input_class} placeholder='Name' />
         <input type='tel' className={input_class} placeholder='Mobile Number' />
         <input type='email' className={input_class} placeholder='Email ID' />
@@ -22,7 +22,7 @@ export default function Login() {
           placeholder='Confirm Password'
         />
       </form>
-      <text className='text-left font-mulish text-sm text-red-400'>
+      <text className='text-left w-1/6 font-mulish text-sm text-red-400'>
         Enter valid data
       </text>
       <button className='mt-7'>

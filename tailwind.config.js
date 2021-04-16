@@ -9,6 +9,9 @@ module.exports = {
         karantina: ['Karantina', 'cursive'],
         roboto: ['Roboto', 'sans-serif'],
       },
+      backgroundImage: theme => ({
+        landing: "url('../assets/Designs/LandingDesign.png')",
+      }),
     },
   },
   variants: {
