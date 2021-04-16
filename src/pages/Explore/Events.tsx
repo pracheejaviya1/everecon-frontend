@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Header from '../../components/header';
-import CommunityCard from '../../components/cards/community/communityCard';
+import EventCard from '../../components/cards/event/eventCard';
 
 export default function ExploreCommunity() {
   const input_class: string =
@@ -11,7 +11,7 @@ export default function ExploreCommunity() {
       <div className='m-6 flex flex-col divide-y divide-gray-500'>
         <div className='m-4'>
           <h1 className='my-5 text-2xl font-mulish text-center'>
-            Explore Communities
+            Explore Events
           </h1>
           <div className='flex flex-row '>
             <form>
@@ -26,9 +26,8 @@ export default function ExploreCommunity() {
               Reset
             </text>
           </div>
-          <CommunityCard />
-          <CommunityCard />
-          <CommunityCard />
+          <EventCard />
+          <EventCard />
         </div>
       </div>
     </div>

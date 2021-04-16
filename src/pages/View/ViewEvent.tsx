@@ -9,7 +9,7 @@ export default function ViewEvent() {
       <Header />
       <EventTitle
         datetime={new Date()}
-        title='Talking Tech with Feeling Ineium'
+        title='Talking Tech with Feeling Ingenium'
       />
       <EventDesc />
     </div>

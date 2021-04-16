@@ -13,15 +13,17 @@ import Landing from '../components/landing';
 import Signin from '../components/signin';
 import Signup from '../components/signup';
 import Communities from './Explore/Communities';
-import ViewEvent from './Explore/CommunityView';
+import ExploreEvents from './Explore/Events';
+import ViewEvent from './View/ViewEvent';
 
 export default function Home() {
   return (
     <div className='divide-y'>
-      <Signin />
+      {/* <Signin />
       <Signup />
-      <Landing />
+      <Landing /> */}
       <Communities />
+      <ExploreEvents />
       <ViewEvent />
       <Events title='Random Title' />
       <EventRegister title='Talking Tech with Ingenium' datetime={new Date()} />
