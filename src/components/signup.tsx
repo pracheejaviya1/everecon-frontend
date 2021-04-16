@@ -22,10 +22,8 @@ export default function Login() {
           placeholder='Confirm Password'
         />
       </form>
-      <text className='flex divide-x w-1/2 mb-2 flex-row items-baseline justify-evenly'>
-        <text className='flex-grow text-left text-xs'>Location</text>
-        <text className='flex-grow text-center text-lg'>Bharuch</text>
-        <text className='flex-grow text-right text-xs'>(change)</text>
+      <text className='text-left font-mulish text-sm text-red-400'>
+        Enter valid data
       </text>
       <button className='mt-7'>
         <text className={btn_class}>Create account</text>

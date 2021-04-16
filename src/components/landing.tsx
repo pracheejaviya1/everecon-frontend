@@ -1,5 +1,5 @@
 import * as React from 'react';
-import landingImage from '../assets/Images/default.jpg';
+import landingImage from '../assets/Images/Rectangle6.png';
 import CommunityCard from './cards/landingCommunityCard';
 import EventsCard from './cards/landingEventsCard';
 import Header from './header';
@@ -10,10 +10,14 @@ export default function Landing() {
       <Header />
       <div className='m-auto'>
         <div className='m-10 flex align-items-center justify-evenly'>
-          <img src={landingImage} className='h-80 w-80' alt='piggy' />
-          <div className='w-1/2 flex flex-col align-items-center justify-evenly'>
-            <h1>About us</h1>
-            <text>
+          <img
+            src={landingImage}
+            className='h-80 w-120 rounded-lg'
+            alt='piggy'
+          />
+          <div className='w-1/4 flex flex-col align-items-center justify-evenly '>
+            <h1 className='font-inter font-extralight text-2xl'>ABOUT US</h1>
+            <text className='font-mulish font-thin '>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -23,13 +27,17 @@ export default function Landing() {
           </div>
         </div>
         <div className='m-10 flex flex-col'>
-          <h1 className='m-4 text-lg text-center'>Explore Communities</h1>
+          <h1 className='m-4 text-xl text-center font-mulish font-medium'>
+            Explore Communities
+          </h1>
           <div className='flex align-items-center justify-evenly'>
             <CommunityCard />
             <CommunityCard />
             <CommunityCard />
           </div>
-          <text className='m-10 text-center'>See more</text>
+          <text className='font-mulish font-light text-xs text-right'>
+            See more
+          </text>
         </div>
         <div className='m-10 flex flex-col'>
           <h1 className='m-4 text-lg text-center'>Explore Events</h1>

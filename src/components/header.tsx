@@ -9,11 +9,11 @@ export default function Header() {
       <div className='flex flex-initial rounded-lg w-1/3 bg-gray-100 p-2'>
         <input
           type='text'
-          placeholder='What you looking for?'
-          className='placeholder-gray-400 border-none text-xs w-full bg-gray-100'
+          placeholder='What are you looking for?'
+          className='placeholder-gray-400 border-none text-xs w-full bg-gray-100 font-mulish'
         />
       </div>
-      <ul className='links flex flex-row justify-evenly'>
+      <ul className='links flex flex-row justify-evenly font-mulish'>
         <li className='m-4'>
           <Link to='/about'>About</Link>
         </li>
