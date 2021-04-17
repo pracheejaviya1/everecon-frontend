@@ -1,7 +1,7 @@
 import * as React from 'react';
-import CommunityImage from '../assets/Images/community.jpg';
-import landingImage from '../assets/Images/default.jpg';
-import Header from './header';
+import CommunityImage from '../../assets/Images/community.jpg';
+import landingImage from '../../assets/Images/default.jpg';
+import Header from '../../components/header';
 
 function CommunityCard() {
   return (
