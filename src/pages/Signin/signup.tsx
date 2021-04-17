@@ -1,5 +1,6 @@
 import * as React from 'react';
 import LandingTitle from '../../assets/Images/evereconLanding.png';
+import { Link } from 'gatsby';
 
 export default function Login() {
   const btn_class: string =
@@ -30,13 +31,15 @@ export default function Login() {
           Already a user?
         </span>
         <span className='text-left font-mulish ml-1 text-lg text-blue-600'>
-          SignIn
+          <Link to='/Signin/signin'> SignIn </Link>
         </span>
       </div>
+      <Link to='/Signin/signin'>
+        <button className='mt-7'>
+          <span className={btn_class}>Create account</span>
+        </button>
+      </Link>
 
-      <button className='mt-7'>
-        <span className={btn_class}>Create account</span>
-      </button>
       <br />
     </div>
   );

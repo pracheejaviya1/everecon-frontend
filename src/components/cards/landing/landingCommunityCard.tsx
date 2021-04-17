@@ -1,5 +1,5 @@
 import * as React from 'react';
-import landingImage from '../../assets/Images/default.jpg';
+import landingImage from '../../../assets/Images/default.jpg';
 
 export default function CommunityCard() {
   return (

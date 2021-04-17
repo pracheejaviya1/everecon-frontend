@@ -48,7 +48,9 @@ export default function Signin() {
         Enter valid data
       </span>
       <div className='w-1/6'>
-        <button className={btn_class}>Login</button>
+        <Link to='/Landing/landing'>
+          <button className={btn_class}>Login</button>
+        </Link>
         <Link to='/Signin/signup'>
           <button className={btn_class}>Sign Up</button>
         </Link>

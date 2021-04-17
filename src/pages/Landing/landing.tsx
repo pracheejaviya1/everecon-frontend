@@ -1,8 +1,8 @@
 import * as React from 'react';
-import landingImage from '../assets/Images/Rectangle6.png';
-import CommunityCard from './cards/landing/landingCommunityCard';
-import EventsCard from './cards/landing/landingEventsCard';
-import Header from './header';
+import landingImage from '../../assets/Images/Rectangle6.png';
+import CommunityCard from '../../components/cards/landing/landingCommunityCard';
+import EventsCard from '../../components/cards/landing/landingEventsCard';
+import Header from '../../components/header';
 
 export default function Landing() {
   return (
