@@ -5,11 +5,7 @@ import CreateCommunityTwo from '../components/community/CreateCommunityPage2';
 import CreateCommunityThree from '../components/community/createCommunityPage3';
 import CreateEventOne from '../components/event/createEventPage1';
 import CreateEventTwo from '../components/event/createEventPage2';
-import EventRegister from '../components/event/eventComponents/Register';
 import UpdateEventTwo from '../components/event/UpdateEvent2';
-import Communities from './Explore/Communities';
-import ExploreEvents from './Explore/Events';
-import ViewEvent from './View/ViewEvent';
 
 export default function Home() {
   return (
@@ -23,7 +19,7 @@ export default function Home() {
       <CreateCommunityThree />
       <CreateEventOne />
       <CreateEventTwo />
-      <UpdateEventTwo />
+      <UpdateEventTwo details='Lorem Ipsum' />
       <Link to='/Settings/SettingsAccount'>Settings</Link>
       <Link to='/Settings/SettingsSecurity'>Setting</Link>
     </div>

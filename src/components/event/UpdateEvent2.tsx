@@ -2,11 +2,15 @@ import * as React from 'react';
 import EventImage from '../../assets/Images/community.jpg';
 import Header from '../../components/header';
 
-export default function UpdateEventTwo() {
+type UpdateProps = {
+  details: string;
+};
+
+export default function UpdateEventTwo(props: UpdateProps) {
   return (
     <div className='h-screen'>
       <Header />
-      <div className='flex flex-col my-8 justify-center items-start ml-12 mr-0 w-full'>
+      <div className='flex flex-col my-8 justify-center items-center ml-12 mr-0 w-full'>
         <div className='flex items-end justify-between border-b-2 pb-4 w-2/3'>
           <div className='flex items-center justify-center'>
             <svg
@@ -33,7 +37,7 @@ export default function UpdateEventTwo() {
           </ul>
         </div>
         <div className='flex items-center justify-between mx-auto w-2/3 font-mulish my-4'>
-          <img src={EventImage} className='rounded-xl m-2' />
+          <img src={EventImage} className='rounded-xl h-40 m-2' />
           <div className='grid grid-cols-3 mx-2'>
             <input
               className='col-span-3 bg-gray-200 rounded-md p-2 placeholder-black'
@@ -60,7 +64,7 @@ export default function UpdateEventTwo() {
             Delete Event
           </button>
         </div>
-        <div className='w-3/4 mx-auto font-mulish'>
+        <div className='w-2/3 mx-auto font-mulish'>
           <form>
             <div className='flex items-center justify-between w-2/5 my-4'>
               <label className='m-2 text-xs' htmlFor='Host'>
@@ -116,14 +120,9 @@ export default function UpdateEventTwo() {
             </div>
           </form>
         </div>
-        <div className='w-3/4 my-2 mx-auto font-inter'>
+        <div className='w-2/3 my-2 mx-auto font-inter'>
           <h2 className='font-bold my-2'>Event Details</h2>
-          <p className='w-1/2'>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aperiam
-            neque repellat tenetur, enim corrupti consequuntur distinctio
-            deleniti numquam ut iste ullam illum quod. Accusamus cum fugit quod
-            totam reprehenderit quidem.
-          </p>
+          <p className='w-1/2'>{props.details}</p>
         </div>
       </div>
     </div>
