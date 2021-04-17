@@ -1,5 +1,5 @@
 import * as React from 'react';
-import communityImage from '../../assets/Images/default.jpg';
+import Rectangle from '../../assets/Images/Rectangle6.png';
 import Header from '../header';
 
 export default function CreateCommunityOne() {
@@ -7,7 +7,7 @@ export default function CreateCommunityOne() {
     <div className='h-screen'>
       <Header />
       {/*Add back icon */}
-      <div className='flex flex-col h-5/6 my-8 justify-center items-center'>
+      <div className='flex flex-col h-5/6 justify-center items-center'>
         <div className='flex items-center justify-between border-b-2 pb-2 w-1/2'>
           <svg
             xmlns='https://www.w3.org/2000/svg'
@@ -23,45 +23,42 @@ export default function CreateCommunityOne() {
               d='M10 19l-7-7m0 0l7-7m-7 7h18'
             />
           </svg>
-          <span className='text-4xl flex-grow text-center'>
+          <span className='text-3xl flex-grow text-center font-base font-mulish'>
             Create Community
           </span>
         </div>
         <figure className='mt-8 mb-6'>
-          <img className='h-60 w-80 rounded-lg' src={communityImage} />
-          <figcaption className='py-2 text-center'>
+          <img className='h-40 w-60 rounded-lg' src={Rectangle} />
+          <figcaption className='py-2 text-center font-mulish'>
             Upload Community photo
           </figcaption>
         </figure>
         <form className='flex flex-col'>
           <label className='my-2' htmlFor='Community name'>
             <input
-              className='border border-black p-2 rounded-lg'
+              className='border border-gray p-2 rounded-lg font-roboto text-sm'
               placeholder='Community name'
               name='Community name'
             />
           </label>
           <label className='my-2' htmlFor='email id'>
             <input
-              className='border border-black p-2 rounded-lg'
+              className='border border-gray p-2 rounded-lg font-roboto text-sm'
               placeholder='email id'
               name='email id'
             />
           </label>
           <label className='my-2' htmlFor='Description'>
             <input
-              className='border border-black p-2 rounded-lg'
+              className='border border-gray p-2 rounded-lg font-roboto text-sm'
               placeholder='Description'
               name='Description'
             />
           </label>
         </form>
-        <div>
-          <span>Location</span>
-          <span> Bharuch</span> {/*Add location spinner*/}
-          <button>(change)</button>
-        </div>
-        <button type='submit'>Next</button>
+        <button className=' my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
+          Next
+        </button>
       </div>
     </div>
   );
