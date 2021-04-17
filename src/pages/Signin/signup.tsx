@@ -19,7 +19,8 @@ export default function Login() {
       />
       <span className='m-1 mt-16 font-mulish text-2xl'>Sign Up</span>
       <form className='w-1/6'>
-        <input type='email' className={input_class} placeholder='Name' />
+        <input type='text' className={input_class} placeholder='Name' />
+        <input type='text' className={input_class} placeholder='Username' />
         <input type='tel' className={input_class} placeholder='Mobile Number' />
         <input type='email' className={input_class} placeholder='Email ID' />
         <input type='password' className={input_class} placeholder='Password' />
