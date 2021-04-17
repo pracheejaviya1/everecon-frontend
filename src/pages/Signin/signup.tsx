@@ -1,6 +1,6 @@
+import { Link } from 'gatsby';
 import * as React from 'react';
 import LandingTitle from '../../assets/Images/evereconLanding.png';
-import { Link } from 'gatsby';
 
 export default function Login() {
   const btn_class: string =
@@ -9,8 +9,14 @@ export default function Login() {
     'border-gray p-3 text-xs block w-full my-4 rounded-xl font-roboto';
 
   return (
-    <div className='flex flex-col bg-landing bg-no-repeat bg-left-bottom items-center h-screen mx-auto w-full mt-10'>
-      <img src={LandingTitle} width='487' height='118' alt='EveRecon' />
+    <div className='flex flex-col bg-landing bg-no-repeat bg-left-bottom items-center h-screen mx-auto w-full'>
+      <img
+        src={LandingTitle}
+        width='487'
+        height='118'
+        className='mt-10'
+        alt='EveRecon'
+      />
       <span className='m-1 mt-16 font-mulish text-2xl'>Sign Up</span>
       <form className='w-1/6'>
         <input type='email' className={input_class} placeholder='Name' />
