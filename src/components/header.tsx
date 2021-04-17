@@ -28,8 +28,8 @@ export default function Header() {
         </li>
       </ul>
       <ul className='flex flex-row justify-center'>
-        <Link to='/Settings/SettingsAccount'>
-          <li className='my-2 m-7'>
+        <li className='my-2 m-7'>
+          <Link to='/Settings/SettingsAccount'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               className='h-7 w-7'
@@ -50,10 +50,10 @@ export default function Header() {
                 d='M15 12a3 3 0 11-6 0 3 3 0 016 0z'
               />
             </svg>
-          </li>
-        </Link>
-        <Link to='/Profiles/userProfile'>
-          <li>
+          </Link>
+        </li>
+        <li>
+          <Link to='/Profiles/userProfile'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               className='h-12 w-12'
@@ -67,8 +67,8 @@ export default function Header() {
                 clipRule='evenodd'
               />
             </svg>
-          </li>
-        </Link>
+          </Link>
+        </li>
       </ul>
     </nav>
   );

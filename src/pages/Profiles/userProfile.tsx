@@ -21,19 +21,14 @@ function CommunityCard() {
   );
 }
 
-type Props = {
-  name: string;
-  location: string;
-};
-
-export default function UserProfile(props: Props) {
+export default function UserProfile() {
   return (
     <div className='h-screen w-screen'>
       <Header />
       <div className='flex flex-col w-1/2 mx-auto items-center justify-center'>
         <img src={landingImage} className='my-4 h-28 w-28 rounded-full' />
-        <p className='text-2xl font-mulish'>{props.name || 'Name'}</p>
-        <p className='text-xl font-mulish'>{props.location || 'Location'}</p>
+        <p className='text-2xl font-mulish'>Name</p>
+        <p className='text-xl font-mulish'>Location</p>
       </div>
       <div className='flex flex-col my-8 w-1/2 mx-auto items-center justify-center'>
         <div className='w-full py-2 border-b-2'>
