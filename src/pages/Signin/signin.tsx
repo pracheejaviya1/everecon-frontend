@@ -1,6 +1,6 @@
+import { Link } from 'gatsby';
 import * as React from 'react';
 import LandingTitle from '../../assets/Images/evereconLanding.png';
-import { Link } from 'gatsby';
 
 export default function Signin() {
   const input_class: string =
@@ -12,8 +12,14 @@ export default function Signin() {
   const btn_class_facebook: string =
     'p-3 my-2 rounded-xl w-full border border-solid border-blue-500 text-blue-400	font-roboto';
   return (
-    <div className='flex flex-col bg-landing_signin bg-no-repeat bg-right-bottom items-center h-screen mx-auto w-full mt-10'>
-      <img src={LandingTitle} width='487' height='118' alt='EveRecon' />
+    <div className='flex flex-col bg-landing_signin bg-no-repeat bg-right-bottom items-center h-screen mx-auto'>
+      <img
+        src={LandingTitle}
+        width='487'
+        height='118'
+        className='mt-10'
+        alt='EveRecon'
+      />
       <span className='m-1 mt-16 font-mulish text-2xl'>Sign In</span>
       <form className='w-1/6'>
         <input

@@ -6,7 +6,6 @@ export default function CreateCommunityOne() {
   return (
     <div className='h-screen w-screen'>
       <Header />
-
       <div className='flex flex-col h-5/6 justify-center items-center'>
         <div className='flex items-center justify-between border-b-2 pb-2 w-1/2'>
           <svg
