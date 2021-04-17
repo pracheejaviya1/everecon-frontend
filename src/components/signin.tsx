@@ -13,7 +13,7 @@ export default function Signin() {
   return (
     <div className='flex flex-col bg-landing_signin bg-no-repeat bg-right-bottom items-center h-screen mx-auto w-full mt-10'>
       <img src={LandingTitle} width='487' height='118' alt='EveRecon' />
-      <text className='m-1 mt-16 font-mulish text-2xl'>Sign In</span>
+      <span className='m-1 mt-16 font-mulish text-2xl'>Sign In</span>
       <form className='w-1/6'>
         <input
           type='email'
@@ -28,7 +28,7 @@ export default function Signin() {
           name='password'
         />
       </form>
-      <text className='font-roboto'>
+      <span className='font-roboto'>
         {'\u2015\u2015\u2015\u2015\u2015\u2015\u2015'}
         {'\u00A0   '}OR{'   \u00A0'}
         {'\u2015\u2015\u2015\u2015\u2015\u2015\u2015'}
@@ -36,14 +36,14 @@ export default function Signin() {
       <div className='w-1/6 mb-3'>
         <button className={btn_class_google}>Continue with Google</button>
         <button className={btn_class_facebook}>Continue with Facebook</button>
-        <text className='p-1 text-sm text-left font-roboto'>
+        <span className='p-1 text-sm text-left font-roboto'>
           Forgot password?{' '}
         </span>
-        <text className='font-roboto text-blue-500 text-sm underline'>
+        <span className='font-roboto text-blue-500 text-sm underline'>
           Reset
         </span>
       </div>
-      <text className='text-left w-1/6 font-mulish text-sm text-red-400'>
+      <span className='text-left w-1/6 font-mulish text-sm text-red-400'>
         Enter valid data
       </span>
       <div className='w-1/6'>

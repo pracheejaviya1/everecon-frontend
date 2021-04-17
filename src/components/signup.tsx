@@ -10,7 +10,7 @@ export default function Login() {
   return (
     <div className='flex flex-col bg-landing bg-no-repeat bg-left-bottom items-center h-screen mx-auto w-full mt-10'>
       <img src={LandingTitle} width='487' height='118' alt='EveRecon' />
-      <text className='m-1 mt-16 font-mulish text-2xl'>Sign Up</span>
+      <span className='m-1 mt-16 font-mulish text-2xl'>Sign Up</span>
       <form className='w-1/6'>
         <input type='email' className={input_class} placeholder='Name' />
         <input type='tel' className={input_class} placeholder='Mobile Number' />
@@ -22,11 +22,11 @@ export default function Login() {
           placeholder='Confirm Password'
         />
       </form>
-      <text className='text-left w-1/6 font-mulish text-sm text-red-400'>
+      <span className='text-left w-1/6 font-mulish text-sm text-red-400'>
         Enter valid data
       </span>
       <button className='mt-7'>
-        <text className={btn_class}>Create account</span>
+        <span className={btn_class}>Create account</span>
       </button>
       <br />
     </div>
