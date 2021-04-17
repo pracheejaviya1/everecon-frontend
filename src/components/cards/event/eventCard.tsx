@@ -1,28 +1,35 @@
 import * as React from 'react';
-import EventImage from '../../../assets/Images/community.jpg';
+import CommunityImage from '../../../assets/Images/ahmedabad.jpeg';
 
-export default function EventCard() {
+type EventProps = {
+  date: Date;
+  title: string;
+  communityName: string;
+};
+
+export default function EventCard(props: EventProps) {
   return (
-    <div className=' flex flex-row p-6 shadow-md rounded-lg w-full text-left my-2'>
-      <img
-        className='h-20 w-30 rounded-md place-items-center'
-        src={EventImage}
-      />
-      <div className='flex flex-col mx-8 '>
-        <div className='flex flex-row'>
-          <span className='text-xs font-inter font-light'>Day</span>
-          <span className='text-xs font-inter font-light mx-2'>Date</span>
-          <span className='text-xs font-inter font-light '>Time</span>
+    <div className='flex flex-row items-center justify-between p-5 shadow-lg mx-auto rounded-lg w-3/4 text-left my-4'>
+      <div className='flex'>
+        <img className='h-40 w-60 rounded-md' src={CommunityImage} />
+        <div className='flex flex-col items-start mx-5 '>
+          <span className='font-inter font-light'>
+            {props.date.toUTCString()}
+          </span>
+          <span className='text-lg font-semibold font-inter'>
+            {props.title}
+          </span>
+          <span className='font-inter text-sm'>{props.communityName}</span>
+          <span className='font-inter text-sm text-gray-500 my-2'>
+            100 members
+          </span>
+          <button
+            className='bg-gray-600 text-white rounded-2xl my-4 px-4 py-1'
+            onClick={e => e.preventDefault()}
+          >
+            Details
+          </button>
         </div>
-        <span className='text-xl font-base font-inter'>
-          {' '}
-          Talking tech with Tech Ingenium
-        </span>
-        <span className='text-xs font-inter font-light'>Community Name</span>
-        <span className='font-inter text-sm my-1'> 100 members</span>
-        <button className='font-inter my-2 text-xs bg-gray-400 text-white rounded-lg p-1'>
-          Details
-        </button>
       </div>
     </div>
   );
