@@ -11,10 +11,7 @@ export default function ViewEvent() {
         datetime={new Date()}
         title='Talking Tech with Feeling Ingenium'
       />
-      <EventDesc
-        datetime={new Date()}
-        title='Talking Tech with Feeling Ingenium'
-      />
+      <EventDesc />
     </div>
   );
 }
