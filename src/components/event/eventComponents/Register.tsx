@@ -1,5 +1,6 @@
 import * as React from 'react';
-import Header from '../header';
+import Header from '../../header';
+import SpeakerBlock from './Speaker';
 
 type Props = {
   title: string;
@@ -10,15 +11,15 @@ export default function EventRegister(props: Props) {
   return (
     <div className='border-b-2 border-black'>
       <Header />
-      <h1 className='mx-auto font-bold text-2xl my-2 border-b-2 p-2 w-1/2'>
+      <h1 className='mx-auto font-base text-2xl my-2 border-b-2 p-2 w-1/2 font-inter'>
         Register for {props.title}
       </h1>
-      <div className='flex items-start p-2 w-1/2 justify-between my-4 mx-auto'>
+      <div className='flex items-start p-2 w-1/2 justify-between my-4 mx-auto font-roboto'>
         <form>
           <label className='block my-4' htmlFor='name'>
             <input
               name='name'
-              className='border-black rounded-xl'
+              className='border-gray rounded-xl h-10 w-60 text-xs'
               type='text'
               placeholder='Full Name'
             />
@@ -26,7 +27,7 @@ export default function EventRegister(props: Props) {
           <label className='block my-4' htmlFor='number'>
             <input
               name='number'
-              className='rounded-xl border-black'
+              className='border-gray rounded-xl h-10 w-60 text-xs'
               type='text'
               placeholder='Phone Number'
             />
@@ -34,27 +35,23 @@ export default function EventRegister(props: Props) {
           <label className='block my-4' htmlFor='email'>
             <input
               name='email'
-              className='rounded-xl border-black'
+              className='border-gray rounded-xl h-10 w-60 text-xs'
               type='email'
               placeholder='Full Name'
             />
           </label>
           <button
             type='submit'
-            className='my-6 block border border-black px-4 py-2 mx-auto rounded-xl text-center'
+            className='bg-blue-500 rounded-md text-white py-2 px-4 font-inter'
           >
-            Proceed to Payment
+            Confirm Registration
           </button>
         </form>
-        <div>
-          <div className='bg-gray-200 rounded-md px-4 py-2'>
-            <p>Host - John Doe</p>
-            <h2 className='font-bold text-lg'>Speaker - John Doe</h2>
-            <p className='my-2'>Online</p>
-            <p className='text-sm my-2 text-gray-500'>
-              {props.datetime.toUTCString()}
-            </p>
-          </div>
+        <div className='font-inter '>
+          <SpeakerBlock />
+        </div>
+        <div className='flex flex-col flex-basis bg-gray-10 p-4 rounded-lg'>
+          <div className='font-light font-inter'>100 attendees</div>
         </div>
       </div>
     </div>
