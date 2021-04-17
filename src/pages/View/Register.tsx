@@ -37,7 +37,7 @@ export default function EventRegister(props: Props) {
               name='email'
               className='border-gray rounded-xl h-10 w-60 text-xs'
               type='email'
-              placeholder='Full Name'
+              placeholder='email id'
             />
           </label>
           <button

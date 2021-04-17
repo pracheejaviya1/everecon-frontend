@@ -45,7 +45,6 @@ export default function Login() {
           <span className={btn_class}>Create account</span>
         </button>
       </Link>
-
       <br />
     </div>
   );

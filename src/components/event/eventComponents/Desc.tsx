@@ -28,9 +28,6 @@ export default function EventDesc() {
         </p>
       </div>
       <SpeakerBlock />
-      <button className=' my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
-        Register
-      </button>
     </div>
   );
 }
