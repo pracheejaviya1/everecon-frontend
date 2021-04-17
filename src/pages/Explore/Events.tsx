@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Header from '../../components/header';
 import EventCard from '../../components/cards/event/eventCard';
+import Header from '../../components/header';
 
 export default function ExploreCommunity() {
   const input_class: string =
@@ -22,9 +22,9 @@ export default function ExploreCommunity() {
                 name='category'
               />
             </form>
-            <text className='text-sm font-mulish text-blue-500 my-2'>
+            <span className='text-sm font-mulish text-blue-500 my-2'>
               Reset
-            </text>
+            </span>
           </div>
           <EventCard />
           <EventCard />

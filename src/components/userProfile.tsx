@@ -7,14 +7,14 @@ export default function Landing() {
     <div>
       <Header />
       <div>
-        <text> Create Community </text>
-        <text> Edit Profile </text>
-        <text> Log out </text>
+        <span>Create Community</span>
+        <span>Edit Profile</span>
+        <span>Log out</span>
       </div>
       <div>
         <img src={landingImage} />
-        <text> NAME</text>
-        <text>Location</text>
+        <span> NAME</span>
+        <span>Location</span>
       </div>
       <div>
         <ul>

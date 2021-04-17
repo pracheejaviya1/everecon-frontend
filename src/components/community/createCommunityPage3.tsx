@@ -6,7 +6,7 @@ export default function CreateCommunityThree() {
     <div>
       <Header />
       {/*Add back icon */}
-      <text>Community successfully created!</text>
+      <span>Community successfully created!</span>
       <button>Go to page</button>
     </div>
   );

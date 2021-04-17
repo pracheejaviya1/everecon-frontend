@@ -6,7 +6,7 @@ export default function exploreEvents() {
     <div>
       <img src={communityImage}></img>
       <div>
-        <text>Name</text>
+        <span>Name</span>
       </div>
       <button>Unfollow</button> {/*Card recycler */}
     </div>

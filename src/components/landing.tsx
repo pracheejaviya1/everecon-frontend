@@ -23,7 +23,7 @@ export default function Landing() {
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
               nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
               reprehenderit in voluptate
-            </text>
+            </span>
           </div>
         </div>
         <div className='m-10 flex flex-col'>
@@ -37,7 +37,7 @@ export default function Landing() {
           </div>
           <text className='m-10 text-center font-mulish text-blue-400 underline'>
             See more
-          </text>
+          </span>
         </div>
         <div className='m-10 flex flex-col'>
           <h1 className='m-4 text-xl text-center font-mulish font-medium'>
@@ -50,7 +50,7 @@ export default function Landing() {
           </div>
           <text className='m-10 text-center font-mulish text-blue-400 underline'>
             See more
-          </text>
+          </span>
         </div>
       </div>
     </div>

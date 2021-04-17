@@ -7,10 +7,10 @@ export default function CreateCommunityTwo() {
     <div>
       <Header />
       {/*Add back icon */}
-      <text>Create Community</text>
+      <span>Create Community</span>
       <hr />
       <div>
-        <text>Add Members</text>
+        <span>Add Members</span>
         <form className='w-1/2'>
           <input name='Enter member name' />
           {/*Add search icon here */}
@@ -19,8 +19,8 @@ export default function CreateCommunityTwo() {
         <div>
           <img src={communityImage} />
           <div>
-            <text> Name</text>
-            <text>Location</text>
+            <span> Name</span>
+            <span>Location</span>
           </div>
           {/*Minus icon */}
         </div>

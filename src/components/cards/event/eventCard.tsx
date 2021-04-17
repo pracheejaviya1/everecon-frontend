@@ -10,19 +10,16 @@ export default function EventCard() {
       />
       <div className='flex flex-col mx-8 '>
         <div className='flex flex-row'>
-          <text className='text-xs font-inter font-light'>Day</text>
-          <text className='text-xs font-inter font-light mx-2'>Date</text>
-          <text className='text-xs font-inter font-light '>Time</text>
+          <span className='text-xs font-inter font-light'>Day</span>
+          <span className='text-xs font-inter font-light mx-2'>Date</span>
+          <span className='text-xs font-inter font-light '>Time</span>
         </div>
-        <text className='text-xl font-base font-inter'>
+        <span className='text-xl font-base font-inter'>
           {' '}
           Talking tech with Tech Ingenium
-        </text>
-        <text className=' text-xs font-inter font-light'>Community Name</text>
-        <text className=' text-xs font-inter font- text-sm my-1'>
-          {' '}
-          100 members
-        </text>
+        </span>
+        <span className='text-xs font-inter font-light'>Community Name</span>
+        <span className='font-inter text-sm my-1'> 100 members</span>
         <button className='font-inter my-2 text-xs bg-gray-400 text-white rounded-lg p-1'>
           Details
         </button>

@@ -1,7 +1,7 @@
+import { Link } from 'gatsby';
 import * as React from 'react';
 import profilepic from '../../assets/Images/community.jpg';
 import Header from '../../components/header';
-import { Link } from 'gatsby';
 
 export default function SettingAccount() {
   return (
