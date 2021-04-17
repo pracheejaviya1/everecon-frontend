@@ -1,6 +1,6 @@
 import * as React from 'react';
-import EventDesc from '../../components/event/Desc';
-import EventTitle from '../../components/event/Title';
+import EventDesc from '../../components/event/eventComponents/Desc';
+import EventTitle from '../../components/event/eventComponents/Title';
 import Header from '../../components/header';
 
 export default function ViewEvent() {
@@ -11,7 +11,10 @@ export default function ViewEvent() {
         datetime={new Date()}
         title='Talking Tech with Feeling Ingenium'
       />
-      <EventDesc />
+      <EventDesc
+        datetime={new Date()}
+        title='Talking Tech with Feeling Ingenium'
+      />
     </div>
   );
 }

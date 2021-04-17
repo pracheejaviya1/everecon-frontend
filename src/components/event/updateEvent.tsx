@@ -1,6 +1,6 @@
 import * as React from 'react';
-import EventDesc from '../../components/event/Desc';
-import EventTitle from '../../components/event/Title';
+import EventDesc from './eventComponents/Desc';
+import EventTitle from '../../components/event/eventComponents/Title';
 import Header from '../../components/header';
 
 export default function UpdateEvent() {

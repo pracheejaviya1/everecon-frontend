@@ -5,7 +5,7 @@ import CreateCommunityTwo from '../components/community/CreateCommunityPage2';
 import CreateCommunityThree from '../components/community/createCommunityPage3';
 import CreateEventOne from '../components/event/createEventPage1';
 import CreateEventTwo from '../components/event/createEventPage2';
-import EventRegister from '../components/event/Register';
+import EventRegister from '../components/event/eventComponents/Register';
 import UpdateEvent from '../components/event/updateEvent';
 import UpdateEventTwo from '../components/event/UpdateEvent2';
 import Communities from './Explore/Communities';
