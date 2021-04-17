@@ -21,65 +21,61 @@ export default function CreateEventTwo() {
               d='M10 19l-7-7m0 0l7-7m-7 7h18'
             />
           </svg>
-          <span className='text-4xl flex-grow text-center'>Create Event</span>
+          <span className='text-4xl flex-grow text-center font-mulish'>
+            Create Event
+          </span>
         </div>
         <form className='flex flex-col my-8 w-1/4'>
           <div className='flex items-center justify-between w-full my-2'>
-            <label className='m-2' htmlFor='Date'>
+            <label className='m-2  font-mulish' htmlFor='Date'>
               Date
             </label>
             <input
-              className='border border-black p-2 rounded-lg'
-              placeholder='Date'
+              className='border border-gray-400 p-2 w-80 rounded-lg font-roboto text-sm'
               name='Date'
             />
           </div>
           <div className='flex items-center justify-between w-full my-2'>
-            <label className='m-2' htmlFor='Time'>
+            <label className='m-2 font-mulish' htmlFor='Time'>
               Time
             </label>
             <input
-              className='border border-black p-2 rounded-lg'
-              placeholder='Time'
+              className='border border-gray-400 p-2 w-80 rounded-lg font-roboto text-sm'
               name='Time'
             />
           </div>
           <div className='flex items-center justify-between w-full my-2'>
-            <label className='m-2' htmlFor='Tags'>
+            <label className='m-2 font-mulish' htmlFor='Tags'>
               Tags
             </label>
             <input
-              className='border border-black p-2 rounded-lg'
-              placeholder='Tags'
+              className='border border-gray-400 p-2 w-80 rounded-lg font-roboto text-sm'
               name='Tags'
             />
           </div>
           <div className='flex items-center justify-between w-full my-2'>
-            <label className='m-2' htmlFor='limit'>
+            <label className='m-2 font-mulish' htmlFor='limit'>
               Participant Limit
             </label>
             <input
-              className='border border-black p-2 rounded-lg'
-              placeholder='limit'
+              className='border border-gray-400 p-2 w-80 rounded-lg font-roboto text-sm'
               type='number'
               name='limit'
             />
           </div>
           <div className='flex items-center justify-between w-full my-2'>
-            <label className='m-2' htmlFor='fees'>
+            <label className='m-2 font-mulish' htmlFor='fees'>
               Fees
             </label>
             <input
-              className='border border-black p-2 rounded-lg'
+              className='border border-gray-400 p-2 w-80 rounded-lg font-roboto text-sm'
               type='currency'
-              placeholder='fees'
               name='fees'
             />
           </div>
         </form>
         <button
-          type='submit'
-          className='border w-1/12 my-8 border-black rounded-lg p-4'
+          className='text-white text-sm bg-blue-400 py-2 px-4 rounded-lg font-inter'
           onClick={e => e.preventDefault()}
         >
           Next
