@@ -1,4 +1,3 @@
-import { Link } from 'gatsby';
 import * as React from 'react';
 import CreateCommunityOne from '../components/community/createCommunityPage1';
 import CreateCommunityTwo from '../components/community/CreateCommunityPage2';
@@ -17,8 +16,8 @@ export default function Home() {
       <CreateEventOne />
       <CreateEventTwo />
       <UpdateEventTwo details='Lorem Ipsum' />
-      <Link to='/Settings/SettingsAccount'>Settings</Link>
-      <Link to='/Settings/SettingsSecurity'>Setting</Link>
+      {/* <Link to='/Settings/SettingsAccount'>Settings</Link>
+      <Link to='/Settings/SettingsSecurity'>Setting</Link> */}
       <Landing />
     </div>
   );

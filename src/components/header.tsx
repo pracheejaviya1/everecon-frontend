@@ -4,7 +4,7 @@ import HeadingTitle from '../assets/Images/headingTitle.png';
 
 export default function Header() {
   return (
-    <nav className='flex flex-row items-center bg-gray-50 justify-evenly h-28'>
+    <nav className='flex w-screen flex-row items-center bg-gray-50 justify-evenly h-28'>
       <img src={HeadingTitle} width='139' height='41' alt='EveRecon' />
       <div className='flex flex-initial rounded-lg w-1/3 bg-gray-100 p-2'>
         <input

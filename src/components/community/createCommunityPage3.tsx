@@ -3,7 +3,7 @@ import Header from '../header';
 
 export default function CreateCommunityThree() {
   return (
-    <div>
+    <div className='w-screen'>
       <Header />
       {/*Add back icon */}
       <span>Community successfully created!</span>

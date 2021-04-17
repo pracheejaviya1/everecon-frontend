@@ -4,7 +4,7 @@ import Header from '../header';
 
 export default function CreateEventOne() {
   return (
-    <div className='h-screen'>
+    <div className='h-screen w-screen'>
       <Header />
       {/*Add back icon */}
       <div className='flex flex-col h-5/6 justify-center items-center'>
