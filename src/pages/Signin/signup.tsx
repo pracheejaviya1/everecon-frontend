@@ -1,5 +1,5 @@
 import * as React from 'react';
-import LandingTitle from '../assets/Images/evereconLanding.png';
+import LandingTitle from '../../assets/Images/evereconLanding.png';
 
 export default function Login() {
   const btn_class: string =
@@ -25,6 +25,15 @@ export default function Login() {
       <span className='text-left w-1/6 font-mulish text-sm text-red-400'>
         Enter valid data
       </span>
+      <div className='flex flex-row'>
+        <span className='text-left font-mulish text-sm text-black-400'>
+          Already a user?
+        </span>
+        <span className='text-left font-mulish text-lg text-blue-600'>
+          SignIn
+        </span>
+      </div>
+
       <button className='mt-7'>
         <span className={btn_class}>Create account</span>
       </button>

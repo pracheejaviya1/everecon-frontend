@@ -18,14 +18,14 @@ export default function Landing() {
   return (
     <div className='h-screen'>
       <Header />
-      <div className='flex border-b-2 py-10 w-2/3 mx-auto'>
+      <div className='flex border-b-2 py-10 w-2/3 mx-auto font-inter'>
         <img className='rounded-md' src={communityImg} />
-        <div className='flex ml-10 items-start justify-between h-full flex-col'>
-          <h1 className='font-bold text-2xl mx-2'>NAME</h1>
+        <div className='flex ml-10 items-start justify-between h-full flex-col font-inter'>
+          <h1 className='font-bold text-2xl mx-2 '>NAME</h1>
           <p className='text-2xl mx-2 mb-1'>Location</p>
           <p className='text-2xl mx-2 text-gray-400 mb-1'>Lead</p>
           <button
-            className='text-lg bg-blue-500 text-white rounded-md px-2 py-1 mx-2 my-1'
+            className='text-lg bg-blue-400 text-white rounded-md px-2 py-1 mx-2 my-1'
             onClick={e => e.preventDefault()}
             type='submit'
           >

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import LandingTitle from '../assets/Images/evereconLanding.png';
+import LandingTitle from '../../assets/Images/evereconLanding.png';
+import { Link } from 'gatsby';
 
 export default function Signin() {
   const input_class: string =
@@ -48,7 +49,10 @@ export default function Signin() {
       </span>
       <div className='w-1/6'>
         <button className={btn_class}>Login</button>
-        <button className={btn_class}>Sign Up</button>
+        <Link to='/Signin/signup'>
+          <button className={btn_class}>Sign Up</button>
+        </Link>
+        {/*  */}
       </div>
     </div>
   );

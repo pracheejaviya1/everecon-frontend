@@ -23,7 +23,7 @@ export default function CreateEventOne() {
               d='M10 19l-7-7m0 0l7-7m-7 7h18'
             />
           </svg>
-          <span className='text-4xl flex-grow text-center font-mulish'>
+          <span className='text-2xl flex-grow text-center font-mulish'>
             Create Event
           </span>
         </div>

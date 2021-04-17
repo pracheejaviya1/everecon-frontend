@@ -7,11 +7,13 @@ import Landing from '../components/community/landing';
 import CreateEventOne from '../components/event/createEventPage1';
 import CreateEventTwo from '../components/event/createEventPage2';
 import UpdateEventTwo from '../components/event/UpdateEvent2';
+import Signin from './Signin/signin';
 
 export default function Home() {
   return (
-    <div className='divide-y'>
-      <CreateCommunityOne />
+    <div>
+      <Signin />
+      {/* <CreateCommunityOne />
       <CreateCommunityTwo />
       <CreateCommunityThree />
       <CreateEventOne />
@@ -19,7 +21,7 @@ export default function Home() {
       <UpdateEventTwo details='Lorem Ipsum' />
       <Link to='/Settings/SettingsAccount'>Settings</Link>
       <Link to='/Settings/SettingsSecurity'>Setting</Link>
-      <Landing />
+      <Landing /> */}
     </div>
   );
 }
