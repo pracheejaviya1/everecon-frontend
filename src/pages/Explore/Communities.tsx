@@ -1,6 +1,7 @@
 import * as React from 'react';
 import CommunityCard from '../../components/cards/community/communityCard';
 import Header from '../../components/header';
+import { Link } from 'gatsby';
 
 type TagProps = {
   text: string;
@@ -56,7 +57,9 @@ export default function ExploreCommunity() {
               Reset
             </span>
           </div>
-          <CommunityCard />
+          <Link to='/View/ViewCommunity'>
+            <CommunityCard />
+          </Link>
           <CommunityCard />
           <CommunityCard />
         </div>

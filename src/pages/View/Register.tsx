@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Header from '../../header';
-import SpeakerBlock from './Speaker';
+import Header from '../../components/header';
+import SpeakerBlock from '../../components/event/eventComponents/Speaker';
 
 type Props = {
   title: string;

@@ -14,6 +14,18 @@ export default function EventDesc() {
           Laboriosam provident cupiditate non ratione illo voluptates aspernatur
           enim porro, corrupti, similique quo.
         </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi
+          nesciunt molestias vero expedita non labore reprehenderit sapiente?
+          Laboriosam provident cupiditate non ratione illo voluptates aspernatur
+          enim porro, corrupti, similique quo.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi
+          nesciunt molestias vero expedita non labore reprehenderit sapiente?
+          Laboriosam provident cupiditate non ratione illo voluptates aspernatur
+          enim porro, corrupti, similique quo.
+        </p>
       </div>
       <SpeakerBlock />
       <button className=' my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>

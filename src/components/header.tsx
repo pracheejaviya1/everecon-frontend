@@ -15,7 +15,7 @@ export default function Header() {
       </div>
       <ul className='links flex flex-row justify-evenly font-mulish'>
         <li className='m-4'>
-          <Link to='/about'>About</Link>
+          <Link to='/Landing/landing'>About</Link>
         </li>
         <li className='m-4'>
           <Link to='/explore'>Explore</Link>

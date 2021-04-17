@@ -1,7 +1,7 @@
 import * as React from 'react';
 import EventCard from '../../components/cards/event/eventCard';
 import Header from '../../components/header';
-
+import { Link } from 'gatsby';
 type TagProps = {
   text: string;
 };
@@ -56,7 +56,9 @@ export default function ExploreCommunity() {
               Reset
             </span>
           </div>
-          <EventCard communityName='meh' date={new Date()} title='Title' />
+          <Link to='/View/ViewEvent'>
+            <EventCard communityName='meh' date={new Date()} title='Title' />
+          </Link>
         </div>
       </div>
     </div>
