@@ -16,7 +16,7 @@ function Tag(props: TagProps) {
 
 export default function Landing() {
   return (
-    <div className='h-screen'>
+    <div className='h-screen w-screen'>
       <Header />
       <div className='flex border-b-2 py-10 w-2/3 mx-auto font-inter'>
         <img className='rounded-md' src={communityImg} />

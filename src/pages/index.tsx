@@ -1,4 +1,3 @@
-import { Link } from 'gatsby';
 import * as React from 'react';
 import CreateCommunityOne from '../components/community/createCommunityPage1';
 import CreateCommunityTwo from '../components/community/CreateCommunityPage2';

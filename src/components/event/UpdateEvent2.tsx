@@ -8,7 +8,7 @@ type UpdateProps = {
 
 export default function UpdateEventTwo(props: UpdateProps) {
   return (
-    <div className='h-screen'>
+    <div className='h-screen w-screen'>
       <Header />
       <div className='flex flex-col my-8 justify-center items-center ml-12 mr-0 w-full'>
         <div className='flex items-end justify-between border-b-2 pb-4 w-2/3'>

@@ -4,7 +4,7 @@ import Header from '../header';
 
 export default function CreateCommunityTwo() {
   return (
-    <div>
+    <div className='w-screen'>
       <Header />
       {/*Add back icon */}
       <span>Create Community</span>
