@@ -1,10 +1,11 @@
+import { Link } from 'gatsby';
 import * as React from 'react';
 import EventImage from '../../../assets/Images/community.jpg';
 import SpeakerBlock from './Speaker';
 
 export default function EventDesc() {
   return (
-    <div className='flex items-center justify-between w-3/4 mx-auto my-2 font-inter'>
+    <div className='flex items-start justify-between w-full my-2 font-inter'>
       <div className='w-1/2 my-2'>
         <img className='rounded-md' src={EventImage} />
         <h2 className='my-4 font-bold'>Details</h2>
@@ -27,7 +28,14 @@ export default function EventDesc() {
           enim porro, corrupti, similique quo.
         </p>
       </div>
-      <SpeakerBlock />
+      <div className='flex flex-col items-center justify-around'>
+        <SpeakerBlock />
+        <Link to='/View/Register'>
+          <button className='my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
+            Register
+          </button>
+        </Link>
+      </div>
     </div>
   );
 }
