@@ -7,7 +7,7 @@ type TagProps = {
 
 function Tag(props: TagProps) {
   return (
-    <span className='flex bg-gray-300 items-center mx-2 my-2 font-mulish rounded-xl justify-between border-gray-400 border px-4 h-3/4'>
+    <span className='flex bg-gray-300 items-center mx-2 my-2 font-mulish rounded-xl justify-between px-4 h-3/4'>
       {props.text}
     </span>
   );
@@ -15,15 +15,15 @@ function Tag(props: TagProps) {
 
 export default function CommunityCard() {
   return (
-    <div className='flex flex-row items-center justify-between p-5 shadow-md mx-auto rounded-lg w-3/4 text-left my-2'>
+    <div className='flex flex-row items-center justify-between p-5 shadow-md mx-auto rounded-lg w-3/4 text-left my-2 mt-3'>
       <div className='flex'>
         <img className='h-30 w-40 rounded-md' src={CommunityImage} />
         <div className='flex flex-col mx-5 '>
           <span className='text-lg font-semibold font-inter'> Name</span>
           <span className='font-inter font-light'> Location</span>
           <div className='flex my-1'>
-            <Tag text='Tag' />
-            <Tag text='Tag' />
+            <Tag text='AI' />
+            <Tag text='Machine Learning' />
             <Tag text='Tag' />
           </div>
           <span className='font-inter text-sm'> 100 members</span>
