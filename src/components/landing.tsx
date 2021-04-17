@@ -17,7 +17,7 @@ export default function Landing() {
           />
           <div className='w-1/4 flex flex-col align-items-center justify-evenly '>
             <h1 className='font-inter font-extralight text-2xl'>ABOUT US</h1>
-            <text className='font-mulish font-thin '>
+            <span className='font-mulish font-thin '>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -35,7 +35,7 @@ export default function Landing() {
             <CommunityCard />
             <CommunityCard />
           </div>
-          <text className='m-10 text-center font-mulish text-blue-400 underline'>
+          <span className='m-10 text-center font-mulish text-blue-400 underline'>
             See more
           </span>
         </div>
@@ -48,7 +48,7 @@ export default function Landing() {
             <EventsCard />
             <EventsCard />
           </div>
-          <text className='m-10 text-center font-mulish text-blue-400 underline'>
+          <span className='m-10 text-center font-mulish text-blue-400 underline'>
             See more
           </span>
         </div>

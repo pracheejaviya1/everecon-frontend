@@ -25,11 +25,11 @@ export default function Login() {
       <span className='text-left w-1/6 font-mulish text-sm text-red-400'>
         Enter valid data
       </span>
-      <div className='flex flex-row'>
-        <span className='text-left font-mulish text-sm text-black-400'>
+      <div className='flex items-center justify-center flex-row'>
+        <span className='text-left font-mulish mr-1 text-sm text-black'>
           Already a user?
         </span>
-        <span className='text-left font-mulish text-lg text-blue-600'>
+        <span className='text-left font-mulish ml-1 text-lg text-blue-600'>
           SignIn
         </span>
       </div>
