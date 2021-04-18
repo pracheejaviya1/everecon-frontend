@@ -14,6 +14,7 @@
     "test": "jest --passWithNoTests"
   },
   "dependencies": {
+    "@popperjs/core": "2.9.1",
     "@tailwindcss/aspect-ratio": "^0.2.0",
     "@tailwindcss/forms": "^0.3.2",
     "autoprefixer": "^10.2.5",
