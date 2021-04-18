@@ -2,7 +2,7 @@ import * as React from 'react';
 import CommunityImage from '../../assets/Images/community.jpg';
 import landingImage from '../../assets/Images/default.jpg';
 import Header from '../../components/header';
-
+import { Link } from 'gatsby';
 function CommunityCard() {
   return (
     <div className='flex flex-row items-center justify-between p-2 shadow-md mx-auto rounded-lg w-full text-left my-2 mt-3'>
@@ -39,7 +39,9 @@ export default function UserProfile() {
               <button onClick={e => e.preventDefault()}>History</button>
               <button onClick={e => e.preventDefault()}>Favorites</button>
             </div>
-            <button onClick={e => e.preventDefault()}>Create Community</button>
+            <Link to='/Create/Community/createCommunityPage1'>
+              Create Community
+            </Link>
           </div>
         </div>
         <CommunityCard />

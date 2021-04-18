@@ -1,6 +1,6 @@
 import * as React from 'react';
-import communityImg from '../../assets/Images/community.jpg';
-import Header from '../header';
+import communityImg from '../../../assets/Images/community.jpg';
+import Header from '../../../components/header';
 
 export default function CreateCommunityTwo() {
   return (
