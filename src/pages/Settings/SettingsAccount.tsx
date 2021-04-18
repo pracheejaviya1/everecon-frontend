@@ -85,12 +85,12 @@ export default function SettingAccount() {
                 share.
               </p>
             </div>
-            <button
+            <Link
               className='text-white text-sm bg-red-400 py-2 px-4 rounded-md font-inter'
-              onClick={e => e.preventDefault()}
+              to='/Signin/signin'
             >
               Log Out
-            </button>
+            </Link>
           </div>
 
           <form className='flex w-2/3 my-3'>

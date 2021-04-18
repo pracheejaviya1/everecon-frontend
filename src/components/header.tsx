@@ -18,14 +18,10 @@ export default function Header() {
           <Link to='/Landing/landing'>About</Link>
         </li>
         <li className='m-4'>
-          <Link to='/explore'>Explore</Link>
+          <Link to='/Explore/Communities'>Explore</Link>
         </li>
-        <li className='m-4'>
-          <Link to='/contact'>Contact</Link>
-        </li>
-        <li className='m-4'>
-          <Link to='/help'>Help</Link>
-        </li>
+        <li className='m-4'>Contact</li>
+        <li className='m-4'>Help</li>
       </ul>
       <ul className='flex flex-row justify-center'>
         <li className='my-2 m-7'>

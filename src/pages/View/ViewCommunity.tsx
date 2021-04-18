@@ -1,7 +1,7 @@
 import * as React from 'react';
 import CommunityImage from '../../assets/Images/ahmedabad.jpeg';
 import Header from '../../components/header';
-
+import { Link } from 'gatsby';
 type TagProps = {
   title: string;
 };
@@ -39,9 +39,7 @@ export default function ViewCommunity() {
             <button onClick={e => e.preventDefault()} type='submit'>
               About
             </button>
-            <button onClick={e => e.preventDefault()} type='submit'>
-              Events
-            </button>
+            <Link to='/Explore/Events'>Events</Link>
             <button onClick={e => e.preventDefault()} type='submit'>
               Members
             </button>
