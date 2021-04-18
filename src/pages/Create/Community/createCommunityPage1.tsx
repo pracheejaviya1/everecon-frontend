@@ -31,31 +31,35 @@ export default function CreateCommunityOne() {
           </span>
         </div>
         <figure className='mt-8 mb-6'>
-          <img className='h-40 w-60 rounded-lg' src={Rectangle} />
-          <figcaption className='py-2 text-center font-mulish'>
-            Upload Community photo
-          </figcaption>
+          <label>
+            <img className='h-40 w-60 rounded-lg' src={Rectangle} />
+            <input type='file' className='hidden' />
+            <figcaption className='py-2 text-center font-mulish'>
+              Upload Community photo
+            </figcaption>
+          </label>
         </figure>
         <form className='flex flex-col'>
           <label className='my-2' htmlFor='Community name'>
             <input
-              className='border border-gray p-2 rounded-lg font-roboto text-sm'
+              className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
               placeholder='Community name'
               name='Community name'
             />
           </label>
           <label className='my-2' htmlFor='email id'>
             <input
-              className='border border-gray p-2 rounded-lg font-roboto text-sm'
+              className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
               placeholder='email id'
               name='email id'
             />
           </label>
           <label className='my-2' htmlFor='Description'>
-            <input
-              className='border border-gray p-2 rounded-lg font-roboto text-sm'
+            <textarea
+              className='border w-60 border-gray h-40 p-2 rounded-lg font-roboto text-sm'
               placeholder='Description'
               name='Description'
+              rows={10}
             />
           </label>
         </form>

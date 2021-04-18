@@ -1,12 +1,13 @@
 import * as React from 'react';
-import communityImg from '../../../assets/Images/community.jpg';
 import Header from '../../../components/header';
 import { Link } from 'gatsby';
+import MemberCard from '../../../components/cards/members/membersCard';
+
 export default function CreateCommunityTwo() {
   return (
     <div className='h-screen w-screen'>
       <Header />
-      <div className='flex flex-col h-5/6 justify-center items-center'>
+      <div className='flex flex-col mt-16 justify-center items-center'>
         <div className='flex mb-2 items-center justify-between border-b-2 pb-2 w-1/2'>
           <Link to='/Create/Community/createCommunityPage1'>
             <svg
@@ -28,12 +29,12 @@ export default function CreateCommunityTwo() {
             Create Community
           </span>
         </div>
-        <div className='flex items-center justify-start mt-4 w-1/2'>
+        <div className='flex items-center justify-start mt-4 w-1/2 font-inter'>
           <span className='mr-10 text-2xl'>Add Members</span>
           <div className='flex ml-10 py-1 px-4 rounded-lg items-center justify-between bg-gray-100'>
             <input
               type='text'
-              className='border-none bg-gray-100'
+              className='border-none w-80 bg-gray-100'
               placeholder='Enter member name'
             />
             <svg
@@ -52,29 +53,9 @@ export default function CreateCommunityTwo() {
             </svg>
           </div>
         </div>
-        <div className='flex items-center justify-between w-1/3 my-8 mx-auto'>
-          <div className='flex w-1/5 items-center justify-between'>
-            <img src={communityImg} className='h-16 w-16 rounded-full' />
-            <div className='mx-8'>
-              <p className='my-1'>Name</p>
-              <p className='my-1'>Location</p>
-            </div>
-          </div>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            className='h-6 w-6 text-red-500'
-            fill='none'
-            viewBox='0 0 24 24'
-            stroke='currentColor'
-          >
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              strokeWidth={2}
-              d='M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z'
-            />
-          </svg>
-        </div>
+        <MemberCard />
+        <MemberCard />
+        <MemberCard />
         <Link
           className=' my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'
           to='/Create/Community/createCommunityPage3'

@@ -25,7 +25,7 @@ export default function ViewCommunity() {
           <p className='text-xl mx-2 mb-1'>Location</p>
           <p className='text-xl mx-2 text-gray-400 mb-1'>Lead</p>
           <button
-            className='text-lg bg-blue-400 text-white rounded-md px-2 py-1 mx-2 my-1'
+            className='text-sm bg-blue-400 text-white rounded-md px-3 py-2 mx-2 my-1'
             onClick={e => e.preventDefault()}
             type='submit'
           >
