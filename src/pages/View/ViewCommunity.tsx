@@ -19,6 +19,7 @@ type ViewProps = {
 };
 
 export default function ViewCommunity(props: ViewProps) {
+  // props.isLead = true;
   return (
     <div className='h-screen w-screen'>
       <Header />
@@ -28,15 +29,14 @@ export default function ViewCommunity(props: ViewProps) {
           <h1 className='font-bold text-2xl mx-2 '>Tough one</h1>
           <p className='text-xl mx-2 mb-1'>Location</p>
           <p className='text-xl mx-2 text-gray-400 mb-1'>Lead</p>
-          <button
+          <Link
             className='text-sm bg-blue-400 text-white rounded-md px-3 py-2 mx-2 my-1'
-            onClick={e => {
-              e.preventDefault();
-            }}
+            to='/Create/Event/createEventPage1'
             type='submit'
           >
-            {props.isLead === true ? 'New Event' : 'Follow'}
-          </button>
+            New Event
+            {/* {props.isLead === true ? 'New Event' : 'Follow'} */}
+          </Link>
         </div>
       </div>
       <div className='w-2/3 m-auto py-4 font-inter justify-between flex'>

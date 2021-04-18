@@ -1,5 +1,6 @@
 import * as React from 'react';
-import Header from '../header';
+import Header from '../../../components/header';
+import { Link } from 'gatsby';
 
 export default function CreateEventTwo() {
   return (
@@ -7,21 +8,23 @@ export default function CreateEventTwo() {
       <Header />
       <div className='flex flex-col my-8 justify-start h-5/6 items-center'>
         <div className='flex items-center justify-between border-b-2 pb-2 w-1/2'>
-          <svg
-            xmlns='https://www.w3.org/2000/svg'
-            className='h-6 w-6'
-            fill='none'
-            viewBox='0 0 24 24'
-            stroke='currentColor'
-          >
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              strokeWidth={2}
-              d='M10 19l-7-7m0 0l7-7m-7 7h18'
-            />
-          </svg>
-          <span className='text-4xl flex-grow text-center font-mulish'>
+          <Link to='/Create/Event/createEventPage1'>
+            <svg
+              xmlns='https://www.w3.org/2000/svg'
+              className='h-6 w-6'
+              fill='none'
+              viewBox='0 0 24 24'
+              stroke='currentColor'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M10 19l-7-7m0 0l7-7m-7 7h18'
+              />
+            </svg>
+          </Link>
+          <span className='text-3xl flex-grow text-center font-mulish'>
             Create Event
           </span>
         </div>
@@ -74,12 +77,12 @@ export default function CreateEventTwo() {
             />
           </div>
         </form>
-        <button
+        <Link
           className='text-white text-sm bg-blue-400 py-2 px-4 rounded-lg font-inter'
-          onClick={e => e.preventDefault()}
+          to='/View/ViewEvent'
         >
           Next
-        </button>
+        </Link>
       </div>
     </div>
   );

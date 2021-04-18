@@ -1,6 +1,7 @@
 import * as React from 'react';
-import EventImg from '../../assets/Images/default.jpg';
-import Header from '../header';
+import EventImg from '../../../assets/Images/Rectangle6.png';
+import Header from '../../../components/header';
+import { Link } from 'gatsby';
 
 export default function CreateEventOne() {
   return (
@@ -9,21 +10,23 @@ export default function CreateEventOne() {
       {/*Add back icon */}
       <div className='flex flex-col h-5/6 justify-center items-center'>
         <div className='flex items-center justify-between border-b-2 pb-2 w-1/2'>
-          <svg
-            xmlns='https://www.w3.org/2000/svg'
-            className='h-6 w-6'
-            fill='none'
-            viewBox='0 0 24 24'
-            stroke='currentColor'
-          >
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              strokeWidth={2}
-              d='M10 19l-7-7m0 0l7-7m-7 7h18'
-            />
-          </svg>
-          <span className='text-2xl flex-grow text-center font-mulish'>
+          <Link to='/View/ViewCommunity'>
+            <svg
+              xmlns='https://www.w3.org/2000/svg'
+              className='h-6 w-6'
+              fill='none'
+              viewBox='0 0 24 24'
+              stroke='currentColor'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M10 19l-7-7m0 0l7-7m-7 7h18'
+              />
+            </svg>
+          </Link>
+          <span className='text-3xl flex-grow text-center font-mulish'>
             Create Event
           </span>
         </div>
@@ -49,19 +52,19 @@ export default function CreateEventOne() {
             />
           </label>
           <label className='my-2' htmlFor='Description'>
-            <input
+            <textarea
               className='border border-gray-400 p-2 w-80 h-40 rounded-lg font-roboto text-sm'
               placeholder='Description'
               name='Description'
             />
           </label>
         </form>
-        <button
+        <Link
+          to='/Create/Event/createEventPage2'
           className='text-white text-sm bg-blue-400 py-2 px-4 rounded-lg font-inter'
-          onClick={e => e.preventDefault()}
         >
           Next
-        </button>
+        </Link>
       </div>
     </div>
   );

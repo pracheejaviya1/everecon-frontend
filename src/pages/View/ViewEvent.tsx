@@ -1,6 +1,6 @@
 import * as React from 'react';
-import EventDesc from '../../components/event/eventComponents/Desc';
-import EventTitle from '../../components/event/eventComponents/Title';
+import EventDesc from '../../components/eventComponents/Desc';
+import EventTitle from '../../components/eventComponents/Title';
 import Header from '../../components/header';
 
 export default function ViewEvent() {

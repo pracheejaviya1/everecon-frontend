@@ -1,6 +1,6 @@
 import { Link } from 'gatsby';
 import * as React from 'react';
-import EventImage from '../../../assets/Images/community.jpg';
+import EventImage from '../../assets/Images/community.jpg';
 import SpeakerBlock from './Speaker';
 
 export default function EventDesc() {
