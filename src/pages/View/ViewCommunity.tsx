@@ -14,12 +14,7 @@ function Tag(props: TagProps) {
   );
 }
 
-type ViewProps = {
-  isLead: boolean;
-};
-
-export default function ViewCommunity(props: ViewProps) {
-  // props.isLead = true;
+export default function ViewCommunity() {
   return (
     <div className='h-screen w-screen'>
       <Header />

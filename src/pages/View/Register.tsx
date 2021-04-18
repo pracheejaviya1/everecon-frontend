@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Header from '../../components/header';
 import SpeakerBlock from '../../components/eventComponents/Speaker';
+import Header from '../../components/header';
 
 type Props = {
   title: string;
@@ -9,7 +9,7 @@ type Props = {
 
 export default function EventRegister(props: Props) {
   return (
-    <div className='border-b-2 border-black'>
+    <div>
       <Header />
       <h1 className='mx-auto font-base text-2xl my-2 border-b-2 p-2 w-1/2 font-inter'>
         Register for {props.title}
