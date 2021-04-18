@@ -1,7 +1,7 @@
+import { Link } from 'gatsby';
 import * as React from 'react';
 import CommunityImage from '../../assets/Images/ahmedabad.jpeg';
 import Header from '../../components/header';
-import { Link } from 'gatsby';
 type TagProps = {
   title: string;
 };
@@ -14,7 +14,11 @@ function Tag(props: TagProps) {
   );
 }
 
-export default function ViewCommunity() {
+type ViewProps = {
+  isLead: boolean;
+};
+
+export default function ViewCommunity(props: ViewProps) {
   return (
     <div className='h-screen w-screen'>
       <Header />
@@ -29,7 +33,7 @@ export default function ViewCommunity() {
             onClick={e => e.preventDefault()}
             type='submit'
           >
-            Follow
+            {props.isLead === true ? 'New Event' : 'Follow'}
           </button>
         </div>
       </div>
@@ -64,13 +68,6 @@ export default function ViewCommunity() {
             <Tag title='Tag' />
             <Tag title='Tag' />
           </div>
-          {/* <button
-            className='bg-blue-500 rounded-md my-5 px-2 py-1 text-white'
-            onClick={e => e.preventDefault()}
-            type='submit'
-          >
-            Join Community
-          </button> */}
         </div>
       </div>
     </div>
