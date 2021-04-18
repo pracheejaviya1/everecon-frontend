@@ -2,6 +2,7 @@ import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import * as React from 'react';
 import { Fragment } from 'react';
+import { Link } from 'gatsby';
 
 export default function Dropdown() {
   return (
@@ -10,7 +11,7 @@ export default function Dropdown() {
         {({ open }) => (
           <>
             <div>
-              <Menu.Button className='inline-flex items-center justify-center w-full px-4 py-2 text-sm font-medium rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'>
+              <Menu.Button className='inline-flex items-center justify-center w-full px-4 py-2 text-md font-medium rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'>
                 Explore
                 <ChevronDownIcon
                   className='w-5 h-5 ml-2 -mr-1 text-violet-200 hover:text-violet-100'
@@ -33,28 +34,32 @@ export default function Dropdown() {
                 className='absolute top-16 right-30 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'
               >
                 <div className='px-1 py-1 '>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <button
-                        className={`${
-                          active ? 'bg-violet-500' : 'text-gray-900'
-                        } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
-                      >
-                        Events
-                      </button>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <button
-                        className={`${
-                          active ? 'bg-violet-500' : 'text-gray-900'
-                        } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
-                      >
-                        Communities
-                      </button>
-                    )}
-                  </Menu.Item>
+                  <Link to='/Explore/Events'>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button
+                          className={`${
+                            active ? 'bg-violet-500' : 'text-gray-900'
+                          } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                        >
+                          Events
+                        </button>
+                      )}
+                    </Menu.Item>
+                  </Link>
+                  <Link to='/Explore/Communities'>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button
+                          className={`${
+                            active ? 'bg-violet-500' : 'text-gray-900'
+                          } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                        >
+                          Communities
+                        </button>
+                      )}
+                    </Menu.Item>
+                  </Link>
                 </div>
               </Menu.Items>
             </Transition>
