@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Header from '../../../components/header';
-
+import { Link } from 'gatsby';
 export default function CreateCommunityThree() {
   return (
     <div className='w-screen h-screen'>
@@ -9,12 +9,12 @@ export default function CreateCommunityThree() {
         <p className='text-6xl text-green-400 font-bold'>
           Community successfully created!
         </p>
-        <button
+        <Link
           className='px-20 py-6 border border-black my-20 rounded-lg'
-          onClick={e => e.preventDefault()}
+          to='/View/ViewCommunity'
         >
           Go to page
-        </button>
+        </Link>
       </div>
     </div>
   );

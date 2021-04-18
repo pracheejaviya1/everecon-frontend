@@ -1,6 +1,6 @@
 import * as React from 'react';
 import EventImage from '../../assets/Images/community.jpg';
-import Header from '../../components/header';
+import Header from '../header';
 
 type UpdateProps = {
   details: string;
