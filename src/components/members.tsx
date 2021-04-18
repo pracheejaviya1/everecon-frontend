@@ -2,19 +2,32 @@ import * as React from 'react';
 import communityImg from '../assets/Images/community.jpg';
 import Header from './header';
 
-function MemberCard() {
+function MemberCard(props: MemberProps) {
   return (
-    <div className='flex items-center border-b-2 pb-4 border-gray-400'>
-      <img src={communityImg} className='h-14 w-14 rounded-full' />
-      <div className='mx-10'>
-        <p className='text-xl'>Name</p>
-        <p>Location</p>
+    <div className='flex items-center justify-between border-b-2 pb-4 border-gray-400'>
+      <div className='flex'>
+        <img src={communityImg} className='h-14 w-14 rounded-full' />
+        <div className='mx-10'>
+          <p className='text-xl'>Name</p>
+          <p>Location</p>
+        </div>
       </div>
+      {props.memberType === 'lead' ? (
+        <button onClick={e => e.preventDefault()}>Lead</button>
+      ) : props.memberType === 'core' ? (
+        <button onClick={e => e.preventDefault}>Core</button>
+      ) : (
+        <button onClick={e => e.preventDefault()}>Volunteer</button>
+      )}
     </div>
   );
 }
 
-export default function Members() {
+type MemberProps = {
+  memberType: 'lead' | 'core' | 'volunteer';
+};
+
+export default function Members(props: MemberProps) {
   return (
     <div className='h-screen'>
       <Header />
@@ -42,16 +55,37 @@ export default function Members() {
             <h2 className='text-2xl font-bold mx-2 my-4'>Members</h2>
           </div>
           <ul className='flex list-none w-1/3 justify-between'>
-            <li>Lead</li>
-            <li>Core</li>
-            <li>Volunteers</li>
+            <li
+              className={`${
+                props.memberType === 'lead' ? 'text-green-400' : 'text-black'
+              }`}
+            >
+              Lead
+            </li>
+            <li
+              className={`${
+                props.memberType === 'core' ? 'text-green-400' : 'text-black'
+              }`}
+            >
+              Core
+            </li>
+            <li
+              className={`${
+                props.memberType === 'volunteer'
+                  ? 'text-green-400'
+                  : 'text-black'
+              }`}
+            >
+              Volunteers
+            </li>
           </ul>
           <input
             placeholder='Search'
             className='p-2 rounded-lg w-2/5 bg-gray-200'
           />
-          <MemberCard />
-          <MemberCard />
+          <MemberCard memberType='lead' />
+          <MemberCard memberType='core' />
+          <MemberCard memberType='volunteer' />
         </div>
       </div>
     </div>
