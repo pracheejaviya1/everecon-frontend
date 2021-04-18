@@ -1,8 +1,37 @@
-import { Link } from 'gatsby';
+import { Link,navigate } from 'gatsby';
 import * as React from 'react';
 import LandingTitle from '../../assets/Images/evereconLanding.png';
+import {loginQS,link} from '../../components/queries'
+import { execute, makePromise } from "apollo-link";
+
 
 export default function Signin() {
+  const [username,setUsername] = React.useState("")
+  const [password,setPassword] = React.useState("")
+  const [error,setError] = React.useState("")
+  const handleSubmit = () => {
+    setError("")
+    const operation = {
+      query: loginQS,
+      variables: {
+        username: username,
+        password: password,
+      },
+    };
+    makePromise(execute(link, operation)).then(r => {
+      if (r.data.tokenAuth != null){
+        console.log(r.data)
+        window.localStorage.setItem("token",r.data.tokenAuth.token)
+        window.localStorage.setItem("refreshToken",r.data.tokenAuth.refreshToken)
+        navigate("/Landing/landing")
+        return
+    }
+      if(r.errors != null){
+        console.log(r.errors)
+        setError(r.errors[0].message)
+      }
+    })
+}
   const input_class: string =
     'border-gray p-3 text-xs block w-full my-4 rounded-xl font-roboto';
   const btn_class: string =
@@ -23,16 +52,20 @@ export default function Signin() {
       <span className='m-1 mt-16 font-mulish text-2xl'>Sign In</span>
       <form className='w-1/6'>
         <input
-          type='email'
+          type='text'
           className={input_class}
-          placeholder='Email ID'
-          name='password'
+          placeholder='Username'
+          name='username'
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
         <input
           type='password'
           className={input_class}
           placeholder='Password'
           name='password'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
       </form>
       <span className='font-roboto'>
@@ -44,19 +77,18 @@ export default function Signin() {
         <button className={btn_class_google}>Continue with Google</button>
         <button className={btn_class_facebook}>Continue with Facebook</button>
         <span className='p-1 text-sm text-left font-roboto'>
-          Forgot password?{' '}
+          Forgot password?
         </span>
         <span className='font-roboto text-blue-500 text-sm underline'>
           Reset
         </span>
       </div>
       <span className='text-left w-1/6 font-mulish text-sm text-red-400'>
-        Enter valid data
+        {error}
       </span>
       <div className='w-1/6'>
-        <Link to='/Landing/landing'>
-          <button className={btn_class}>Login</button>
-        </Link>
+        <button className={btn_class} onClick={handleSubmit}>Login</button>
+        
         <Link to='/Signin/signup'>
           <button className={btn_class}>Sign Up</button>
         </Link>
