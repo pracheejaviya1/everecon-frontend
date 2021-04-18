@@ -1,6 +1,7 @@
 import { Link } from 'gatsby';
 import * as React from 'react';
 import HeadingTitle from '../assets/Images/headingTitle.png';
+import Dropdown from './dropdown';
 
 export default function Header() {
   return (
@@ -17,9 +18,9 @@ export default function Header() {
         <li className='m-4'>
           <Link to='/Landing/landing'>About</Link>
         </li>
-        <li className='m-4'>
-          <Link to='/Explore/Communities'>Explore</Link>
-        </li>
+        {/* <li className='m-4'> */}
+        <Dropdown />
+        {/* </li> */}
         <li className='m-4'>Contact</li>
         <li className='m-4'>Help</li>
       </ul>
