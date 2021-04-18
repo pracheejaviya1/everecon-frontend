@@ -18,9 +18,7 @@ export default function Header() {
         <li className='m-4'>
           <Link to='/Landing/landing'>About</Link>
         </li>
-        {/* <li className='m-4'> */}
         <Dropdown />
-        {/* </li> */}
         <li className='m-4'>Contact</li>
         <li className='m-4'>Help</li>
       </ul>

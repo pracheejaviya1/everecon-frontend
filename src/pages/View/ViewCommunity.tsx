@@ -30,7 +30,9 @@ export default function ViewCommunity(props: ViewProps) {
           <p className='text-xl mx-2 text-gray-400 mb-1'>Lead</p>
           <button
             className='text-sm bg-blue-400 text-white rounded-md px-3 py-2 mx-2 my-1'
-            onClick={e => e.preventDefault()}
+            onClick={e => {
+              e.preventDefault();
+            }}
             type='submit'
           >
             {props.isLead === true ? 'New Event' : 'Follow'}
