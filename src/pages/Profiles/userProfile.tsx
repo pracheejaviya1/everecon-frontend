@@ -7,6 +7,7 @@ import Header from '../../components/header';
 import { link, getProfileQuery } from '../../components/queries';
 import { execute, makePromise } from 'apollo-link';
 
+//TODO: Add new card for my communities, remove favorites, add logo in community, tickets, historym following, link commuinty page
 function CommunityCard({name,logo,userid,communityid}) {
   const UnfollowCommunity = (userid,communityid)=> {
     console.log(userid,communityid)
@@ -15,7 +16,7 @@ function CommunityCard({name,logo,userid,communityid}) {
   return (
     <div className='flex flex-row items-center justify-between p-2 shadow-md mx-auto rounded-lg w-full text-left my-2 mt-3'>
       <div className='flex'>
-        <img className='h-20 w-30 mx-5 my-2 rounded-md' src={logo} />
+        <img className='h-20 w-30 mx-5 my-2 rounded-md' src={CommunityImage} />
         <span className='text-2xl my-5 font-semibold mx-5 font-inter'>
           {name}
         </span>
@@ -29,13 +30,20 @@ function CommunityCard({name,logo,userid,communityid}) {
     </div>
   );
 }
+const FOLLOWING = 0
+const TICKETS = 1
+const HISTORY = 2
+const FAVORITES = 3
+const COMMUNITYSET = 4
 
 export default function UserProfile() {
   const[name,setName] = React.useState("")
   const [userid,setUserid] = React.useState(null)
   const [location,setLocation] = React.useState("")
   const [communities,setCommunities] = React.useState([])
-
+  const [communitySet, setCommunitySet] = React.useState([])
+  const [options,setOptions] = React.useState(["Following","Tickets","History","Favorites","MyCommunities"])
+  const [selected,setSelected] = React.useState(0)
   React.useEffect(() => {
      const operation = {
       query: getProfileQuery,
@@ -46,7 +54,13 @@ export default function UserProfile() {
         setName(profile.firstname+" "+profile.lastname)
         setUserid(profile.id)
         setLocation(profile.profile.city+","+profile.profile.country)
+        console.log(profile)
         setCommunities(profile.communities)
+        setCommunitySet(profile.communitySet)
+        if(communitySet.length > 0){
+          console.log("user has created a community")
+          setOptions(["Following","Tickets","History","Favorites","MyCommunities"])
+        }
         return;
       }
       if (r.errors != null) {
@@ -68,10 +82,9 @@ export default function UserProfile() {
         <div className='w-full py-2 border-b-2'>
           <div className='flex justify-between items-center font-inter'>
             <div className='flex justify-between w-4/12 '>
-              <button onClick={e => e.preventDefault()}>Following</button>
-              <button onClick={e => e.preventDefault()}>Tickets</button>
-              <button onClick={e => e.preventDefault()}>History</button>
-              <button onClick={e => e.preventDefault()}>Favorites</button>
+              {
+                options.map((e,i) => <button onClick={() => setSelected(i)} key={i} className={selected==i?"font-bold":""}>{e}</button>)
+              }
             </div>
             <Link to='/Create/Community/createCommunityPage1'>
               Create Community
@@ -79,7 +92,10 @@ export default function UserProfile() {
           </div>
         </div>
         {
-          () => communities.forEach((e,i) => <CommunityCard key={i} name={e.name} logo={e.logo} userid={userid} communityid={e.id} ></CommunityCard>)
+          selected===COMMUNITYSET && communitySet.map((e,i) => <CommunityCard key={i} name={e.name} logo={e.logo} userid={userid} communityid={e.id} ></CommunityCard>)
+        }
+        {
+        selected===FOLLOWING && communities.map((e,i) => <CommunityCard key={i} name={e.name} logo={e.logo} userid={userid} communityid={e.id} ></CommunityCard>)
         }
       </div>
     </div>

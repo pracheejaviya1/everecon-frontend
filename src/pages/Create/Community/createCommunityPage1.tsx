@@ -1,9 +1,37 @@
-import { Link } from 'gatsby';
 import * as React from 'react';
 import Rectangle from '../../../assets/Images/Rectangle6.png';
 import Header from '../../../components/header';
+import { createCommunityMutation, link } from '../../../components/queries';
+import { Link, navigate } from 'gatsby';
+import { execute, makePromise } from 'apollo-link';
 
+// TODO: handle image, display error, fix next css 
 export default function CreateCommunityOne() {
+  const [logo,setLogo] = React.useState("")
+  const [name,setName] = React.useState("")
+  const [description,setDescription] = React.useState("")
+  const [email,setEmail] = React.useState("")
+  const handleSubmit = () => {
+    
+    const operation = {
+      query: createCommunityMutation,
+      variables: {
+        email: email,
+        name:name,
+        description:description,
+      },
+    };
+    makePromise(execute(link, operation)).then(r => {
+      if (r.data?.createCommunity !== null) {
+        const communityid =  r.data.createCommunity.community.id
+        navigate('/Create/Community/createCommunityPage2',{state:{communityid}});
+        return;
+      }
+      if (r.errors != null) {
+        console.error(r.errors);
+      }
+    });
+  };
   return (
     <div className='h-screen w-screen'>
       <Header />
@@ -45,6 +73,9 @@ export default function CreateCommunityOne() {
               className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
               placeholder='Community name'
               name='Community name'
+              required={true}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </label>
           <label className='my-2' htmlFor='email id'>
@@ -52,6 +83,9 @@ export default function CreateCommunityOne() {
               className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
               placeholder='email id'
               name='email id'
+              required={true}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </label>
           <label className='my-2' htmlFor='Description'>
@@ -60,15 +94,15 @@ export default function CreateCommunityOne() {
               placeholder='Description'
               name='Description'
               rows={10}
+              value={description}
+              required={true}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </label>
         </form>
-        <Link
-          to='/Create/Community/createCommunityPage2'
-          className='my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'
-        >
+        <button onClick={handleSubmit}>
           Next
-        </Link>
+          </button>
       </div>
     </div>
   );
