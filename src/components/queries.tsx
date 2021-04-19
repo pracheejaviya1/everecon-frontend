@@ -59,3 +59,127 @@ mutation createUser ($city: String, $contact: String, $country: String, $email: 
     }
 }
 `
+
+export const getProfileQuery = gql`
+query myprofile {
+    myprofile {
+        id
+        lastLogin
+        isSuperuser
+        username
+        firstName
+        lastName
+        email
+        isStaff
+        isActive
+        dateJoined
+        profile {
+            id
+            contact
+            city
+            country
+            profilePicture
+        }
+        eventsAttended {
+            id
+            name
+            description
+            kind
+            address
+            city
+            country
+            liveUrl
+            startTime
+            endTime
+            featuredImage
+            isActive
+            creationTime
+            maxRsvp
+        }
+        communities {
+            id
+            name
+            description
+            logo
+            banner
+            featuredVideo
+            address
+            city
+            country
+            email
+            membersCount
+            website
+            facebook
+            linkedin
+            twitter
+            instagram
+            discord
+            isActive
+            creationTime
+        }
+        communitySet {
+            id
+            name
+            description
+            logo
+            banner
+            featuredVideo
+            address
+            city
+            country
+            email
+            membersCount
+            website
+            facebook
+            linkedin
+            twitter
+            instagram
+            discord
+            isActive
+            creationTime
+        }
+        communitiesCoreMembers {
+            id
+            name
+            description
+            logo
+            banner
+            featuredVideo
+            address
+            city
+            country
+            email
+            membersCount
+            website
+            facebook
+            linkedin
+            twitter
+            instagram
+            discord
+            isActive
+            creationTime
+        }
+        communitiesVolunteers {
+            id
+            name
+            description
+            logo
+            banner
+            featuredVideo
+            address
+            city
+            country
+            email
+            membersCount
+            website
+            facebook
+            linkedin
+            twitter
+            instagram
+            discord
+            isActive
+            creationTime
+        }
+    }
+}
+`
