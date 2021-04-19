@@ -1,35 +1,34 @@
+import { execute, makePromise } from 'apollo-link';
 import { Link, navigate } from 'gatsby';
-
 import * as React from 'react';
 import LandingTitle from '../../assets/Images/evereconLanding.png';
-import { link, createUserMutation } from '../../components/queries';
-import { execute, makePromise } from 'apollo-link';
+import { createUserMutation, link } from '../../components/queries';
 
-export default function Login() {React.useState("")
-  const [city,setCity] = React.useState("")
-  const [contact,setContact] = React.useState("")
-  const [country,setCountry] = React.useState("")
-  const [email,setEmail] = React.useState("")
-  const [username,setUsername] = React.useState("")
-  const [password,setPassword] = React.useState("")
-  const [firstname,setFirstName] = React.useState("")
-  const [lastname,setLastName] = React.useState("")
-  const [confirmpassword,setConfirmPassword] = React.useState("")
-  const [error,setError] = React.useState("")
-  
-  const handleSubmit= () =>{
+export default function Login() {
+  const [city, setCity] = React.useState('');
+  const [contact, setContact] = React.useState('');
+  const [country, setCountry] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [firstname, setFirstName] = React.useState('');
+  const [lastname, setLastName] = React.useState('');
+  const [confirmpassword, setConfirmPassword] = React.useState('');
+  const [error, setError] = React.useState('');
+
+  const handleSubmit = () => {
     setError('');
-    if(password!==confirmpassword){
-      setError("confirm password didn't match password")
-      return
+    if (password !== confirmpassword) {
+      setError("confirm password didn't match password");
+      return;
     }
     const operation = {
       query: createUserMutation,
       variables: {
-        city:city,
-        contact:contact,
-        country:country,
-        email:email,
+        city: city,
+        contact: contact,
+        country: country,
+        email: email,
         username: username,
         password: password,
       },
@@ -52,8 +51,7 @@ export default function Login() {React.useState("")
         }
       }
     });
-
-  } 
+  };
   const btn_class: string =
     'p-4 my-2 rounded-xl w-full border border-solid border-gray-200 text-gray-700 font-roboto ';
   const input_class: string =
@@ -70,18 +68,56 @@ export default function Login() {React.useState("")
       />
       <span className='m-1 mt-16 font-mulish text-2xl'>Sign Up</span>
       <form className='w-1/6'>
-        <input type='text' className={input_class} placeholder='First Name' value={firstname} onChange={(e)=> setFirstName(e.target.value)}/>
-        <input type='text' className={input_class} placeholder='Last Name' value={lastname} onChange={(e)=> setLastName(e.target.value)}/>
-        <input type='tel' className={input_class} placeholder='Mobile Number' value={contact} onChange={(e)=> setContact(e.target.value)}/>
-        <input type='email' className={input_class} placeholder='Email ID' value={email} onChange={(e)=> setEmail(e.target.value)}/>
-        <input type='text' className={input_class} placeholder='Username' value={username} onChange={(e)=> setUsername(e.target.value)}/>
-        <input type='password' className={input_class} placeholder='Password' value={password} onChange={(e)=> setPassword(e.target.value)}/>
+        <input
+          type='text'
+          className={input_class}
+          placeholder='First Name'
+          value={firstname}
+          onChange={e => setFirstName(e.target.value)}
+        />
+        <input
+          type='text'
+          className={input_class}
+          placeholder='Last Name'
+          value={lastname}
+          onChange={e => setLastName(e.target.value)}
+        />
+        <input
+          type='tel'
+          className={input_class}
+          placeholder='Mobile Number'
+          value={contact}
+          onChange={e => setContact(e.target.value)}
+        />
+        <input
+          type='email'
+          className={input_class}
+          placeholder='Email ID'
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
+        <input
+          type='text'
+          className={input_class}
+          placeholder='Username'
+          value={username}
+          onChange={e => setUsername(e.target.value)}
+        />
+        <input
+          type='password'
+          className={input_class}
+          placeholder='Password'
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
         <input
           type='password'
           className={input_class}
           placeholder='Confirm Password'
           value={confirmpassword}
-          onChange={(e)=> {setConfirmPassword(e.target.value)}}
+          onChange={e => {
+            setConfirmPassword(e.target.value);
+          }}
         />
       </form>
       <span className='text-left w-1/6 font-mulish text-sm text-red-400'>
@@ -95,9 +131,9 @@ export default function Login() {React.useState("")
           <Link to='/Signin/signin'> SignIn </Link>
         </span>
       </div>
-        <button className='mt-7' onClick={handleSubmit}>
-          <span className={btn_class}>Create account</span>
-        </button>
+      <button className='mt-7' onClick={handleSubmit}>
+        <span className={btn_class}>Create account</span>
+      </button>
       <br />
     </div>
   );
