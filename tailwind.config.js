@@ -13,7 +13,7 @@ module.exports = {
         landing: "url('../assets/Designs/LandingDesign.png')",
         landing_signin: "url('../assets/Designs/LandingDesign2.png')",
         explore_communities: "url('../assets/Designs/ExploreDesign1.png')",
-        explore_events: "url('../assets/Designs/ExploreDesign2.png')"
+        explore_events: "url('../assets/Designs/ExploreDesign2.png')",
       }),
     },
   },

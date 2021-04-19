@@ -1,8 +1,8 @@
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
+import { Link } from 'gatsby';
 import * as React from 'react';
 import { Fragment } from 'react';
-import { Link } from 'gatsby';
 
 export default function Dropdown() {
   return (

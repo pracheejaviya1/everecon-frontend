@@ -1,16 +1,16 @@
-import { Link,navigate } from 'gatsby';
+import { execute, makePromise } from 'apollo-link';
+import { Link, navigate } from 'gatsby';
 import * as React from 'react';
 import LandingTitle from '../../assets/Images/evereconLanding.png';
-import {loginQS,link} from '../../components/queries'
-import { execute, makePromise } from "apollo-link";
-
+import { link, loginQS } from '../../components/queries';
 
 export default function Signin() {
-  const [username,setUsername] = React.useState("")
-  const [password,setPassword] = React.useState("")
-  const [error,setError] = React.useState("")
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [error, setError] = React.useState('');
+
   const handleSubmit = () => {
-    setError("")
+    setError('');
     const operation = {
       query: loginQS,
       variables: {
@@ -19,19 +19,24 @@ export default function Signin() {
       },
     };
     makePromise(execute(link, operation)).then(r => {
-      if (r.data.tokenAuth != null){
-        console.log(r.data)
-        window.localStorage.setItem("token",r.data.tokenAuth.token)
-        window.localStorage.setItem("refreshToken",r.data.tokenAuth.refreshToken)
-        navigate("/Landing/landing")
-        return
-    }
-      if(r.errors != null){
-        console.log(r.errors)
-        setError(r.errors[0].message)
+      if (r.data?.tokenAuth !== null) {
+        console.log(r.data);
+        window.localStorage.setItem('token', r.data?.tokenAuth.token);
+        window.localStorage.setItem(
+          'refreshToken',
+          r.data?.tokenAuth.refreshToken
+        );
+        navigate('/Landing/landing');
+        return;
       }
-    })
-}
+      if (r.errors != null) {
+        console.log(r.errors);
+        if (r.errors[0] !== undefined) {
+          setError(r.errors[0].message);
+        }
+      }
+    });
+  };
   const input_class: string =
     'border-gray p-3 text-xs block w-full my-4 rounded-xl font-roboto';
   const btn_class: string =
@@ -57,7 +62,7 @@ export default function Signin() {
           placeholder='Username'
           name='username'
           value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={e => setUsername(e.target.value)}
         />
         <input
           type='password'
@@ -65,7 +70,7 @@ export default function Signin() {
           placeholder='Password'
           name='password'
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={e => setPassword(e.target.value)}
         />
       </form>
       <span className='font-roboto'>
@@ -87,12 +92,13 @@ export default function Signin() {
         {error}
       </span>
       <div className='w-1/6'>
-        <button className={btn_class} onClick={handleSubmit}>Login</button>
-        
+        <button className={btn_class} onClick={handleSubmit}>
+          Login
+        </button>
+
         <Link to='/Signin/signup'>
           <button className={btn_class}>Sign Up</button>
         </Link>
-        {/*  */}
       </div>
     </div>
   );
