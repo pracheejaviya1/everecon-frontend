@@ -8,7 +8,7 @@ type TagProps = {
 
 function Tag(props: TagProps) {
   return (
-    <span className='rounded-xl text-center m-2 bg-gray-300 px-2 py-1'>
+    <span className='rounded-full text-center m-2 bg-gray-300 px-2 py-1'>
       {props.title}
     </span>
   );

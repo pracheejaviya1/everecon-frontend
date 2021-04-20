@@ -18,7 +18,7 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {padding: ['hover'],},
   },
   plugins: [
     'gatsby-plugin-postcss',
