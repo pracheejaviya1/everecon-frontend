@@ -1,9 +1,7 @@
 import * as React from 'react';
 import Rectangle from '../../../assets/Images/Rectangle6.png';
 import Header from '../../../components/header';
-import { createCommunityMutation, link } from '../../../components/queries';
 import { Link, navigate } from 'gatsby';
-import { execute, makePromise } from 'apollo-link';
 
 // TODO: handle image, display error, fix next css 
 export default function CreateCommunityOne() {
@@ -11,27 +9,27 @@ export default function CreateCommunityOne() {
   const [name,setName] = React.useState("")
   const [description,setDescription] = React.useState("")
   const [email,setEmail] = React.useState("")
-  const handleSubmit = () => {
+  // const handleSubmit = () => {
     
-    const operation = {
-      query: createCommunityMutation,
-      variables: {
-        email: email,
-        name:name,
-        description:description,
-      },
-    };
-    makePromise(execute(link, operation)).then(r => {
-      if (r.data?.createCommunity !== null) {
-        const communityid =  r.data.createCommunity.community.id
-        navigate('/Create/Community/createCommunityPage2',{state:{communityid}});
-        return;
-      }
-      if (r.errors != null) {
-        console.error(r.errors);
-      }
-    });
-  };
+  //   const operation = {
+  //     query: createCommunityMutation,
+  //     variables: {
+  //       email: email,
+  //       name:name,
+  //       description:description,
+  //     },
+  //   };
+  //   makePromise(execute(link, operation)).then(r => {
+  //     if (r.data?.createCommunity !== null) {
+  //       const communityid =  r.data.createCommunity.community.id
+  //       navigate('/Create/Community/createCommunityPage2',{state:{communityid}});
+  //       return;
+  //     }
+  //     if (r.errors != null) {
+  //       console.error(r.errors);
+  //     }
+  //   });
+  // };
   return (
     <div className='h-screen w-screen'>
       <Header />
@@ -100,7 +98,7 @@ export default function CreateCommunityOne() {
             />
           </label>
         </form>
-        <button onClick={handleSubmit}>
+        <button>
           Next
           </button>
       </div>

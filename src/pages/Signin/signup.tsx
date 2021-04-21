@@ -1,8 +1,6 @@
-import { execute, makePromise } from 'apollo-link';
 import { Link, navigate } from 'gatsby';
 import * as React from 'react';
 import LandingTitle from '../../assets/Images/evereconLanding.png';
-import { createUserMutation, link } from '../../components/queries';
 
 export default function Login() {
   const [city, setCity] = React.useState('');
@@ -15,43 +13,24 @@ export default function Login() {
   const [lastname, setLastName] = React.useState('');
   const [confirmpassword, setConfirmPassword] = React.useState('');
   const [error, setError] = React.useState('');
-
-  const handleSubmit = () => {
-    setError('');
-    if (password !== confirmpassword) {
-      setError("confirm password didn't match password");
-      return;
-    }
-    const operation = {
-      query: createUserMutation,
-      variables: {
-        city: city,
-        contact: contact,
-        country: country,
-        email: email,
-        username: username,
-        password: password,
-      },
-    };
-    makePromise(execute(link, operation)).then(r => {
-      if (r.data?.createUser !== null) {
-        console.log(r.data);
-        window.localStorage.setItem('token', r.data?.createUser.token);
-        window.localStorage.setItem(
-          'refreshToken',
-          r.data?.createUser.refreshToken
-        );
-        navigate('/Landing/landing');
-        return;
-      }
-      if (r.errors != null) {
-        console.log(r.errors);
-        if (r.errors[0] !== undefined) {
-          setError(r.errors[0].message);
-        }
-      }
-    });
-  };
+  
+  // const handleSubmit = () => {
+  //   setError('');
+  //   if (password !== confirmpassword) {
+  //     setError("confirm password didn't match password");
+  //     return;
+  //   }
+  //   call_login({
+  //     variables: {
+  //       city: city,
+  //       contact: contact,
+  //       country: country,
+  //       email: email,
+  //       username: username,
+  //       password: password,
+  //   }}).then(r => console.log(r.data))
+    
+  // };
   const btn_class: string =
     'p-4 my-2 rounded-xl w-full border border-solid border-gray-200 text-gray-700 font-roboto ';
   const input_class: string =
@@ -131,7 +110,7 @@ export default function Login() {
           <Link to='/Signin/signin'> SignIn </Link>
         </span>
       </div>
-      <button className='mt-7' onClick={handleSubmit}>
+      <button className='mt-7' >
         <span className={btn_class}>Create account</span>
       </button>
       <br />
