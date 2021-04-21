@@ -16,6 +16,7 @@ export default function Signin() {
   const [password, setPassword] = React.useState('');
   const [error, setError] = React.useState('');
   const [call_login,{data}] = useMutation(LOGIN_MUTATION)
+  
   const handleSubmit = () => {
     setError('');
     call_login({
@@ -23,7 +24,13 @@ export default function Signin() {
         username: username,
         password: password,
       },
-    }).then(r => console.log(r.data)).catch(e => setError(e.graphQLErrors[0].message))
+    }).then(r => {
+      let data = r.data.tokenAuth
+      window.localStorage.setItem("token", data.token)
+      window.localStorage.setItem("refreshToken",data.refreshToken)
+      navigate('/Landing/landing')
+      return;
+    }).catch(e => setError(e.graphQLErrors[0].message))
     
   };
   const input_class: string =
