@@ -4,7 +4,7 @@ import { Link } from 'gatsby';
 import MemberCard from '../../../components/cards/members/membersCard';
 
 export default function CreateCommunityTwo({location}) {
-  console.log(location.state.communityid)
+  // console.log(location.state.communityid)
   return (
     <div className='h-screen w-screen'>
       <Header />

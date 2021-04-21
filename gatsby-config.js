@@ -14,6 +14,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-postcss`,
+    `gatsby-theme-apollo`,
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {

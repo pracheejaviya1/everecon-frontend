@@ -4,8 +4,6 @@ import CommunityImage from '../../assets/Images/community.jpg';
 import landingImage from '../../assets/Images/default.jpg';
 import Header from '../../components/header';
 
-import { link, getProfileQuery } from '../../components/queries';
-import { execute, makePromise } from 'apollo-link';
 
 //TODO: Add new card for my communities, remove favorites, add logo in community, tickets, historym following, link commuinty page
 function CommunityCard({name,logo,userid,communityid}) {
@@ -44,32 +42,32 @@ export default function UserProfile() {
   const [communitySet, setCommunitySet] = React.useState([])
   const [options,setOptions] = React.useState(["Following","Tickets","History","Favorites","MyCommunities"])
   const [selected,setSelected] = React.useState(0)
-  React.useEffect(() => {
-     const operation = {
-      query: getProfileQuery,
-    };
-    makePromise(execute(link, operation)).then(r => {
-      if (r.data?.myprofile !== null) {
-        let profile = r.data?.myprofile
-        setName(profile.firstname+" "+profile.lastname)
-        setUserid(profile.id)
-        setLocation(profile.profile.city+","+profile.profile.country)
-        console.log(profile)
-        setCommunities(profile.communities)
-        setCommunitySet(profile.communitySet)
-        if(communitySet.length > 0){
-          console.log("user has created a community")
-          setOptions(["Following","Tickets","History","Favorites","MyCommunities"])
-        }
-        return;
-      }
-      if (r.errors != null) {
-        if (r.errors[0] !== undefined) {
-          console.error(r.errors[0].message);
-        }
-      }
-  })
-},[])
+//   React.useEffect(() => {
+//      const operation = {
+//       query: getProfileQuery,
+//     };
+//     makePromise(execute(link, operation)).then(r => {
+//       if (r.data?.myprofile !== null) {
+//         let profile = r.data?.myprofile
+//         setName(profile.firstname+" "+profile.lastname)
+//         setUserid(profile.id)
+//         setLocation(profile.profile.city+","+profile.profile.country)
+//         console.log(profile)
+//         setCommunities(profile.communities)
+//         setCommunitySet(profile.communitySet)
+//         if(communitySet.length > 0){
+//           console.log("user has created a community")
+//           setOptions(["Following","Tickets","History","Favorites","MyCommunities"])
+//         }
+//         return;
+//       }
+//       if (r.errors != null) {
+//         if (r.errors[0] !== undefined) {
+//           console.error(r.errors[0].message);
+//         }
+//       }
+//   })
+// },[])
   return (
     <div className='h-screen w-screen'>
       <Header />
