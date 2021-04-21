@@ -1,9 +1,9 @@
-import * as React from 'react';
-import Header from '../../../components/header';
 import { Link } from 'gatsby';
+import * as React from 'react';
 import MemberCard from '../../../components/cards/members/membersCard';
+import Header from '../../../components/header';
 
-export default function CreateCommunityTwo({location}) {
+export default function CreateCommunityTwo({ location }) {
   // console.log(location.state.communityid)
   return (
     <div className='h-screen w-screen'>

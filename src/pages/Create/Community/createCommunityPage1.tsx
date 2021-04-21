@@ -1,16 +1,16 @@
+import { Link } from 'gatsby';
 import * as React from 'react';
 import Rectangle from '../../../assets/Images/Rectangle6.png';
 import Header from '../../../components/header';
-import { Link, navigate } from 'gatsby';
 
-// TODO: handle image, display error, fix next css 
+// TODO: handle image, display error, fix next css
 export default function CreateCommunityOne() {
-  const [logo,setLogo] = React.useState("")
-  const [name,setName] = React.useState("")
-  const [description,setDescription] = React.useState("")
-  const [email,setEmail] = React.useState("")
+  const [logo, setLogo] = React.useState('');
+  const [name, setName] = React.useState('');
+  const [description, setDescription] = React.useState('');
+  const [email, setEmail] = React.useState('');
   // const handleSubmit = () => {
-    
+
   //   const operation = {
   //     query: createCommunityMutation,
   //     variables: {
@@ -73,7 +73,7 @@ export default function CreateCommunityOne() {
               name='Community name'
               required={true}
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={e => setName(e.target.value)}
             />
           </label>
           <label className='my-2' htmlFor='email id'>
@@ -83,7 +83,7 @@ export default function CreateCommunityOne() {
               name='email id'
               required={true}
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={e => setEmail(e.target.value)}
             />
           </label>
           <label className='my-2' htmlFor='Description'>
@@ -94,13 +94,11 @@ export default function CreateCommunityOne() {
               rows={10}
               value={description}
               required={true}
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={e => setDescription(e.target.value)}
             />
           </label>
         </form>
-        <button>
-          Next
-          </button>
+        <button>Next</button>
       </div>
     </div>
   );

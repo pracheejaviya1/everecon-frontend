@@ -1,4 +1,4 @@
-import { Link, navigate } from 'gatsby';
+import { Link } from 'gatsby';
 import * as React from 'react';
 import LandingTitle from '../../assets/Images/evereconLanding.png';
 
@@ -13,7 +13,7 @@ export default function Login() {
   const [lastname, setLastName] = React.useState('');
   const [confirmpassword, setConfirmPassword] = React.useState('');
   const [error, setError] = React.useState('');
-  
+
   // const handleSubmit = () => {
   //   setError('');
   //   if (password !== confirmpassword) {
@@ -29,7 +29,7 @@ export default function Login() {
   //       username: username,
   //       password: password,
   //   }}).then(r => console.log(r.data))
-    
+
   // };
   const btn_class: string =
     'p-4 my-2 rounded-xl w-full border border-solid border-gray-200 text-gray-700 font-roboto ';
@@ -110,7 +110,7 @@ export default function Login() {
           <Link to='/Signin/signin'> SignIn </Link>
         </span>
       </div>
-      <button className='mt-7' >
+      <button className='mt-7'>
         <span className={btn_class}>Create account</span>
       </button>
       <br />

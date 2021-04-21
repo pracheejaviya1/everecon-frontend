@@ -1,7 +1,7 @@
-import { Link, navigate } from 'gatsby';
+import { gql, useMutation } from '@apollo/client';
+import { Link } from 'gatsby';
 import * as React from 'react';
 import LandingTitle from '../../assets/Images/evereconLanding.png';
-import { useMutation, gql } from "@apollo/client"
 
 const LOGIN_MUTATION = gql`
   mutation tokenAuth($username: String!, $password: String!) {
@@ -15,7 +15,7 @@ export default function Signin() {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [error, setError] = React.useState('');
-  const [call_login,{data}] = useMutation(LOGIN_MUTATION)
+  const [call_login, { data }] = useMutation(LOGIN_MUTATION);
   const handleSubmit = () => {
     setError('');
     call_login({
@@ -23,8 +23,9 @@ export default function Signin() {
         username: username,
         password: password,
       },
-    }).then(r => console.log(r.data)).catch(e => setError(e.graphQLErrors[0].message))
-    
+    })
+      .then(r => console.log(r.data))
+      .catch(e => setError(e.graphQLErrors[0].message));
   };
   const input_class: string =
     'border-gray p-3 text-xs block w-full my-4 rounded-xl font-roboto';
