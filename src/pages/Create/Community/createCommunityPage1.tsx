@@ -1,35 +1,163 @@
-import { Link } from 'gatsby';
+import { gql, useMutation } from '@apollo/client';
+import { Link, navigate } from 'gatsby';
 import * as React from 'react';
 import Rectangle from '../../../assets/Images/Rectangle6.png';
 import Header from '../../../components/header';
 
+const CREATE_COMMUNITY_MUTATION = gql`
+  mutation createCommunity(
+    $address: String
+    $city: String
+    $country: String
+    $description: String!
+    $discord: String
+    $email: String
+    $facebook: String
+    $featuredVideo: String
+    $instagram: String
+    $linkedin: String
+    $name: String!
+    $twitter: String
+    $website: String
+  ) {
+    createCommunity(
+      address: $address
+      city: $city
+      country: $country
+      description: $description
+      discord: $discord
+      email: $email
+      facebook: $facebook
+      featuredVideo: $featuredVideo
+      instagram: $instagram
+      linkedin: $linkedin
+      name: $name
+      twitter: $twitter
+      website: $website
+    ) {
+      community {
+        id
+        name
+        description
+        logo
+        banner
+        featuredVideo
+        address
+        city
+        country
+        email
+        membersCount
+        website
+        facebook
+        linkedin
+        twitter
+        instagram
+        discord
+        isActive
+        creationTime
+        leader {
+          id
+          password
+          lastLogin
+          isSuperuser
+          username
+          firstName
+          lastName
+          email
+          isStaff
+          isActive
+          dateJoined
+          profile {
+            id
+            contact
+            city
+            country
+            profilePicture
+          }
+        }
+      }
+    }
+  }
+`;
 // TODO: handle image, display error, fix next css
 export default function CreateCommunityOne() {
-  const [logo, setLogo] = React.useState('');
+  const [logo, setLogo] = React.useState(null);
   const [name, setName] = React.useState('');
+  const [logoURL, setLogoURL] = React.useState(Rectangle);
   const [description, setDescription] = React.useState('');
   const [email, setEmail] = React.useState('');
-  // const handleSubmit = () => {
+  const [callCreateCommunity, { data }] = useMutation(
+    CREATE_COMMUNITY_MUTATION
+  );
 
-  //   const operation = {
-  //     query: createCommunityMutation,
-  //     variables: {
-  //       email: email,
-  //       name:name,
-  //       description:description,
-  //     },
-  //   };
-  //   makePromise(execute(link, operation)).then(r => {
-  //     if (r.data?.createCommunity !== null) {
-  //       const communityid =  r.data.createCommunity.community.id
-  //       navigate('/Create/Community/createCommunityPage2',{state:{communityid}});
-  //       return;
-  //     }
-  //     if (r.errors != null) {
-  //       console.error(r.errors);
-  //     }
-  //   });
-  // };
+  const handleFileChange = e => {
+    var files = e.target.files;
+
+    setLogo(files[0]);
+    setLogoURL(URL.createObjectURL(files[0]));
+  };
+
+  async function uploadLogo(communityid) {
+    // upload logo if logo else return True 
+    if (!logo) {
+      console.log('no logo');
+      return true;
+    }
+    var myHeaders = new Headers();
+    myHeaders.append(
+      'Authorization',
+      `Bearer ${window.localStorage.getItem('token')}`
+    );
+    var formdata = new FormData();
+    formdata.append(
+      'query',
+      `mutation{
+        updateCommunitybanner(id: ${communityid}) {
+          success
+          banner    
+        }
+      }`
+    );
+    formdata.append('file', logo);
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow',
+    };
+
+    let r = await fetch('http://localhost:8000/graphql/', requestOptions)
+      .then(response => response.json())
+      .catch(error => console.log('error', error));
+
+    return (r.data.updateCommunitybanner.success);
+  }
+  async function handleSubmit() {
+    let { data, errors: e } = await callCreateCommunity({
+      variables: {
+        email: email,
+        name: name,
+        description: description,
+      },
+    });
+    if (e) {
+      console.error(e);
+      return;
+    }
+
+    let communityid = data.createCommunity.community.id;
+
+    if(uploadLogo(communityid)){
+    navigate('/Create/Community/createCommunityPage2', {
+      state: { communityid },
+    });
+    }
+    else {
+      console.error("Failed to upload Community Logo")
+    }
+    return;
+  }
   return (
     <div className='h-screen w-screen'>
       <Header />
@@ -58,8 +186,8 @@ export default function CreateCommunityOne() {
         </div>
         <figure className='mt-8 mb-6'>
           <label>
-            <img className='h-40 w-60 rounded-lg' src={Rectangle} />
-            <input type='file' className='hidden' />
+            <img className='h-40 w-60 rounded-lg' src={logoURL} />
+            <input type='file' className='hidden' onChange={handleFileChange} />
             <figcaption className='py-2 text-center font-mulish'>
               Upload Community photo
             </figcaption>
@@ -98,7 +226,7 @@ export default function CreateCommunityOne() {
             />
           </label>
         </form>
-        <button>Next</button>
+        <button onClick={handleSubmit}>Next</button>
       </div>
     </div>
   );
