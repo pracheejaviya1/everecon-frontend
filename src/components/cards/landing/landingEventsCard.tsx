@@ -1,6 +1,6 @@
 import * as React from 'react';
 import landingImage from '../../../assets/Images/default.jpg';
-
+//TODO use logo
 export default function EventsCard() {
   return (
     <div>

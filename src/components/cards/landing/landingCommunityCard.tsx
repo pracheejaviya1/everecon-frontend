@@ -1,7 +1,9 @@
 import * as React from 'react';
 import landingImage from '../../../assets/Images/default.jpg';
 
-export default function CommunityCard() {
+// TODO: use logo instead
+export default function CommunityCard({ logo, id }) {
+  console.log(id);
   return (
     <div className=''>
       <img

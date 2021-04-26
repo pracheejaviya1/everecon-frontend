@@ -1,7 +1,54 @@
-import { Link } from 'gatsby';
+import { gql, useMutation } from '@apollo/client';
+import { Link, navigate } from 'gatsby';
 import * as React from 'react';
 import LandingTitle from '../../assets/Images/evereconLanding.png';
 
+const SIGNUP_MUTATION = gql`
+  mutation createUser(
+    $city: String
+    $contact: String
+    $country: String
+    $email: String!
+    $password: String!
+    $username: String!
+    $firstname: String
+    $lastname: String
+  ) {
+    createUser(
+      city: $city
+      contact: $contact
+      country: $country
+      email: $email
+      password: $password
+      username: $username
+      firstname: $firstname
+      lastname: $lastname
+    ) {
+      user {
+        id
+        password
+        lastLogin
+        isSuperuser
+        username
+        firstName
+        lastName
+        email
+        isStaff
+        isActive
+        dateJoined
+      }
+      profile {
+        id
+        contact
+        city
+        country
+        profilePicture
+      }
+      token
+      refreshToken
+    }
+  }
+`;
 export default function Login() {
   const [city, setCity] = React.useState('');
   const [contact, setContact] = React.useState('');
@@ -13,24 +60,36 @@ export default function Login() {
   const [lastname, setLastName] = React.useState('');
   const [confirmpassword, setConfirmPassword] = React.useState('');
   const [error, setError] = React.useState('');
+  const [call_signup, { data }] = useMutation(SIGNUP_MUTATION);
 
-  // const handleSubmit = () => {
-  //   setError('');
-  //   if (password !== confirmpassword) {
-  //     setError("confirm password didn't match password");
-  //     return;
-  //   }
-  //   call_login({
-  //     variables: {
-  //       city: city,
-  //       contact: contact,
-  //       country: country,
-  //       email: email,
-  //       username: username,
-  //       password: password,
-  //   }}).then(r => console.log(r.data))
+  const handleSubmit = () => {
+    setError('');
+    if (password !== confirmpassword) {
+      setError("confirm password didn't match password");
 
-  // };
+      return;
+    }
+    call_signup({
+      variables: {
+        city: city,
+        contact: contact,
+        country: country,
+        email: email,
+        username: username,
+        password: password,
+        firstname: firstname,
+        lastname: lastname,
+      },
+    })
+      .then(r => {
+        let data = r.data.createUser;
+        window.localStorage.setItem('token', data.token);
+        window.localStorage.setItem('refreshToken', data.refreshToken);
+        navigate('/Landing/landing');
+        return;
+      })
+      .catch(e => setError(e.graphQLErrors[0].message));
+  };
   const btn_class: string =
     'p-4 my-2 rounded-xl w-full border border-solid border-gray-200 text-gray-700 font-roboto ';
   const input_class: string =
@@ -110,7 +169,7 @@ export default function Login() {
           <Link to='/Signin/signin'> SignIn </Link>
         </span>
       </div>
-      <button className='mt-7'>
+      <button className='mt-7' onClick={handleSubmit}>
         <span className={btn_class}>Create account</span>
       </button>
       <br />

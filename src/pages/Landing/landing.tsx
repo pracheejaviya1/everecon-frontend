@@ -4,8 +4,58 @@ import CommunityCard from '../../components/cards/landing/landingCommunityCard';
 import EventsCard from '../../components/cards/landing/landingEventsCard';
 import Header from '../../components/header';
 import { Link } from 'gatsby';
+import { gql, useQuery } from '@apollo/client';
 
+const ALL_COMMUNITIES_QUERY = gql`
+  query communityList(
+    $kind: Int
+    $length: Int
+    $filter: String
+    $desc: Boolean
+  ) {
+    communityList(kind: $kind, length: $length, filter: $filter, desc: $desc) {
+      id
+      logo
+    }
+  }
+`;
+const ALL_EVENTS_QUERY = gql`
+  query events($kind: Int, $length: Int, $filter: String, $desc: Boolean) {
+    events(kind: $kind, length: $length, filter: $filter, desc: $desc) {
+      id
+      name
+      description
+      kind
+      address
+      city
+      country
+      liveUrl
+      startTime
+      endTime
+      featuredImage
+      isActive
+      creationTime
+      maxRsvp
+      category {
+        id
+        name
+        description
+      }
+      tags {
+        id
+        name
+      }
+    }
+  }
+`;
 export default function Landing() {
+  // TODO : handling GraphQL Error
+  const { data: community_data } = useQuery(ALL_COMMUNITIES_QUERY, {
+    variables: { kind: 0, length: 1, filter: '', desc: true },
+  });
+  const { data: events_data } = useQuery(ALL_EVENTS_QUERY, {
+    variables: { kind: 0, length: 1, filter: '', desc: true },
+  });
   return (
     <div>
       <Header />
@@ -32,9 +82,15 @@ export default function Landing() {
             Explore Communities
           </h1>
           <div className='flex align-items-center justify-evenly'>
-            <CommunityCard />
-            <CommunityCard />
-            <CommunityCard />
+            {
+              // show only first 3 communities
+              community_data &&
+                community_data.communityList
+                  .slice(0, 3)
+                  .map(e => (
+                    <CommunityCard logo={e.logo} id={e.id} key={e.id} />
+                  ))
+            }
           </div>
           <Link
             to='/Explore/Communities'
@@ -48,9 +104,7 @@ export default function Landing() {
             Explore Events
           </h1>
           <div className='flex align-items-center justify-evenly'>
-            <EventsCard />
-            <EventsCard />
-            <EventsCard />
+            {events_data && events_data.events.map(e => <EventsCard />)}
           </div>
           <Link
             to='/Explore/Events'
