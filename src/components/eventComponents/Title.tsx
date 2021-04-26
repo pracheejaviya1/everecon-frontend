@@ -7,7 +7,7 @@ type Props = {
 
 export default function EventTitle(props: Props) {
   return (
-    <div className='flex border-b border-gray-400 my-4 p-4 w-full items-center justify-between font-inter'>
+    <div className='flex border-b border-gray-400 my-4 py-4 w-full items-center justify-between font-inter'>
       <div>
         <div>{props.datetime.toUTCString()}</div>
         <h1 className='text-xl font-semibold'>{props.title}</h1>
