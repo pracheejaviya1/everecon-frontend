@@ -162,11 +162,7 @@ const FAVORITES = 3;
 const COMMUNITYSET = 4;
 
 export default function UserProfile() {
-  const [name, setName] = React.useState('');
   const [userid, setUserid] = React.useState(null);
-  const [location, setLocation] = React.useState('');
-  const [communities, setCommunities] = React.useState([]);
-  const [communitySet, setCommunitySet] = React.useState([]);
   const [options, setOptions] = React.useState([
     'Following ',
     'Tickets ',
@@ -178,6 +174,7 @@ export default function UserProfile() {
   const { loading, error, data } = useQuery(PROFILE_QUERY);
   React.useEffect(() => {
     console.log(data);
+    setUserid(data.myprofile.id)
   });
   if (loading) return null;
   if (error) return `Error! ${error}`;
@@ -186,8 +183,8 @@ export default function UserProfile() {
       <Header />
       <div className='flex flex-col w-1/2 mx-auto items-center justify-center'>
         <img src={mediaurl + data.myprofile.profile.profilePicture} className='my-8 h-28 w-28 rounded-full' />
-        <p className='text-2xl font-mulish'>{name}</p>
-        <p className='text-xl font-mulish'>{location}</p>
+        <p className='text-2xl font-mulish'>{data.myprofile.username}</p>
+        <p className='text-xl font-mulish'>{data.myprofile.profile.country}</p>
       </div>
       <div className='flex flex-col my-8 w-1/2 mx-auto items-center justify-center'>
         <div className='w-full py-2 border-b-2'>
@@ -209,7 +206,7 @@ export default function UserProfile() {
           </div>
         </div>
         {selected === COMMUNITYSET &&
-          communitySet.map((e, i) => (
+          data.myprofile.communitySet.map((e, i) => (
             <CommunityCard
               key={i}
               name={e.name}
@@ -219,7 +216,7 @@ export default function UserProfile() {
             ></CommunityCard>
           ))}
         {selected === FOLLOWING &&
-          communities.map((e, i) => (
+          data.myprofile.communities.map((e, i) => (
             <CommunityCard
               key={i}
               name={e.name}
