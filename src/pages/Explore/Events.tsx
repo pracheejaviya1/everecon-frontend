@@ -1,10 +1,42 @@
+import { useQuery } from '@apollo/client';
+import { Link } from 'gatsby';
+import gql from 'graphql-tag';
 import * as React from 'react';
 import EventCard from '../../components/cards/event/eventCard';
 import Header from '../../components/header';
-import { Link } from 'gatsby';
 type TagProps = {
   text: string;
 };
+
+const LIST_EVENTS = gql`
+  query events($kind: Int, $length: Int, $filter: String, $desc: Boolean) {
+    events(kind: $kind, length: $length, filter: $filter, desc: $desc) {
+      id
+      name
+      description
+      kind
+      address
+      city
+      country
+      liveUrl
+      startTime
+      endTime
+      featuredImage
+      isActive
+      creationTime
+      maxRsvp
+      category {
+        id
+        name
+        description
+      }
+      tags {
+        id
+        name
+      }
+    }
+  }
+`;
 
 function Tag(props: TagProps) {
   return (
@@ -29,6 +61,14 @@ function Tag(props: TagProps) {
 }
 
 export default function ExploreCommunity() {
+  const { data: events_data } = useQuery(LIST_EVENTS, {
+    variables: {
+      kind: 0,
+      length: 2,
+      desc: true,
+      filter: '',
+    },
+  });
   const input_class: string =
     'border-gray-100 p-3 text-xs block w-80 rounded-xl font-mulish bg-gray-100';
   return (
@@ -39,6 +79,7 @@ export default function ExploreCommunity() {
           <h1 className='my-5 text-2xl font-mulish text-center'>
             Explore Events
           </h1>
+
           <div className='border-b-2 w-3/4 mx-auto items-center justify-between flex flex-row '>
             <div className='flex'>
               <form className='mb-2'>
@@ -56,6 +97,14 @@ export default function ExploreCommunity() {
               Reset
             </span>
           </div>
+          {events_data &&
+            events_data.events.map(e => (
+              <EventCard
+                communityName={e.name}
+                title={e.name}
+                date={e.startTime}
+              />
+            ))}
           <Link to='/View/ViewEvent'>
             <EventCard communityName='meh' date={new Date()} title='Title' />
           </Link>
