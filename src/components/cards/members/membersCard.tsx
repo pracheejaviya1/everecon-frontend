@@ -2,7 +2,6 @@ import { gql, useMutation } from '@apollo/client';
 import * as React from 'react';
 import communityImg from '../../../assets/Images/community.jpg';
 
-<<<<<<< HEAD
 const REMOVE_MEMBER_MUTATION = gql`
   mutation removeCoreMember ($community: ID!, $user: ID!) {
     removeCoreMember (community: $community, user: $user) {
@@ -19,13 +18,6 @@ export default function MembersCard({
   refetch,
 }) {
   const [callRemoveMember, { data }] = useMutation(REMOVE_MEMBER_MUTATION);
-=======
-export default function MembersCard({
-  name = 'Nam',
-  location = 'Location',
-  id = 1,
-}) {
->>>>>>> a07301f381456f74b16ffcb69981c18d0dddb7ab
   return (
     <div className='flex items-center justify-between w-1/3 m-6 mx-auto'>
       <div className='flex w-1/5 items-center justify-between'>
@@ -35,7 +27,6 @@ export default function MembersCard({
           <p className='my-1'>{location}</p>
         </div>
       </div>
-<<<<<<< HEAD
       <button
         onClick={() => {
           callRemoveMember({
@@ -43,9 +34,6 @@ export default function MembersCard({
           }).then(r => refetch())
         }}
       >
-=======
-      <button>
->>>>>>> a07301f381456f74b16ffcb69981c18d0dddb7ab
         <svg
           xmlns='http://www.w3.org/2000/svg'
           className='h-6 w-6 text-red-500'
