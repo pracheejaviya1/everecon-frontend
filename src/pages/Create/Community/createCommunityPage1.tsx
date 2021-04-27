@@ -79,6 +79,7 @@ const CREATE_COMMUNITY_MUTATION = gql`
     }
   }
 `;
+
 // TODO: handle image, display error, fix next css
 export default function CreateCommunityOne() {
   const [logo, setLogo] = React.useState(null);
@@ -90,7 +91,7 @@ export default function CreateCommunityOne() {
     CREATE_COMMUNITY_MUTATION
   );
 
-  const handleFileChange = e => {
+  const handleFileChange = (e: { target: { files: any } }) => {
     var files = e.target.files;
 
     setLogo(files[0]);
@@ -98,7 +99,7 @@ export default function CreateCommunityOne() {
   };
 
   async function uploadLogo(communityid) {
-    // upload logo if logo else return True 
+    // upload logo if logo else return True
     if (!logo) {
       console.log('no logo');
       return true;
@@ -114,7 +115,7 @@ export default function CreateCommunityOne() {
       `mutation{
         updateCommunitybanner(id: ${communityid}) {
           success
-          banner    
+          banner
         }
       }`
     );
@@ -131,7 +132,7 @@ export default function CreateCommunityOne() {
       .then(response => response.json())
       .catch(error => console.log('error', error));
 
-    return (r.data.updateCommunitybanner.success);
+    return r.data.updateCommunitybanner.success;
   }
   async function handleSubmit() {
     let { data, errors: e } = await callCreateCommunity({
@@ -148,13 +149,12 @@ export default function CreateCommunityOne() {
 
     let communityid = data.createCommunity.community.id;
 
-    if(uploadLogo(communityid)){
-    navigate('/Create/Community/createCommunityPage2', {
-      state: { communityid },
-    });
-    }
-    else {
-      console.error("Failed to upload Community Logo")
+    if (uploadLogo(communityid)) {
+      navigate('/Create/Community/createCommunityPage2', {
+        state: { communityid },
+      });
+    } else {
+      console.error('Failed to upload Community Logo');
     }
     return;
   }

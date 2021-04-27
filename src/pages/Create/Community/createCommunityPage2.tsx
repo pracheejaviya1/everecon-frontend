@@ -5,14 +5,13 @@ import Header from '../../../components/header';
 
 // TODO: ERROR Display required
 export default function CreateCommunityTwo({ location }) {
-  const [username,setUsername] = React.useState("")
-  const [members,setMembers] = React.useState([])
+  const [username, setUsername] = React.useState('');
+  const [members, setMembers] = React.useState([]);
 
-  const searchUser = () => 
-  {
-    console.log(username)
-  }
-  console.log(location.state.communityid)
+  const searchUser = () => {
+    console.log(username);
+  };
+  console.log(location.state.communityid);
   return (
     <div className='h-screen w-screen'>
       <Header />
@@ -46,31 +45,29 @@ export default function CreateCommunityTwo({ location }) {
               className='border-none w-80 bg-gray-100'
               placeholder='Enter member name'
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={e => setUsername(e.target.value)}
             />
             <button onClick={searchUser}>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              className='h-6 w-6'
-              fill='none'
-              viewBox='0 0 24 24'
-              stroke='currentColor'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
-              />
-            </svg>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                className='h-6 w-6'
+                fill='none'
+                viewBox='0 0 24 24'
+                stroke='currentColor'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
+                />
+              </svg>
             </button>
           </div>
         </div>
-        {
-          members.map((e,i) =>
-            <MemberCard name={e.name} key={i}/>
-          )
-        }
+        {members.map((e, i) => (
+          <MemberCard name={e.name} key={i} />
+        ))}
         <Link
           className=' my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'
           to='/Create/Community/createCommunityPage3'
