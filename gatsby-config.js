@@ -7,6 +7,7 @@
 module.exports = {
   siteMetadata: {
     title: 'EveRecon',
+    siteURL: 'https://everecon.com',
   },
   flags: {
     FAST_DEV: true,

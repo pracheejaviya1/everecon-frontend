@@ -11,7 +11,7 @@ const LOGIN_MUTATION = gql`
     }
   }
 `;
-export default function Signin() {
+export default function Signin(props) {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [error, setError] = React.useState('');
