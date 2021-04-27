@@ -49,6 +49,7 @@ const SIGNUP_MUTATION = gql`
     }
   }
 `;
+
 export default function Login() {
   const [city, setCity] = React.useState('');
   const [contact, setContact] = React.useState('');

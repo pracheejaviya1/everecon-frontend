@@ -1,10 +1,10 @@
+import { gql, useQuery } from '@apollo/client';
+import { Link } from 'gatsby';
 import * as React from 'react';
 import landingImage from '../../assets/Images/Rectangle6.png';
 import CommunityCard from '../../components/cards/landing/landingCommunityCard';
 import EventsCard from '../../components/cards/landing/landingEventsCard';
 import Header from '../../components/header';
-import { Link } from 'gatsby';
-import { gql, useQuery } from '@apollo/client';
 
 const ALL_COMMUNITIES_QUERY = gql`
   query communityList(
@@ -19,6 +19,7 @@ const ALL_COMMUNITIES_QUERY = gql`
     }
   }
 `;
+
 const ALL_EVENTS_QUERY = gql`
   query events($kind: Int, $length: Int, $filter: String, $desc: Boolean) {
     events(kind: $kind, length: $length, filter: $filter, desc: $desc) {
@@ -87,7 +88,7 @@ export default function Landing() {
               community_data &&
                 community_data.communityList
                   .slice(0, 3)
-                  .map(e => (
+                  .map((e: { logo: any; id: React.Key | null | undefined }) => (
                     <CommunityCard logo={e.logo} id={e.id} key={e.id} />
                   ))
             }
