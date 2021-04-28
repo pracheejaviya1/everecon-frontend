@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Signin from './Signin/signin';
+import Signin from './signin';
 
 export default function Home() {
   return (

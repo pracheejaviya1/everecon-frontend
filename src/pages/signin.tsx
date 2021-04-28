@@ -1,7 +1,7 @@
 import { gql, useMutation } from '@apollo/client';
 import { Link, navigate } from 'gatsby';
 import * as React from 'react';
-import LandingTitle from '../../assets/Images/evereconLanding.png';
+import LandingTitle from '../assets/Images/evereconLanding.png';
 
 const LOGIN_MUTATION = gql`
   mutation tokenAuth($username: String!, $password: String!) {

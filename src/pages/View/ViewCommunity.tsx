@@ -14,14 +14,15 @@ function Tag(props: TagProps) {
   );
 }
 
-export default function ViewCommunity() {
+export default function ViewCommunity(props) {
   return (
     <div className='h-screen w-screen'>
       <Header />
       <div className='flex border-b-2 py-10 w-2/3 mx-auto font-inter'>
         <img className='h-60 w-90 rounded-md' src={CommunityImage} />
         <div className='flex ml-10 items-start justify-between h-full flex-col font-inter'>
-          <h1 className='font-bold text-2xl mx-2 '>Tough one</h1>
+          <h1 className='font-bold text-2xl mx-2'>Tough one</h1>
+          <p>{props.uid}</p>
           <p className='text-xl mx-2 mb-1'>Location</p>
           <p className='text-xl mx-2 text-gray-400 mb-1'>Lead</p>
           <Link

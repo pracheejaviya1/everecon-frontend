@@ -1,13 +1,16 @@
 import { Router } from '@reach/router';
 import * as React from 'react';
-import Signin from './Signin/signin';
-const Page = props => <div>{props.page}</div>;
+import Signin from './signin';
+import Signup from './signup';
+import ViewCommunity from './View/ViewCommunity';
+import ViewEvent from './View/ViewEvent';
 
 const App = () => (
   <Router>
-    <Signin path='/' />
-    <Page path='view/event/:page' />
-    <Page path='view/community/:page' />
+    <Signin path='/signin' />
+    <Signup path='/signup' />
+    <ViewEvent path='/event/:uid' />
+    <ViewCommunity path='/community/:uid' />
   </Router>
 );
 

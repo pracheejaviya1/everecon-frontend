@@ -1,7 +1,7 @@
 import { gql, useMutation } from '@apollo/client';
 import { Link, navigate } from 'gatsby';
 import * as React from 'react';
-import LandingTitle from '../../assets/Images/evereconLanding.png';
+import LandingTitle from '../assets/Images/evereconLanding.png';
 
 const SIGNUP_MUTATION = gql`
   mutation createUser(
@@ -50,7 +50,7 @@ const SIGNUP_MUTATION = gql`
   }
 `;
 
-export default function Login() {
+export default function Signup(props) {
   const [city, setCity] = React.useState('');
   const [contact, setContact] = React.useState('');
   const [country, setCountry] = React.useState('');
