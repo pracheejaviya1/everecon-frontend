@@ -13,6 +13,7 @@ type Props = {
     URL: string;
     Category: string;
     Check: number;
+    description: string;
   };
   uid: string;
 };
@@ -33,18 +34,7 @@ export default function EventDesc(props: Props) {
           <p>Category: {props.details.Category || 'category'}</p>
           <p>Number of Checkins: {props.details.Check || 'num-checkins'}</p>
         </div>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi
-          nesciunt molestias vero expedita non labore reprehenderit sapiente?
-          Laboriosam provident cupiditate non ratione illo voluptates aspernatur
-          enim porro, corrupti, similique quo.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi
-          nesciunt molestias vero expedita non labore reprehenderit sapiente?
-          Laboriosam provident cupiditate non ratione illo voluptates aspernatur
-          enim porro, corrupti, similique quo.
-        </p>
+        <p>{props.details.description}</p>
       </div>
       <div className='flex flex-col items-center justify-around'>
         <SpeakerBlock />

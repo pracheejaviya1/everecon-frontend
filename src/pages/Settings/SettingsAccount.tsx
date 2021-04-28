@@ -4,11 +4,11 @@ import profilepic from '../../assets/Images/community.jpg';
 import Header from '../../components/header';
 
 export default function SettingAccount() {
-  const [fname, setFname] = React.useState("");
-  const [lname, setLname] = React.useState("");
-  const [country, setCountry] = React.useState("");
-  const [city, setCity] = React.useState("");
-  const [contact, setContact] = React.useState("");
+  const [fname, setFname] = React.useState('');
+  const [lname, setLname] = React.useState('');
+  const [country, setCountry] = React.useState('');
+  const [city, setCity] = React.useState('');
+  const [contact, setContact] = React.useState('');
   return (
     <div className='h-screen bg-landing_signin bg-no-repeat bg-right-bottom'>
       <Header />

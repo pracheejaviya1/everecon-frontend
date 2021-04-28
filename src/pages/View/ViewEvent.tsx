@@ -130,6 +130,7 @@ export default function ViewEvent(props) {
             End: new Date(data.eventById.endTime).toISOString(),
             Start: new Date(data.eventById.startTime).toISOString(),
             URL: data.eventById.url,
+            description: data.eventById.description,
           }}
           uid={props.uid}
         />
