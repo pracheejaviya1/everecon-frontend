@@ -12,7 +12,7 @@ const App = () => (
     <Signup path='/signup' />
     <ViewEvent path='/event/:uid' />
     <ViewCommunity path='/community/:uid' />
-    <Search path='/search'/>
+    <Search path='/search' />
   </Router>
 );
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import CommunityImage from '../../../assets/Images/ahmedabad.jpeg';
-
+import { mediaurl } from '../../config';
+import { Link } from 'gatsby';
 type TagProps = {
   text: string;
 };
@@ -13,27 +13,29 @@ function Tag(props: TagProps) {
   );
 }
 
-export default function CommunityCard() {
+export default function CommunityCard(props) {
   return (
-    <div className='flex flex-row items-center justify-between p-5 shadow-md mx-auto rounded-lg w-3/4 text-left my-2 mt-3'>
-      <div className='flex'>
-        <img className='h-30 w-40 rounded-md' src={CommunityImage} />
-        <div className='flex flex-col mx-5 '>
-          <span className='text-lg font-semibold font-inter'> Name</span>
-          <span className='font-inter font-light'> Location</span>
-          <div className='flex my-1'>
-            <Tag text='AI' />
-            <Tag text='Machine Learning' />
-            <Tag text='Tag' />
+    <Link to={'/community/' + props.id}>
+      <div className='flex flex-row items-center justify-between p-5 shadow-md mx-auto rounded-lg w-3/4 text-left my-2 mt-3'>
+        <div className='flex'>
+          <img
+            className='h-30 w-40 rounded-md'
+            src={mediaurl + props.imageurl}
+          />
+          <div className='flex flex-col mx-5 '>
+            <span className='text-lg font-semibold font-inter'>
+              {props.name}
+            </span>
+            <span className='font-inter font-light'> {props.location}</span>
+            <span className='font-inter text-sm'> {props.memcount}</span>
           </div>
-          <span className='font-inter text-sm'> 100 members</span>
+        </div>
+        <div className='float-right'>
+          <button className='font-inter my-2 text-xs bg-blue-400 text-white rounded-lg px-3 py-2'>
+            Follow
+          </button>
         </div>
       </div>
-      <div className='float-right'>
-        <button className='font-inter my-2 text-xs bg-blue-400 text-white rounded-lg px-3 py-2'>
-          Follow
-        </button>
-      </div>
-    </div>
+    </Link>
   );
 }

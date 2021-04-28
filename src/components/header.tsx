@@ -1,4 +1,4 @@
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 import * as React from 'react';
 import HeadingTitle from '../assets/Images/headingTitle.png';
 import Dropdown from './dropdown';
@@ -27,6 +27,7 @@ export default function Header() {
         className='font-inter my-2 text-xs bg-blue-400 text-white rounded-lg px-3 py-2'
         onClick={() => {
           setSearchcon(search);
+          navigate('/search');
           // navigate to search results
         }}
       >
