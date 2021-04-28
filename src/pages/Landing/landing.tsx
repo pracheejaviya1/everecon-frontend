@@ -18,7 +18,6 @@ const ALL_COMMUNITIES_QUERY = gql`
       logo
     }
   }
-
 `;
 
 const ALL_EVENTS_QUERY = gql`

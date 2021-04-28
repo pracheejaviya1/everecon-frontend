@@ -6,128 +6,128 @@ import { gql, useQuery } from '@apollo/client';
 import { mediaurl } from '../../components/config';
 
 const PROFILE_QUERY = gql`
-query myprofile {
+  query myprofile {
     myprofile {
+      id
+      lastLogin
+      isSuperuser
+      username
+      firstName
+      lastName
+      email
+      isStaff
+      isActive
+      dateJoined
+      profile {
         id
-        lastLogin
-        isSuperuser
-        username
-        firstName
-        lastName
-        email
-        isStaff
+        contact
+        city
+        country
+        profilePicture
+      }
+      eventsAttended {
+        id
+        name
+        description
+        kind
+        address
+        city
+        country
+        liveUrl
+        startTime
+        endTime
+        featuredImage
         isActive
-        dateJoined
-        profile {
-            id
-            contact
-            city
-            country
-            profilePicture
-        }
-        eventsAttended {
-            id
-            name
-            description
-            kind
-            address
-            city
-            country
-            liveUrl
-            startTime
-            endTime
-            featuredImage
-            isActive
-            creationTime
-            maxRsvp
-        }
-        communities {
-            id
-            name
-            description
-            logo
-            banner
-            featuredVideo
-            address
-            city
-            country
-            email
-            membersCount
-            website
-            facebook
-            linkedin
-            twitter
-            instagram
-            discord
-            isActive
-            creationTime
-        }
-        communitySet {
-            id
-            name
-            description
-            logo
-            banner
-            featuredVideo
-            address
-            city
-            country
-            email
-            membersCount
-            website
-            facebook
-            linkedin
-            twitter
-            instagram
-            discord
-            isActive
-            creationTime
-        }
-        communitiesCoreMembers {
-            id
-            name
-            description
-            logo
-            banner
-            featuredVideo
-            address
-            city
-            country
-            email
-            membersCount
-            website
-            facebook
-            linkedin
-            twitter
-            instagram
-            discord
-            isActive
-            creationTime
-        }
-        communitiesVolunteers {
-            id
-            name
-            description
-            logo
-            banner
-            featuredVideo
-            address
-            city
-            country
-            email
-            membersCount
-            website
-            facebook
-            linkedin
-            twitter
-            instagram
-            discord
-            isActive
-            creationTime
-        }
+        creationTime
+        maxRsvp
+      }
+      communities {
+        id
+        name
+        description
+        logo
+        banner
+        featuredVideo
+        address
+        city
+        country
+        email
+        membersCount
+        website
+        facebook
+        linkedin
+        twitter
+        instagram
+        discord
+        isActive
+        creationTime
+      }
+      communitySet {
+        id
+        name
+        description
+        logo
+        banner
+        featuredVideo
+        address
+        city
+        country
+        email
+        membersCount
+        website
+        facebook
+        linkedin
+        twitter
+        instagram
+        discord
+        isActive
+        creationTime
+      }
+      communitiesCoreMembers {
+        id
+        name
+        description
+        logo
+        banner
+        featuredVideo
+        address
+        city
+        country
+        email
+        membersCount
+        website
+        facebook
+        linkedin
+        twitter
+        instagram
+        discord
+        isActive
+        creationTime
+      }
+      communitiesVolunteers {
+        id
+        name
+        description
+        logo
+        banner
+        featuredVideo
+        address
+        city
+        country
+        email
+        membersCount
+        website
+        facebook
+        linkedin
+        twitter
+        instagram
+        discord
+        isActive
+        creationTime
+      }
     }
-}
-`
+  }
+`;
 
 //TODO: Add new card for my communities, remove favorites, add logo in community, tickets, historym following, link commuinty page
 function CommunityCard({ name, logo, userid, communityid }) {
@@ -174,7 +174,7 @@ export default function UserProfile() {
   const { loading, error, data } = useQuery(PROFILE_QUERY);
   React.useEffect(() => {
     console.log(data);
-    setUserid(data.myprofile.id)
+    setUserid(data.myprofile.id);
   });
   if (loading) return null;
   if (error) return `Error! ${error}`;
@@ -182,7 +182,10 @@ export default function UserProfile() {
     <div className='h-screen w-screen'>
       <Header />
       <div className='flex flex-col w-1/2 mx-auto items-center justify-center'>
-        <img src={mediaurl + data.myprofile.profile.profilePicture} className='my-8 h-28 w-28 rounded-full' />
+        <img
+          src={mediaurl + data.myprofile.profile.profilePicture}
+          className='my-8 h-28 w-28 rounded-full'
+        />
         <p className='text-2xl font-mulish'>{data.myprofile.username}</p>
         <p className='text-xl font-mulish'>{data.myprofile.profile.country}</p>
       </div>

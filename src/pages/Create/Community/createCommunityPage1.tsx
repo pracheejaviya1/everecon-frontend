@@ -161,7 +161,7 @@ export default function CreateCommunityOne() {
   return (
     <div className='h-screen w-screen'>
       <Header />
-      <div className='flex flex-col h-5/6 justify-center items-center'>
+      <div className='flex flex-col justify-center items-center'>
         <div className='flex items-center justify-between border-b-2 pb-2 w-1/2'>
           <Link to='/Profiles/userProfile'>
             <svg
@@ -212,6 +212,106 @@ export default function CreateCommunityOne() {
               required={true}
               value={email}
               onChange={e => setEmail(e.target.value)}
+            />
+          </label>
+          <label className='my-2' htmlFor='Address'>
+            <input
+              className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
+              placeholder='Address'
+              name='Address'
+              required={true}
+              // value={address}
+              onChange={e => setName(e.target.value)}
+            />
+          </label>
+          <label className='my-2' htmlFor='City'>
+            <input
+              className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
+              placeholder='City'
+              name='City'
+              required={true}
+              // value={city}
+              onChange={e => setName(e.target.value)}
+            />
+          </label>
+          <label className='my-2' htmlFor='Country'>
+            <input
+              className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
+              placeholder='Country'
+              name='Country'
+              required={true}
+              // value={country}
+              onChange={e => setName(e.target.value)}
+            />
+          </label>
+          <label className='my-2' htmlFor='Discord'>
+            <input
+              className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
+              placeholder='Discord'
+              name='Discord'
+              required={true}
+              // value={discord}
+              onChange={e => setName(e.target.value)}
+            />
+          </label>
+          <label className='my-2' htmlFor='Facebook'>
+            <input
+              className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
+              placeholder='Facebook'
+              name='Facebook'
+              required={true}
+              // value={facebook}
+              onChange={e => setName(e.target.value)}
+            />
+          </label>
+          <label className='my-2' htmlFor='video'>
+            <input
+              className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
+              placeholder='video'
+              name='video'
+              required={true}
+              // value={video}
+              onChange={e => setName(e.target.value)}
+            />
+          </label>
+          <label className='my-2' htmlFor='Instagram'>
+            <input
+              className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
+              placeholder='Instragram'
+              name='Instragram'
+              required={true}
+              // value={instagram}
+              onChange={e => setName(e.target.value)}
+            />
+          </label>
+          <label className='my-2' htmlFor='LinkedIn'>
+            <input
+              className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
+              placeholder='LinkedIn'
+              name='LinkedIn'
+              required={true}
+              // value={linkedin}
+              onChange={e => setName(e.target.value)}
+            />
+          </label>
+          <label className='my-2' htmlFor='Twitter'>
+            <input
+              className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
+              placeholder='Twitter'
+              name='Twitter'
+              required={true}
+              // value={twitter}
+              onChange={e => setName(e.target.value)}
+            />
+          </label>
+          <label className='my-2' htmlFor='Webpage'>
+            <input
+              className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
+              placeholder='Webpage'
+              name='Webpage'
+              required={true}
+              // value={webpage}
+              onChange={e => setName(e.target.value)}
             />
           </label>
           <label className='my-2' htmlFor='Description'>
