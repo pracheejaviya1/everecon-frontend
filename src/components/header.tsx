@@ -2,8 +2,11 @@ import { Link } from 'gatsby';
 import * as React from 'react';
 import HeadingTitle from '../assets/Images/headingTitle.png';
 import Dropdown from './dropdown';
+import SearchContext from '../context/searchcontext.js';
 
 export default function Header() {
+  const [searchcon, setSearchcon] = React.useContext(SearchContext);
+  const [search, setSearch] = React.useState('');
   return (
     <nav className='flex flex-row items-center bg-gray-50 justify-evenly h-28'>
       <Link to='/Landing/landing'>
@@ -14,9 +17,19 @@ export default function Header() {
           type='text'
           placeholder='What are you looking for?'
           className='placeholder-gray-400 border-none text-xs w-full bg-gray-100 font-mulish'
+          value={search}
+          onChange={e => {
+            setSearch(e.target.value);
+          }}
         />
       </div>
-      <button className='font-inter my-2 text-xs bg-blue-400 text-white rounded-lg px-3 py-2'>
+      <button
+        className='font-inter my-2 text-xs bg-blue-400 text-white rounded-lg px-3 py-2'
+        onClick={() => {
+          setSearchcon(search);
+          // navigate to search results
+        }}
+      >
         Search
       </button>
       <ul className='links flex flex-row justify-evenly font-mulish'>

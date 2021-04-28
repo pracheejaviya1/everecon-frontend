@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client';
 import { Link } from 'gatsby';
 import gql from 'graphql-tag';
 import * as React from 'react';
-import CommunityImage from '../../assets/Images/ahmedabad.jpeg';
+import { mediaurl } from '../../components/config';
 import Header from '../../components/header';
 
 type TagProps = {
@@ -125,11 +125,18 @@ export default function ViewCommunity(props) {
     <div className='h-screen w-screen'>
       <Header />
       <div className='flex border-b-2 py-10 w-2/3 mx-auto font-inter'>
-        <img className='h-60 w-90 rounded-md' src={CommunityImage} />
+        <img
+          className='h-60 w-90 rounded-md'
+          src={mediaurl + data.communityById.logo}
+        />
         <div className='flex ml-10 items-start justify-between h-full flex-col font-inter'>
-          <h1 className='font-bold text-2xl mx-2'>Tough one</h1>
-          <p className='text-xl mx-2 mb-1'>Location</p>
-          <p className='text-xl mx-2 text-gray-400 mb-1'>Lead</p>
+          <h1 className='font-bold text-2xl mx-2'>
+            {data?.communityById.name}
+          </h1>
+          <p className='text-xl mx-2 mb-1'>{data?.communityById.city}</p>
+          <p className='text-xl mx-2 text-gray-400 mb-1'>
+            {data?.communityById.leader.username}
+          </p>
           <Link
             className='text-sm bg-blue-400 text-white rounded-md px-3 py-2 mx-2 my-1'
             to='/Create/Event/createEventPage1'
@@ -155,7 +162,7 @@ export default function ViewCommunity(props) {
             </button>
           </div>
           <p className='my-10 text-gray-500'>
-            <div className='grid grid-cols-3'>
+            <div className='grid'>
               <p>Address: {data?.communityById.address || 'address'}</p>
               <p>City: {data?.communityById.city || 'city'}</p>
               <p>Country: {data?.communityById.country || 'Country'}</p>
@@ -163,7 +170,7 @@ export default function ViewCommunity(props) {
               <p>Facebook: {data?.communityById.facebook || 'facebook'}</p>
               <p>Twitter: {data?.communityById.twitter || 'twitter'}</p>
               <p>LinkedIn: {data?.communityById.linkedin || 'linkedin'}</p>
-              <p>Leader: {data?.communityById.leader || 'Leader'}</p>
+              {/* <p>Leader: {data?.communityById.leader || 'Leader'}</p> */}
               <p>
                 Featured Video:{' '}
                 {data?.communityById.featuredVideo || 'featuredVideo'}

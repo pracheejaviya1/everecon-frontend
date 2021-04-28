@@ -121,18 +121,15 @@ export default function ViewEvent(props) {
           title={data.eventById.name}
         />
         <EventDesc
-          details={{
-            Address: data.eventById.address,
-            Category: data.eventById.category,
-            Check: data.eventById.checkins,
-            City: data.eventById.city,
-            Country: data.eventById.country,
-            End: new Date(data.eventById.endTime).toISOString(),
-            Start: new Date(data.eventById.startTime).toISOString(),
-            URL: data.eventById.url,
-            description: data.eventById.description,
-          }}
+          Address={data.eventById.address}
+          City={data.eventById.city}
+          Country={data.eventById.country}
+          End={new Date(data.eventById.endTime).toISOString()}
+          Start={new Date(data.eventById.startTime).toISOString()}
+          URL={data.eventById.url}
+          description={data.eventById.description}
           uid={props.uid}
+          imageurl={data.eventById.featuredImage}
         />
       </div>
     </div>
