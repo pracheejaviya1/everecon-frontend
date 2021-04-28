@@ -1,7 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 import { Link } from 'gatsby';
 import * as React from 'react';
-import landingImage from '../../assets/Images/Rectangle6.png';
+import landingImage from '../../assets/Images/evereconLanding.png';
 import CommunityCard from '../../components/cards/landing/landingCommunityCard';
 import EventsCard from '../../components/cards/landing/landingEventsCard';
 import Header from '../../components/header';
@@ -16,6 +16,7 @@ const ALL_COMMUNITIES_QUERY = gql`
     communityList(kind: $kind, length: $length, filter: $filter, desc: $desc) {
       id
       logo
+      name
     }
   }
 
@@ -51,6 +52,13 @@ const ALL_EVENTS_QUERY = gql`
   }
 `;
 export default function Landing() {
+
+  React.useEffect(() => {
+    console.log(community_data);
+    console.log(events_data);
+  });
+
+
   // TODO : handling GraphQL Error
   const { data: community_data } = useQuery(ALL_COMMUNITIES_QUERY, {
     variables: { kind: 0, length: 1, filter: '', desc: true },
@@ -62,20 +70,26 @@ export default function Landing() {
     <div>
       <Header />
       <div className='m-auto'>
-        <div className='m-10 flex align-items-center justify-evenly'>
+        <div className='m-3 flex align-items-center justify-evenly'>
           <img
             src={landingImage}
-            className='h-80 w-120 rounded-lg'
-            alt='piggy'
+            className='h-36 rounded-lg'
+            alt='landing image'
           />
-          <div className='w-1/3 flex flex-col align-items-center justify-evenly '>
+          <div className='w-1/2 flex flex-col align-items-center justify-evenly '>
             <h1 className='font-inter font-extralight text-2xl'>ABOUT US</h1>
             <span className='font-mulish font-thin '>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate
+              Communities are a way for people to come together and pursue similar interests.
+              People make communities that operate like a small organization - they have roles (leader, core members, followers etc.),
+              objectives (promote their interests through events and engaging with their community) and day to day work.
+              <br></br>
+              The purpose of this platform is to:-
+              <br></br>
+              - Help communities create an online presence and portfolio.
+              <br></br>
+              - Manage community work such as setting up events, gathering registrations and checking people in
+              <br></br>
+              - Help users discover communities and events of their interest and get on board easily.
             </span>
           </div>
         </div>
@@ -87,11 +101,11 @@ export default function Landing() {
             {
               // show only first 3 communities
               community_data &&
-                community_data.communityList
-                  .slice(0, 3)
-                  .map((e: { logo: any; id: React.Key | null | undefined }) => (
-                    <CommunityCard logo={e.logo} id={e.id} key={e.id} />
-                  ))
+              community_data.communityList
+                .slice(0, 3)
+                .map((e: { logo: any; id: React.Key | null | undefined; name: any }) => (
+                  <CommunityCard logo={e.logo} id={e.id} name={e.name} key={e.id} />
+                ))
             }
           </div>
           <Link
@@ -106,7 +120,10 @@ export default function Landing() {
             Explore Events
           </h1>
           <div className='flex align-items-center justify-evenly'>
-            {events_data && events_data.events.map(e => <EventsCard />)}
+            {events_data && events_data.events
+              .slice(0, 3)
+              .map((e: { featuredImage: any; id: React.Key | null | undefined; name: any }) =>
+                <EventsCard logo={e.featuredImage} id={e.id} name={e.name} key={e.id} />)}
           </div>
           <Link
             to='/Explore/Events'
