@@ -1,4 +1,4 @@
-import { gql, useQuery } from '@apollo/client';
+import { gql } from '@apollo/client';
 import * as React from 'react';
 import EventDesc from '../../components/eventComponents/Desc';
 import EventTitle from '../../components/eventComponents/Title';
@@ -92,34 +92,46 @@ const EVENT_QUERY = gql`
 `;
 
 export default function ViewEvent(props) {
-  let uid: number;
+  let uid: string;
   const isBrowser = typeof window !== 'undefined';
   if (isBrowser) {
     uid = props.uid;
     //  parseInt(window.location.href.split('#')[1] || '0');
   } else {
-    uid = 1;
+    uid = '1';
   }
 
-  const { loading, error, data } = useQuery(EVENT_QUERY, {
-    variables: { id: uid },
-  });
-  if (loading) {
-    return `Loading`;
-  }
-  if (error) {
-    return `Error! ${error}`;
-  }
+  // const { loading, error, data } = useQuery(EVENT_QUERY, {
+  //   variables: { id: uid },
+  // });
+  // if (loading) {
+  //   return `Loading`;
+  // }
+  // if (error) {
+  //   return `Error! ${error}`;
+  // }
   return (
     <div className='border-b-2 h-screen'>
       <Header />
       <div className='flex flex-col mx-auto w-3/4 items-center'>
         <p>{props.uid}</p>
         <EventTitle
-          datetime={new Date(data.eventById.startTime)}
-          title={data.eventById.name}
+          datetime={new Date() /*Date(data.eventById.startTime)*/}
+          title={uid /*data.eventById.name*/}
         />
-        <EventDesc uid={props.uid} />
+        <EventDesc
+          details={{
+            Address: '',
+            Category: '',
+            Check: 1,
+            City: '',
+            Country: '',
+            End: new Date().toISOString(),
+            Start: new Date().toISOString(),
+            URL: '',
+          }}
+          uid={props.uid}
+        />
       </div>
     </div>
   );
