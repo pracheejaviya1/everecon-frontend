@@ -1,9 +1,9 @@
+import { gql, useQuery } from '@apollo/client';
 import { Link } from 'gatsby';
 import * as React from 'react';
 import CommunityImage from '../../assets/Images/community.jpg';
-import Header from '../../components/header';
-import { gql, useQuery } from '@apollo/client';
 import { mediaurl } from '../../components/config';
+import Header from '../../components/header';
 
 const PROFILE_QUERY = gql`
   query myprofile {
@@ -174,8 +174,8 @@ export default function UserProfile() {
   const { loading, error, data } = useQuery(PROFILE_QUERY);
   React.useEffect(() => {
     console.log(data);
-    setUserid(data.myprofile.id);
-  });
+    if (loading == false) setUserid(data.myprofile.id);
+  }, [loading]);
   if (loading) return null;
   if (error) return `Error! ${error}`;
   return (

@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client';
 import * as React from 'react';
 import EventDesc from '../../components/eventComponents/Desc';
 import EventTitle from '../../components/eventComponents/Title';
@@ -101,23 +101,23 @@ export default function ViewEvent(props) {
     uid = 1;
   }
 
-  // const { loading, error, data } = useQuery(EVENT_QUERY, {
-  //   variables: { id: uid },
-  // });
-  // if (loading) {
-  //   return null;
-  // }
-  // if (error) {
-  //   return `Error! ${error}`;
-  // }
+  const { loading, error, data } = useQuery(EVENT_QUERY, {
+    variables: { id: uid },
+  });
+  if (loading) {
+    return `Loading`;
+  }
+  if (error) {
+    return `Error! ${error}`;
+  }
   return (
     <div className='border-b-2 h-screen'>
       <Header />
       <div className='flex flex-col mx-auto w-3/4 items-center'>
         <p>{props.uid}</p>
         <EventTitle
-          datetime={new Date() /*Date(data.eventById.startTime)*/}
-          title={'title' /*data.eventById.name*/}
+          datetime={new Date(data.eventById.startTime)}
+          title={data.eventById.name}
         />
         <EventDesc uid={props.uid} />
       </div>
