@@ -24,14 +24,14 @@ export default function EventDesc(props: Props) {
         <img className='rounded-md' src={EventImage} />
         <h2 className='my-4 font-bold'>Details</h2>
         <div className='my-2 grid grid-cols-2'>
-          <p>{props.details.City || 'city'}</p>
-          <p>{props.details.Country || 'country'}</p>
-          <p>{props.details.Address || 'address'}</p>
-          <p>{props.details.Start || 'starttime'}</p>
-          <p>{props.details.End || 'endtime'}</p>
-          <p>{props.details.URL || 'url'}</p>
-          <p>{props.details.Category || 'category'}</p>
-          <p>{props.details.Check || 'num-checkins'}</p>
+          <p>City: {props.details.City || 'city'}</p>
+          <p>Country: {props.details.Country || 'country'}</p>
+          <p>Address: {props.details.Address || 'address'}</p>
+          <p>Start Time: {props.details.Start || 'starttime'}</p>
+          <p>End Time: {props.details.End || 'endtime'}</p>
+          <p>Event URL: {props.details.URL || 'url'}</p>
+          <p>Category: {props.details.Category || 'category'}</p>
+          <p>Number of Checkins: {props.details.Check || 'num-checkins'}</p>
         </div>
         <p>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi

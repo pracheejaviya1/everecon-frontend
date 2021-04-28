@@ -22,7 +22,6 @@ export default function ViewCommunity(props) {
         <img className='h-60 w-90 rounded-md' src={CommunityImage} />
         <div className='flex ml-10 items-start justify-between h-full flex-col font-inter'>
           <h1 className='font-bold text-2xl mx-2'>Tough one</h1>
-          <p>{props.uid}</p>
           <p className='text-xl mx-2 mb-1'>Location</p>
           <p className='text-xl mx-2 text-gray-400 mb-1'>Lead</p>
           <Link
