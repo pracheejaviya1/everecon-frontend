@@ -1,4 +1,4 @@
-import { Link } from 'gatsby';
+import { useQuery, gql } from '@apollo/client';
 import * as React from 'react';
 import CommunityCard from '../../components/cards/community/communityCard';
 import Header from '../../components/header';
@@ -6,6 +6,53 @@ import Header from '../../components/header';
 type TagProps = {
   text: string;
 };
+
+const LIST_COMMUNITIES = gql`
+  query communityList(
+    $kind: Int
+    $length: Int
+    $filter: String
+    $desc: Boolean
+  ) {
+    communityList(kind: $kind, length: $length, filter: $filter, desc: $desc) {
+      isfollower
+      iscore
+      isvolunteer
+      id
+      name
+      description
+      logo
+      banner
+      featuredVideo
+      address
+      city
+      country
+      email
+      membersCount
+      website
+      facebook
+      linkedin
+      twitter
+      instagram
+      discord
+      isActive
+      creationTime
+      leader {
+        id
+        password
+        lastLogin
+        isSuperuser
+        username
+        firstName
+        lastName
+        email
+        isStaff
+        isActive
+        dateJoined
+      }
+    }
+  }
+`;
 
 function Tag(props: TagProps) {
   return (
@@ -30,6 +77,14 @@ function Tag(props: TagProps) {
 }
 
 export default function ExploreCommunity() {
+  const { data: communities_data } = useQuery(LIST_COMMUNITIES, {
+    variables: {
+      kind: 0,
+      length: 5,
+      desc: true,
+      filter: '',
+    },
+  });
   const input_class: string =
     'border-gray-100 p-3 text-xs block w-80 rounded-xl font-mulish bg-gray-100';
   return (
@@ -40,8 +95,8 @@ export default function ExploreCommunity() {
           <h1 className='my-5 text-2xl font-mulish text-center'>
             Explore Communities
           </h1>
-          <div className='border-b-2 w-3/4 mx-auto items-center justify-between flex flex-row '>
-            <div className='flex'>
+          {/* <div className='border-b-2 w-3/4 mx-auto items-center justify-between flex flex-row '>
+             <div className='flex'>
               <form className='mb-2'>
                 <input
                   type='text'
@@ -56,12 +111,19 @@ export default function ExploreCommunity() {
             <span className='text-sm font-mulish text-blue-500 my-2'>
               Reset
             </span>
-          </div>
-          <Link to='/View/ViewCommunity'>
-            <CommunityCard />
-          </Link>
-          <CommunityCard />
-          <CommunityCard />
+          </div> */}
+          {communities_data &&
+            communities_data.communityList.map(e => (
+              <CommunityCard
+                id={e.id}
+                name={e.name}
+                date={e.startTime}
+                location={e.city}
+                imageurl={e.logo}
+                memcount={e.membersCount}
+                isfollower={e.isfollower}
+              />
+            ))}
         </div>
       </div>
     </div>

@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/client';
-import { Link } from 'gatsby';
 import gql from 'graphql-tag';
 import * as React from 'react';
 import EventCard from '../../components/cards/event/eventCard';
@@ -11,6 +10,10 @@ type TagProps = {
 const LIST_EVENTS = gql`
   query events($kind: Int, $length: Int, $filter: String, $desc: Boolean) {
     events(kind: $kind, length: $length, filter: $filter, desc: $desc) {
+      iscore
+      isvolunteer
+      isregistered
+      ischeckedin
       id
       name
       description
@@ -32,6 +35,9 @@ const LIST_EVENTS = gql`
       }
       tags {
         id
+        name
+      }
+      community {
         name
       }
     }
@@ -80,7 +86,7 @@ export default function ExploreCommunity() {
             Explore Events
           </h1>
 
-          <div className='border-b-2 w-3/4 mx-auto items-center justify-between flex flex-row '>
+          {/* <div className='border-b-2 w-3/4 mx-auto items-center justify-between flex flex-row '>
             <div className='flex'>
               <form className='mb-2'>
                 <input
@@ -96,18 +102,20 @@ export default function ExploreCommunity() {
             <span className='text-sm font-mulish text-blue-500 my-2'>
               Reset
             </span>
-          </div>
+          </div> */}
           {events_data &&
             events_data.events.map(e => (
               <EventCard
-                communityName={e.name}
+                communityName={e.community.name}
                 title={e.name}
                 date={e.startTime}
+                imageurl={e.featuredImage}
+                id={e.id}
               />
             ))}
-          <Link to='/View/ViewEvent'>
+          {/* <Link to='/View/ViewEvent'>
             <EventCard communityName='meh' date={new Date()} title='Title' />
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>
