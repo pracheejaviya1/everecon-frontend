@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 import gql from 'graphql-tag';
 import * as React from 'react';
 import { mediaurl } from '../../components/config';
@@ -137,14 +137,13 @@ export default function ViewCommunity(props) {
           <p className='text-xl mx-2 text-gray-400 mb-1'>
             {data?.communityById.leader.username}
           </p>
-          <Link
+          <button
             className='text-sm bg-blue-400 text-white rounded-md px-3 py-2 mx-2 my-1'
-            to='/Create/Event/createEventPage1'
-            type='submit'
+            onClick= {() => navigate('/Create/Event/createEventPage1',{state:{communityid:uid}})}
           >
             New Event
             {/* {props.isLead === true ? 'New Event' : 'Follow'} */}
-          </Link>
+          </button>
         </div>
       </div>
       <div className='w-2/3 m-auto py-4 font-inter justify-between flex'>

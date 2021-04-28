@@ -8,7 +8,7 @@ export default function Header() {
   const [searchcon, setSearchcon] = React.useContext(SearchContext);
   const [search, setSearch] = React.useState('');
   return (
-    <nav className='flex flex-row items-center bg-gray-50 justify-evenly h-28'>
+    <nav className='flex flex-row items-center bg-gray-50 justify-evenly h-28 fixed top-0 left-0 w-screen'>
       <Link to='/Landing/landing'>
         <img src={HeadingTitle} width='139' height='41' alt='EveRecon' />
       </Link>

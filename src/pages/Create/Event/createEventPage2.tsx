@@ -1,8 +1,165 @@
 import * as React from 'react';
 import Header from '../../../components/header';
-import { Link } from 'gatsby';
+import { Link,navigate } from 'gatsby';
+import { gql, useMutation } from '@apollo/client';
 
-export default function CreateEventTwo() {
+const CREATE_EVENT_MUTATION = gql`
+  mutation createEvent(
+    $address: String
+    $category: ID!
+    $city: String
+    $community: ID
+    $country: String
+    $description: String!
+    $endTime: DateTime!
+    $kind: String!
+    $liveUrl: String
+    $maxRsvp: Int
+    $name: String!
+    $startTime: DateTime!
+    $tags: [String]
+  ) {
+    createEvent(
+      address: $address
+      category: $category
+      city: $city
+      community: $community
+      country: $country
+      description: $description
+      endTime: $endTime
+      kind: $kind
+      liveUrl: $liveUrl
+      maxRsvp: $maxRsvp
+      name: $name
+      startTime: $startTime
+      tags: $tags
+    ) {
+      event {
+        id
+        name
+        description
+        kind
+        address
+        city
+        country
+        liveUrl
+        startTime
+        endTime
+        featuredImage
+        isActive
+        creationTime
+        maxRsvp
+      }
+      community {
+        id
+        name
+        description
+        logo
+        banner
+        featuredVideo
+        address
+        city
+        country
+        email
+        membersCount
+        website
+        facebook
+        linkedin
+        twitter
+        instagram
+        discord
+        isActive
+        creationTime
+      }
+      tags {
+        id
+        name
+      }
+      category {
+        id
+        name
+        description
+      }
+    }
+  }
+`;
+export default function CreateEventTwo({ location }) {
+  const [callCreateEvent, { data }] = useMutation(CREATE_EVENT_MUTATION);
+  const [startTime, setStartTime] = React.useState('2018-06-07T00:00');
+  const [endTime, setEndTime] = React.useState('');
+  const [maxRsvp, setmaxRsvp] = React.useState('');
+  const image = location.state.logo
+  // TODO: input for Tags
+  // const [tags, setTags] = React.useState('');
+ async function uploadImage(eventid) {
+    // upload logo if logo else return True
+    if (!image) {
+      console.log('no image');
+      return true;
+    }
+    var myHeaders = new Headers();
+    myHeaders.append(
+      'Authorization',
+      `Bearer ${window.localStorage.getItem('token')}`
+    );
+    var formdata = new FormData();
+    formdata.append(
+      'query',
+      `mutation{
+    updateEventimage (id: ${eventid}) {
+        success
+        picture
+    }
+}
+      `
+    );
+    formdata.append('file', image);
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow',
+    };
+
+    let r = await fetch('http://localhost:8000/graphql/', requestOptions)
+      .then(response => response.json())
+      .catch(error => console.log('error', error));
+
+    return r.data.updateEventimage.success;
+  }
+  
+  async function handleSubmit() {
+    let { data, errors: e } = await callCreateEvent({
+      variables: {
+        address: location.state.address,
+        category: 1, // need support for categories
+        tags: ['tag1'],
+        city: location.state.city,
+        name: location.state.name,
+        community: location.state.communityid,
+        country: location.state.country,
+        description: location.state.description,
+        endTime: endTime,
+        kind: 'V',
+        maxRsvp: maxRsvp,
+        startTime: startTime,
+      },
+    });
+    if (e) {
+      console.error(e);
+      return;
+    }
+    let eventid = data.createEvent.event.id;
+    console.log(eventid)
+    if (uploadImage(eventid)) {
+      navigate(`/event/${eventid}`);
+    } else {
+      console.error('Failed to upload Event Image');
+    }
+    return;
+  }
+
   return (
     <div className='h-screen w-screen'>
       <Header />
@@ -30,24 +187,30 @@ export default function CreateEventTwo() {
         </div>
         <form className='flex flex-col my-8 w-1/4'>
           <div className='flex items-center justify-between w-full my-2'>
-            <label className='m-2  font-mulish' htmlFor='Date'>
-              Date
+            <label className='m-2  font-mulish' htmlFor='Start Time'>
+              Start Time
             </label>
             <input
               className='border border-gray-400 p-2 w-80 rounded-lg font-roboto text-sm'
-              name='Date'
+              name='Start Time'
+              type='datetime-local'
+              min='2018-06-07T00:00'
+              value={startTime}
+              onChange={e => setStartTime(e.target.value)}
             />
-          </div>
-          <div className='flex items-center justify-between w-full my-2'>
-            <label className='m-2 font-mulish' htmlFor='Time'>
-              Time
+            <label className='m-2  font-mulish' htmlFor='End Time'>
+              End Time
             </label>
             <input
               className='border border-gray-400 p-2 w-80 rounded-lg font-roboto text-sm'
-              name='Time'
+              name='End Time'
+              type='datetime-local'
+              min={startTime}
+              value={endTime}
+              onChange={e => setEndTime(e.target.value)}
             />
           </div>
-          <div className='flex items-center justify-between w-full my-2'>
+          {/* <div className='flex items-center justify-between w-full my-2'>
             <label className='m-2 font-mulish' htmlFor='Tags'>
               Tags
             </label>
@@ -55,7 +218,7 @@ export default function CreateEventTwo() {
               className='border border-gray-400 p-2 w-80 rounded-lg font-roboto text-sm'
               name='Tags'
             />
-          </div>
+          </div> */}
           <div className='flex items-center justify-between w-full my-2'>
             <label className='m-2 font-mulish' htmlFor='limit'>
               Participant Limit
@@ -64,9 +227,11 @@ export default function CreateEventTwo() {
               className='border border-gray-400 p-2 w-80 rounded-lg font-roboto text-sm'
               type='number'
               name='limit'
+              value={maxRsvp}
+              onChange={e => setmaxRsvp(e.target.value)}
             />
           </div>
-          <div className='flex items-center justify-between w-full my-2'>
+          {/* <div className='flex items-center justify-between w-full my-2'>
             <label className='m-2 font-mulish' htmlFor='fees'>
               Fees
             </label>
@@ -75,14 +240,14 @@ export default function CreateEventTwo() {
               type='currency'
               name='fees'
             />
-          </div>
+          </div> */}
         </form>
-        <Link
+        <button
           className='text-white text-sm bg-blue-400 py-2 px-4 rounded-lg font-inter'
-          to='/View/ViewEvent'
+          onClick={handleSubmit}
         >
           Next
-        </Link>
+        </button>
       </div>
     </div>
   );

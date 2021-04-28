@@ -1,4 +1,4 @@
-import { gql, useQuery } from '@apollo/client';
+import { gql, useMutation, useQuery } from '@apollo/client';
 import { Link } from 'gatsby';
 import * as React from 'react';
 import CommunityImage from '../../assets/Images/community.jpg';
@@ -129,17 +129,29 @@ const PROFILE_QUERY = gql`
   }
 `;
 
+const UNFOLLOW_COMMUNITY_MUTATION=gql`
+mutation removeFollower ($community: ID!, $user: ID!) {
+    removeFollower (community: $community, user: $user) {
+        ok
+    }
+}
+`
 //TODO: Add new card for my communities, remove favorites, add logo in community, tickets, historym following, link commuinty page
-function CommunityCard({ name, logo, userid, communityid }) {
+function CommunityCard({ name, logo, userid, communityid,refetch }) {
+  const [callRemoveFollower,{data}] = useMutation(UNFOLLOW_COMMUNITY_MUTATION)
   const UnfollowCommunity = (userid, communityid) => {
-    console.log(userid, communityid);
+    //console.log(userid, communityid);
+    callRemoveFollower({variables:{
+    community: communityid,
+    user: userid
+    }})
     // call unfollow community
   };
 
   return (
     <div className='flex flex-row items-center justify-between p-2 shadow-md mx-auto rounded-lg w-full text-left my-2 mt-3'>
       <div className='flex'>
-        <img className='h-20 w-30 mx-5 my-2 rounded-md' src={CommunityImage} />
+        <img className='h-20 w-30 mx-5 my-2 rounded-md' src={logo} />
         <span className='text-2xl my-5 font-semibold mx-5 font-inter'>
           {name}
         </span>
@@ -155,6 +167,31 @@ function CommunityCard({ name, logo, userid, communityid }) {
     </div>
   );
 }
+
+function MyCommunityCard({ name, logo, userid, communityid }) {
+
+  return (
+    // <div className='flex flex-row items-center justify-between p-2 shadow-md mx-auto rounded-lg w-full text-left my-2 mt-3'>
+      <Link to={`/community/${communityid}`} className='flex flex-row items-center justify-between p-2 shadow-md mx-auto rounded-lg w-full text-left my-2 mt-3'>
+      <div className='flex'>
+        <img className='h-20 w-30 mx-5 my-2 rounded-md' src={logo} />
+        <span className='text-2xl my-5 font-semibold mx-5 font-inter'>
+          {name}
+        </span>
+      </div>
+      <div className='float-right mx-3'>
+        {/* <button
+          className='font-inter my-2 text-xs bg-red-200 text-black rounded-lg px-2 py-2'
+          onClick={() => UnfollowCommunity(userid, communityid)}
+        >
+          Unfollow
+        </button> */}
+      </div>
+    </Link>
+    // </div>
+  );
+}
+
 const FOLLOWING = 0;
 const TICKETS = 1;
 const HISTORY = 2;
@@ -171,7 +208,7 @@ export default function UserProfile() {
     'MyCommunities ',
   ]);
   const [selected, setSelected] = React.useState(0);
-  const { loading, error, data } = useQuery(PROFILE_QUERY);
+  const { loading, error, data,refetch } = useQuery(PROFILE_QUERY);
   React.useEffect(() => {
     console.log(data);
     if (loading == false) setUserid(data.myprofile.id);
@@ -210,13 +247,13 @@ export default function UserProfile() {
         </div>
         {selected === COMMUNITYSET &&
           data.myprofile.communitySet.map((e, i) => (
-            <CommunityCard
+            <MyCommunityCard
               key={i}
               name={e.name}
               logo={e.logo}
               userid={userid}
               communityid={e.id}
-            ></CommunityCard>
+            ></MyCommunityCard>
           ))}
         {selected === FOLLOWING &&
           data.myprofile.communities.map((e, i) => (
@@ -226,6 +263,7 @@ export default function UserProfile() {
               logo={e.logo}
               userid={userid}
               communityid={e.id}
+              refetch={refetch}
             ></CommunityCard>
           ))}
       </div>

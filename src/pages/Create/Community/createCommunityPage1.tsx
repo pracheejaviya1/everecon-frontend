@@ -112,12 +112,13 @@ export default function CreateCommunityOne() {
     var formdata = new FormData();
     formdata.append(
       'query',
-      `mutation{
-        updateCommunitybanner(id: ${communityid}) {
-          success
-          banner
-        }
-      }`
+      `mutation  {
+    updateCommunitylogo(id: ${communityid}) {
+        success
+        logo
+    }
+}
+      `
     );
     formdata.append('file', logo);
 
