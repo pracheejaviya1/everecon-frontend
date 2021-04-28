@@ -7,7 +7,7 @@ export default function EventsCard({ logo, id, name }) {
     <Link to={"/event/" + id}>
       <div>
         <img
-          className='shadow hover:shadow-2xl h-72 w-72 rounded-md'
+          className='shadow hover:shadow-2xl h-72 w-72 rounded-md object-cover'
           src={mediaurl + logo}
         />
         <h3 className='p-3'>
