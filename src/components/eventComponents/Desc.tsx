@@ -3,7 +3,11 @@ import * as React from 'react';
 import EventImage from '../../assets/Images/community.jpg';
 import SpeakerBlock from './Speaker';
 
-export default function EventDesc() {
+type Props = {
+  uid: string;
+};
+
+export default function EventDesc(props: Props) {
   return (
     <div className='flex items-start justify-between w-full my-2 font-inter'>
       <div className='w-1/2 my-2'>

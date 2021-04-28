@@ -5,7 +5,7 @@ import Header from '../../components/header';
 
 export default function ViewEvent(props) {
   return (
-    <div className='m-2 border-b-2 h-screen'>
+    <div className='border-b-2 h-screen'>
       <Header />
       <div className='flex flex-col mx-auto w-3/4 items-center'>
         <p>{props.uid}</p>
@@ -13,7 +13,7 @@ export default function ViewEvent(props) {
           datetime={new Date()}
           title='Talking Tech with Feeling Ingenium'
         />
-        <EventDesc />
+        <EventDesc uid={props.uid} />
       </div>
     </div>
   );
