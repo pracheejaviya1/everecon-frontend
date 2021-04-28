@@ -51,12 +51,10 @@ const ALL_EVENTS_QUERY = gql`
   }
 `;
 export default function Landing() {
-
   React.useEffect(() => {
     console.log(community_data);
     console.log(events_data);
   });
-
 
   // TODO : handling GraphQL Error
   const { data: community_data } = useQuery(ALL_COMMUNITIES_QUERY, {
@@ -78,17 +76,19 @@ export default function Landing() {
           <div className='w-1/2 flex flex-col align-items-center justify-evenly '>
             <h1 className='font-inter font-extralight text-2xl'>ABOUT US</h1>
             <span className='font-mulish font-thin '>
-              Communities are a way for people to come together and pursue similar interests.
-              People make communities that operate like a small organization - they have roles (leader, core members, followers etc.),
-              objectives (promote their interests through events and engaging with their community) and day to day work.
+              Communities are a way for people to come together and pursue
+              similar interests. People make communities that operate like a
+              small organization - they have roles (leader, core members,
+              followers etc.), objectives (promote their interests through
+              events and engaging with their community) and day to day work.
               <br></br>
               The purpose of this platform is to:-
-              <br></br>
-              - Help communities create an online presence and portfolio.
-              <br></br>
-              - Manage community work such as setting up events, gathering registrations and checking people in
-              <br></br>
-              - Help users discover communities and events of their interest and get on board easily.
+              <br></br>- Help communities create an online presence and
+              portfolio.
+              <br></br>- Manage community work such as setting up events,
+              gathering registrations and checking people in
+              <br></br>- Help users discover communities and events of their
+              interest and get on board easily.
             </span>
           </div>
         </div>
@@ -100,11 +100,22 @@ export default function Landing() {
             {
               // show only first 3 communities
               community_data &&
-              community_data.communityList
-                .slice(0, 3)
-                .map((e: { logo: any; id: React.Key | null | undefined; name: any }) => (
-                  <CommunityCard logo={e.logo} id={e.id} name={e.name} key={e.id} />
-                ))
+                community_data.communityList
+                  .slice(0, 3)
+                  .map(
+                    (e: {
+                      logo: any;
+                      id: React.Key | null | undefined;
+                      name: any;
+                    }) => (
+                      <CommunityCard
+                        logo={e.logo}
+                        id={e.id}
+                        name={e.name}
+                        key={e.id}
+                      />
+                    )
+                  )
             }
           </div>
           <Link
@@ -119,10 +130,23 @@ export default function Landing() {
             Explore Events
           </h1>
           <div className='flex align-items-center justify-evenly'>
-            {events_data && events_data.events
-              .slice(0, 3)
-              .map((e: { featuredImage: any; id: React.Key | null | undefined; name: any }) =>
-                <EventsCard logo={e.featuredImage} id={e.id} name={e.name} key={e.id} />)}
+            {events_data &&
+              events_data.events
+                .slice(0, 3)
+                .map(
+                  (e: {
+                    featuredImage: any;
+                    id: React.Key | null | undefined;
+                    name: any;
+                  }) => (
+                    <EventsCard
+                      logo={e.featuredImage}
+                      id={e.id}
+                      name={e.name}
+                      key={e.id}
+                    />
+                  )
+                )}
           </div>
           <Link
             to='/Explore/Events'

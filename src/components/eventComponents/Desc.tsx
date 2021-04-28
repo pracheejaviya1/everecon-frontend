@@ -4,6 +4,16 @@ import EventImage from '../../assets/Images/community.jpg';
 import SpeakerBlock from './Speaker';
 
 type Props = {
+  details: {
+    City: string;
+    Country: string;
+    Address: string;
+    Start: string;
+    End: string;
+    URL: string;
+    Category: string;
+    Check: number;
+  };
   uid: string;
 };
 
@@ -13,12 +23,16 @@ export default function EventDesc(props: Props) {
       <div className='w-1/2 my-2'>
         <img className='rounded-md' src={EventImage} />
         <h2 className='my-4 font-bold'>Details</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi
-          nesciunt molestias vero expedita non labore reprehenderit sapiente?
-          Laboriosam provident cupiditate non ratione illo voluptates aspernatur
-          enim porro, corrupti, similique quo.
-        </p>
+        <div className='my-2 grid grid-cols-2'>
+          <p>{props.details.City || 'city'}</p>
+          <p>{props.details.Country || 'country'}</p>
+          <p>{props.details.Address || 'address'}</p>
+          <p>{props.details.Start || 'starttime'}</p>
+          <p>{props.details.End || 'endtime'}</p>
+          <p>{props.details.URL || 'url'}</p>
+          <p>{props.details.Category || 'category'}</p>
+          <p>{props.details.Check || 'num-checkins'}</p>
+        </div>
         <p>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi
           nesciunt molestias vero expedita non labore reprehenderit sapiente?
