@@ -77,7 +77,8 @@ function Tag(props: TagProps) {
 }
 
 export default function ExploreCommunity() {
-  const { data: communities_data } = useQuery(LIST_COMMUNITIES, {
+  const [num, setNum] = React.useState(0);
+  const { data, refetch } = useQuery(LIST_COMMUNITIES, {
     variables: {
       kind: 0,
       length: 5,
@@ -85,6 +86,14 @@ export default function ExploreCommunity() {
       filter: '',
     },
   });
+  React.useEffect(() => {
+    refetch();
+  }, []);
+  React.useEffect(() => {
+    console.log(num);
+    setNum(num + 1);
+  }, [data]);
+
   const input_class: string =
     'border-gray-100 p-3 text-xs block w-80 rounded-xl font-mulish bg-gray-100';
   return (
@@ -112,9 +121,10 @@ export default function ExploreCommunity() {
               Reset
             </span>
           </div> */}
-          {communities_data &&
-            communities_data.communityList.map(e => (
+          {data &&
+            data.communityList.map(e => (
               <CommunityCard
+                key={e.id}
                 id={e.id}
                 name={e.name}
                 date={e.startTime}
@@ -122,6 +132,7 @@ export default function ExploreCommunity() {
                 imageurl={e.logo}
                 memcount={e.membersCount}
                 isfollower={e.isfollower}
+                num={num}
               />
             ))}
         </div>

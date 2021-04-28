@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { mediaurl } from '../../config';
 import { Link } from 'gatsby';
+import { gql, useQuery, useMutation } from '@apollo/client';
+
 type TagProps = {
   text: string;
 };
@@ -13,13 +15,77 @@ function Tag(props: TagProps) {
   );
 }
 
+const FOLLOW = gql`
+  mutation addFollower($community: ID!, $user: ID!) {
+    addFollower(community: $community, user: $user) {
+      ok
+    }
+  }
+`;
+
+const UNFOLLOW = gql`
+  mutation removeFollower($community: ID!, $user: ID!) {
+    removeFollower(community: $community, user: $user) {
+      ok
+    }
+  }
+`;
+
+const MYID = gql`
+  query myprofile {
+    myprofile {
+      id
+    }
+  }
+`;
+
 export default function CommunityCard(props) {
   const [fnuf, setFnuf] = React.useState(false);
+  const [id, setID] = React.useState(0);
+  const { loading, error, data: profdata } = useQuery(MYID);
+  const [callFollow, dataF] = useMutation(FOLLOW);
+  const [callUnfollow, dataUF] = useMutation(UNFOLLOW);
   React.useEffect(() => {
     setFnuf(props.isfollower);
-  }, []);
-  function handlefnunf() {
+  }, [props.isfollower]);
+  React.useEffect(() => {
+    if (!loading) setID(profdata.myprofile.id);
+  }, [loading]);
+  async function handlefnunf() {
+    if (fnuf) {
+      let { data, errors: e } = await callUnfollow({
+        variables: {
+          community: props.id,
+          user: id,
+        },
+      });
+      if (e) {
+        console.error(e);
+        return;
+      } else {
+        console.log(data);
+      }
+    } else {
+      let { data, errors: e } = await callFollow({
+        variables: {
+          community: props.id,
+          user: id,
+        },
+      });
+      if (e) {
+        console.error(e);
+        return;
+      } else {
+        console.log(data);
+      }
+    }
     return;
+  }
+  if (loading) {
+    return `Loading`;
+  }
+  if (error) {
+    return `Error! ${error}`;
   }
   return (
     <Link to={'/community/' + props.id}>
