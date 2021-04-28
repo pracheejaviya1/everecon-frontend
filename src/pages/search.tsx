@@ -168,6 +168,7 @@ export default function Search() {
               location={e.city}
               imageurl={e.logo}
               memcount={e.membersCount}
+              isfollower={e.isfollower}
             />
           ))}
       </>

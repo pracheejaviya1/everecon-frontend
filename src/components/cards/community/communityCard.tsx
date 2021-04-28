@@ -14,6 +14,13 @@ function Tag(props: TagProps) {
 }
 
 export default function CommunityCard(props) {
+  const [fnuf, setFnuf] = React.useState(false);
+  React.useEffect(() => {
+    setFnuf(props.isfollower);
+  }, []);
+  function handlefnunf() {
+    return;
+  }
   return (
     <Link to={'/community/' + props.id}>
       <div className='flex flex-row items-center justify-between p-5 shadow-md mx-auto rounded-lg w-3/4 text-left my-2 mt-3'>
@@ -31,8 +38,15 @@ export default function CommunityCard(props) {
           </div>
         </div>
         <div className='float-right'>
-          <button className='font-inter my-2 text-xs bg-blue-400 text-white rounded-lg px-3 py-2'>
-            Follow
+          <button
+            className='font-inter my-2 text-xs bg-blue-400 text-white rounded-lg px-3 py-2'
+            onClick={e => {
+              handlefnunf();
+              setFnuf(!fnuf);
+              return e.preventDefault();
+            }}
+          >
+            {fnuf == true ? 'Unfollow' : 'Follow'}
           </button>
         </div>
       </div>
