@@ -4,6 +4,11 @@ import profilepic from '../../assets/Images/community.jpg';
 import Header from '../../components/header';
 
 export default function SettingAccount() {
+  const [fname, setFname] = React.useState("");
+  const [lname, setLname] = React.useState("");
+  const [country, setCountry] = React.useState("");
+  const [city, setCity] = React.useState("");
+  const [contact, setContact] = React.useState("");
   return (
     <div className='h-screen bg-landing_signin bg-no-repeat bg-right-bottom'>
       <Header />
@@ -112,6 +117,38 @@ export default function SettingAccount() {
                 type='text'
                 className='rounded-lg border-gray-400'
                 name='lastname'
+              />
+            </div>
+          </form>
+          <form className='flex w-2/3 my-3'>
+            <div className='flex my-4 mr-4 flex-col'>
+              <label htmlFor='city' className='mb-1 font-mulish'>
+                City <span className='text-red-500'>*</span>
+              </label>
+              <input
+                type='text'
+                className='rounded-lg border-gray-400'
+                name='city'
+              />
+            </div>
+            <div className='flex my-4 ml-4 flex-col'>
+              <label htmlFor='country' className='mb-1 font-mulish'>
+                Country <span className='text-red-500'>*</span>
+              </label>
+              <input
+                type='text'
+                className='rounded-lg border-gray-400'
+                name='coutry'
+              />
+            </div>
+            <div className='flex my-4 ml-4 flex-col'>
+              <label htmlFor='contact' className='mb-1 font-mulish'>
+                Contact <span className='text-red-500'>*</span>
+              </label>
+              <input
+                type='text'
+                className='rounded-lg border-gray-400'
+                name='contact'
               />
             </div>
           </form>
