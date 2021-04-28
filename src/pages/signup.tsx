@@ -97,7 +97,7 @@ export default function Signup(props) {
     'border-gray p-3 text-xs block w-full my-4 rounded-xl font-roboto';
 
   return (
-    <div className='flex flex-col bg-landing bg-no-repeat bg-left-bottom items-center h-screen mx-auto w-full'>
+    <div className='flex flex-col bg-landing bg-no-repeat bg-left-bottom items-center mx-auto w-full'>
       <img
         src={LandingTitle}
         width='487'
@@ -120,6 +120,20 @@ export default function Signup(props) {
           placeholder='Last Name'
           value={lastname}
           onChange={e => setLastName(e.target.value)}
+        />
+        <input
+          type='text'
+          className={input_class}
+          placeholder='City'
+          value={city}
+          onChange={e => setUsername(e.target.value)}
+        />
+        <input
+          type='text'
+          className={input_class}
+          placeholder='Country'
+          value={country}
+          onChange={e => setUsername(e.target.value)}
         />
         <input
           type='tel'
