@@ -4,6 +4,7 @@ import Signin from './signin';
 import Signup from './signup';
 import ViewCommunity from './View/ViewCommunity';
 import ViewEvent from './View/ViewEvent';
+import Search from './search';
 
 const App = () => (
   <Router>
@@ -11,6 +12,7 @@ const App = () => (
     <Signup path='/signup' />
     <ViewEvent path='/event/:uid' />
     <ViewCommunity path='/community/:uid' />
+    <Search path='/search'/>
   </Router>
 );
 
