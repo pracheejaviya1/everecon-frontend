@@ -1,8 +1,133 @@
 import { Link } from 'gatsby';
 import * as React from 'react';
 import CommunityImage from '../../assets/Images/community.jpg';
-import landingImage from '../../assets/Images/default.jpg';
 import Header from '../../components/header';
+import { gql, useQuery } from '@apollo/client';
+import { mediaurl } from '../../components/config';
+
+const PROFILE_QUERY = gql`
+query myprofile {
+    myprofile {
+        id
+        lastLogin
+        isSuperuser
+        username
+        firstName
+        lastName
+        email
+        isStaff
+        isActive
+        dateJoined
+        profile {
+            id
+            contact
+            city
+            country
+            profilePicture
+        }
+        eventsAttended {
+            id
+            name
+            description
+            kind
+            address
+            city
+            country
+            liveUrl
+            startTime
+            endTime
+            featuredImage
+            isActive
+            creationTime
+            maxRsvp
+        }
+        communities {
+            id
+            name
+            description
+            logo
+            banner
+            featuredVideo
+            address
+            city
+            country
+            email
+            membersCount
+            website
+            facebook
+            linkedin
+            twitter
+            instagram
+            discord
+            isActive
+            creationTime
+        }
+        communitySet {
+            id
+            name
+            description
+            logo
+            banner
+            featuredVideo
+            address
+            city
+            country
+            email
+            membersCount
+            website
+            facebook
+            linkedin
+            twitter
+            instagram
+            discord
+            isActive
+            creationTime
+        }
+        communitiesCoreMembers {
+            id
+            name
+            description
+            logo
+            banner
+            featuredVideo
+            address
+            city
+            country
+            email
+            membersCount
+            website
+            facebook
+            linkedin
+            twitter
+            instagram
+            discord
+            isActive
+            creationTime
+        }
+        communitiesVolunteers {
+            id
+            name
+            description
+            logo
+            banner
+            featuredVideo
+            address
+            city
+            country
+            email
+            membersCount
+            website
+            facebook
+            linkedin
+            twitter
+            instagram
+            discord
+            isActive
+            creationTime
+        }
+    }
+}
+`
 
 //TODO: Add new card for my communities, remove favorites, add logo in community, tickets, historym following, link commuinty page
 function CommunityCard({ name, logo, userid, communityid }) {
@@ -10,6 +135,7 @@ function CommunityCard({ name, logo, userid, communityid }) {
     console.log(userid, communityid);
     // call unfollow community
   };
+
   return (
     <div className='flex flex-row items-center justify-between p-2 shadow-md mx-auto rounded-lg w-full text-left my-2 mt-3'>
       <div className='flex'>
@@ -36,52 +162,29 @@ const FAVORITES = 3;
 const COMMUNITYSET = 4;
 
 export default function UserProfile() {
-  const [name, setName] = React.useState('');
   const [userid, setUserid] = React.useState(null);
-  const [location, setLocation] = React.useState('');
-  const [communities, setCommunities] = React.useState([]);
-  const [communitySet, setCommunitySet] = React.useState([]);
   const [options, setOptions] = React.useState([
-    'Following',
-    'Tickets',
-    'History',
-    'Favorites',
-    'MyCommunities',
+    'Following ',
+    'Tickets ',
+    'History ',
+    'Favorites ',
+    'MyCommunities ',
   ]);
   const [selected, setSelected] = React.useState(0);
-  //   React.useEffect(() => {
-  //      const operation = {
-  //       query: getProfileQuery,
-  //     };
-  //     makePromise(execute(link, operation)).then(r => {
-  //       if (r.data?.myprofile !== null) {
-  //         let profile = r.data?.myprofile
-  //         setName(profile.firstname+" "+profile.lastname)
-  //         setUserid(profile.id)
-  //         setLocation(profile.profile.city+","+profile.profile.country)
-  //         console.log(profile)
-  //         setCommunities(profile.communities)
-  //         setCommunitySet(profile.communitySet)
-  //         if(communitySet.length > 0){
-  //           console.log("user has created a community")
-  //           setOptions(["Following","Tickets","History","Favorites","MyCommunities"])
-  //         }
-  //         return;
-  //       }
-  //       if (r.errors != null) {
-  //         if (r.errors[0] !== undefined) {
-  //           console.error(r.errors[0].message);
-  //         }
-  //       }
-  //   })
-  // },[])
+  const { loading, error, data } = useQuery(PROFILE_QUERY);
+  React.useEffect(() => {
+    console.log(data);
+    setUserid(data.myprofile.id)
+  });
+  if (loading) return null;
+  if (error) return `Error! ${error}`;
   return (
     <div className='h-screen w-screen'>
       <Header />
       <div className='flex flex-col w-1/2 mx-auto items-center justify-center'>
-        <img src={landingImage} className='my-8 h-28 w-28 rounded-full' />
-        <p className='text-2xl font-mulish'>{name}</p>
-        <p className='text-xl font-mulish'>{location}</p>
+        <img src={mediaurl + data.myprofile.profile.profilePicture} className='my-8 h-28 w-28 rounded-full' />
+        <p className='text-2xl font-mulish'>{data.myprofile.username}</p>
+        <p className='text-xl font-mulish'>{data.myprofile.profile.country}</p>
       </div>
       <div className='flex flex-col my-8 w-1/2 mx-auto items-center justify-center'>
         <div className='w-full py-2 border-b-2'>
@@ -91,7 +194,7 @@ export default function UserProfile() {
                 <button
                   onClick={() => setSelected(i)}
                   key={i}
-                  className={selected == i ? 'font-bold' : ''}
+                  className={selected == i ? 'font-bold px-4' : '' + ' px-4'}
                 >
                   {e}
                 </button>
@@ -103,7 +206,7 @@ export default function UserProfile() {
           </div>
         </div>
         {selected === COMMUNITYSET &&
-          communitySet.map((e, i) => (
+          data.myprofile.communitySet.map((e, i) => (
             <CommunityCard
               key={i}
               name={e.name}
@@ -113,7 +216,7 @@ export default function UserProfile() {
             ></CommunityCard>
           ))}
         {selected === FOLLOWING &&
-          communities.map((e, i) => (
+          data.myprofile.communities.map((e, i) => (
             <CommunityCard
               key={i}
               name={e.name}
