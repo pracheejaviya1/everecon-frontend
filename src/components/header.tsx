@@ -16,6 +16,9 @@ export default function Header() {
           className='placeholder-gray-400 border-none text-xs w-full bg-gray-100 font-mulish'
         />
       </div>
+      <button className='font-inter my-2 text-xs bg-blue-400 text-white rounded-lg px-3 py-2'>
+        Search
+      </button>
       <ul className='links flex flex-row justify-evenly font-mulish'>
         <li className='m-4'>
           <Link to='/Landing/landing'>About</Link>
