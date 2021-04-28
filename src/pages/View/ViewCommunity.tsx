@@ -1,10 +1,97 @@
+import { useQuery } from '@apollo/client';
 import { Link } from 'gatsby';
+import gql from 'graphql-tag';
 import * as React from 'react';
 import CommunityImage from '../../assets/Images/ahmedabad.jpeg';
 import Header from '../../components/header';
+
 type TagProps = {
   title: string;
 };
+
+const COMMUNITY_QUERY = gql`
+  query communityById($id: ID) {
+    communityById(id: $id) {
+      id
+      name
+      description
+      logo
+      banner
+      featuredVideo
+      address
+      city
+      country
+      email
+      membersCount
+      website
+      facebook
+      linkedin
+      twitter
+      instagram
+      discord
+      isActive
+      creationTime
+      iscore
+      isfollower
+      isvolunteer
+      leader {
+        id
+        password
+        lastLogin
+        isSuperuser
+        username
+        firstName
+        lastName
+        email
+        isStaff
+        isActive
+        dateJoined
+      }
+      coreMembers {
+        id
+        password
+        lastLogin
+        isSuperuser
+        username
+        firstName
+        lastName
+        email
+        isStaff
+        isActive
+        dateJoined
+      }
+      volunteers {
+        id
+        password
+        lastLogin
+        isSuperuser
+        username
+        firstName
+        lastName
+        email
+        isStaff
+        isActive
+        dateJoined
+      }
+      events {
+        id
+        name
+        description
+        kind
+        address
+        city
+        country
+        liveUrl
+        startTime
+        endTime
+        featuredImage
+        isActive
+        creationTime
+        maxRsvp
+      }
+    }
+  }
+`;
 
 function Tag(props: TagProps) {
   return (
@@ -15,6 +102,25 @@ function Tag(props: TagProps) {
 }
 
 export default function ViewCommunity(props) {
+  let uid: string;
+  const isBrowser = typeof window !== 'undefined';
+  if (isBrowser) {
+    uid = props.uid;
+    //  parseInt(window.location.href.split('#')[1] || '0');
+  } else {
+    uid = '1';
+  }
+
+  const { loading, error, data } = useQuery(COMMUNITY_QUERY, {
+    variables: { id: uid },
+  });
+  if (loading) {
+    return `Loading`;
+  }
+  if (error) {
+    return `Error! ${error}`;
+  }
+
   return (
     <div className='h-screen w-screen'>
       <Header />
@@ -49,10 +155,21 @@ export default function ViewCommunity(props) {
             </button>
           </div>
           <p className='my-10 text-gray-500'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit
-            vitae, ea nisi nulla iusto aperiam ipsam asperiores enim harum
-            doloribus atque adipisci cupiditate id quis fugiat culpa voluptates,
-            porro reprehenderit!
+            <div className='grid grid-cols-3'>
+              <p>Address: {data?.communityById.address || 'address'}</p>
+              <p>City: {data?.communityById.city || 'city'}</p>
+              <p>Country: {data?.communityById.country || 'Country'}</p>
+              <p>Discord: {data?.communityById.discord || 'discord'}</p>
+              <p>Facebook: {data?.communityById.facebook || 'facebook'}</p>
+              <p>Twitter: {data?.communityById.twitter || 'twitter'}</p>
+              <p>LinkedIn: {data?.communityById.linkedin || 'linkedin'}</p>
+              <p>Leader: {data?.communityById.leader || 'Leader'}</p>
+              <p>
+                Featured Video:{' '}
+                {data?.communityById.featuredVideo || 'featuredVideo'}
+              </p>
+            </div>
+            {data?.communityById.description || 'description'}
           </p>
         </div>
         <div className='flex items-center flex-col w-1/4'>
