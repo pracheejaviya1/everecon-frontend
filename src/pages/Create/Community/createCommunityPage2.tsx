@@ -49,7 +49,7 @@ const GET_MEMBERS = gql`
         isStaff
         isActive
         dateJoined
-        profile{
+        profile {
           city
           country
           profilePicture
@@ -60,14 +60,17 @@ const GET_MEMBERS = gql`
 `;
 // TODO: ERROR Display required
 export default function CreateCommunityTwo({ location }) {
-  const communityid =28
+  const communityid = 28;
   const [username, setUsername] = React.useState('');
   const [fetch_user, { data: userdata }] = useLazyQuery(USERNAME_QUERY);
   const [callAddMember, { data }] = useMutation(ADD_MEMBER_MUTATION);
-  
-  const { data:data_members, refetch: refetch_members } = useQuery(GET_MEMBERS, {
-    variables: { id: communityid },
-  });
+
+  const { data: data_members, refetch: refetch_members } = useQuery(
+    GET_MEMBERS,
+    {
+      variables: { id: communityid },
+    }
+  );
 
   React.useEffect(() => {
     if (!userdata) {
@@ -148,9 +151,18 @@ export default function CreateCommunityTwo({ location }) {
             </button>
           </div>
         </div>
-        {data_members && data_members.communityById && data_members.communityById.coreMembers.map((e, i) => (
-          <MemberCard name={e.firstName + e.lastName} location={e.profile.city +","+e.profile.country} userid={e.id} communityid={communityid} refetch={refetch_members} key={i} />
-        ))}
+        {data_members &&
+          data_members.communityById &&
+          data_members.communityById.coreMembers.map((e, i) => (
+            <MemberCard
+              name={e.firstName + e.lastName}
+              location={e.profile.city + ',' + e.profile.country}
+              userid={e.id}
+              communityid={communityid}
+              refetch={refetch_members}
+              key={i}
+            />
+          ))}
 
         <Link
           className=' my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'

@@ -3,11 +3,11 @@ import * as React from 'react';
 import communityImg from '../../../assets/Images/community.jpg';
 
 const REMOVE_MEMBER_MUTATION = gql`
-  mutation removeCoreMember ($community: ID!, $user: ID!) {
-    removeCoreMember (community: $community, user: $user) {
-        ok
+  mutation removeCoreMember($community: ID!, $user: ID!) {
+    removeCoreMember(community: $community, user: $user) {
+      ok
     }
-}
+  }
 `;
 
 export default function MembersCard({
@@ -31,7 +31,7 @@ export default function MembersCard({
         onClick={() => {
           callRemoveMember({
             variables: { user: parseInt(userid), community: communityid },
-          }).then(r => refetch())
+          }).then(r => refetch());
         }}
       >
         <svg

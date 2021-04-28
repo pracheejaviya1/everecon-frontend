@@ -19,7 +19,6 @@ const ALL_COMMUNITIES_QUERY = gql`
       name
     }
   }
-
 `;
 
 const ALL_EVENTS_QUERY = gql`
