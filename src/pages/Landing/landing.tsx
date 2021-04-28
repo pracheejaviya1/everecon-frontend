@@ -5,6 +5,7 @@ import landingImage from '../../assets/Images/evereconLanding.png';
 import CommunityCard from '../../components/cards/landing/landingCommunityCard';
 import EventsCard from '../../components/cards/landing/landingEventsCard';
 import Header from '../../components/header';
+import UserContext from '../../context/usercontext.js';
 
 const ALL_COMMUNITIES_QUERY = gql`
   query communityList(
@@ -17,6 +18,130 @@ const ALL_COMMUNITIES_QUERY = gql`
       id
       logo
       name
+    }
+  }
+`;
+
+const PROFILE_QUERY = gql`
+  query myprofile {
+    myprofile {
+      id
+      lastLogin
+      isSuperuser
+      username
+      firstName
+      lastName
+      email
+      isStaff
+      isActive
+      dateJoined
+      profile {
+        id
+        contact
+        city
+        country
+        profilePicture
+      }
+      eventsAttended {
+        id
+        name
+        description
+        kind
+        address
+        city
+        country
+        liveUrl
+        startTime
+        endTime
+        featuredImage
+        isActive
+        creationTime
+        maxRsvp
+      }
+      communities {
+        id
+        name
+        description
+        logo
+        banner
+        featuredVideo
+        address
+        city
+        country
+        email
+        membersCount
+        website
+        facebook
+        linkedin
+        twitter
+        instagram
+        discord
+        isActive
+        creationTime
+      }
+      communitySet {
+        id
+        name
+        description
+        logo
+        banner
+        featuredVideo
+        address
+        city
+        country
+        email
+        membersCount
+        website
+        facebook
+        linkedin
+        twitter
+        instagram
+        discord
+        isActive
+        creationTime
+      }
+      communitiesCoreMembers {
+        id
+        name
+        description
+        logo
+        banner
+        featuredVideo
+        address
+        city
+        country
+        email
+        membersCount
+        website
+        facebook
+        linkedin
+        twitter
+        instagram
+        discord
+        isActive
+        creationTime
+      }
+      communitiesVolunteers {
+        id
+        name
+        description
+        logo
+        banner
+        featuredVideo
+        address
+        city
+        country
+        email
+        membersCount
+        website
+        facebook
+        linkedin
+        twitter
+        instagram
+        discord
+        isActive
+        creationTime
+      }
     }
   }
 `;
@@ -56,6 +181,7 @@ export default function Landing() {
     console.log(events_data);
   });
 
+  const [myprofile, setMyProfile] = React.useContext(UserContext);
   // TODO : handling GraphQL Error
   const { data: community_data } = useQuery(ALL_COMMUNITIES_QUERY, {
     variables: { kind: 0, length: 1, filter: '', desc: true },
@@ -63,6 +189,13 @@ export default function Landing() {
   const { data: events_data } = useQuery(ALL_EVENTS_QUERY, {
     variables: { kind: 0, length: 1, filter: '', desc: true },
   });
+  const { loading, error, data: profile_data } = useQuery(PROFILE_QUERY);
+  if (loading) return null;
+  if (error) return `Error! ${error}`;
+  if (!loading) {
+    setMyProfile(profile_data.myprofile);
+    console.log(myprofile);
+  }
   return (
     <div>
       <Header />
