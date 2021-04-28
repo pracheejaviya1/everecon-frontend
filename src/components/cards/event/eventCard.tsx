@@ -14,7 +14,7 @@ export default function EventCard(props: EventProps) {
         <img className='h-40 w-60 rounded-md' src={CommunityImage} />
         <div className='flex flex-col items-start mx-5 '>
           <span className='font-inter font-light'>
-            {props.date.toUTCString()}
+            {/* {props.date.toUTCString()} */}
           </span>
           <span className='text-lg font-semibold font-inter'>
             {props.title}

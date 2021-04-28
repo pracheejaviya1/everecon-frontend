@@ -174,8 +174,9 @@ export default function UserProfile() {
   const { loading, error, data } = useQuery(PROFILE_QUERY);
   React.useEffect(() => {
     console.log(data);
-    setUserid(data.myprofile.id)
-  });
+    if (loading == false)
+      setUserid(data.myprofile.id)
+  }, [loading]);
   if (loading) return null;
   if (error) return `Error! ${error}`;
   return (
