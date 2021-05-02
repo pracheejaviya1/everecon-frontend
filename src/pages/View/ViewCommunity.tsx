@@ -137,13 +137,21 @@ export default function ViewCommunity(props) {
           <p className='text-xl mx-2 text-gray-400 mb-1'>
             {data?.communityById.leader.username}
           </p>
-          <button
-            className='text-sm bg-blue-400 text-white rounded-md px-3 py-2 mx-2 my-1'
-            onClick= {() => navigate('/Create/Event/createEventPage1',{state:{communityid:uid}})}
-          >
-            New Event
-            {/* {props.isLead === true ? 'New Event' : 'Follow'} */}
-          </button>
+          {data?.communityById.iscore ? (
+            <button
+              className='text-sm bg-blue-400 text-white rounded-md px-3 py-2 mx-2 my-1'
+              onClick={() =>
+                navigate('/Create/Event/createEventPage1', {
+                  state: { communityid: uid },
+                })
+              }
+            >
+              New Event
+              {/* {props.isLead === true ? 'New Event' : 'Follow'} */}
+            </button>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
       <div className='w-2/3 m-auto py-4 font-inter justify-between flex'>
@@ -178,17 +186,7 @@ export default function ViewCommunity(props) {
             {data?.communityById.description || 'description'}
           </p>
         </div>
-        <div className='flex items-center flex-col w-1/4'>
-          <h3 className='text-center'>Tags</h3>
-          <div className='grid items-center my-10 grid-cols-3'>
-            <Tag title='Tag' />
-            <Tag title='Tag' />
-            <Tag title='Tag' />
-            <Tag title='Tag' />
-            <Tag title='Tag' />
-            <Tag title='Tag' />
-          </div>
-        </div>
+        <div className='flex items-center flex-col w-1/4'></div>
       </div>
     </div>
   );

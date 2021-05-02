@@ -84,6 +84,9 @@ const CREATE_COMMUNITY_MUTATION = gql`
 export default function CreateCommunityOne() {
   const [logo, setLogo] = React.useState(null);
   const [name, setName] = React.useState('');
+  const [address, setAddress] = React.useState('');
+  const [city, setCity] = React.useState('');
+  const [country, setCountry] = React.useState('');
   const [logoURL, setLogoURL] = React.useState(Rectangle);
   const [description, setDescription] = React.useState('');
   const [email, setEmail] = React.useState('');

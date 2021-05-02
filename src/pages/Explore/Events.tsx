@@ -67,7 +67,7 @@ function Tag(props: TagProps) {
 }
 
 export default function ExploreCommunity() {
-  const { data: events_data } = useQuery(LIST_EVENTS, {
+  const { data: events_data, refetch } = useQuery(LIST_EVENTS, {
     variables: {
       kind: 0,
       length: 2,
@@ -75,6 +75,9 @@ export default function ExploreCommunity() {
       filter: '',
     },
   });
+  React.useEffect(() => {
+    refetch();
+  }, []);
   const input_class: string =
     'border-gray-100 p-3 text-xs block w-80 rounded-xl font-mulish bg-gray-100';
   return (
