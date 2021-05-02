@@ -20,9 +20,7 @@ export default function SettingAccount() {
       setCity(myprofile.profile.city);
       setCountry(myprofile.profile.country);
     }
-    return () => {
-      console.log('cleanup');
-    };
+    return;
   }, []);
 
   return (

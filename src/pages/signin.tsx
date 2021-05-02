@@ -93,7 +93,7 @@ export default function Signin(props) {
           Login
         </button>
 
-        <Link to='/Signin/signup'>
+        <Link to='/signup'>
           <button className={btn_class}>Sign Up</button>
         </Link>
       </div>
