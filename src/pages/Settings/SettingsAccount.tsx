@@ -1,27 +1,130 @@
+import { gql, useMutation, useQuery } from '@apollo/client';
+import { data } from 'autoprefixer';
+
 import { Link } from 'gatsby';
 import * as React from 'react';
-import profilepic from '../../assets/Images/community.jpg';
 import Header from '../../components/header';
-import UserContext from '../../context/usercontext.js';
+const PROFILE_QUERY = gql`
+  query myprofile {
+    myprofile {
+      id
+      lastLogin
+      isSuperuser
+      username
+      firstName
+      lastName
+      email
+      isStaff
+      isActive
+      dateJoined
+      profile {
+        id
+        contact
+        city
+        country
+        profilePicture
+      }
+      }
+    }
+`;
 
+const UPDATE_PROFILE_MUTATION = gql`
+mutation updateUser ($city: String, $contact: String, $country: String) {
+    updateUser (city: $city, contact: $contact, country: $country) {
+        profile {
+            id
+            contact
+            city
+            country
+            profilePicture
+        }
+        user {
+            id
+            password
+            lastLogin
+            isSuperuser
+            username
+            firstName
+            lastName
+            email
+            isStaff
+            isActive
+            dateJoined
+        }
+    }
+}
+`
 export default function SettingAccount() {
+  const [profilepic, setProfilePic] = React.useState(null);
+  const {data:userdata,error} = useQuery(PROFILE_QUERY)
+  const [profileURL, setProfileURL] = React.useState('');
+
   const [fname, setFname] = React.useState('');
   const [lname, setLname] = React.useState('');
   const [country, setCountry] = React.useState('');
   const [city, setCity] = React.useState('');
   const [contact, setContact] = React.useState('');
-  const [myprofile, setProfile] = React.useContext(UserContext);
+  const [userid,setUserid] = React.useState();
   //  parseInt(window.location.href.split('#')[1] || '0');
+  
+  const handleFileChange = (e: { target: { files: any } }) => {
+    var files = e.target.files;
+
+    setProfilePic(files[0]);
+    setProfileURL(URL.createObjectURL(files[0]));
+  };
+
+
+  async function uploadProfilePic(communityid) {
+    // upload logo if logo else return True
+    if (!profilepic) {
+      return true;
+    }
+    var myHeaders = new Headers();
+    myHeaders.append(
+      'Authorization',
+      `Bearer ${window.localStorage.getItem('token')}`
+    );
+    var formdata = new FormData();
+    formdata.append(
+      'query',
+      `mutation{
+        updateProfpic(id:${userid}){
+          success
+          picture
+        }
+      }
+      `
+    );
+    formdata.append('file', profilepic);
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow',
+    };
+
+    let r = await fetch('http://localhost:8000/graphql/', requestOptions)
+      .then(response => response.json())
+      .catch(error => console.log('error', error));
+
+    return r.data.updateCommunitybanner.success;
+  }
+
   React.useEffect(() => {
-    if (myprofile.profile) {
-      setFname(myprofile.firstName);
-      setLname(myprofile.lastName);
-      setContact(myprofile.profile.contact);
-      setCity(myprofile.profile.city);
-      setCountry(myprofile.profile.country);
+    if (userdata) {
+      setFname(userdata.myprofile.firstName);
+      setLname(userdata.myprofile.lastName);
+      setContact(userdata.myprofile.profile.contact);
+      setCity(userdata.myprofile.profile.city);
+      setCountry(userdata.myprofile.profile.country);
+      setProfileURL(userdata.myprofile.profile.profilePicture);
+      setUserid(userdata.myprofile.profile.id)
     }
     return;
-  }, []);
+  }, [userdata]);
+
 
   return (
     <div className='h-screen bg-landing_signin bg-no-repeat bg-right-bottom'>
@@ -190,29 +293,23 @@ export default function SettingAccount() {
           <div className='w-full'>
             <h3 className='font-base text-md my-3 font-mulish'>Photo</h3>
             <div className='flex items-center justify-between w-1/5'>
-              <img src={profilepic} className='w-16 h-16 rounded-full' />
-              <button
-                className='bg-gray-100 rounded-md py-2 px-4 text-xs font-mulish'
-                onClick={e => e.preventDefault()}
+             <figure >
+              <label className="flex items-center">
+              <img src={profileURL} className='w-16 h-16 rounded-full' />
+              <input type='file' className='hidden' onChange={handleFileChange} />
+              <figcaption
+                className='bg-gray-100 rounded-md py-2 px-4 text-xs font-mulish ml-7'
               >
                 Change
-              </button>
+              </figcaption>
+              </label>
+              </figure>
               <button className='font-mulish' onClick={e => e.preventDefault()}>
                 Remove
               </button>
             </div>
           </div>
 
-          <div className='w-full my-8'>
-            <h3 className='text-md my-1 font-mulish'>
-              Location <span className='text-red-500'>*</span>
-            </h3>
-            <select className='rounded-xl font-mulish my-1'>
-              <option value='Ahmedabad, India' selected>
-                {city + ', ' + country}
-              </option>
-            </select>
-          </div>
         </div>
       </div>
     </div>

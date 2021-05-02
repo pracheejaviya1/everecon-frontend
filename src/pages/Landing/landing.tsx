@@ -199,7 +199,7 @@ export default function Landing() {
   return (
     <div>
       <Header />
-      <div className='m-auto mt-48'>
+      <div className='m-auto'>
         <div className='m-3 flex align-items-center justify-evenly'>
           <img
             src={landingImage}
