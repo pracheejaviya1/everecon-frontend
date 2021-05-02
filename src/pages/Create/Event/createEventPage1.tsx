@@ -1,27 +1,25 @@
 import * as React from 'react';
 import EventImg from '../../../assets/Images/Rectangle6.png';
 import Header from '../../../components/header';
-import { Link,navigate } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 
+export default function CreateEventOne({ location }) {
+  const communityid = location.state.communityid;
+  // check communityid else return ERROR probably 404
 
+  const [logo, setLogo] = React.useState(null);
+  const [logoURL, setLogoURL] = React.useState(EventImg);
+  const [name, setName] = React.useState('');
+  const [address, setAddress] = React.useState('');
+  const [category, setCategory] = React.useState('');
+  const [city, setCity] = React.useState('');
+  const [country, setCountry] = React.useState('');
+  const [description, setDescription] = React.useState('');
+  const [liveUrl, setliveURL] = React.useState('');
 
-export default function CreateEventOne({location}) {
-const communityid = location.state.communityid
-// check communityid else return ERROR probably 404
-
-const [logo, setLogo] = React.useState(null);
-const [logoURL, setLogoURL] = React.useState(EventImg);
-const [name,setName] = React.useState("")
-const [address,setAddress] = React.useState("")
-const [category,setCategory] = React.useState("")
-const [city,setCity] = React.useState("")
-const [country,setCountry] = React.useState("")
-const [description,setDescription] = React.useState("")
-const [liveUrl, setliveURL] = React.useState('');
-  
   const handleFileChange = (e: { target: { files: any } }) => {
     var files = e.target.files;
-    if(files[0]){
+    if (files[0]) {
       setLogo(files[0]);
       setLogoURL(URL.createObjectURL(files[0]));
     }
@@ -69,7 +67,7 @@ const [liveUrl, setliveURL] = React.useState('');
               placeholder='Event name'
               name='Event name'
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={e => setName(e.target.value)}
             />
           </label>
           <label className='my-2' htmlFor='Description'>
@@ -81,14 +79,14 @@ const [liveUrl, setliveURL] = React.useState('');
               onChange={e => setDescription(e.target.value)}
             />
           </label>
-          
+
           <label className='my-2' htmlFor='Event category'>
             <input
               className='border border-gray-400 p-2 w-80 rounded-lg font-roboto text-sm'
               placeholder='category'
               name='Event category'
               value={category}
-              onChange={(e) => setCategory(e.target.value)}
+              onChange={e => setCategory(e.target.value)}
             />
           </label>
           <label className='my-2' htmlFor='Event city'>
@@ -97,7 +95,7 @@ const [liveUrl, setliveURL] = React.useState('');
               placeholder='city'
               name='Event city'
               value={city}
-              onChange={(e) => setCity(e.target.value)}
+              onChange={e => setCity(e.target.value)}
             />
           </label>
 
@@ -107,7 +105,7 @@ const [liveUrl, setliveURL] = React.useState('');
               placeholder='country'
               name='Event country'
               value={country}
-              onChange={(e) => setCountry(e.target.value)}
+              onChange={e => setCountry(e.target.value)}
             />
           </label>
           {/* TODO: */}
@@ -122,23 +120,22 @@ const [liveUrl, setliveURL] = React.useState('');
               onChange={e => setAddress(e.target.value)}
             />
           </label>
-
-
-          
         </form>
         <button
-          onClick={() => navigate('/Create/Event/createEventPage2',{
-            state:{
-              name:name,
-              description:description,
-              address:address,
-              category:category,
-              city:city,
-              country:country,
-              communityid:communityid,
-              logo:logo
-            }
-          })}
+          onClick={() =>
+            navigate('/Create/Event/createEventPage2', {
+              state: {
+                name: name,
+                description: description,
+                address: address,
+                category: category,
+                city: city,
+                country: country,
+                communityid: communityid,
+                logo: logo,
+              },
+            })
+          }
           className='text-white text-sm bg-blue-400 py-2 px-4 rounded-lg font-inter'
         >
           Next
