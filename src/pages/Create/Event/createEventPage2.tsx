@@ -231,16 +231,19 @@ export default function CreateEventTwo({ location }) {
               onChange={e => setmaxRsvp(e.target.value)}
             />
           </div>
-          {/* <div className='flex items-center justify-between w-full my-2'>
-            <label className='m-2 font-mulish' htmlFor='fees'>
-              Fees
-            </label>
-            <input
-              className='border border-gray-400 p-2 w-80 rounded-lg font-roboto text-sm'
-              type='currency'
-              name='fees'
-            />
-          </div> */}
+          <div>
+            <p>Speaker</p>
+            <div className='flex flex-row'>
+              <input
+                type='text'
+                placeholder='What are you looking for?'
+                className='placeholder-gray-400 border-none text-xs w-full bg-gray-100 font-mulish'
+              />
+              <button className='text-white text-sm bg-blue-400 py-2 px-4 rounded-md font-inter'>
+                New Speaker
+              </button>
+            </div>
+          </div>
         </form>
         <button
           className='text-white text-sm bg-blue-400 py-2 px-4 rounded-lg font-inter'

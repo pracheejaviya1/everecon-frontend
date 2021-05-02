@@ -166,7 +166,11 @@ export default function CreateCommunityTwo({ location }) {
 
         <button
           className=' my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'
-          onClick={() => navigate('/Create/Community/createCommunityPage3',{state: { communityid:communityid }})}
+          onClick={() =>
+            navigate('/Create/Community/createCommunityPage3', {
+              state: { communityid: communityid },
+            })
+          }
         >
           Next
         </button>

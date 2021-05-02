@@ -233,7 +233,7 @@ export default function CreateCommunityOne() {
               name='email id'
               required={true}
               value={email}
-              type="email"
+              type='email'
               onChange={e => setEmail(e.target.value)}
             />
           </label>
@@ -273,7 +273,7 @@ export default function CreateCommunityOne() {
               placeholder='Discord'
               name='Discord'
               required={true}
-              type="url"
+              type='url'
               value={discord}
               onChange={e => setDiscord(e.target.value)}
             />
@@ -283,7 +283,7 @@ export default function CreateCommunityOne() {
               className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
               placeholder='Facebook'
               name='Facebook'
-              type="url"
+              type='url'
               required={true}
               value={facebook}
               onChange={e => setFacebook(e.target.value)}
@@ -304,7 +304,7 @@ export default function CreateCommunityOne() {
               className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
               placeholder='Instragram'
               name='Instragram'
-              type="url"
+              type='url'
               required={true}
               value={instagram}
               onChange={e => setInstagram(e.target.value)}
@@ -315,7 +315,7 @@ export default function CreateCommunityOne() {
               className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
               placeholder='LinkedIn'
               name='LinkedIn'
-              type="url"
+              type='url'
               required={true}
               value={linkedin}
               onChange={e => setLinkedIn(e.target.value)}
@@ -326,7 +326,7 @@ export default function CreateCommunityOne() {
               className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
               placeholder='Twitter'
               name='Twitter'
-              type="url"
+              type='url'
               required={true}
               value={twitter}
               onChange={e => setTwitter(e.target.value)}
@@ -337,7 +337,7 @@ export default function CreateCommunityOne() {
               className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
               placeholder='Webpage'
               name='Webpage'
-              type="url"
+              type='url'
               required={true}
               value={webpage}
               onChange={e => setWebpage(e.target.value)}
