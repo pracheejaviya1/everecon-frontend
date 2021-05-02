@@ -186,7 +186,21 @@ export default function ViewCommunity(props) {
             {data?.communityById.description || 'description'}
           </p>
         </div>
-        <div className='flex items-center flex-col w-1/4'></div>
+        <div className='flex items-center flex-col w-1/4'>
+          {data?.communityById.iscore ? (
+            <button
+              className='text-sm bg-blue-400 text-white rounded-md px-3 py-2 mx-2 my-1'
+              onClick={() =>
+                navigate('/Create/Community/updateCommunity', {
+                  state: { communityid: uid },
+                })
+              }
+            >
+              Update Community
+              {/* {props.isLead === true ? 'New Event' : 'Follow'} */}
+            </button>
+          ) : null}
+        </div>
       </div>
     </div>
   );

@@ -115,7 +115,6 @@ export default function ViewEvent(props) {
     <div className='border-b-2 h-screen'>
       <Header />
       <div className='flex flex-col mx-auto w-3/4 items-center'>
-        <p>{props.uid}</p>
         <EventTitle
           datetime={new Date(data.eventById.startTime)}
           title={data.eventById.name}
