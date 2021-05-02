@@ -1,5 +1,3 @@
-
-
 // export const createUserMutation = gql`
 //   mutation createUser(
 //     $city: String

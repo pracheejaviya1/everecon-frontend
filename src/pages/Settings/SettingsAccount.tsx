@@ -2,8 +2,29 @@ import { Link } from 'gatsby';
 import * as React from 'react';
 import profilepic from '../../assets/Images/community.jpg';
 import Header from '../../components/header';
+import UserContext from '../../context/usercontext.js';
 
 export default function SettingAccount() {
+  const [fname, setFname] = React.useState('');
+  const [lname, setLname] = React.useState('');
+  const [country, setCountry] = React.useState('');
+  const [city, setCity] = React.useState('');
+  const [contact, setContact] = React.useState('');
+  const [myprofile, setProfile] = React.useContext(UserContext);
+  //  parseInt(window.location.href.split('#')[1] || '0');
+  React.useEffect(() => {
+    if (myprofile.profile) {
+      setFname(myprofile.firstName);
+      setLname(myprofile.lastName);
+      setContact(myprofile.profile.contact);
+      setCity(myprofile.profile.city);
+      setCountry(myprofile.profile.country);
+    }
+    return () => {
+      console.log('cleanup');
+    };
+  }, []);
+
   return (
     <div className='h-screen bg-landing_signin bg-no-repeat bg-right-bottom'>
       <Header />
@@ -102,6 +123,10 @@ export default function SettingAccount() {
                 type='text'
                 className='rounded-lg border-gray-400'
                 name='firstname'
+                value={fname}
+                onChange={e => {
+                  setFname(e.target.value);
+                }}
               />
             </div>
             <div className='flex my-4 ml-4 flex-col'>
@@ -112,6 +137,54 @@ export default function SettingAccount() {
                 type='text'
                 className='rounded-lg border-gray-400'
                 name='lastname'
+                value={lname}
+                onChange={e => {
+                  setLname(e.target.value);
+                }}
+              />
+            </div>
+          </form>
+          <form className='flex w-2/3 my-3'>
+            <div className='flex my-4 mr-4 flex-col'>
+              <label htmlFor='city' className='mb-1 font-mulish'>
+                City <span className='text-red-500'>*</span>
+              </label>
+              <input
+                type='text'
+                className='rounded-lg border-gray-400'
+                name='city'
+                value={city}
+                onChange={e => {
+                  setCity(e.target.value);
+                }}
+              />
+            </div>
+            <div className='flex my-4 ml-4 flex-col'>
+              <label htmlFor='country' className='mb-1 font-mulish'>
+                Country <span className='text-red-500'>*</span>
+              </label>
+              <input
+                type='text'
+                className='rounded-lg border-gray-400'
+                name='coutry'
+                value={country}
+                onChange={e => {
+                  setCountry(e.target.value);
+                }}
+              />
+            </div>
+            <div className='flex my-4 ml-4 flex-col'>
+              <label htmlFor='contact' className='mb-1 font-mulish'>
+                Contact <span className='text-red-500'>*</span>
+              </label>
+              <input
+                type='text'
+                className='rounded-lg border-gray-400'
+                name='contact'
+                value={contact}
+                onChange={e => {
+                  setContact(e.target.value);
+                }}
               />
             </div>
           </form>
@@ -138,7 +211,7 @@ export default function SettingAccount() {
             </h3>
             <select className='rounded-xl font-mulish my-1'>
               <option value='Ahmedabad, India' selected>
-                Ahmedabad, India
+                {city + ', ' + country}
               </option>
             </select>
           </div>
