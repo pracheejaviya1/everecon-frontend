@@ -7,38 +7,28 @@ type TagProps = {
   text: string;
 };
 
-const LIST_EVENTS = gql`
-  query events($kind: Int, $length: Int, $filter: String, $desc: Boolean) {
-    events(kind: $kind, length: $length, filter: $filter, desc: $desc) {
-      iscore
-      isvolunteer
-      isregistered
-      ischeckedin
-      id
+const COMMUNITY_EVENTS_QUERY = gql`
+  query communityById($id: ID) {
+    communityById(id: $id) {
       name
-      description
-      kind
-      address
-      city
-      country
-      liveUrl
-      startTime
-      endTime
-      featuredImage
-      isActive
-      creationTime
-      maxRsvp
-      category {
+      events {
         id
         name
         description
-      }
-      tags {
-        id
-        name
-      }
-      community {
-        name
+        kind
+        address
+        city
+        country
+        liveUrl
+        startTime
+        endTime
+        featuredImage
+        isActive
+        creationTime
+        maxRsvp
+        community {
+          name
+        }
       }
     }
   }
@@ -66,13 +56,19 @@ function Tag(props: TagProps) {
   );
 }
 
-export default function ExploreCommunity() {
-  const { data: events_data, refetch } = useQuery(LIST_EVENTS, {
+export default function CommunityEvents(props) {
+  let uid: string;
+  const isBrowser = typeof window !== 'undefined';
+  if (isBrowser) {
+    uid = props.uid;
+    //  parseInt(window.location.href.split('#')[1] || '0');
+  } else {
+    uid = '1';
+  }
+
+  const { data, refetch } = useQuery(COMMUNITY_EVENTS_QUERY, {
     variables: {
-      kind: 0,
-      length: 2,
-      desc: true,
-      filter: '',
+      id: uid,
     },
   });
   React.useEffect(() => {
@@ -86,7 +82,7 @@ export default function ExploreCommunity() {
       <div className='m-6 flex flex-col divide-y divide-gray-500'>
         <div className='m-4'>
           <h1 className='my-5 text-2xl font-mulish text-center'>
-            Explore Events
+            Events By {data?.communityById.name}
           </h1>
 
           {/* <div className='border-b-2 w-3/4 mx-auto items-center justify-between flex flex-row '>
@@ -106,8 +102,8 @@ export default function ExploreCommunity() {
               Reset
             </span>
           </div> */}
-          {events_data &&
-            events_data.events.map(e => (
+          {data?.communityById.events &&
+            data?.communityById.events.map(e => (
               <EventCard
                 communityName={e.community.name}
                 title={e.name}

@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { Link, navigate } from 'gatsby';
 import gql from 'graphql-tag';
 import * as React from 'react';
@@ -93,6 +93,30 @@ const COMMUNITY_QUERY = gql`
   }
 `;
 
+const FOLLOW = gql`
+  mutation addFollower($community: ID!, $user: ID!) {
+    addFollower(community: $community, user: $user) {
+      ok
+    }
+  }
+`;
+
+const UNFOLLOW = gql`
+  mutation removeFollower($community: ID!, $user: ID!) {
+    removeFollower(community: $community, user: $user) {
+      ok
+    }
+  }
+`;
+
+const MYID = gql`
+  query myprofile {
+    myprofile {
+      id
+    }
+  }
+`;
+
 function Tag(props: TagProps) {
   return (
     <span className='rounded-full text-center m-2 bg-gray-300 px-2 py-1'>
@@ -111,9 +135,59 @@ export default function ViewCommunity(props) {
     uid = '1';
   }
 
-  const { loading, error, data } = useQuery(COMMUNITY_QUERY, {
+  const { loading, error, data, refetch } = useQuery(COMMUNITY_QUERY, {
     variables: { id: uid },
   });
+  const [fnuf, setFnuf] = React.useState(false);
+  const [id, setID] = React.useState(0);
+  const { loading: loading_id, error: error_id, data: profdata } = useQuery(
+    MYID
+  );
+  const [callFollow, dataF] = useMutation(FOLLOW);
+  const [callUnfollow, dataUF] = useMutation(UNFOLLOW);
+
+  React.useEffect(() => {
+    setFnuf(data?.communityById.isfollower);
+  }, [data]);
+  React.useEffect(() => {
+    if (!loading) setID(profdata?.myprofile.id);
+  }, [loading]);
+
+  React.useEffect(() => {
+    refetch();
+  }, []);
+
+  async function handlefnunf() {
+    if (fnuf) {
+      let { data, errors: e } = await callUnfollow({
+        variables: {
+          community: uid,
+          user: id,
+        },
+      });
+      if (e) {
+        console.error(e);
+        return;
+      } else {
+        console.log(data);
+      }
+    } else {
+      let { data, errors: e } = await callFollow({
+        variables: {
+          community: uid,
+          user: id,
+        },
+      });
+      if (e) {
+        console.error(e);
+        return;
+      } else {
+        console.log(data);
+      }
+    }
+    return;
+  }
+
   if (loading) {
     return `Loading`;
   }
@@ -150,7 +224,16 @@ export default function ViewCommunity(props) {
               {/* {props.isLead === true ? 'New Event' : 'Follow'} */}
             </button>
           ) : (
-            <></>
+            <button
+              className='text-sm bg-blue-400 text-white rounded-md px-3 py-2 mx-2 my-1'
+              onClick={e => {
+                handlefnunf();
+                setFnuf(!fnuf);
+                return e.preventDefault();
+              }}
+            >
+              {fnuf == true ? 'Unfollow' : 'Follow'}
+            </button>
           )}
         </div>
       </div>
@@ -160,7 +243,7 @@ export default function ViewCommunity(props) {
             <button onClick={e => e.preventDefault()} type='submit'>
               About
             </button>
-            <Link to='/Explore/Events'>Events</Link>
+            <Link to={'/communityevents/' + uid}>Events</Link>
             <button onClick={e => e.preventDefault()} type='submit'>
               Members
             </button>
