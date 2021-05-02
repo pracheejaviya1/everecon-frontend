@@ -221,8 +221,12 @@ export default function UserProfile() {
     console.log(data);
     if (loading == false) setUserid(data.myprofile.id);
   }, [loading]);
+  React.useEffect(() => {
+    refetch();
+  }, []);
   if (loading) return null;
   if (error) return `Error! ${error}`;
+
   return (
     <div className='h-screen w-screen'>
       <Header />
