@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Header from '../../../components/header';
-import { Link,navigate } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 import { gql, useMutation } from '@apollo/client';
 
 const CREATE_EVENT_MUTATION = gql`
@@ -88,10 +88,10 @@ export default function CreateEventTwo({ location }) {
   const [startTime, setStartTime] = React.useState('2018-06-07T00:00');
   const [endTime, setEndTime] = React.useState('');
   const [maxRsvp, setmaxRsvp] = React.useState('');
-  const image = location.state.logo
+  const image = location.state.logo;
   // TODO: input for Tags
   // const [tags, setTags] = React.useState('');
- async function uploadImage(eventid) {
+  async function uploadImage(eventid) {
     // upload logo if logo else return True
     if (!image) {
       console.log('no image');
@@ -128,7 +128,7 @@ export default function CreateEventTwo({ location }) {
 
     return r.data.updateEventimage.success;
   }
-  
+
   async function handleSubmit() {
     let { data, errors: e } = await callCreateEvent({
       variables: {
@@ -151,7 +151,7 @@ export default function CreateEventTwo({ location }) {
       return;
     }
     let eventid = data.createEvent.event.id;
-    console.log(eventid)
+    console.log(eventid);
     if (uploadImage(eventid)) {
       navigate(`/event/${eventid}`);
     } else {
