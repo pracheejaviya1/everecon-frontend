@@ -90,7 +90,7 @@ export default function CreateCommunityTwo({ location }) {
       })
       .catch(e => console.error(e));
   }, [userdata]);
-  
+
   return (
     <div className='h-screen w-screen'>
       <Header />

@@ -1,8 +1,87 @@
-import { Link } from 'gatsby';
+import { useMutation, useQuery } from '@apollo/client';
+import { Link, navigate } from 'gatsby';
+import gql from 'graphql-tag';
 import * as React from 'react';
 import Header from '../../components/header';
 
+//TODO: requires Alert and Error dispaly to user
+const UPDATE_SECURITY = gql`
+  mutation updateUsersecurity($email: String, $password: String) {
+    updateUsersecurity(email: $email, password: $password) {
+      user {
+        id
+        email
+      }
+    }
+  }
+`;
+
+const PROFILE_QUERY = gql`
+  query myprofile {
+    myprofile {
+      id
+      lastLogin
+      isSuperuser
+      username
+      firstName
+      lastName
+      email
+      isStaff
+      isActive
+      dateJoined
+      profile {
+        id
+        contact
+        city
+        country
+        profilePicture
+      }
+    }
+  }
+`;
 export default function SettingSecurity() {
+  const { data: userdata, error } = useQuery(PROFILE_QUERY);
+  const [discard, setDiscard] = React.useState(0);
+  const [callUpdateSecurity, { data }] = useMutation(UPDATE_SECURITY);
+
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [confirmpassword, setConfirmPassword] = React.useState('');
+
+  React.useEffect(() => {
+    if (userdata) {
+      setEmail(userdata.myprofile.email);
+      setPassword('');
+      setConfirmPassword('');
+    }
+    return;
+  }, [userdata, discard]);
+
+  const handleSubmit = () => {
+    if (password !== confirmpassword) {
+      console.error("Confirm Password doesn't match password");
+      setPassword('');
+      setConfirmPassword('');
+      return;
+    }
+    callUpdateSecurity({
+      variables: {
+        email: email,
+        password: password,
+      },
+    })
+      .then(r => console.log('Updated Security'))
+      .catch(e => console.error(e.graphQLErrors));
+    setPassword('');
+    setConfirmPassword('');
+  };
+
+  const logout = () => {
+    window.localStorage.removeItem('token');
+    window.localStorage.removeItem('refreshToken');
+    navigate('/signin');
+  };
+
   return (
     <div className='h-screen bg-landing_signin bg-no-repeat bg-right-bottom'>
       <Header />
@@ -68,8 +147,18 @@ export default function SettingSecurity() {
               </h1>
             </div>
             <ul className='flex list-none'>
-              <li className='mx-2 text-green-500 font-inter'>Save</li>
-              <li className='mx-2 text-red-500 font-inter'>Discard</li>
+              <button
+                className='mx-2 text-green-500 font-inter'
+                onClick={handleSubmit}
+              >
+                Save
+              </button>
+              <button
+                className='mx-2 text-red-500 font-inter'
+                onClick={() => setDiscard(discard + 1)}
+              >
+                Discard
+              </button>
             </ul>
           </div>
 
@@ -79,7 +168,7 @@ export default function SettingSecurity() {
             </div>
             <button
               className='text-white text-sm bg-red-400 py-2 px-4 rounded-md font-inter'
-              onClick={e => e.preventDefault()}
+              onClick={logout}
             >
               Log Out
             </button>
@@ -91,31 +180,37 @@ export default function SettingSecurity() {
                 Email Id <span className='text-red-500 '>*</span>
               </label>
               <input
-                type='text'
+                type='email'
                 className='rounded-lg border-gray-400'
-                name='lastname'
+                name='email'
+                value={email}
+                onChange={e => setEmail(e.target.value)}
               />
             </div>
           </form>
           <form className='flex w-2/3'>
             <div className='flex my-4 mr-4 flex-col'>
-              <label htmlFor='firstname' className='mb-1 font-mulish'>
+              <label htmlFor='password' className='mb-1 font-mulish'>
                 Password <span className='text-red-500 '>*</span>
               </label>
               <input
-                type='text'
+                type='password'
                 className='rounded-lg border-gray-400'
-                name='firstname'
+                name='password'
+                value={password}
+                onChange={e => setPassword(e.target.value)}
               />
             </div>
             <div className='flex my-4 ml-4 flex-col'>
-              <label htmlFor='lastname' className='mb-1 font-mulish'>
+              <label htmlFor='confirm password' className='mb-1 font-mulish'>
                 Confirm Password <span className='text-red-500 '>*</span>
               </label>
               <input
-                type='text'
+                type='password'
                 className='rounded-lg border-gray-400'
-                name='lastname'
+                name='confirm password'
+                value={confirmpassword}
+                onChange={e => setConfirmPassword(e.target.value)}
               />
             </div>
           </form>

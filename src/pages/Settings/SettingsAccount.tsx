@@ -1,7 +1,5 @@
 import { gql, useMutation, useQuery } from '@apollo/client';
-import { data } from 'autoprefixer';
-
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 import * as React from 'react';
 import Header from '../../components/header';
 const PROFILE_QUERY = gql`
@@ -24,39 +22,61 @@ const PROFILE_QUERY = gql`
         country
         profilePicture
       }
-      }
     }
+  }
 `;
 
 const UPDATE_PROFILE_MUTATION = gql`
-mutation updateUser ($city: String, $contact: String, $country: String) {
-    updateUser (city: $city, contact: $contact, country: $country) {
-        profile {
+  mutation updateUser(
+    $city: String
+    $contact: String
+    $country: String
+    $firstname: String
+    $lastname: String
+  ) {
+    updateUser(
+      city: $city
+      contact: $contact
+      country: $country
+      firstname: $firstname
+      lastname: $lastname
+    ) {
+      profile {
+        id
+        contact
+        city
+        country
+        profilePicture
+        user {
+          id
+          password
+          lastLogin
+          isSuperuser
+          username
+          firstName
+          lastName
+          email
+          isStaff
+          isActive
+          dateJoined
+          profile {
             id
             contact
             city
             country
             profilePicture
+          }
         }
-        user {
-            id
-            password
-            lastLogin
-            isSuperuser
-            username
-            firstName
-            lastName
-            email
-            isStaff
-            isActive
-            dateJoined
-        }
+      }
     }
-}
-`
+  }
+`;
 export default function SettingAccount() {
   const [profilepic, setProfilePic] = React.useState(null);
-  const {data:userdata,error} = useQuery(PROFILE_QUERY)
+  const { data: userdata, error } = useQuery(PROFILE_QUERY);
+  const [discard, setDiscard] = React.useState(0);
+  const [call_UpdateProfile, { data }] = useMutation(UPDATE_PROFILE_MUTATION);
+
   const [profileURL, setProfileURL] = React.useState('');
 
   const [fname, setFname] = React.useState('');
@@ -64,9 +84,8 @@ export default function SettingAccount() {
   const [country, setCountry] = React.useState('');
   const [city, setCity] = React.useState('');
   const [contact, setContact] = React.useState('');
-  const [userid,setUserid] = React.useState();
-  //  parseInt(window.location.href.split('#')[1] || '0');
-  
+  const [userid, setUserid] = React.useState();
+
   const handleFileChange = (e: { target: { files: any } }) => {
     var files = e.target.files;
 
@@ -74,11 +93,14 @@ export default function SettingAccount() {
     setProfileURL(URL.createObjectURL(files[0]));
   };
 
-
-  async function uploadProfilePic(communityid) {
+  async function uploadProfilePic() {
     // upload logo if logo else return True
     if (!profilepic) {
       return true;
+    }
+    if (!userid) {
+      console.error('Failed to fetch userid');
+      return;
     }
     var myHeaders = new Headers();
     myHeaders.append(
@@ -109,9 +131,24 @@ export default function SettingAccount() {
       .then(response => response.json())
       .catch(error => console.log('error', error));
 
-    return r.data.updateCommunitybanner.success;
+    return r.data.updateProfpic.success;
   }
 
+  const handleSubmit = () => {
+    call_UpdateProfile({
+      variables: {
+        city: city,
+        contact: contact,
+        country: country,
+        firstname: fname,
+        lastname: lname,
+      },
+    })
+      .then(r => console.log('Profile Updated'))
+      .catch(e => console.error(e.graphQLErrors));
+
+    uploadProfilePic();
+  };
   React.useEffect(() => {
     if (userdata) {
       setFname(userdata.myprofile.firstName);
@@ -120,12 +157,16 @@ export default function SettingAccount() {
       setCity(userdata.myprofile.profile.city);
       setCountry(userdata.myprofile.profile.country);
       setProfileURL(userdata.myprofile.profile.profilePicture);
-      setUserid(userdata.myprofile.profile.id)
+      setUserid(userdata.myprofile.profile.id);
     }
     return;
-  }, [userdata]);
+  }, [userdata, discard]);
 
-
+  const logout = () => {
+    window.localStorage.removeItem('token');
+    window.localStorage.removeItem('refreshToken');
+    navigate('/signin');
+  };
   return (
     <div className='h-screen bg-landing_signin bg-no-repeat bg-right-bottom'>
       <Header />
@@ -194,8 +235,18 @@ export default function SettingAccount() {
               </h1>
             </div>
             <ul className='flex list-none'>
-              <li className='mx-2 text-green-500 font-inter'>Save</li>
-              <li className='mx-2 text-red-500 font-inter'>Discard</li>
+              <button
+                className='mx-2 text-green-500 font-inter'
+                onClick={handleSubmit}
+              >
+                Save
+              </button>
+              <button
+                className='mx-2 text-red-500 font-inter'
+                onClick={() => setDiscard(discard + 1)}
+              >
+                Discard
+              </button>
             </ul>
           </div>
 
@@ -207,12 +258,12 @@ export default function SettingAccount() {
                 share.
               </p>
             </div>
-            <Link
+            <button
               className='text-white text-sm bg-red-400 py-2 px-4 rounded-md font-inter'
-              to='/Signin/signin'
+              onClick={logout}
             >
               Log Out
-            </Link>
+            </button>
           </div>
 
           <form className='flex w-2/3 my-3'>
@@ -293,23 +344,24 @@ export default function SettingAccount() {
           <div className='w-full'>
             <h3 className='font-base text-md my-3 font-mulish'>Photo</h3>
             <div className='flex items-center justify-between w-1/5'>
-             <figure >
-              <label className="flex items-center">
-              <img src={profileURL} className='w-16 h-16 rounded-full' />
-              <input type='file' className='hidden' onChange={handleFileChange} />
-              <figcaption
-                className='bg-gray-100 rounded-md py-2 px-4 text-xs font-mulish ml-7'
-              >
-                Change
-              </figcaption>
-              </label>
+              <figure>
+                <label className='flex items-center'>
+                  <img src={profileURL} className='w-16 h-16 rounded-full' />
+                  <input
+                    type='file'
+                    className='hidden'
+                    onChange={handleFileChange}
+                  />
+                  <figcaption className='bg-gray-100 rounded-md py-2 px-4 text-xs font-mulish ml-7'>
+                    Change
+                  </figcaption>
+                </label>
               </figure>
-              <button className='font-mulish' onClick={e => e.preventDefault()}>
+              {/* <button className='font-mulish' onClick={e => e.preventDefault()}>
                 Remove
-              </button>
+              </button> */}
             </div>
           </div>
-
         </div>
       </div>
     </div>

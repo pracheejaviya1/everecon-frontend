@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Header from '../../../components/header';
 import { Link } from 'gatsby';
-export default function CreateCommunityThree({location}) {
+export default function CreateCommunityThree({ location }) {
   return (
     <div className='w-screen h-screen'>
       <Header />
