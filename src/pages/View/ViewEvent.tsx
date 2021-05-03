@@ -137,6 +137,7 @@ export default function ViewEvent(props) {
           isvolunteer={data.eventById.isvolunteer}
           isregistered={data.eventById.isregistered}
           ischeckedin={data.eventById.ischeckedin}
+          eventid={data.eventById.id}
         />
       </div>
     </div>
