@@ -7,20 +7,21 @@ type Text = {
 };
 
 function MemberCard(props: Text) {
+  // TODO: take userid and eventid in props on Click make call
+  const [checkedin,setCheckedin] = React.useState(false)
   return (
-    <div className='flex items-center border-b-2 p-2 border-gray-400'>
-      <div className='flex'>
-        <div className='mx-4 flex flex-row'>
-          <p className='text-xl font-inter'>{props.title}</p>
-          <label className='inline-flex items-end'>
+    <div className='my-2 flex items-center border-b-2 p-2 border-gray-400'>
+        <div className='flex flex-row w-full'>
+          <p className='text-xl font-inter flex-auto'>{props.title}</p>
+          <label className='self-end'>
             <input
               type='checkbox'
               className='form-checkbox h-5 w-5 text-blue-600 items-end'
-              checked
+              checked={checkedin}
+              onChange={() => setCheckedin(!checkedin)}
             />
           </label>
         </div>
-      </div>
     </div>
   );
 }
@@ -41,10 +42,6 @@ export default function ViewEvent() {
         <div>
           <h2 className='font-inter text-2xl font-base'>Check-In Attendees</h2>
         </div>
-        <ul className='flex list-none'>
-          <li className='mx-2 text-green-500 font-inter'>Save</li>
-          <li className='mx-2 text-red-500 font-inter'>Discard</li>
-        </ul>
       </div>
       <div className='flex flex-col mx-auto w-3/4 items-start mt-4'>
         <form className='mb-2'>
@@ -55,7 +52,7 @@ export default function ViewEvent() {
             name='category'
           />
         </form>
-        <ol className='flex flex-col list-decimal text-gray-700 mt-4 mx-4 justify-evenly'>
+        <ol className='flex flex-col list-decimal text-gray-700 mt-4 mx-4 justify-evenly w-full'>
           <li>
             <MemberCard title='Prachee Javiya' />
           </li>
