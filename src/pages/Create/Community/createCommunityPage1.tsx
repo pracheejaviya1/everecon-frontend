@@ -3,7 +3,7 @@ import { Link, navigate } from 'gatsby';
 import * as React from 'react';
 import Rectangle from '../../../assets/Images/Rectangle6.png';
 import Header from '../../../components/header';
-
+import { graphqlurl } from '../../../components/config';
 const CREATE_COMMUNITY_MUTATION = gql`
   mutation createCommunity(
     $address: String
@@ -138,7 +138,7 @@ export default function CreateCommunityOne() {
       redirect: 'follow',
     };
 
-    let r = await fetch('http://localhost:8000/graphql/', requestOptions)
+    let r = await fetch(graphqlurl, requestOptions)
       .then(response => response.json())
       .catch(error => console.log('error', error));
 
@@ -159,9 +159,6 @@ export default function CreateCommunityOne() {
         webpage: webpage,
         city: city,
         country: country,
-        logoURL: logoURL,
-        description: description,
-        email: email,
       },
     });
     if (e) {

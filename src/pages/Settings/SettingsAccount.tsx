@@ -2,6 +2,7 @@ import { gql, useMutation, useQuery } from '@apollo/client';
 import { Link, navigate } from 'gatsby';
 import * as React from 'react';
 import Header from '../../components/header';
+import { graphqlurl } from '../../components/config';
 const PROFILE_QUERY = gql`
   query myprofile {
     myprofile {
@@ -127,7 +128,7 @@ export default function SettingAccount() {
       redirect: 'follow',
     };
 
-    let r = await fetch('http://localhost:8000/graphql/', requestOptions)
+    let r = await fetch(graphqlurl, requestOptions)
       .then(response => response.json())
       .catch(error => console.log('error', error));
 

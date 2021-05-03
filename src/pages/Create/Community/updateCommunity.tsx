@@ -1,7 +1,98 @@
 import * as React from 'react';
 import CommunityImage from '../../../assets/Images/ahmedabad.jpeg';
+import { useQuery, useMutation, gql } from '@apollo/client';
+import { mediaurl, graphqlurl } from '../../../components/config';
 
 import Header from '../../../components/header';
+
+const COMMUNITY_QUERY = gql`
+  query communityById($id: ID) {
+    communityById(id: $id) {
+      id
+      name
+      description
+      logo
+      banner
+      featuredVideo
+      address
+      city
+      country
+      email
+      membersCount
+      website
+      facebook
+      linkedin
+      twitter
+      instagram
+      discord
+      isActive
+      creationTime
+      iscore
+      isfollower
+      isvolunteer
+    }
+  }
+`;
+
+const UPDATE_COMMUNITY_MUTATION = gql`
+  mutation updateCommunity(
+    $address: String
+    $city: String
+    $country: String
+    $description: String
+    $discord: String
+    $email: String
+    $facebook: String
+    $featuredVideo: String
+    $followers: [ID]
+    $id: ID!
+    $instagram: String
+    $isActive: Boolean
+    $linkedin: String
+    $name: String
+    $website: String
+  ) {
+    updateCommunity(
+      address: $address
+      city: $city
+      country: $country
+      description: $description
+      discord: $discord
+      email: $email
+      facebook: $facebook
+      featuredVideo: $featuredVideo
+      followers: $followers
+      id: $id
+      instagram: $instagram
+      isActive: $isActive
+      linkedin: $linkedin
+      name: $name
+      website: $website
+    ) {
+      community {
+        id
+        name
+        description
+        logo
+        banner
+        featuredVideo
+        address
+        city
+        country
+        email
+        membersCount
+        website
+        facebook
+        linkedin
+        twitter
+        instagram
+        discord
+        isActive
+        creationTime
+      }
+    }
+  }
+`;
 
 type TagProps = {
   title: string;
@@ -29,17 +120,151 @@ function Tag(props: TagProps) {
   );
 }
 
-export default function UpdateCommunity() {
+export default function UpdateCommunity(props) {
+  const communityid = props.location?.state.communityid;
+  console.log(communityid);
+  const [logo, setLogo] = React.useState(null);
+  const [logoURL, setLogoURL] = React.useState(CommunityImage);
+  const [name, setName] = React.useState('');
+  const [address, setAddress] = React.useState('');
+  const [city, setCity] = React.useState('');
+  const [country, setCountry] = React.useState('');
+  const [description, setDescription] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [discord, setDiscord] = React.useState('');
+  const [facebook, setFacebook] = React.useState('');
+  const [instagram, setInstagram] = React.useState('');
+  const [linkedin, setLinkedIn] = React.useState('');
+  const [twitter, setTwitter] = React.useState('');
+  const [webpage, setWebpage] = React.useState('');
+  const [featuredVideo, setFeaturedVideo] = React.useState('');
+  const [id, setId] = React.useState(props.location.id);
+  const { loading, error, data, refetch } = useQuery(COMMUNITY_QUERY, {
+    variables: { id: communityid },
+  });
+  const [callUpdateCommunity, { data: updateddata }] = useMutation(
+    UPDATE_COMMUNITY_MUTATION
+  );
+  React.useEffect(() => {
+    setId(props?.location.state.communityid);
+    refetch();
+  }, []);
+
+  React.useEffect(() => {
+    setId(props?.location.state.communityid);
+    setName(data?.communityById.name);
+    setAddress(data?.communityById.address);
+    setCity(data?.communityById.city);
+    setCountry(data?.communityById.country);
+    setDescription(data?.communityById.description);
+    setEmail(data?.communityById.email);
+    setDiscord(data?.communityById.discord);
+    setFacebook(data?.communityById.facebook);
+    setInstagram(data?.communityById.instagram);
+    setLinkedIn(data?.communityById.linkedin);
+    setWebpage(data?.communityById.webpage);
+    setLogoURL(mediaurl + data?.communityById.logo);
+    setFeaturedVideo(data?.communityById.featuredVideo);
+  }, [data]);
+
+  const handleFileChange = (e: { target: { files: any } }) => {
+    var files = e.target.files;
+
+    setLogo(files[0]);
+    setLogoURL(URL.createObjectURL(files[0]));
+  };
+
+  async function uploadLogo(communityid) {
+    // upload logo if logo else return True
+    if (!logo) {
+      console.log('no logo');
+      return true;
+    }
+    var myHeaders = new Headers();
+    myHeaders.append(
+      'Authorization',
+      `Bearer ${window.localStorage.getItem('token')}`
+    );
+    var formdata = new FormData();
+    formdata.append(
+      'query',
+      `mutation  {
+    updateCommunitylogo(id: ${communityid}) {
+        success
+        logo
+    }
+}
+      `
+    );
+    formdata.append('file', logo);
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow',
+    };
+
+    let r = await fetch(graphqlurl, requestOptions)
+      .then(response => response.json())
+      .catch(error => console.log('error', error));
+
+    return r.data.updateCommunitybanner.success;
+  }
+
+  async function handleSubmit() {
+    let variables = {
+      id: id,
+      email: email,
+      name: name,
+      description: description,
+      address: address,
+      discord: discord,
+      facebook: facebook,
+      instagram: instagram,
+      linkedin: linkedin,
+      twitter: twitter,
+      webpage: webpage,
+      city: city,
+      country: country,
+      featuredVideo: featuredVideo,
+    };
+    console.log(variables);
+    let { data, errors: e } = await callUpdateCommunity({
+      variables,
+    });
+
+    if (e) {
+      console.log(e.graphQLErrors[0].message);
+    }
+
+    uploadLogo(id);
+    return;
+  }
+
   const input_class: string =
     'border-gray-100 p-3 text-xs block w-80 rounded-xl font-mulish bg-gray-100';
+  if (loading) {
+    return `Loading`;
+  }
+  if (error) {
+    return `Error! ${error}`;
+  }
+
   return (
     <div className='h-screen w-screen'>
       <Header />
       <div className='flex border-b-2 py-10 w-2/3 mx-auto font-inter'>
-        <img
-          className='h-60 w-90 rounded-md hover:bg-red-500'
-          src={CommunityImage}
-        />
+        <label>
+          <img
+            className='h-60 w-90 rounded-md hover:bg-red-500'
+            src={logoURL}
+          />
+          <input type='file' className='hidden' onChange={handleFileChange} />
+          <figcaption className='py-2 text-center font-mulish'>
+            Upload Community photo
+          </figcaption>
+        </label>
         <div className='flex ml-10 items-start justify-between h-full flex-col font-inter'>
           <form className='flex flex-col'>
             <label className='my-2' htmlFor='Community name'>
@@ -48,31 +273,70 @@ export default function UpdateCommunity() {
                 placeholder='Community name'
                 name='Community name'
                 required={true}
+                value={name}
+                onChange={e => setName(e.target.value)}
               />
             </label>
             <label className='my-2' htmlFor='email id'>
               <input
                 className='border w-80 border-gray p-3 rounded-lg font-roboto text-sm'
-                placeholder='Location'
-                name='Location'
+                placeholder='City'
+                name='City'
                 required={true}
+                value={city}
+                onChange={e => setCity(e.target.value)}
               />
             </label>
             <label className='my-2' htmlFor='Description'>
               <input
                 className='border w-80 border-gray p-3 rounded-lg font-roboto text-sm'
-                placeholder='Lead'
-                name='Lead'
+                placeholder='Country'
+                name='Country'
+                value={country}
+                onChange={e => setCountry(e.target.value)}
+              />
+            </label>
+            <label className='my-2' htmlFor='Description'>
+              <input
+                className='border w-80 border-gray p-3 rounded-lg font-roboto text-sm'
+                placeholder='Address'
+                name='Address'
+                value={address}
+                onChange={e => setAddress(e.target.value)}
+              />
+            </label>
+            <label className='my-2' htmlFor='Description'>
+              <input
+                className='border w-80 border-gray p-3 rounded-lg font-roboto text-sm'
+                placeholder='email'
+                name='Email'
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+              />
+            </label>
+            <label className='my-2' htmlFor='Description'>
+              <input
+                className='border w-80 border-gray p-3 rounded-lg font-roboto text-sm'
+                placeholder='Featured Video'
+                name='Featured Video'
+                value={featuredVideo}
+                onChange={e => setFeaturedVideo(e.target.value)}
               />
             </label>
           </form>
-          <button className='text-white text-sm bg-red-400 py-2 px-4 rounded-md font-inter bottom-0 right-0 hover:bg-red-500'>
+          <button className='text-white text-sm bg-red-300 py-2 px-4 rounded-md font-inter bottom-0 right-0 hover:bg-red-300 disabled'>
             Delete Community
           </button>
         </div>
         <ul className='flex list-none'>
-          <li className='mx-2 text-green-500 font-inter'>Save</li>
-          <li className='mx-2 text-red-500 font-inter'>Discard</li>
+          <li>
+            <button
+              className='mx-2 text-green-500 font-inter'
+              onClick={handleSubmit}
+            >
+              Save
+            </button>
+          </li>
         </ul>
       </div>
       <div className='w-2/3 m-auto py-4 font-inter justify-between flex'>
@@ -81,45 +345,96 @@ export default function UpdateCommunity() {
             <button onClick={e => e.preventDefault()} type='submit'>
               About
             </button>
-            <button onClick={e => e.preventDefault()} type='submit'>
-              Events
-            </button>
-            <button onClick={e => e.preventDefault()} type='submit'>
-              Members
-            </button>
+          </div>
+          <form className='flex flex-col'>
+            <label className='my-2' htmlFor='Community name'>
+              <textarea
+                className='border w-full h-80 border-gray p-3 rounded-lg font-roboto text-sm  text-gray-500'
+                placeholder='Description'
+                name='Community Description'
+                required={true}
+                value={description}
+                onChange={e => setDescription(e.target.value)}
+              />
+            </label>
+          </form>
+        </div>
+        <div className='w-1/3'>
+          <div className='w-full flex justify-between'>
             <button onClick={e => e.preventDefault()} type='submit'>
               Contact
             </button>
           </div>
           <form className='flex flex-col'>
-            <label className='my-2' htmlFor='Community name'>
-              <textarea
-                className='border w-full h-80 border-gray p-3 rounded-lg font-roboto text-sm my-10 text-gray-500'
-                placeholder='Description'
-                name='Community Description'
+            <label className='my-2' htmlFor='Discord'>
+              <input
+                className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
+                placeholder='Discord'
+                name='Discord'
                 required={true}
+                type='url'
+                value={discord}
+                onChange={e => setDiscord(e.target.value)}
+              />
+            </label>
+            <label className='my-2' htmlFor='Facebook'>
+              <input
+                className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
+                placeholder='Facebook'
+                name='Facebook'
+                type='url'
+                required={true}
+                value={facebook}
+                onChange={e => setFacebook(e.target.value)}
+              />
+            </label>
+            <label className='my-2' htmlFor='Instagram'>
+              <input
+                className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
+                placeholder='Instragram'
+                name='Instragram'
+                type='url'
+                required={true}
+                value={instagram}
+                onChange={e => setInstagram(e.target.value)}
+              />
+            </label>
+            <label className='my-2' htmlFor='LinkedIn'>
+              <input
+                className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
+                placeholder='LinkedIn'
+                name='LinkedIn'
+                type='url'
+                required={true}
+                value={linkedin}
+                onChange={e => setLinkedIn(e.target.value)}
+              />
+            </label>
+            <label className='my-2' htmlFor='Twitter'>
+              <input
+                className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
+                placeholder='Twitter'
+                name='Twitter'
+                type='url'
+                required={true}
+                value={twitter}
+                onChange={e => setTwitter(e.target.value)}
+              />
+            </label>
+            <label className='my-2' htmlFor='Webpage'>
+              <input
+                className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
+                placeholder='Webpage'
+                name='Webpage'
+                type='url'
+                required={true}
+                value={webpage}
+                onChange={e => setWebpage(e.target.value)}
               />
             </label>
           </form>
         </div>
-        <div className='flex items-center flex-col w-1/4'>
-          <h3 className='text-center mb-4 text-lg'>Tags</h3>
-          <form className='items-center justify-between'>
-            <input
-              type='text'
-              className={input_class}
-              placeholder='Search tags'
-              name='category'
-            />
-          </form>
-          <div className=' grid grid-cols-3 items-center my-4 justify-evenly justify-between'>
-            <Tag title='AI' />
-            <Tag title='Machine Learning' />
-            <Tag title='Tag' />
-            <Tag title='Tag' />
-            <Tag title='Tag' />
-          </div>
-        </div>
+        <div className='flex items-center flex-col w-1/4'></div>
       </div>
     </div>
   );

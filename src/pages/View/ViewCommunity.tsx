@@ -244,9 +244,7 @@ export default function ViewCommunity(props) {
               About
             </button>
             <Link to={'/communityevents/' + uid}>Events</Link>
-            <button onClick={e => e.preventDefault()} type='submit'>
-              Members
-            </button>
+            <Link to={'/communitymembers/' + uid}>Members</Link>
             <button onClick={e => e.preventDefault()} type='submit'>
               Contact
             </button>

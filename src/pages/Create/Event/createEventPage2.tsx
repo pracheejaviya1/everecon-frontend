@@ -2,6 +2,7 @@ import * as React from 'react';
 import Header from '../../../components/header';
 import { Link, navigate } from 'gatsby';
 import { gql, useMutation } from '@apollo/client';
+import { graphqlurl } from '../../../components/config';
 
 const CREATE_EVENT_MUTATION = gql`
   mutation createEvent(
@@ -122,7 +123,7 @@ export default function CreateEventTwo({ location }) {
       redirect: 'follow',
     };
 
-    let r = await fetch('http://localhost:8000/graphql/', requestOptions)
+    let r = await fetch(graphqlurl, requestOptions)
       .then(response => response.json())
       .catch(error => console.log('error', error));
 
