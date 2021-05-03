@@ -52,7 +52,7 @@ export default function UpdateEventTwo() {
               </div>
               <div className='flex flex-row'>
                 <label
-                  htmlFor='firstname'
+                  htmlFor='Links'
                   className='mb-1 font-inter text-xl m-5 mx-6'
                 >
                   Links
@@ -60,7 +60,19 @@ export default function UpdateEventTwo() {
               </div>
               <div className='flex flex-row items-center mt-2'>
                 <label
-                  htmlFor='firstname'
+                  htmlFor='email id'
+                  className='mb-1 font-mulish w-24 text-lg mt-1 mx-6'
+                >
+                  Email ID
+                </label>
+                <input
+                  type='text'
+                  className='rounded-lg bg-gray-100 border-gray-100 w-96'
+                />
+              </div>
+              <div className='flex flex-row items-center mt-2'>
+                <label
+                  htmlFor='website url'
                   className='mb-1 font-mulish text-lg mt-1 w-24 mx-6'
                 >
                   Website
@@ -68,12 +80,11 @@ export default function UpdateEventTwo() {
                 <input
                   type='text'
                   className='rounded-lg bg-gray-100 border-gray-100 w-96'
-                  name='firstname'
                 />
               </div>
               <div className='flex flex-row items-center mt-2'>
                 <label
-                  htmlFor='firstname'
+                  htmlFor='linkedin url'
                   className='mb-1 font-mulish w-24 text-lg mt-1 mx-6'
                 >
                   LinkedIn
@@ -81,12 +92,11 @@ export default function UpdateEventTwo() {
                 <input
                   type='text'
                   className='rounded-lg bg-gray-100 border-gray-100 w-96'
-                  name='firstname'
                 />
               </div>
               <div className='flex flex-row items-center mt-2'>
                 <label
-                  htmlFor='firstname'
+                  htmlFor='instagram url'
                   className='mb-1 font-mulish w-24 text-lg mt-1 mx-6'
                 >
                   Instagram
@@ -94,12 +104,11 @@ export default function UpdateEventTwo() {
                 <input
                   type='text'
                   className='rounded-lg bg-gray-100 border-gray-100 w-96'
-                  name='firstname'
                 />
               </div>
               <div className='flex flex-row items-center mt-2'>
                 <label
-                  htmlFor='firstname'
+                  htmlFor='facebook url'
                   className='mb-1 font-mulish w-24 text-lg mt-1 mx-6'
                 >
                   Facebook
@@ -107,12 +116,11 @@ export default function UpdateEventTwo() {
                 <input
                   type='text'
                   className='rounded-lg bg-gray-100 border-gray-100 w-96'
-                  name='firstname'
                 />
               </div>
               <div className='flex flex-row items-center mt-2'>
                 <label
-                  htmlFor='firstname'
+                  htmlFor='twitter url'
                   className='mb-1 font-mulish w-24 text-lg mt-1 mx-6'
                 >
                   Twitter
@@ -120,7 +128,6 @@ export default function UpdateEventTwo() {
                 <input
                   type='text'
                   className='rounded-lg bg-gray-100 border-gray-100 w-96'
-                  name='firstname'
                 />
               </div>
             </div>
