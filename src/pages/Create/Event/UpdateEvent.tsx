@@ -14,7 +14,7 @@ export default function UpdateEventTwo(props: UpdateProps) {
         <div className='flex items-end justify-between border-b-2 pb-4 w-2/3'>
           <div className='flex items-center justify-center'>
             <svg
-              xmlns='http://www.w3.org/2000/svg'
+              xmlns='https://www.w3.org/2000/svg'
               className='h-5 w-5 mr-2'
               fill='none'
               viewBox='0 0 24 24'
