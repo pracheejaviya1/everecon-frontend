@@ -1,20 +1,141 @@
 import * as React from 'react';
 import Header from '../../components/header';
 import SpeakerProfile from '../../assets/Images/default.jpg';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/client';
+import { navigate } from 'gatsby-link';
 
-export default function UpdateEventTwo() {
+const CREATE_SPEAKER_MUTATION = gql`
+mutation createSpeaker ($description: String, $email: String, $facebook: String, $firstName: String!, $instagram: String, $lastName: String) {
+    createSpeaker (description: $description, email: $email, facebook: $facebook, firstName: $firstName, instagram: $instagram, lastName: $lastName) {
+        speaker {
+            id
+            firstName
+            lastName
+            email
+            facebook
+            instagram
+            profilePicture
+        }
+      }
+    }
+`
+
+const ADD_SPEAKER_MUTATION = gql`
+mutation addSpeaker ($eventid: ID!, $speakerid: ID!) {
+    addSpeaker (eventid: $eventid, speakerid: $speakerid) {
+        ok
+    }
+}
+`
+export default function UpdateEventTwo({location}) {
+  const [callCreateSpeaker,{data}] = useMutation(CREATE_SPEAKER_MUTATION)
+  const [callAddSpeaker,{data}]  = useMutation(ADD_SPEAKER_MUTATION)
+
+  const [fname,setFName] = React.useState('')
+  const [lname,setLName] = React.useState('')
+  
+  const [instagram,setInstagram] = React.useState('')
+  const [facebook,setFacebook] = React.useState('')
+  const [email,setEmail] = React.useState("")
+
+  const [photo, setPhoto] = React.useState(null);
+  const [photoURL, setPhotoURL] = React.useState(SpeakerProfile);
+  // const [website,setWebsite] = React.useState('')
+  // const [linkedin,setLinkedin] = React.useState('')
+  // const [twitter,setTwitter] = React.useState('')
+
+  const discard = () => {
+    setEmail('')
+    setFName('')
+    setLName('')
+    setFacebook('')
+    setInstagram('')
+    // where to navigate to ??
+  }
+  const handleFileChange = (e: { target: { files: any } }) => {
+    var files = e.target.files;
+    if (files[0]) {
+      setPhoto(files[0]);
+      setPhotoURL(URL.createObjectURL(files[0]));
+    }
+  };
+async function uploadSpeakerPic(speakerid) {
+    // upload logo if logo else return True
+    if (!photo) {
+      console.log('no photo');
+      return true;
+    }
+    var myHeaders = new Headers();
+    myHeaders.append(
+      'Authorization',
+      `Bearer ${window.localStorage.getItem('token')}`
+    );
+    var formdata = new FormData();
+    formdata.append(
+      'query',
+      `mutation{
+    updateSpeakerpicture (id: ${speakerid}) {
+        success
+        picture
+    }
+}
+      `
+    );
+    formdata.append('file', photo);
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow',
+    };
+
+    let r = await fetch('http://localhost:8000/graphql/', requestOptions)
+      .then(response => response.json())
+      .catch(error => console.log('error', error));
+
+    return r.data.updateSpeakerpicture.success;
+  }
+  async function handleSubmit(){
+  let {data,error:e} = await callCreateSpeaker({variables:{
+  email: email,
+  facebook: facebook,
+  firstName: fname,
+  lastName: lname,
+  instagram: instagram,
+}});
+if (e) {
+      console.log(e.graphQLErrors[0].message);
+      return;
+    }
+  let speakerid = data.createSpeaker.speaker.id
+   if (uploadSpeakerPic(speakerid)){
+    let newlocation = JSON.parse(JSON.stringify(location))
+    if (newlocation.speakers){
+      newlocation.speaker.append(speakerid)
+    }
+    else newlocation.speaker = [speakerid]
+    navigate('/Create/Event/createEventPage2',newlocation)
+   
+  }else{
+     console.error('Failed to upload Speaker Photo');
+   }
+   return;
+  }
   return (
     <div className='h-screen w-screen'>
       <Header />
-      <div className='flex flex-col my-8 justify-center items-center ml-12 mr-0 w-full'>
+      <div className='flex flex-col my-8 items-center ml-12 mr-0'>
         <div className='flex items-end justify-between border-b-2 pb-4 w-2/3'>
-          <div className='flex items-center justify-center'>
+          <div className='flex items-center  '>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               className='h-5 w-5 mr-2'
               fill='none'
               viewBox='0 0 24 24'
               stroke='currentColor'
+              onClick={()=> navigate('/Create/Event/createEventPage2',location)}
             >
               <path
                 strokeLinecap='round'
@@ -28,28 +149,53 @@ export default function UpdateEventTwo() {
             </h1>
           </div>
           <ul className='flex list-none'>
-            <li className='mx-2 text-green-500 font-inter'>Save</li>
-            <li className='mx-2 text-red-500 font-inter'>Discard</li>
+            <button className='mx-2 text-green-500 font-inter' onClick={handleSubmit}>Save</button>
+            <button className='mx-2 text-red-500 font-inter' onClick={discard}>Discard</button>
           </ul>
         </div>
         <div>
-          <div className='flex flex-col mx-auto items-center justify-center'>
-            <img src={SpeakerProfile} className='my-8 h-40 w-40 rounded-full' />
-            <span className='font-mulish font-xs'>Add photo</span>
+          <div className='flex flex-col mx-auto items-center  justify-center'>
+        <figure className='mt-8 mb-6'>
+          <label>
+            
+            <img src={photoURL} className='my-8 h-40 w-40 rounded-full' />
+            <input type='file' className='hidden' onChange={handleFileChange} />
+            <figcaption className='text-center font-mulish'>
+              Add Photo
+            </figcaption>
+          </label>
+        </figure>
             <div className='flex flex-col justify-between mx-auto font-mulish my-4'>
               <div className='flex flex-row items-center'>
                 <label
                   htmlFor='firstname'
-                  className='mb-1 font-mulish text-2xl mt-1 w-24 mx-6'
+                  className='mb-1 font-mulish text-lg mt-2 w-24 mx-6'
                 >
-                  Name
+                  First Name
                 </label>
                 <input
                   type='text'
                   className='rounded-lg bg-gray-100 border-gray-100 w-96'
-                  name='firstname'
+                  name='Lastname'
+                  value={fname}
+                  onChange={(e) => setFName(e.target.value)}
                 />
               </div>
+              <div className='flex flex-row items-center mt-2'> 
+                <label
+                  htmlFor='lastname'
+                  className='mb-1 font-mulish text-lg mt-2 w-24 mx-6'
+                >
+                  Last Name
+                </label>
+                <input
+                  type='text'
+                  className='rounded-lg bg-gray-100 border-gray-100 w-96'
+                  name='name'
+                  value={lname}
+                  onChange={(e) => setLName(e.target.value)}
+                />
+                </div>
               <div className='flex flex-row'>
                 <label
                   htmlFor='Links'
@@ -58,31 +204,35 @@ export default function UpdateEventTwo() {
                   Links
                 </label>
               </div>
-              <div className='flex flex-row items-center mt-2'>
+              <div className='flex flex-row items-center mt-2  '>
                 <label
-                  htmlFor='email id'
-                  className='mb-1 font-mulish w-24 text-lg mt-1 mx-6'
+                  htmlFor='email'
+                  className='mb-1 font-mulish text-lg mt-1 w-24 mx-6'
                 >
-                  Email ID
+                  Email
                 </label>
                 <input
-                  type='text'
+                  type='email'
                   className='rounded-lg bg-gray-100 border-gray-100 w-96'
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
                 />
               </div>
-              <div className='flex flex-row items-center mt-2'>
+              {/* <div className='flex flex-row items-center mt-2  '>
                 <label
-                  htmlFor='website url'
+                  htmlFor='website'
                   className='mb-1 font-mulish text-lg mt-1 w-24 mx-6'
                 >
                   Website
                 </label>
                 <input
-                  type='text'
+                  type='url'
                   className='rounded-lg bg-gray-100 border-gray-100 w-96'
+                  value={website}
+                  onChange={e => setWebsite(e.target.value)}
                 />
-              </div>
-              <div className='flex flex-row items-center mt-2'>
+              </div> */}
+              {/* <div className='flex flex-row items-center mt-2  '>
                 <label
                   htmlFor='linkedin url'
                   className='mb-1 font-mulish w-24 text-lg mt-1 mx-6'
@@ -90,11 +240,14 @@ export default function UpdateEventTwo() {
                   LinkedIn
                 </label>
                 <input
-                  type='text'
-                  className='rounded-lg bg-gray-100 border-gray-100 w-96'
+                  className='rounded-lg bg-gray-100 border-gray-100 w-96'  
+                  type='url'
+                  value={linkedin}
+                  onChange={e => setLinkedin(e.target.value)}
+                
                 />
-              </div>
-              <div className='flex flex-row items-center mt-2'>
+              </div> */}
+              <div className='flex flex-row items-center mt-2  '>
                 <label
                   htmlFor='instagram url'
                   className='mb-1 font-mulish w-24 text-lg mt-1 mx-6'
@@ -102,11 +255,14 @@ export default function UpdateEventTwo() {
                   Instagram
                 </label>
                 <input
-                  type='text'
                   className='rounded-lg bg-gray-100 border-gray-100 w-96'
+                  type='url'
+                  value={instagram}
+                  onChange={e => setInstagram(e.target.value)}
+                
                 />
               </div>
-              <div className='flex flex-row items-center mt-2'>
+              <div className='flex flex-row items-center mt-2  '>
                 <label
                   htmlFor='facebook url'
                   className='mb-1 font-mulish w-24 text-lg mt-1 mx-6'
@@ -114,11 +270,14 @@ export default function UpdateEventTwo() {
                   Facebook
                 </label>
                 <input
-                  type='text'
                   className='rounded-lg bg-gray-100 border-gray-100 w-96'
+                  type='url'
+                  value={facebook}
+                  onChange={e => setFacebook(e.target.value)}
+                
                 />
               </div>
-              <div className='flex flex-row items-center mt-2'>
+              {/* <div className='flex flex-row items-center mt-2  '>
                 <label
                   htmlFor='twitter url'
                   className='mb-1 font-mulish w-24 text-lg mt-1 mx-6'
@@ -126,10 +285,13 @@ export default function UpdateEventTwo() {
                   Twitter
                 </label>
                 <input
-                  type='text'
                   className='rounded-lg bg-gray-100 border-gray-100 w-96'
+                  type='url'
+                  value={twitter}
+                  onChange={e => setTwitter(e.target.value)}
+                
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

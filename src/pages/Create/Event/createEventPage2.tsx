@@ -191,7 +191,6 @@ export default function CreateEventTwo({ location }) {
               Start Time
             </label>
             <input
-              className='border border-gray-400 p-2 w-80 rounded-lg font-roboto text-sm'
               name='Start Time'
               type='datetime-local'
               min='2018-06-07T00:00'
@@ -202,7 +201,6 @@ export default function CreateEventTwo({ location }) {
               End Time
             </label>
             <input
-              className='border border-gray-400 p-2 w-80 rounded-lg font-roboto text-sm'
               name='End Time'
               type='datetime-local'
               min={startTime}
@@ -239,7 +237,7 @@ export default function CreateEventTwo({ location }) {
                 placeholder='What are you looking for?'
                 className='placeholder-gray-400 border-none text-xs w-full bg-gray-100 font-mulish'
               />
-              <button className='text-white text-sm bg-blue-400 py-2 px-4 rounded-md font-inter'>
+              <button className='text-white text-sm bg-blue-400 py-2 px-4 rounded-md font-inter' onClick={(e) => {e.preventDefault();navigate('/Create/Speaker',location)}}>
                 New Speaker
               </button>
             </div>
