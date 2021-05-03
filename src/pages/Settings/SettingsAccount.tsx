@@ -127,7 +127,10 @@ export default function SettingAccount() {
       redirect: 'follow',
     };
 
-    let r = await fetch('http://localhost:8000/graphql/', requestOptions)
+    let r = await fetch(
+      'https://everecon-api.herokuapp.com/graphql/',
+      requestOptions
+    )
       .then(response => response.json())
       .catch(error => console.log('error', error));
 

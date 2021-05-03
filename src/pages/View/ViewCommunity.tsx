@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import * as React from 'react';
 import { mediaurl } from '../../components/config';
 import Header from '../../components/header';
+import YT from '../../assets/Images/ahmedabad.jpeg';
 
 type TagProps = {
   title: string;
@@ -204,7 +205,7 @@ export default function ViewCommunity(props) {
           src={mediaurl + data.communityById.logo}
         />
         <div className='flex ml-10 items-start justify-between h-full flex-col font-inter'>
-          <h1 className='font-bold text-2xl mx-2'>
+          <h1 className='font-light text-4xl mx-2 mb-2'>
             {data?.communityById.name}
           </h1>
           <p className='text-xl mx-2 mb-1'>{data?.communityById.city}</p>
@@ -237,9 +238,9 @@ export default function ViewCommunity(props) {
           )}
         </div>
       </div>
-      <div className='w-2/3 m-auto py-4 font-inter justify-between flex'>
-        <div className='w-1/3'>
-          <div className='w-full flex justify-between'>
+      <div className='m-auto w-2/3 py-4 font-inter justify-between flex'>
+        <div>
+          <div className='w-1/3 flex justify-between'>
             <button onClick={e => e.preventDefault()} type='submit'>
               About
             </button>
@@ -251,7 +252,98 @@ export default function ViewCommunity(props) {
               Contact
             </button>
           </div>
-          <p className='my-10 text-gray-500'>
+          <div>
+            <div className='flex flex-row mt-8 w-4/5'>
+              <iframe
+                className='rounded-md'
+                height='200'
+                width='300'
+                src={data?.communityById.featuredVideo || 'featuredVideo'}
+                allow='autoplay; encrypted-media'
+                title='video'
+              />
+
+              <p className='font-mulish text-base mx-5 font-light'>
+                {' '}
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </div>
+            <div className='flex flex-row mt-12'>
+              <p className='w-36 h-24 text-xl font-mulish'>Address</p>
+              <p className='font-mulish text-base mx-5 font-light'>
+                {data?.communityById.address || 'address'}
+              </p>
+            </div>
+            <div className='flex flex-col mb-12'>
+              <div>
+                <label htmlFor='Links' className='mb-1 font-inter text-xl '>
+                  Find us At
+                </label>
+              </div>
+              <div className='flex flex-row items-center mt-2'>
+                <label
+                  htmlFor='email id'
+                  className='mb-1 font-mulish w-24 text-lg mt-1'
+                >
+                  Email ID
+                </label>
+                <p className='rounded-lg mx-5 w-96 font-mulish text-blue-400 text-base font-light'>
+                  www.help.com
+                </p>
+              </div>
+              <div className='flex flex-row items-center mt-2'>
+                <label
+                  htmlFor='website url'
+                  className='mb-1 font-mulish text-lg mt-1 w-24'
+                >
+                  Website
+                </label>
+                <p className='rounded-lg mx-5 w-96 font-mulish text-blue-400 text-base font-light'>
+                  www.help.com
+                </p>{' '}
+              </div>
+              <div className='flex flex-row items-center mt-2'>
+                <label
+                  htmlFor='linkedin url'
+                  className='mb-1 font-mulish w-24 text-lg mt-1'
+                >
+                  LinkedIn
+                </label>
+                <p className='rounded-lg mx-5 w-96 font-mulish text-blue-400 text-base font-light'>
+                  {data?.communityById.linkedin || 'linkedin'}{' '}
+                </p>{' '}
+              </div>
+              <div className='flex flex-row items-center mt-2'>
+                <label
+                  htmlFor='twitter url'
+                  className='mb-1 font-mulish w-24 text-lg mt-1'
+                >
+                  Twitter
+                </label>
+                <p className='rounded-lg mx-5 w-96 font-mulish text-blue-400 text-base font-light'>
+                  {data?.communityById.twitter || 'twitter'}{' '}
+                </p>{' '}
+              </div>
+              <div className='flex flex-row items-center mt-2'>
+                <label
+                  htmlFor='facebook url'
+                  className='mb-1 font-mulish w-24 text-lg mt-1'
+                >
+                  Facebook
+                </label>
+                <p className='rounded-lg mx-5 w-96 font-mulish text-blue-400 text-base font-light'>
+                  {data?.communityById.facebook || 'facebook'}{' '}
+                </p>{' '}
+              </div>
+            </div>
+          </div>
+          {/* <p className='my-10 text-gray-500'>
             <div className='grid'>
               <p>Address: {data?.communityById.address || 'address'}</p>
               <p>City: {data?.communityById.city || 'city'}</p>
@@ -260,19 +352,19 @@ export default function ViewCommunity(props) {
               <p>Facebook: {data?.communityById.facebook || 'facebook'}</p>
               <p>Twitter: {data?.communityById.twitter || 'twitter'}</p>
               <p>LinkedIn: {data?.communityById.linkedin || 'linkedin'}</p>
-              {/* <p>Leader: {data?.communityById.leader || 'Leader'}</p> */}
+              <p>Leader: {data?.communityById.leader || 'Leader'}</p>
               <p>
                 Featured Video:{' '}
                 {data?.communityById.featuredVideo || 'featuredVideo'}
               </p>
             </div>
             {data?.communityById.description || 'description'}
-          </p>
+          </p> */}
         </div>
-        <div className='flex items-center flex-col w-1/4'>
+        <div className='flex items-center flex-col w-4/5'>
           {data?.communityById.iscore ? (
             <button
-              className='text-sm bg-blue-400 text-white rounded-md px-3 py-2 mx-2 my-1'
+              className='text-sm bg-blue-400 text-white rounded-md px-3 py-2'
               onClick={() =>
                 navigate('/Create/Community/updateCommunity', {
                   state: { communityid: uid },
@@ -283,6 +375,18 @@ export default function ViewCommunity(props) {
               {/* {props.isLead === true ? 'New Event' : 'Follow'} */}
             </button>
           ) : null}
+          <p className='mt-4 font-mulish'>Created On</p>
+          <p className='text-red-400 font-sm m-4'>Add creation time here</p>
+          <div className='bg-gray-100 p-4 rounded-lg font-light font-mulish'>
+            100 members
+          </div>
+          <div className=' grid grid-cols-3 m-6 items-center my-4 justify-evenly justify-between'>
+            <Tag title='AI' />
+            <Tag title='ML' />
+            <Tag title='Tag' />
+            <Tag title='Tag' />
+            <Tag title='Tag' />
+          </div>
         </div>
       </div>
     </div>

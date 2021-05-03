@@ -3,7 +3,7 @@ import { setContext } from '@apollo/client/link/context';
 import fetch from 'isomorphic-fetch';
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:8000/graphql/',
+  uri: 'https://everecon-api.herokuapp.com/graphql/',
   fetch,
 });
 

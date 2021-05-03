@@ -1,1 +1,1 @@
-export const mediaurl = 'http://localhost:8000/media/';
+export const mediaurl = 'https://everecon-api.herokuapp.com/media/';
