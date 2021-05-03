@@ -194,7 +194,7 @@ export default function Landing() {
   if (error) return `Error! ${error}`;
   if (!loading) {
     setMyProfile(profile_data.myprofile);
-    console.log(myprofile);
+    //console.log(myprofile);
   }
   return (
     <div>

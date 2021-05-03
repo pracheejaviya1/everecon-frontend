@@ -1,5 +1,5 @@
 import { gql, useLazyQuery, useMutation, useQuery } from '@apollo/client';
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 import * as React from 'react';
 import MemberCard from '../../../components/cards/members/membersCard';
 import Header from '../../../components/header';
@@ -90,6 +90,7 @@ export default function CreateCommunityTwo({ location }) {
       })
       .catch(e => console.error(e));
   }, [userdata]);
+
   return (
     <div className='h-screen w-screen'>
       <Header />
@@ -164,12 +165,16 @@ export default function CreateCommunityTwo({ location }) {
             />
           ))}
 
-        <Link
+        <button
           className=' my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'
-          to='/Create/Community/createCommunityPage3'
+          onClick={() =>
+            navigate('/Create/Community/createCommunityPage3', {
+              state: { communityid: communityid },
+            })
+          }
         >
           Next
-        </Link>
+        </button>
       </div>
     </div>
   );

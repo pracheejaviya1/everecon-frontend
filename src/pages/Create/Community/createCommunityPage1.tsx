@@ -85,6 +85,12 @@ export default function CreateCommunityOne() {
   const [logo, setLogo] = React.useState(null);
   const [name, setName] = React.useState('');
   const [address, setAddress] = React.useState('');
+  const [discord, setDiscord] = React.useState('');
+  const [facebook, setFacebook] = React.useState('');
+  const [instagram, setInstagram] = React.useState('');
+  const [linkedin, setLinkedIn] = React.useState('');
+  const [twitter, setTwitter] = React.useState('');
+  const [webpage, setWebpage] = React.useState('');
   const [city, setCity] = React.useState('');
   const [country, setCountry] = React.useState('');
   const [logoURL, setLogoURL] = React.useState(Rectangle);
@@ -144,10 +150,22 @@ export default function CreateCommunityOne() {
         email: email,
         name: name,
         description: description,
+        address: address,
+        discord: discord,
+        facebook: facebook,
+        instagram: instagram,
+        linkedin: linkedin,
+        twitter: twitter,
+        webpage: webpage,
+        city: city,
+        country: country,
+        logoURL: logoURL,
+        description: description,
+        email: email,
       },
     });
     if (e) {
-      console.error(e);
+      console.log(e.graphQLErrors[0].message);
       return;
     }
 
@@ -215,6 +233,7 @@ export default function CreateCommunityOne() {
               name='email id'
               required={true}
               value={email}
+              type='email'
               onChange={e => setEmail(e.target.value)}
             />
           </label>
@@ -224,8 +243,8 @@ export default function CreateCommunityOne() {
               placeholder='Address'
               name='Address'
               required={true}
-              // value={address}
-              onChange={e => setName(e.target.value)}
+              value={address}
+              onChange={e => setAddress(e.target.value)}
             />
           </label>
           <label className='my-2' htmlFor='City'>
@@ -234,8 +253,8 @@ export default function CreateCommunityOne() {
               placeholder='City'
               name='City'
               required={true}
-              // value={city}
-              onChange={e => setName(e.target.value)}
+              value={city}
+              onChange={e => setCity(e.target.value)}
             />
           </label>
           <label className='my-2' htmlFor='Country'>
@@ -244,8 +263,8 @@ export default function CreateCommunityOne() {
               placeholder='Country'
               name='Country'
               required={true}
-              // value={country}
-              onChange={e => setName(e.target.value)}
+              value={country}
+              onChange={e => setCountry(e.target.value)}
             />
           </label>
           <label className='my-2' htmlFor='Discord'>
@@ -254,8 +273,9 @@ export default function CreateCommunityOne() {
               placeholder='Discord'
               name='Discord'
               required={true}
-              // value={discord}
-              onChange={e => setName(e.target.value)}
+              type='url'
+              value={discord}
+              onChange={e => setDiscord(e.target.value)}
             />
           </label>
           <label className='my-2' htmlFor='Facebook'>
@@ -263,29 +283,31 @@ export default function CreateCommunityOne() {
               className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
               placeholder='Facebook'
               name='Facebook'
+              type='url'
               required={true}
-              // value={facebook}
-              onChange={e => setName(e.target.value)}
+              value={facebook}
+              onChange={e => setFacebook(e.target.value)}
             />
           </label>
-          <label className='my-2' htmlFor='video'>
+          {/* <label className='my-2' htmlFor='video'>
             <input
               className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
               placeholder='video'
               name='video'
               required={true}
-              // value={video}
-              onChange={e => setName(e.target.value)}
+              value={video}
+              onChange={e => setVideo(e.target.value)}
             />
-          </label>
+          </label> */}
           <label className='my-2' htmlFor='Instagram'>
             <input
               className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
               placeholder='Instragram'
               name='Instragram'
+              type='url'
               required={true}
-              // value={instagram}
-              onChange={e => setName(e.target.value)}
+              value={instagram}
+              onChange={e => setInstagram(e.target.value)}
             />
           </label>
           <label className='my-2' htmlFor='LinkedIn'>
@@ -293,9 +315,10 @@ export default function CreateCommunityOne() {
               className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
               placeholder='LinkedIn'
               name='LinkedIn'
+              type='url'
               required={true}
-              // value={linkedin}
-              onChange={e => setName(e.target.value)}
+              value={linkedin}
+              onChange={e => setLinkedIn(e.target.value)}
             />
           </label>
           <label className='my-2' htmlFor='Twitter'>
@@ -303,9 +326,10 @@ export default function CreateCommunityOne() {
               className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
               placeholder='Twitter'
               name='Twitter'
+              type='url'
               required={true}
-              // value={twitter}
-              onChange={e => setName(e.target.value)}
+              value={twitter}
+              onChange={e => setTwitter(e.target.value)}
             />
           </label>
           <label className='my-2' htmlFor='Webpage'>
@@ -313,9 +337,10 @@ export default function CreateCommunityOne() {
               className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
               placeholder='Webpage'
               name='Webpage'
+              type='url'
               required={true}
-              // value={webpage}
-              onChange={e => setName(e.target.value)}
+              value={webpage}
+              onChange={e => setWebpage(e.target.value)}
             />
           </label>
           <label className='my-2' htmlFor='Description'>
@@ -330,7 +355,12 @@ export default function CreateCommunityOne() {
             />
           </label>
         </form>
-        <button onClick={handleSubmit}>Next</button>
+        <button
+          className='font-inter my-2 text-xs bg-blue-400 text-white rounded-lg px-3 py-2'
+          onClick={handleSubmit}
+        >
+          Next
+        </button>
       </div>
     </div>
   );

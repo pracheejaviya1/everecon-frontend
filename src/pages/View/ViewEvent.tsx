@@ -7,6 +7,10 @@ import Header from '../../components/header';
 const EVENT_QUERY = gql`
   query eventById($id: ID) {
     eventById(id: $id) {
+      iscore
+      isvolunteer
+      isregistered
+      ischeckedin
       id
       name
       description
@@ -115,7 +119,6 @@ export default function ViewEvent(props) {
     <div className='border-b-2 h-screen'>
       <Header />
       <div className='flex flex-col mx-auto w-3/4 items-center'>
-        <p>{props.uid}</p>
         <EventTitle
           datetime={new Date(data.eventById.startTime)}
           title={data.eventById.name}
@@ -130,6 +133,11 @@ export default function ViewEvent(props) {
           description={data.eventById.description}
           uid={props.uid}
           imageurl={data.eventById.featuredImage}
+          iscore={data.eventById.iscore}
+          isvolunteer={data.eventById.isvolunteer}
+          isregistered={data.eventById.isregistered}
+          ischeckedin={data.eventById.ischeckedin}
+          eventid={data.eventById.id}
         />
       </div>
     </div>

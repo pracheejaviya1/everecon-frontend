@@ -1,9 +1,10 @@
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { Link } from 'gatsby';
 import * as React from 'react';
-import CommunityImage from '../../assets/Images/community.jpg';
+// import CommunityImage from '../../assets/Images/community.jpg';
 import { mediaurl } from '../../components/config';
 import Header from '../../components/header';
+import EventCard from '../../components/cards/event/eventCard';
 
 const PROFILE_QUERY = gql`
   query myprofile {
@@ -40,6 +41,9 @@ const PROFILE_QUERY = gql`
         isActive
         creationTime
         maxRsvp
+        community {
+          name
+        }
       }
       communities {
         id
@@ -199,19 +203,17 @@ function MyCommunityCard({ name, logo, userid, communityid }) {
 }
 
 const FOLLOWING = 0;
-const TICKETS = 1;
-const HISTORY = 2;
-const FAVORITES = 3;
-const COMMUNITYSET = 4;
+const EVENTS = 1;
+const COMMUNITYSET = 2;
+const DETAILS = 3;
 
 export default function UserProfile() {
   const [userid, setUserid] = React.useState(null);
   const [options, setOptions] = React.useState([
     'Following ',
-    'Tickets ',
-    'History ',
-    'Favorites ',
-    'MyCommunities ',
+    'Events Attended',
+    'My Communities',
+    'Details',
   ]);
   const [selected, setSelected] = React.useState(0);
   const { loading, error, data, refetch } = useQuery(PROFILE_QUERY);
@@ -219,8 +221,12 @@ export default function UserProfile() {
     console.log(data);
     if (loading == false) setUserid(data.myprofile.id);
   }, [loading]);
+  React.useEffect(() => {
+    refetch();
+  }, []);
   if (loading) return null;
   if (error) return `Error! ${error}`;
+
   return (
     <div className='h-screen w-screen'>
       <Header />
@@ -251,27 +257,40 @@ export default function UserProfile() {
             </Link>
           </div>
         </div>
-        {selected === COMMUNITYSET &&
-          data.myprofile.communitySet.map((e, i) => (
-            <MyCommunityCard
-              key={i}
-              name={e.name}
-              logo={e.logo}
-              userid={userid}
-              communityid={e.id}
-            ></MyCommunityCard>
-          ))}
         {selected === FOLLOWING &&
           data.myprofile.communities.map((e, i) => (
             <CommunityCard
               key={i}
               name={e.name}
-              logo={e.logo}
+              logo={mediaurl + e.logo}
               userid={userid}
               communityid={e.id}
               refetch={refetch}
             ></CommunityCard>
           ))}
+        {selected === EVENTS &&
+          data.myprofile.eventsAttended.map((e, i) => (
+            <div className='w-full'>
+              <EventCard
+                communityName={e.community.name}
+                title={e.name}
+                date={e.startTime}
+                imageurl={e.featuredImage}
+                id={e.id}
+              />
+            </div>
+          ))}
+        {selected === COMMUNITYSET &&
+          data.myprofile.communitySet.map((e, i) => (
+            <MyCommunityCard
+              key={i}
+              name={e.name}
+              logo={mediaurl + e.logo}
+              userid={userid}
+              communityid={e.id}
+            ></MyCommunityCard>
+          ))}
+        {selected === DETAILS ? JSON.stringify(data.myprofile) : ''}
       </div>
     </div>
   );

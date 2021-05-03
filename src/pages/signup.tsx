@@ -50,7 +50,7 @@ const SIGNUP_MUTATION = gql`
   }
 `;
 
-export default function Signup(props) {
+export default function Signup() {
   const [city, setCity] = React.useState('');
   const [contact, setContact] = React.useState('');
   const [country, setCountry] = React.useState('');
@@ -126,14 +126,14 @@ export default function Signup(props) {
           className={input_class}
           placeholder='City'
           value={city}
-          onChange={e => setUsername(e.target.value)}
+          onChange={e => setCity(e.target.value)}
         />
         <input
           type='text'
           className={input_class}
           placeholder='Country'
           value={country}
-          onChange={e => setUsername(e.target.value)}
+          onChange={e => setCountry(e.target.value)}
         />
         <input
           type='tel'
