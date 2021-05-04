@@ -249,20 +249,26 @@ export default function ViewCommunity(props) {
           )}
         </div>
       </div>
-      <div className='m-auto w-2/3 py-4 font-inter justify-between flex'>
+      <div className='m-auto w-2/3 py-4 font-inter text-lg justify-between flex'>
         <div>
-          <div className='flex justify-between'>
+          <div className='flex'>
             <button onClick={e => e.preventDefault()} type='submit'>
               About
             </button>
-            <Link to={'/communityevents/' + uid}>Events</Link>
+            <Link className='mx-12' to={'/communityevents/' + uid}>
+              Events
+            </Link>
             <Link to={'/communitymembers/' + uid}>Members</Link>
-            <button onClick={e => e.preventDefault()} type='submit'>
+            <button
+              className='mx-12'
+              onClick={e => e.preventDefault()}
+              type='submit'
+            >
               Contact
             </button>
           </div>
           <div>
-            <div className='flex flex-row mt-8 w-4/5'>
+            <div className='flex flex-row mt-12 w-4/5'>
               <iframe
                 className='rounded-md'
                 height='200'
@@ -311,9 +317,12 @@ export default function ViewCommunity(props) {
                 >
                   Website
                 </label>
-                <p className='rounded-lg mx-5 w-96 font-mulish text-blue-400 text-base font-light'>
+                <a
+                  className='rounded-lg mx-5 w-96 font-mulish text-blue-400 text-base font-light'
+                  href={data?.communityById.website}
+                >
                   {data?.communityById.website}
-                </p>{' '}
+                </a>
               </div>
               <div className='flex flex-row items-center mt-2'>
                 <label
@@ -322,9 +331,12 @@ export default function ViewCommunity(props) {
                 >
                   LinkedIn
                 </label>
-                <p className='rounded-lg mx-5 w-96 font-mulish text-blue-400 text-base font-light'>
-                  {data?.communityById.linkedin || 'linkedin'}{' '}
-                </p>{' '}
+                <a
+                  className='rounded-lg mx-5 w-96 font-mulish text-blue-400 text-base font-light'
+                  href={data?.communityById.linkedin || 'linkedin'}
+                >
+                  {data?.communityById.linkedin || 'linkedin'}
+                </a>{' '}
               </div>
               <div className='flex flex-row items-center mt-2'>
                 <label
@@ -333,9 +345,12 @@ export default function ViewCommunity(props) {
                 >
                   Twitter
                 </label>
-                <p className='rounded-lg mx-5 w-96 font-mulish text-blue-400 text-base font-light'>
-                  {data?.communityById.twitter || 'twitter'}{' '}
-                </p>{' '}
+                <a
+                  className='rounded-lg mx-5 w-96 font-mulish text-blue-400 text-base font-light'
+                  href={data?.communityById.twitter || 'twitter'}
+                >
+                  {data?.communityById.twitter || 'twitter'}
+                </a>{' '}
               </div>
               <div className='flex flex-row items-center mt-2'>
                 <label
@@ -344,9 +359,12 @@ export default function ViewCommunity(props) {
                 >
                   Facebook
                 </label>
-                <p className='rounded-lg mx-5 w-96 font-mulish text-blue-400 text-base font-light'>
-                  {data?.communityById.facebook || 'facebook'}{' '}
-                </p>{' '}
+                <a
+                  className='rounded-lg mx-5 w-96 font-mulish text-blue-400 text-base font-light'
+                  href={data?.communityById.facebook || 'facebook'}
+                >
+                  {data?.communityById.facebook || 'facebook'}
+                </a>
               </div>
             </div>
           </div>
