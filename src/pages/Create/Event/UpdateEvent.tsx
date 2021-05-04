@@ -28,7 +28,7 @@ export default function UpdateEventTwo(props: UpdateProps) {
                 d='M10 19l-7-7m0 0l7-7m-7 7h18'
               />
             </svg>
-            <h1 className='text-3xl ml-2 font-light text-center font-mulish text-gray-700'>
+            <h1 className='text-2xl ml-2 font-light text-center font-mulish text-gray-700'>
               Update Event
             </h1>
           </div>

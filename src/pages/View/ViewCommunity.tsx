@@ -268,7 +268,7 @@ export default function ViewCommunity(props) {
             </button>
           </div>
           <div>
-            <div className='flex flex-row mt-12 w-4/5'>
+            <div className='flex flex-row mt-12'>
               <iframe
                 className='rounded-md'
                 height='200'
@@ -306,9 +306,12 @@ export default function ViewCommunity(props) {
                 >
                   Email ID
                 </label>
-                <p className='rounded-lg mx-5 w-96 font-mulish text-blue-400 text-base font-light'>
+                <a
+                  className='rounded-lg mx-5 w-96 font-mulish text-blue-400 text-base font-light'
+                  href={'mailto:' + data?.communityById.email}
+                >
                   {data?.communityById.email}
-                </p>
+                </a>
               </div>
               <div className='flex flex-row items-center mt-2'>
                 <label
@@ -386,10 +389,10 @@ export default function ViewCommunity(props) {
             {data?.communityById.description || 'description'}
           </p> */}
         </div>
-        <div className='flex items-center flex-col w-4/5'>
+        <div className='flex items-end align-center flex-col w-4/5'>
           {data?.communityById.iscore ? (
             <button
-              className='text-sm bg-blue-400 text-white rounded-md px-3 py-2'
+              className='text-sm bg-blue-400 mx-3 items-center text-white rounded-md px-3 py-2'
               onClick={() =>
                 navigate('/Create/Community/updateCommunity', {
                   state: { communityid: uid },
@@ -400,11 +403,11 @@ export default function ViewCommunity(props) {
               {/* {props.isLead === true ? 'New Event' : 'Follow'} */}
             </button>
           ) : null}
-          <p className='mt-4 font-mulish'>Created On</p>
-          <p className='text-red-400 font-sm m-4'>
-            {data?.communityById.creationTime.toUTCStri}
+          <p className='mt-4 mx-10 font-mulish'>Created On</p>
+          <p className='text-gray-700 font-sm m-4'>
+            {data?.communityById.creationTime}
           </p>
-          <div className='bg-gray-100 p-4 rounded-lg font-light font-mulish'>
+          <div className='bg-gray-100 mx-6 p-4 rounded-lg font-light font-mulish'>
             {data?.communityById.membersCount} members
           </div>
           <div className=' grid grid-cols-3 m-6 items-center my-4 justify-evenly justify-between'>

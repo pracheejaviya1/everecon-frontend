@@ -233,14 +233,14 @@ export default function CreateEventTwo({ location }) {
             />
           </div>
           <div>
-            <p>Speaker</p>
+            <p className='font-mulish mt-6 mb-6'>Speaker</p>
             <div className='flex flex-row'>
               <input
                 type='text'
-                placeholder='What are you looking for?'
-                className='placeholder-gray-400 border-none text-xs w-full bg-gray-100 font-mulish'
+                placeholder='Add Speaker'
+                className='placeholder-gray-400 border-none rounded-md text-xs w-full bg-gray-100 font-mulish'
               />
-              <button className='text-white text-sm bg-blue-400 py-2 px-4 rounded-md font-inter'>
+              <button className='text-white mx-5 text-sm bg-blue-400 py-2 px-4 rounded-md font-inter'>
                 New Speaker
               </button>
             </div>

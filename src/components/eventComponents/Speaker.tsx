@@ -7,7 +7,6 @@ export default function SpeakerBlock() {
       <div className='font-light'>Host - John Doe</div>
       <img src={image} className='h-16 w-16 rounded-full my-2' />
       <h1 className='text-xl font-semibold'>Speaker - John Doe</h1>
-      <div className='font-light'>Mode</div>
       <div className='font-light'>Date</div>
     </div>
   );
