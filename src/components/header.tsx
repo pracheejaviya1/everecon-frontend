@@ -1,14 +1,17 @@
 import { Link, navigate } from 'gatsby';
 import * as React from 'react';
 import HeadingTitle from '../assets/Images/headingTitle.png';
-import Dropdown from './dropdown';
 import SearchContext from '../context/searchcontext.js';
+import Dropdown from './dropdown';
 
 export default function Header() {
   const [searchcon, setSearchcon] = React.useContext(SearchContext);
   const [search, setSearch] = React.useState('');
   return (
-    <nav className='flex flex-row items-center bg-gray-50 justify-evenly h-28 top-0 left-0 w-screen'>
+    <nav
+      id='header'
+      className='flex flex-row items-center bg-gray-50 justify-evenly h-28 top-0 left-0 w-screen'
+    >
       <Link to='/Landing/landing'>
         <img src={HeadingTitle} width='139' height='41' alt='EveRecon' />
       </Link>
