@@ -6,6 +6,7 @@ context('Actions', () => {
   it('.type() - type into a DOM element', () => {
     cy.visit('http://localhost:8000/Create/Community/updateCommunity');
     cy.get('#header').should('have.class', 'flex');
+    cy.get('a').should('');
   });
 
   it('.type() - type into a DOM element', () => {
