@@ -59,6 +59,7 @@ export default function Signin(props) {
           placeholder='Username'
           name='username'
           value={username}
+          id='username'
           onChange={e => setUsername(e.target.value)}
         />
         <input
@@ -66,6 +67,7 @@ export default function Signin(props) {
           className={input_class}
           placeholder='Password'
           name='password'
+          id='password'
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
@@ -89,7 +91,7 @@ export default function Signin(props) {
         {error}
       </span>
       <div className='w-1/6'>
-        <button className={btn_class} onClick={handleSubmit}>
+        <button id='login-button' className={btn_class} onClick={handleSubmit}>
           Login
         </button>
 
