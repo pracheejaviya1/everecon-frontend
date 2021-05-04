@@ -1,7 +1,7 @@
+import { gql, useMutation, useQuery } from '@apollo/client';
+import { Link } from 'gatsby';
 import * as React from 'react';
 import { mediaurl } from '../../config';
-import { Link } from 'gatsby';
-import { gql, useQuery, useMutation } from '@apollo/client';
 
 type TagProps = {
   text: string;
@@ -89,7 +89,7 @@ export default function CommunityCard(props) {
   }
   return (
     <Link to={'/community/' + props.id}>
-      <div className='flex flex-row items-center justify-between p-5 shadow-md mx-auto rounded-lg w-3/4 text-left my-2 mt-3'>
+      <div className='community_card flex flex-row items-center justify-between p-5 shadow-md mx-auto rounded-lg w-3/4 text-left my-2 mt-3'>
         <div className='flex'>
           <img
             className='h-30 w-40 rounded-md'
