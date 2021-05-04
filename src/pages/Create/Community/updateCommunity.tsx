@@ -256,19 +256,19 @@ export default function UpdateCommunity(props) {
       <div className='flex border-b-2 py-10 w-2/3 mx-auto font-inter'>
         <label>
           <img
-            className='h-60 w-90 rounded-md hover:bg-red-500'
+            className='h-72 w-96 rounded-lg hover:bg-red-500'
             src={logoURL}
           />
           <input type='file' className='hidden' onChange={handleFileChange} />
-          <figcaption className='py-2 text-center font-mulish'>
-            Upload Community photo
+          <figcaption className='py-2 text-center text-xs font-mulish'>
+            Update Community photo
           </figcaption>
         </label>
-        <div className='flex ml-10 items-start justify-between h-full flex-col font-inter'>
+        <div className='flex ml-10 items-start justify-between h-full flex-col font-inter w-4/5'>
           <form className='flex flex-col'>
-            <label className='my-2' htmlFor='Community name'>
+            <label htmlFor='Community name'>
               <input
-                className='border w-80 border-gray p-3 rounded-lg font-roboto text-sm'
+                className='w-96 mb-2 bg-gray-100 p-3 rounded-lg font-roboto text-sm'
                 placeholder='Community name'
                 name='Community name'
                 required={true}
@@ -276,28 +276,31 @@ export default function UpdateCommunity(props) {
                 onChange={e => setName(e.target.value)}
               />
             </label>
-            <label className='my-2' htmlFor='email id'>
-              <input
-                className='border w-80 border-gray p-3 rounded-lg font-roboto text-sm'
-                placeholder='City'
-                name='City'
-                required={true}
-                value={city}
-                onChange={e => setCity(e.target.value)}
-              />
-            </label>
+            <div className='grid grid-cols-2'>
+              <label className='my-2' htmlFor='email id'>
+                <input
+                  className='w-48 bg-gray-100 p-3 rounded-lg font-roboto text-sm'
+                  placeholder='City'
+                  name='City'
+                  required={true}
+                  value={city}
+                  onChange={e => setCity(e.target.value)}
+                />
+              </label>
+              <label className='my-2' htmlFor='Description'>
+                <input
+                  className='w-48 mx-2 bg-gray-100 p-3 rounded-lg font-roboto text-sm'
+                  placeholder='Country'
+                  name='Country'
+                  value={country}
+                  onChange={e => setCountry(e.target.value)}
+                />
+              </label>
+            </div>
+
             <label className='my-2' htmlFor='Description'>
               <input
-                className='border w-80 border-gray p-3 rounded-lg font-roboto text-sm'
-                placeholder='Country'
-                name='Country'
-                value={country}
-                onChange={e => setCountry(e.target.value)}
-              />
-            </label>
-            <label className='my-2' htmlFor='Description'>
-              <input
-                className='border w-80 border-gray p-3 rounded-lg font-roboto text-sm'
+                className='w-96 bg-gray-100 p-3 rounded-lg font-roboto text-sm'
                 placeholder='Address'
                 name='Address'
                 value={address}
@@ -306,7 +309,7 @@ export default function UpdateCommunity(props) {
             </label>
             <label className='my-2' htmlFor='Description'>
               <input
-                className='border w-80 border-gray p-3 rounded-lg font-roboto text-sm'
+                className='w-96 bg-gray-100 p-3 rounded-lg font-roboto text-sm'
                 placeholder='email'
                 name='Email'
                 value={email}
@@ -315,7 +318,7 @@ export default function UpdateCommunity(props) {
             </label>
             <label className='my-2' htmlFor='Description'>
               <input
-                className='border w-80 border-gray p-3 rounded-lg font-roboto text-sm'
+                className='w-96 bg-gray-100 p-3 rounded-lg font-roboto text-sm'
                 placeholder='Featured Video'
                 name='Featured Video'
                 value={featuredVideo}
@@ -323,14 +326,11 @@ export default function UpdateCommunity(props) {
               />
             </label>
           </form>
-          <button className='text-white text-sm bg-red-300 py-2 px-4 rounded-md font-inter bottom-0 right-0 hover:bg-red-300 disabled'>
-            Delete Community
-          </button>
         </div>
         <ul className='flex list-none'>
           <li>
             <button
-              className='mx-2 text-green-500 font-inter'
+              className='mx-2 text-green-600 font-inter items-end text-lg'
               onClick={handleSubmit}
             >
               Save
@@ -338,9 +338,10 @@ export default function UpdateCommunity(props) {
           </li>
         </ul>
       </div>
+
       <div className='w-2/3 m-auto py-4 font-inter justify-between flex'>
-        <div className='w-1/3'>
-          <div className='w-full flex justify-between'>
+        <div className='w-2/3'>
+          <div className='w-full mb-2 flex justify-between text-xl'>
             <button onClick={e => e.preventDefault()} type='submit'>
               About
             </button>
@@ -348,7 +349,7 @@ export default function UpdateCommunity(props) {
           <form className='flex flex-col'>
             <label className='my-2' htmlFor='Community name'>
               <textarea
-                className='border w-full h-80 border-gray p-3 rounded-lg font-roboto text-sm  text-gray-500'
+                className='w-full border border-gray-100 h-96 bg-gray-100 rounded-lg font-roboto text-sm text-gray-700'
                 placeholder='Description'
                 name='Community Description'
                 required={true}
@@ -358,8 +359,8 @@ export default function UpdateCommunity(props) {
             </label>
           </form>
         </div>
-        <div className='w-1/3'>
-          <div className='w-full flex justify-between'>
+        <div className='w-2/3 mx-8'>
+          <div className='w-full mb-2 flex justify-between text-xl'>
             <button onClick={e => e.preventDefault()} type='submit'>
               Contact
             </button>
@@ -367,7 +368,7 @@ export default function UpdateCommunity(props) {
           <form className='flex flex-col'>
             <label className='my-2' htmlFor='Discord'>
               <input
-                className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
+                className='w-80 border border-gray-100 bg-gray-100 p-3 rounded-lg font-roboto text-sm'
                 placeholder='Discord'
                 name='Discord'
                 required={true}
@@ -378,7 +379,7 @@ export default function UpdateCommunity(props) {
             </label>
             <label className='my-2' htmlFor='Facebook'>
               <input
-                className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
+                className='w-80 border border-gray-100 bg-gray-100 p-3 rounded-lg font-roboto text-sm'
                 placeholder='Facebook'
                 name='Facebook'
                 type='url'
@@ -389,7 +390,7 @@ export default function UpdateCommunity(props) {
             </label>
             <label className='my-2' htmlFor='Instagram'>
               <input
-                className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
+                className='w-80 border border-gray-100 bg-gray-100 p-3 rounded-lg font-roboto text-sm'
                 placeholder='Instragram'
                 name='Instragram'
                 type='url'
@@ -400,7 +401,7 @@ export default function UpdateCommunity(props) {
             </label>
             <label className='my-2' htmlFor='LinkedIn'>
               <input
-                className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
+                className='w-80 border border-gray-100 bg-gray-100 p-3 rounded-lg font-roboto text-sm'
                 placeholder='LinkedIn'
                 name='LinkedIn'
                 type='url'
@@ -411,7 +412,7 @@ export default function UpdateCommunity(props) {
             </label>
             <label className='my-2' htmlFor='Twitter'>
               <input
-                className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
+                className='w-80 border border-gray-100 bg-gray-100 p-3 rounded-lg font-roboto text-sm'
                 placeholder='Twitter'
                 name='Twitter'
                 type='url'
@@ -422,7 +423,7 @@ export default function UpdateCommunity(props) {
             </label>
             <label className='my-2' htmlFor='Webpage'>
               <input
-                className='border w-60 border-gray p-2 rounded-lg font-roboto text-sm'
+                className='w-80 border border-gray-100 bg-gray-100 p-3 rounded-lg font-roboto text-sm'
                 placeholder='Webpage'
                 name='Webpage'
                 type='url'
@@ -433,7 +434,9 @@ export default function UpdateCommunity(props) {
             </label>
           </form>
         </div>
-        <div className='flex items-center flex-col w-1/4'></div>
+        <button className='text-white text-sm bg-red-500 h-14 w-40 rounded-md font-inter right-0 hover:bg-red-700 items-end'>
+          Delete Community
+        </button>
       </div>
     </div>
   );
