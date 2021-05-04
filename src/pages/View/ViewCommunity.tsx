@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import * as React from 'react';
 import { mediaurl } from '../../components/config';
 import Header from '../../components/header';
-import YT from '../../assets/Images/ahmedabad.jpeg';
+// import YT from '../../assets/Images/ahmedabad.jpeg';
 
 type TagProps = {
   title: string;
@@ -190,10 +190,14 @@ export default function ViewCommunity(props) {
   }
 
   function getVideoId(url) {
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    const match = url.match(regExp);
+    try {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+      const match = url.match(regExp);
 
-    return match && match[2].length === 11 ? match[2] : null;
+      return match && match[2].length === 11 ? match[2] : null;
+    } catch (error) {
+      return null;
+    }
   }
 
   if (loading) {
@@ -247,7 +251,7 @@ export default function ViewCommunity(props) {
       </div>
       <div className='m-auto w-2/3 py-4 font-inter justify-between flex'>
         <div>
-          <div className='w-1/3 flex justify-between'>
+          <div className='flex justify-between'>
             <button onClick={e => e.preventDefault()} type='submit'>
               About
             </button>
@@ -274,13 +278,7 @@ export default function ViewCommunity(props) {
 
               <p className='font-mulish text-base mx-5 font-light'>
                 {' '}
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                {data?.communityById.description}
               </p>
             </div>
             <div className='flex flex-row mt-12'>
@@ -303,7 +301,7 @@ export default function ViewCommunity(props) {
                   Email ID
                 </label>
                 <p className='rounded-lg mx-5 w-96 font-mulish text-blue-400 text-base font-light'>
-                  www.help.com
+                  {data?.communityById.email}
                 </p>
               </div>
               <div className='flex flex-row items-center mt-2'>
@@ -314,7 +312,7 @@ export default function ViewCommunity(props) {
                   Website
                 </label>
                 <p className='rounded-lg mx-5 w-96 font-mulish text-blue-400 text-base font-light'>
-                  www.help.com
+                  {data?.communityById.website}
                 </p>{' '}
               </div>
               <div className='flex flex-row items-center mt-2'>
@@ -385,16 +383,18 @@ export default function ViewCommunity(props) {
             </button>
           ) : null}
           <p className='mt-4 font-mulish'>Created On</p>
-          <p className='text-red-400 font-sm m-4'>Add creation time here</p>
+          <p className='text-red-400 font-sm m-4'>
+            {data?.communityById.creationTime.toUTCStri}
+          </p>
           <div className='bg-gray-100 p-4 rounded-lg font-light font-mulish'>
-            100 members
+            {data?.communityById.membersCount} members
           </div>
           <div className=' grid grid-cols-3 m-6 items-center my-4 justify-evenly justify-between'>
-            <Tag title='AI' />
+            {/* <Tag title='AI' />
             <Tag title='ML' />
             <Tag title='Tag' />
             <Tag title='Tag' />
-            <Tag title='Tag' />
+            <Tag title='Tag' /> */}
           </div>
         </div>
       </div>
