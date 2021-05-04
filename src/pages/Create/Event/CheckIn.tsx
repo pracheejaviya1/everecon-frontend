@@ -8,20 +8,20 @@ type Text = {
 
 function MemberCard(props: Text) {
   // TODO: take userid and eventid in props on Click make call
-  const [checkedin,setCheckedin] = React.useState(false)
+  const [checkedin, setCheckedin] = React.useState(false);
   return (
     <div className='my-2 flex items-center border-b-2 p-2 border-gray-400'>
-        <div className='flex flex-row w-full'>
-          <p className='text-xl font-inter flex-auto'>{props.title}</p>
-          <label className='self-end'>
-            <input
-              type='checkbox'
-              className='form-checkbox h-5 w-5 text-blue-600 items-end'
-              checked={checkedin}
-              onChange={() => setCheckedin(!checkedin)}
-            />
-          </label>
-        </div>
+      <div className='flex flex-row w-full'>
+        <p className='text-xl font-inter flex-auto'>{props.title}</p>
+        <label className='self-end'>
+          <input
+            type='checkbox'
+            className='form-checkbox h-5 w-5 text-blue-600 items-end'
+            checked={checkedin}
+            onChange={() => setCheckedin(!checkedin)}
+          />
+        </label>
+      </div>
     </div>
   );
 }

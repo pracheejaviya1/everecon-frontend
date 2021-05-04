@@ -1,8 +1,7 @@
+import { gql, useMutation, useQuery } from '@apollo/client';
 import * as React from 'react';
 import CommunityImage from '../../../assets/Images/ahmedabad.jpeg';
-import { useQuery, useMutation, gql } from '@apollo/client';
-import { mediaurl, graphqlurl } from '../../../components/config';
-
+import { graphqlurl, mediaurl } from '../../../components/config';
 import Header from '../../../components/header';
 
 const COMMUNITY_QUERY = gql`
@@ -121,7 +120,7 @@ function Tag(props: TagProps) {
 }
 
 export default function UpdateCommunity(props) {
-  const communityid = props.location?.state.communityid;
+  const communityid = props.location?.state?.communityid;
   console.log(communityid);
   const [logo, setLogo] = React.useState(null);
   const [logoURL, setLogoURL] = React.useState(CommunityImage);

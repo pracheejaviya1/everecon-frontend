@@ -1,6 +1,6 @@
+import { Link } from 'gatsby';
 import * as React from 'react';
 import Header from '../../../components/header';
-import { Link } from 'gatsby';
 export default function CreateCommunityThree({ location }) {
   return (
     <div className='w-screen h-screen'>
@@ -11,7 +11,7 @@ export default function CreateCommunityThree({ location }) {
         </p>
         <Link
           className='px-20 py-6 border border-black my-20 rounded-lg'
-          to={`/community/${location.state.communityid}`}
+          to={`/community/${location.state?.communityid}`}
         >
           Go to page
         </Link>

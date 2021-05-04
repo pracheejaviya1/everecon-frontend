@@ -7,7 +7,7 @@ type UpdateProps = {
 };
 
 export default function UpdateEventTwo(props: UpdateProps) {
-  console.log(props.location)
+  console.log(props.location);
   return (
     <div className='h-screen w-screen'>
       <Header />

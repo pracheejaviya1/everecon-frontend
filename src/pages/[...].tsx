@@ -1,13 +1,13 @@
 import { Router } from '@reach/router';
 import * as React from 'react';
+import Checkin from './Create/Event/CheckIn';
+import Search from './search';
 import Signin from './signin';
 import Signup from './signup';
-import ViewCommunity from './View/ViewCommunity';
-import ViewEvent from './View/ViewEvent';
-import Search from './search';
 import Members from './View/Members';
+import ViewCommunity from './View/ViewCommunity';
 import CommunityEvents from './View/ViewCommunityEvents';
-import Checkin from './Create/Event/CheckIn';
+import ViewEvent from './View/ViewEvent';
 
 const App = () => (
   <Router>

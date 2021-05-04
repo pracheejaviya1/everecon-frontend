@@ -60,7 +60,7 @@ const GET_MEMBERS = gql`
 `;
 // TODO: ERROR Display required
 export default function CreateCommunityTwo({ location }) {
-  const communityid = location.state.communityid;
+  const communityid = location.state?.communityid;
   const [username, setUsername] = React.useState('');
   const [fetch_user, { data: userdata }] = useLazyQuery(USERNAME_QUERY);
   const [callAddMember, { data }] = useMutation(ADD_MEMBER_MUTATION);

@@ -2,8 +2,8 @@ import { gql, useMutation } from '@apollo/client';
 import { Link, navigate } from 'gatsby';
 import * as React from 'react';
 import Rectangle from '../../../assets/Images/Rectangle6.png';
-import Header from '../../../components/header';
 import { graphqlurl } from '../../../components/config';
+import Header from '../../../components/header';
 const CREATE_COMMUNITY_MUTATION = gql`
   mutation createCommunity(
     $address: String

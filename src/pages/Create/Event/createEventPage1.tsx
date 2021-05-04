@@ -1,10 +1,10 @@
+import { Link, navigate } from 'gatsby';
 import * as React from 'react';
 import EventImg from '../../../assets/Images/Rectangle6.png';
 import Header from '../../../components/header';
-import { Link, navigate } from 'gatsby';
 
 export default function CreateEventOne({ location }) {
-  const communityid = location.state.communityid;
+  const communityid = location.state?.communityid;
   // check communityid else return ERROR probably 404
 
   const [logo, setLogo] = React.useState(null);

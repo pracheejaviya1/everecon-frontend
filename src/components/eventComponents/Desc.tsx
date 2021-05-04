@@ -3,19 +3,26 @@ import * as React from 'react';
 import { mediaurl } from '../config';
 import SpeakerBlock from './Speaker';
 
-const EventAction = ({ eventid,iscore, isvolunteer, isregistered }) => {
-  // TODO: handle Register 
+const EventAction = ({ eventid, iscore, isvolunteer, isregistered }) => {
+  // TODO: handle Register
   // TODO: handle Unregister (add confirm modal)
-  
+
   if (iscore)
     return (
       <>
-      <Link to={`/eventcheckin/${eventid}`}>
-        <button className='my-3 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
-          Checkin
-        </button>
-      </Link>
-        <button className='mt-3 bg-blue-500 rounded-md text-white py-2 px-4 font-inter' onClick={() => navigate('/Create/Event/UpdateEvent/',{state:{eventid:eventid}})}>
+        <Link to={`/eventcheckin/${eventid}`}>
+          <button className='my-3 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
+            Checkin
+          </button>
+        </Link>
+        <button
+          className='mt-3 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'
+          onClick={() =>
+            navigate('/Create/Event/UpdateEvent/', {
+              state: { eventid: eventid },
+            })
+          }
+        >
           Update
         </button>
       </>
@@ -30,14 +37,15 @@ const EventAction = ({ eventid,iscore, isvolunteer, isregistered }) => {
     );
   else if (isregistered)
     return (
-        <button className='my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter' >
-          Unregister
-        </button>
+      <button className='my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
+        Unregister
+      </button>
     );
-  else return (
-        <button className='my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
-          Register
-        </button>
+  else
+    return (
+      <button className='my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
+        Register
+      </button>
     );
 };
 export default function EventDesc(props: any) {

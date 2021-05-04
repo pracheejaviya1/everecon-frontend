@@ -1,8 +1,8 @@
-import * as React from 'react';
-import Header from '../../../components/header';
-import { Link, navigate } from 'gatsby';
 import { gql, useMutation } from '@apollo/client';
+import { Link, navigate } from 'gatsby';
+import * as React from 'react';
 import { graphqlurl } from '../../../components/config';
+import Header from '../../../components/header';
 
 const CREATE_EVENT_MUTATION = gql`
   mutation createEvent(
@@ -89,7 +89,7 @@ export default function CreateEventTwo({ location }) {
   const [startTime, setStartTime] = React.useState('2018-06-07T00:00');
   const [endTime, setEndTime] = React.useState('');
   const [maxRsvp, setmaxRsvp] = React.useState('');
-  const image = location.state.logo;
+  const image = location.state?.logo;
   // TODO: input for Tags
   // const [tags, setTags] = React.useState('');
   async function uploadImage(eventid) {
