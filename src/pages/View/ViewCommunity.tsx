@@ -189,6 +189,13 @@ export default function ViewCommunity(props) {
     return;
   }
 
+  function getVideoId(url) {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+
+    return match && match[2].length === 11 ? match[2] : null;
+  }
+
   if (loading) {
     return `Loading`;
   }
@@ -256,7 +263,11 @@ export default function ViewCommunity(props) {
                 className='rounded-md'
                 height='200'
                 width='300'
-                src={data?.communityById.featuredVideo || 'featuredVideo'}
+                src={
+                  'https://www.youtube.com/embed/' +
+                    getVideoId(data?.communityById.featuredVideo) ||
+                  'featuredVideo'
+                }
                 allow='autoplay; encrypted-media'
                 title='video'
               />
