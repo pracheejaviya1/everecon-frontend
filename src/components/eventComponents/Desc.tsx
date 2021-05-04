@@ -68,11 +68,6 @@ export default function EventDesc(props: any) {
             </p>
           </div>
           <div className='flex flex-col mb-12'>
-            <div>
-              <label htmlFor='Links' className='mb-1 font-inter text-xl '>
-                Find us At
-              </label>
-            </div>
             <div className='flex flex-row items-center mt-2'>
               <label
                 htmlFor='event url'
@@ -87,11 +82,21 @@ export default function EventDesc(props: any) {
                 {props?.URL || 'url'}
               </a>
             </div>
+            <div>
+              <label htmlFor='Links' className='mb-1 font-inter text-lg '>
+                Contact
+              </label>
+              <div className='flex flex-row mt-2 w-4/5'>
+                <p className='font-mulish text-base font-light'>
+                  {props.description}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
         {/* <h2 className='my-4 text-xl font-semibold'>Details</h2> */}
 
-        <div className='my-2 grid '>
+        {/* <div className='my-2 grid '>
           <p>City: {props?.City || 'city'}</p>
           <p>Country: {props?.Country || 'country'}</p>
           <p>Address: {props?.Address || 'address'}</p>
@@ -99,7 +104,7 @@ export default function EventDesc(props: any) {
           <p>End Time: {props?.End || 'endtime'}</p>
           <p>Event URL: {props?.URL || 'url'}</p>
         </div>
-        {/* <p>{props.description}</p> */}
+        <p>{props.description}</p>*/}
       </div>
       <div className='flex flex-col items-center justify-around'>
         <SpeakerBlock />
@@ -109,6 +114,7 @@ export default function EventDesc(props: any) {
           isregistered={props.isregistered}
           eventid={props.eventid}
         />
+        <p>{props.kind}</p>
       </div>
     </div>
   );

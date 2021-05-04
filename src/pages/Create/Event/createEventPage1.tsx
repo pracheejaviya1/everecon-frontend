@@ -29,7 +29,7 @@ export default function CreateEventOne({ location }) {
     <div className='h-screen w-full'>
       <Header />
       {/*Add back icon */}
-      <div className='flex flex-col h-5/6 items-center mt-48'>
+      <div className='flex flex-col h-5/6 items-center mt-8'>
         <div className='flex items-center justify-between border-b-2 pb-2 w-1/2'>
           <Link to='/View/ViewCommunity'>
             <svg

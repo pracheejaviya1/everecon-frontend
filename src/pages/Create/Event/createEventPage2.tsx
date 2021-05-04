@@ -187,30 +187,28 @@ export default function CreateEventTwo({ location }) {
           </span>
         </div>
         <form className='flex flex-col my-8 w-1/4'>
-          <div className='flex items-center justify-between w-full my-2'>
-            <label className='m-2  font-mulish' htmlFor='Start Time'>
-              Start Time
-            </label>
-            <input
-              className='border border-gray-400 p-2 w-80 rounded-lg font-roboto text-sm'
-              name='Start Time'
-              type='datetime-local'
-              min='2018-06-07T00:00'
-              value={startTime}
-              onChange={e => setStartTime(e.target.value)}
-            />
-            <label className='m-2  font-mulish' htmlFor='End Time'>
-              End Time
-            </label>
-            <input
-              className='border border-gray-400 p-2 w-80 rounded-lg font-roboto text-sm'
-              name='End Time'
-              type='datetime-local'
-              min={startTime}
-              value={endTime}
-              onChange={e => setEndTime(e.target.value)}
-            />
-          </div>
+          <label className='my-4 mx-10 font-mulish' htmlFor='Start Time'>
+            Start Time
+          </label>
+          <input
+            className='border border-gray-400 mx-10 p-2 w-80 rounded-lg font-roboto text-md'
+            name='Start Time'
+            type='datetime-local'
+            min='2018-06-07T00:00'
+            value={startTime}
+            onChange={e => setStartTime(e.target.value)}
+          />
+          <label className='my-4 mx-10 font-mulish' htmlFor='End Time'>
+            End Time
+          </label>
+          <input
+            className='border border-gray-400 mx-10 p-2 w-80 rounded-lg font-roboto text-md'
+            name='End Time'
+            type='datetime-local'
+            min={startTime}
+            value={endTime}
+            onChange={e => setEndTime(e.target.value)}
+          />
           {/* <div className='flex items-center justify-between w-full my-2'>
             <label className='m-2 font-mulish' htmlFor='Tags'>
               Tags
@@ -220,25 +218,24 @@ export default function CreateEventTwo({ location }) {
               name='Tags'
             />
           </div> */}
-          <div className='flex items-center justify-between w-full my-2'>
-            <label className='m-2 font-mulish' htmlFor='limit'>
-              Participant Limit
-            </label>
-            <input
-              className='border border-gray-400 p-2 w-80 rounded-lg font-roboto text-sm'
-              type='number'
-              name='limit'
-              value={maxRsvp}
-              onChange={e => setmaxRsvp(e.target.value)}
-            />
-          </div>
+
+          <label className='my-4 mx-10 font-mulish' htmlFor='limit'>
+            Participant Limit
+          </label>
+          <input
+            className='border border-gray-400 mx-10 p-2 w-80 rounded-lg font-roboto text-sm'
+            type='number'
+            name='limit'
+            value={maxRsvp}
+            onChange={e => setmaxRsvp(e.target.value)}
+          />
           <div>
-            <p className='font-mulish mt-6 mb-6'>Speaker</p>
+            <p className='font-mulish mx-10 my-4 mb-6'>Speaker</p>
             <div className='flex flex-row'>
               <input
                 type='text'
                 placeholder='Add Speaker'
-                className='placeholder-gray-400 border-none rounded-md text-xs w-full bg-gray-100 font-mulish'
+                className='placeholder-gray-400 mx-10 border-none rounded-md text-xs w-full bg-gray-100 font-mulish'
               />
               <button className='text-white mx-5 text-sm bg-blue-400 py-2 px-4 rounded-md font-inter'>
                 New Speaker
