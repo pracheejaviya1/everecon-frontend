@@ -6,7 +6,7 @@ import { Fragment } from 'react';
 
 export default function Dropdown() {
   return (
-    <li className='flex items-center'>
+    <li className='dropdown flex items-center'>
       <Menu>
         {({ open }) => (
           <>

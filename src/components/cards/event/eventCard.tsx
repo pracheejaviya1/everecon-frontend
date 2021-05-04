@@ -1,11 +1,11 @@
+import { Link } from 'gatsby';
 import * as React from 'react';
 import { mediaurl } from '../../config';
-import { Link } from 'gatsby';
 
 export default function EventCard(props) {
   return (
     <Link to={'/event/' + props.id}>
-      <div className='flex flex-row items-center justify-between p-5 shadow-lg mx-auto rounded-lg w-3/4 text-left my-4'>
+      <div className='event_card flex flex-row items-center justify-between p-5 shadow-lg mx-auto rounded-lg w-3/4 text-left my-4'>
         <div className='flex'>
           <img
             className='h-40 w-60 rounded-md'
