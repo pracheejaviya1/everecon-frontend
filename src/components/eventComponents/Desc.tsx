@@ -10,11 +10,18 @@ const EventAction = ({ eventid, iscore, isvolunteer, isregistered }) => {
   if (iscore)
     return (
       <>
-        <Link to={`/eventcheckin/${eventid}`}>
-          <button className='my-3 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
-            Checkin
-          </button>
-        </Link>
+        <div className='flex flex-row space-x-2'>
+          <Link to={`/eventcheckin/${eventid}`}>
+            <button className='my-3 mx-3 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
+              Checkin
+            </button>
+          </Link>
+          <Link to={`/eventattendees/${eventid}`}>
+            <button className='my-3 mx-3 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
+              Attendees
+            </button>
+          </Link>
+        </div>
         <button
           className='mt-3 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'
           onClick={() =>
@@ -29,23 +36,44 @@ const EventAction = ({ eventid, iscore, isvolunteer, isregistered }) => {
     );
   else if (isvolunteer)
     return (
-      <Link to={`/eventcheckin/${eventid}`}>
-        <button className='my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
-          CheckIn
-        </button>
-      </Link>
+      <div className='flex flex-row space-x-2'>
+        <Link to={`/eventcheckin/${eventid}`}>
+          <button className='my-3 mx-3 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
+            Checkin
+          </button>
+        </Link>
+        <Link to={`/eventattendees/${eventid}`}>
+          <button className='my-3 mx-3 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
+            Attendees
+          </button>
+        </Link>
+      </div>
     );
   else if (isregistered)
     return (
-      <button className='my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
-        Unregister
-      </button>
+      <>
+        <button className='my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
+          UnRegister
+        </button>
+        <Link to={`/eventattendees/${eventid}`}>
+          <button className='my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
+            Attendees
+          </button>
+        </Link>
+      </>
     );
   else
     return (
-      <button className='my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
-        Register
-      </button>
+      <>
+        <button className='my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
+          Register
+        </button>
+        <Link to={`/eventattendees/${eventid}`}>
+          <button className='my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
+            Attendees
+          </button>
+        </Link>
+      </>
     );
 };
 export default function EventDesc(props: any) {

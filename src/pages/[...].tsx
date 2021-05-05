@@ -8,6 +8,7 @@ import Members from './View/Members';
 import ViewCommunity from './View/ViewCommunity';
 import CommunityEvents from './View/ViewCommunityEvents';
 import ViewEvent from './View/ViewEvent';
+import Attendees from './Create/Event/Attendees';
 
 const App = () => (
   <Router>
@@ -19,6 +20,7 @@ const App = () => (
     <CommunityEvents path='/communityevents/:uid' />
     <Members path='/communitymembers/:uid' />
     <Checkin path='/eventcheckin/:uid' />
+    <Attendees path='/eventattendees/:uid' />
   </Router>
 );
 
