@@ -48,6 +48,18 @@ const EventAction = ({ eventid, iscore, isvolunteer, isregistered }) => {
       </button>
     );
 };
+
+type TagProps = {
+  title: string;
+};
+
+function Tag(props: TagProps) {
+  return (
+    <span className='rounded-full text-center text-sm m-2 bg-gray-100 px-2 py-1'>
+      {props.title}
+    </span>
+  );
+}
 export default function EventDesc(props: any) {
   return (
     <div className='flex items-start justify-between w-full my-2 font-inter'>
@@ -91,36 +103,47 @@ export default function EventDesc(props: any) {
 
           <div className='flex flex-col mt-6 mb-12'>
             <div className='flex flex-row items-center mt-2'>
-              <label htmlFor='event url' className='text-xl font-mulish'>
+              <label htmlFor='event url' className='text-xl font-inter'>
                 Event Link
               </label>
               <a
-                className='rounded-lg mx-10 w-96 font-mulish text-blue-400 text-base font-light'
+                className='rounded-lg mx-10 w-96 font-inter text-blue-400 text-base font-light'
                 href={props?.URL || 'url'}
               >
                 {props?.URL || 'url'}
               </a>
             </div>
             <div className='flex flex-row items-center mt-3'>
-              <label htmlFor='start time' className='text-md w-48 font-mulish'>
+              <label htmlFor='start time' className='text-md w-48 font-inter'>
                 Start Time
               </label>
-              <p className='rounded-lg mx-5 w-96 font-mulish text-green-500 mx-12 text-lg font-light'>
+              <p className='rounded-lg mx-5 w-96 font-inter text-green-500 mx-12 text-lg font-light'>
                 {props?.startTime || 'startTime'}
               </p>
-              <label htmlFor='end time' className='text-md w-48 font-mulish'>
+              <label htmlFor='end time' className='text-md w-48 font-inter'>
                 End Time
               </label>
-              <p className='rounded-lg mx-5 w-96 font-mulish text-green-500 mx-12 text-lg font-light'>
+              <p className='rounded-lg mx-5 w-96 font-inter text-green-500 mx-12 text-lg font-light'>
                 {props?.endTime || 'endTIme'}
               </p>
             </div>
             <div className='flex flex-row items-center mt-6'>
-              <label htmlFor='category' className='text-xl font-mulish'>
+              <label htmlFor='category' className='text-xl font-inter'>
                 Category
               </label>
-              <p className='rounded-lg mx-5 w-96 font-mulish text-orange-600 mx-12 text-lg font-light'>
+              <p className='rounded-lg mx-5 w-96 font-inter text-orange-600 mx-12 text-lg font-light'>
                 {props?.category || 'category'}
+              </p>
+            </div>
+            <div className='flex flex-row items-center mt-6'>
+              <label htmlFor='category' className='text-xl font-inter'>
+                Tags
+              </label>
+              <p className='rounded-lg mx-20 w-96 font-inter text-orange-600 mx-12 text-lg font-light'>
+                <Tag title='ML' />
+                <Tag title='AI' />
+                <Tag title='Deep Learning' />
+                <Tag title='Data Science' />
               </p>
             </div>
             <hr className='my-4' />
@@ -142,15 +165,15 @@ export default function EventDesc(props: any) {
             </div>
 
             <div className='flex flex-row items-center mt-3'>
-              <p className='rounded-lg w-96 font-mulish text-orange-600 text-lg font-light'>
+              <p className='rounded-lg w-96 font-inter text-orange-600 text-lg font-light'>
                 Community Name
               </p>
             </div>
             <div className='flex flex-col items-start mt-3'>
-              <p className='rounded-lg w-96 font-mulish text-orange-600 text-md font-light'>
+              <p className='rounded-lg w-96 font-inter text-orange-600 text-md font-light'>
                 Community Contact email
               </p>
-              <p className='rounded-lg w-96 font-mulish text-orange-600 text-md font-light'>
+              <p className='rounded-lg w-96 font-inter text-orange-600 text-md font-light'>
                 Community Contact email
               </p>
             </div>
