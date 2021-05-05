@@ -51,8 +51,6 @@ context('Actions', () => {
     ).click();
     cy.get(
       '#gatsby-focus-wrapper > div > div > div > div.flex.items-start.justify-between.w-full.my-2.font-inter > div.w-1\\/2.my-2 > h2'
-    )
-      .should('contain.text')
-      .contains('Details');
+    ).should('contain.text', 'Details');
   });
 });
