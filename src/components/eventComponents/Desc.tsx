@@ -10,11 +10,18 @@ const EventAction = ({ eventid, iscore, isvolunteer, isregistered }) => {
   if (iscore)
     return (
       <>
-        <Link to={`/eventcheckin/${eventid}`}>
-          <button className='my-3 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
-            Checkin
-          </button>
-        </Link>
+        <div className='flex flex-row space-x-2'>
+          <Link to={`/eventcheckin/${eventid}`}>
+            <button className='my-3 mx-3 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
+              Checkin
+            </button>
+          </Link>
+          <Link to={`/eventattendees/${eventid}`}>
+            <button className='my-3 mx-3 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
+              Attendees
+            </button>
+          </Link>
+        </div>
         <button
           className='mt-3 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'
           onClick={() =>
@@ -29,23 +36,44 @@ const EventAction = ({ eventid, iscore, isvolunteer, isregistered }) => {
     );
   else if (isvolunteer)
     return (
-      <Link to={`/eventcheckin/${eventid}`}>
-        <button className='my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
-          CheckIn
-        </button>
-      </Link>
+      <div className='flex flex-row space-x-2'>
+        <Link to={`/eventcheckin/${eventid}`}>
+          <button className='my-3 mx-3 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
+            Checkin
+          </button>
+        </Link>
+        <Link to={`/eventattendees/${eventid}`}>
+          <button className='my-3 mx-3 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
+            Attendees
+          </button>
+        </Link>
+      </div>
     );
   else if (isregistered)
     return (
-      <button className='my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
-        Unregister
-      </button>
+      <>
+        <button className='my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
+          UnRegister
+        </button>
+        <Link to={`/eventattendees/${eventid}`}>
+          <button className='my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
+            Attendees
+          </button>
+        </Link>
+      </>
     );
   else
     return (
-      <button className='my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
-        Register
-      </button>
+      <>
+        <button className='my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
+          Register
+        </button>
+        <Link to={`/eventattendees/${eventid}`}>
+          <button className='my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
+            Attendees
+          </button>
+        </Link>
+      </>
     );
 };
 
@@ -61,22 +89,19 @@ function Tag(props: TagProps) {
   );
 }
 export default function EventDesc(props: any) {
+  console.log(props.URL);
   return (
     <div className='flex items-start justify-between w-full my-2 font-inter'>
       <div className='w-1/2 my-2'>
-        <img className='rounded-md h-48 w-96' src={mediaurl + props.imageurl} />
+        <img
+          className='rounded-md h-48 w-96'
+          src={mediaurl + props.eventData.featuredImage}
+        />
         <h2 className='my-4 text-xl font-semibold'>Details</h2>
         <div>
           <div className='flex flex-row mt-6 w-4/5'>
             <p className='font-inter text-lg font-light'>
-              {props.description} EVENT DECSCRIPTION Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-              labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-              nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-              occaecat cupidatat non proident, sunt in culpa qui officia
-              deserunt mollit anim id est laborum.
+              {props.eventData.description}
             </p>
           </div>
           <hr className='my-4' />
@@ -84,20 +109,19 @@ export default function EventDesc(props: any) {
           <div className='flex flex-row mt-6'>
             <p className='text-xl font-mulish'>Address</p>
             <p className='font-mulish text-base mx-14 font-light'>
-              {props?.Address || 'address'} {props?.City || 'city'}
-              {props?.Country || 'country'}
+              {props?.eventData.address || 'address'}
             </p>
           </div>
           <div className='flex flex-row'>
             <p className=' text-xl font-mulish'>City</p>
             <p className='font-mulish text-base mx-24 font-light'>
-              {props?.City || 'city'}
+              {props?.eventData.city || 'city'}
             </p>
           </div>
           <div className='flex flex-row'>
             <p className=' text-xl font-mulish'>Country</p>
             <p className='font-mulish text-base mx-16 font-light'>
-              {props?.Country || 'country'}
+              {props?.eventData.country || 'country'}
             </p>
           </div>
 
@@ -108,9 +132,9 @@ export default function EventDesc(props: any) {
               </label>
               <a
                 className='rounded-lg mx-10 w-96 font-inter text-blue-400 text-base font-light'
-                href={props?.URL || 'url'}
+                href={window.location.href || 'url'}
               >
-                {props?.URL || 'url'}
+                {window.location.href || 'url'}
               </a>
             </div>
             <div className='flex flex-row items-center mt-3'>
@@ -118,13 +142,13 @@ export default function EventDesc(props: any) {
                 Start Time
               </label>
               <p className='rounded-lg mx-5 w-96 font-inter text-green-500 mx-12 text-lg font-light'>
-                {props?.startTime || 'startTime'}
+                {props?.eventData.startTime || 'startTime'}
               </p>
               <label htmlFor='end time' className='text-md w-48 font-inter'>
                 End Time
               </label>
               <p className='rounded-lg mx-5 w-96 font-inter text-green-500 mx-12 text-lg font-light'>
-                {props?.endTime || 'endTIme'}
+                {props?.eventData.endTime || 'endTIme'}
               </p>
             </div>
             <div className='flex flex-row items-center mt-6'>
@@ -132,7 +156,7 @@ export default function EventDesc(props: any) {
                 Category
               </label>
               <p className='rounded-lg mx-5 w-96 font-inter text-orange-600 mx-12 text-lg font-light'>
-                {props?.category || 'category'}
+                {props?.eventData.category.name || 'category'}
               </p>
             </div>
             <div className='flex flex-row items-center mt-6'>
@@ -140,10 +164,9 @@ export default function EventDesc(props: any) {
                 Tags
               </label>
               <p className='rounded-lg mx-20 w-96 font-inter text-orange-600 mx-12 text-lg font-light'>
-                <Tag title='ML' />
-                <Tag title='AI' />
-                <Tag title='Deep Learning' />
-                <Tag title='Data Science' />
+                {props.eventData.tags.map(e => (
+                  <Tag title={e.name} />
+                ))}
               </p>
             </div>
             <hr className='my-4' />
@@ -166,15 +189,14 @@ export default function EventDesc(props: any) {
 
             <div className='flex flex-row items-center mt-3'>
               <p className='rounded-lg w-96 font-inter text-orange-600 text-lg font-light'>
-                Community Name
+                {props.eventData.community.name}
               </p>
             </div>
             <div className='flex flex-col items-start mt-3'>
               <p className='rounded-lg w-96 font-inter text-orange-600 text-md font-light'>
-                Community Contact email
-              </p>
-              <p className='rounded-lg w-96 font-inter text-orange-600 text-md font-light'>
-                Community Contact email
+                <a href={'mailto:' + props.eventData.community.email}>
+                  {props.eventData.community.email}
+                </a>
               </p>
             </div>
           </div>
@@ -183,12 +205,14 @@ export default function EventDesc(props: any) {
       <div className='flex flex-col items-center justify-around'>
         <SpeakerBlock />
         <EventAction
-          iscore={props.iscore}
-          isvolunteer={props.isvolunteer}
-          isregistered={props.isregistered}
-          eventid={props.eventid}
+          iscore={props.eventData.iscore}
+          isvolunteer={props.eventData.isvolunteer}
+          isregistered={props.eventData.isregistered}
+          eventid={props.eventData.id}
         />
-        <p>{props.kind}</p>
+        <p>
+          {props.eventData.kind === 'V' ? 'Virtual Event' : 'In-Person Event'}
+        </p>
       </div>
     </div>
   );
