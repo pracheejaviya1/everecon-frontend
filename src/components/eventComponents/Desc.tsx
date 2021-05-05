@@ -101,7 +101,7 @@ export default function EventDesc(props: any) {
                 {props?.URL || 'url'}
               </a>
             </div>
-            <div className='flex flex-row items-center mt-6'>
+            <div className='flex flex-row items-center mt-3'>
               <label htmlFor='start time' className='text-md w-48 font-mulish'>
                 Start Time
               </label>
