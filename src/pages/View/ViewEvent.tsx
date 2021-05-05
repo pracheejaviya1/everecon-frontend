@@ -116,7 +116,7 @@ export default function ViewEvent(props) {
   }
 
   return (
-    <div className='border-b-2 h-screen'>
+    <div className='h-screen'>
       <Header />
       <div className='flex flex-col mx-auto w-3/4 items-center'>
         <EventTitle
