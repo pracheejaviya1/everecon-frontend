@@ -52,7 +52,7 @@ export default function EventDesc(props: any) {
   return (
     <div className='flex items-start justify-between w-full my-2 font-inter'>
       <div className='w-1/2 my-2'>
-        <img className='rounded-md' src={mediaurl + props.imageurl} />
+        <img className='rounded-md h-48 w-96' src={mediaurl + props.imageurl} />
         <h2 className='my-4 text-xl font-semibold'>Details</h2>
         <div>
           <div className='flex flex-row mt-6 w-4/5'>
