@@ -237,11 +237,7 @@ export default function CreateEventTwo({ location }) {
                 placeholder='Add Speaker'
                 className='placeholder-gray-400 mx-10 border-none rounded-md text-xs w-full bg-gray-100 font-mulish'
               />
-<<<<<<< HEAD
-              <button className='text-white mx-5 text-sm bg-blue-400 py-2 px-4 rounded-md font-inter'>
-=======
               <button className='text-white text-sm bg-blue-400 py-2 px-4 rounded-md font-inter' onClick={(e) => {e.preventDefault();navigate('/Create/Speaker',location)}}>
->>>>>>> create_speaker
                 New Speaker
               </button>
             </div>
