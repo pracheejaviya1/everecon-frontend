@@ -177,7 +177,7 @@ export default function Search() {
   return (
     <div className='bg-explore_events bg-no-repeat bg-bottom h-screen'>
       <Header />
-      <div className='m-6 flex flex-col divide-y divide-gray-500'>
+      <div className='m-6 flex flex-col divide-y divide-gray-500 font-inter'>
         <div className='m-4'>
           <h1 className='my-5 text-2xl font-mulish text-center'>
             Search Results for {searchcon}
