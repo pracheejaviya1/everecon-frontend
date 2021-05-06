@@ -65,7 +65,7 @@ export default function CreateEventOne({ location }) {
         </div>
         <figure className='mt-8 mb-6'>
           <label>
-            <img className='rounded-lg h-64 object-contain' src={logoURL} />
+            <img className='rounded-lg h-64 w-96 object-cover' src={logoURL} />
             <input type='file' className='hidden' onChange={handleFileChange} />
             <figcaption className='py-2 text-center font-mulish'>
               Upload Event photo

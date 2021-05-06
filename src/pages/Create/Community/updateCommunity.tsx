@@ -256,7 +256,7 @@ export default function UpdateCommunity(props) {
       <div className='flex border-b-2 py-10 w-2/3 mx-auto font-inter'>
         <label>
           <img
-            className=' object-contain h-72 w-96 rounded-lg hover:bg-red-500'
+            className=' object-cover h-72 w-96 rounded-lg hover:bg-red-500'
             src={logoURL}
           />
           <input type='file' className='hidden' onChange={handleFileChange} />
