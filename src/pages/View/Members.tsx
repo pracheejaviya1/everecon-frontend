@@ -192,9 +192,11 @@ function MemberCard(props) {
               });
               if (e) {
                 console.error(e);
+                alert(JSON.stringify(e));
                 return;
               } else {
                 console.log(data);
+                alert('member removed from core');
                 props.refetchfunc();
               }
             }
@@ -206,10 +208,12 @@ function MemberCard(props) {
                 },
               });
               if (e) {
+                alert(JSON.stringify(e));
                 console.error(e);
                 return;
               } else {
                 console.log(data);
+                alert('member removed from volunteer');
                 props.refetchfunc();
               }
             }
@@ -277,7 +281,10 @@ export default function Members(props) {
           //TODO:error username not found
           refetch();
         })
-        .catch(e => console.error(e));
+        .catch(e => {
+          console.error(e);
+          alert(JSON.stringify(e));
+        });
     }
     if (type === 'core') {
       callAddCore({
@@ -290,7 +297,10 @@ export default function Members(props) {
           //TODO:error username not found
           refetch();
         })
-        .catch(e => console.error(e));
+        .catch(e => {
+          console.error(e);
+          alert(JSON.stringify(e));
+        });
     }
   }, [userdata]);
 

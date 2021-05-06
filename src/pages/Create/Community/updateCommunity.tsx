@@ -206,7 +206,10 @@ export default function UpdateCommunity(props) {
 
     let r = await fetch(graphqlurl, requestOptions)
       .then(response => response.json())
-      .catch(error => console.log('error', error));
+      .catch(error => {
+        console.log('error', error);
+        alert('image upload error ' + JSON.stringify(error));
+      });
 
     return r.data.updateCommunitybanner.success;
   }
@@ -235,6 +238,9 @@ export default function UpdateCommunity(props) {
 
     if (e) {
       console.log(e.graphQLErrors[0].message);
+      alert(e.graphQLErrors[0].message);
+    } else {
+      alert('Successfully updated community');
     }
 
     uploadLogo(id);

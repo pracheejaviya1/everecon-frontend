@@ -101,6 +101,7 @@ export default function SettingAccount() {
     }
     if (!userid) {
       console.error('Failed to fetch userid');
+      alert('Failed to fetch userid');
       return;
     }
     var myHeaders = new Headers();
@@ -130,7 +131,10 @@ export default function SettingAccount() {
 
     let r = await fetch(graphqlurl, requestOptions)
       .then(response => response.json())
-      .catch(error => console.log('error', error));
+      .catch(error => {
+        console.log('error', error);
+        alert(JSON.stringify(error));
+      });
 
     return r.data.updateProfpic.success;
   }
@@ -146,7 +150,10 @@ export default function SettingAccount() {
       },
     })
       .then(r => console.log('Profile Updated'))
-      .catch(e => console.error(e.graphQLErrors));
+      .catch(e => {
+        console.error(e.graphQLErrors);
+        alert(JSON.stringify(e));
+      });
 
     uploadProfilePic();
   };

@@ -50,6 +50,7 @@ const EventAction = ({
       });
       if (e) {
         console.error(e);
+        alert(JSON.stringify(e));
         return;
       } else {
         console.log(data);
@@ -64,6 +65,7 @@ const EventAction = ({
       });
       if (e) {
         console.error(e);
+        alert(JSON.stringify(e));
         return;
       } else {
         console.log(data);

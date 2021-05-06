@@ -199,7 +199,10 @@ export default function CreateEventTwo({ location }) {
 
     let r = await fetch(graphqlurl, requestOptions)
       .then(response => response.json())
-      .catch(error => console.log('error', error));
+      .catch(error => {
+        console.log('error', error);
+        alert('image upload error ' + JSON.stringify(error));
+      });
 
     return r.data.updateEventimage.success;
   }
@@ -224,14 +227,18 @@ export default function CreateEventTwo({ location }) {
     });
     if (e) {
       console.error(e);
+      alert(JSON.stringify(e));
       return;
     }
+
+    alert('Event Created');
     let eventid = data.createEvent.event.id;
     console.log(eventid);
     if (uploadImage(eventid)) {
       navigate(`/event/${eventid}`);
     } else {
       console.error('Failed to upload Event Image');
+      alert('Failed to upload Event Image');
     }
     return;
   }

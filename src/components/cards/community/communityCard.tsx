@@ -61,6 +61,7 @@ export default function CommunityCard(props) {
       });
       if (e) {
         console.error(e);
+        alert(JSON.stringify(e));
         return;
       } else {
         console.log(data);
@@ -74,6 +75,7 @@ export default function CommunityCard(props) {
       });
       if (e) {
         console.error(e);
+        alert(JSON.stringify(e));
         return;
       } else {
         console.log(data);
