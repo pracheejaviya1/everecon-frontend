@@ -6,38 +6,53 @@ import { useMutation } from '@apollo/client';
 import { navigate } from 'gatsby-link';
 
 const CREATE_SPEAKER_MUTATION = gql`
-mutation createSpeaker ($description: String, $email: String, $facebook: String, $firstName: String!, $instagram: String, $lastName: String) {
-    createSpeaker (description: $description, email: $email, facebook: $facebook, firstName: $firstName, instagram: $instagram, lastName: $lastName) {
-        speaker {
-            id
-            firstName
-            lastName
-            email
-            facebook
-            instagram
-            profilePicture
-        }
+  mutation createSpeaker(
+    $description: String
+    $email: String
+    $facebook: String
+    $firstName: String!
+    $instagram: String
+    $lastName: String
+  ) {
+    createSpeaker(
+      description: $description
+      email: $email
+      facebook: $facebook
+      firstName: $firstName
+      instagram: $instagram
+      lastName: $lastName
+    ) {
+      speaker {
+        id
+        firstName
+        lastName
+        email
+        facebook
+        instagram
+        profilePicture
       }
     }
-`
+  }
+`;
 
 const ADD_SPEAKER_MUTATION = gql`
-mutation addSpeaker ($eventid: ID!, $speakerid: ID!) {
-    addSpeaker (eventid: $eventid, speakerid: $speakerid) {
-        ok
+  mutation addSpeaker($eventid: ID!, $speakerid: ID!) {
+    addSpeaker(eventid: $eventid, speakerid: $speakerid) {
+      ok
     }
-}
-`
-export default function UpdateEventTwo({location}) {
-  const [callCreateSpeaker,{data}] = useMutation(CREATE_SPEAKER_MUTATION)
-  const [callAddSpeaker,{data}]  = useMutation(ADD_SPEAKER_MUTATION)
+  }
+`;
+export default function UpdateEventTwo({ location }) {
+  const [callCreateSpeaker, { data: data_createSpeaker }] = useMutation(
+    CREATE_SPEAKER_MUTATION
+  );
 
-  const [fname,setFName] = React.useState('')
-  const [lname,setLName] = React.useState('')
-  
-  const [instagram,setInstagram] = React.useState('')
-  const [facebook,setFacebook] = React.useState('')
-  const [email,setEmail] = React.useState("")
+  const [fname, setFName] = React.useState('');
+  const [lname, setLName] = React.useState('');
+
+  const [instagram, setInstagram] = React.useState('');
+  const [facebook, setFacebook] = React.useState('');
+  const [email, setEmail] = React.useState('');
 
   const [photo, setPhoto] = React.useState(null);
   const [photoURL, setPhotoURL] = React.useState(SpeakerProfile);
@@ -46,13 +61,13 @@ export default function UpdateEventTwo({location}) {
   // const [twitter,setTwitter] = React.useState('')
 
   const discard = () => {
-    setEmail('')
-    setFName('')
-    setLName('')
-    setFacebook('')
-    setInstagram('')
+    setEmail('');
+    setFName('');
+    setLName('');
+    setFacebook('');
+    setInstagram('');
     // where to navigate to ??
-  }
+  };
   const handleFileChange = (e: { target: { files: any } }) => {
     var files = e.target.files;
     if (files[0]) {
@@ -60,7 +75,7 @@ export default function UpdateEventTwo({location}) {
       setPhotoURL(URL.createObjectURL(files[0]));
     }
   };
-async function uploadSpeakerPic(speakerid) {
+  async function uploadSpeakerPic(speakerid) {
     // upload logo if logo else return True
     if (!photo) {
       console.log('no photo');
@@ -97,31 +112,31 @@ async function uploadSpeakerPic(speakerid) {
 
     return r.data.updateSpeakerpicture.success;
   }
-  async function handleSubmit(){
-  let {data,error:e} = await callCreateSpeaker({variables:{
-  email: email,
-  facebook: facebook,
-  firstName: fname,
-  lastName: lname,
-  instagram: instagram,
-}});
-if (e) {
+  async function handleSubmit() {
+    let { data, error: e } = await callCreateSpeaker({
+      variables: {
+        email: email,
+        facebook: facebook,
+        firstName: fname,
+        lastName: lname,
+        instagram: instagram,
+        description: "Just a speaker"
+      },
+    });
+    if (e) {
       console.log(e.graphQLErrors[0].message);
       return;
     }
-  let speakerid = data.createSpeaker.speaker.id
-   if (uploadSpeakerPic(speakerid)){
-    let newlocation = JSON.parse(JSON.stringify(location))
-    if (newlocation.speakers){
-      newlocation.speaker.append(speakerid)
+    if (uploadSpeakerPic(data.createSpeaker.speaker.id)) {
+      let newlocation = JSON.parse(JSON.stringify(location));
+      let speakeremail = data.createSpeaker.speaker.email
+      newlocation.state.speakeremail = speakeremail;
+      navigate('/Create/Event/createEventPage2', newlocation);
+      
+    } else {
+      console.error('Failed to upload Speaker Photo');
     }
-    else newlocation.speaker = [speakerid]
-    navigate('/Create/Event/createEventPage2',newlocation)
-   
-  }else{
-     console.error('Failed to upload Speaker Photo');
-   }
-   return;
+    return;
   }
   return (
     <div className='h-screen w-screen'>
@@ -135,7 +150,9 @@ if (e) {
               fill='none'
               viewBox='0 0 24 24'
               stroke='currentColor'
-              onClick={()=> navigate('/Create/Event/createEventPage2',location)}
+              onClick={() =>
+                navigate('/Create/Event/createEventPage2', location)
+              }
             >
               <path
                 strokeLinecap='round'
@@ -149,22 +166,32 @@ if (e) {
             </h1>
           </div>
           <ul className='flex list-none'>
-            <button className='mx-2 text-green-500 font-inter' onClick={handleSubmit}>Save</button>
-            <button className='mx-2 text-red-500 font-inter' onClick={discard}>Discard</button>
+            <button
+              className='mx-2 text-green-500 font-inter'
+              onClick={handleSubmit}
+            >
+              Save
+            </button>
+            <button className='mx-2 text-red-500 font-inter' onClick={discard}>
+              Discard
+            </button>
           </ul>
         </div>
         <div>
           <div className='flex flex-col mx-auto items-center  justify-center'>
-        <figure className='mt-8 mb-6'>
-          <label>
-            
-            <img src={photoURL} className='my-8 h-40 w-40 rounded-full' />
-            <input type='file' className='hidden' onChange={handleFileChange} />
-            <figcaption className='text-center font-mulish'>
-              Add Photo
-            </figcaption>
-          </label>
-        </figure>
+            <figure className='mt-8 mb-6'>
+              <label>
+                <img src={photoURL} className='my-8 h-40 w-40 rounded-full' />
+                <input
+                  type='file'
+                  className='hidden'
+                  onChange={handleFileChange}
+                />
+                <figcaption className='text-center font-mulish'>
+                  Add Photo
+                </figcaption>
+              </label>
+            </figure>
             <div className='flex flex-col justify-between mx-auto font-mulish my-4'>
               <div className='flex flex-row items-center'>
                 <label
@@ -178,10 +205,10 @@ if (e) {
                   className='rounded-lg bg-gray-100 border-gray-100 w-96'
                   name='Lastname'
                   value={fname}
-                  onChange={(e) => setFName(e.target.value)}
+                  onChange={e => setFName(e.target.value)}
                 />
               </div>
-              <div className='flex flex-row items-center mt-2'> 
+              <div className='flex flex-row items-center mt-2'>
                 <label
                   htmlFor='lastname'
                   className='mb-1 font-mulish text-lg mt-2 w-24 mx-6'
@@ -193,9 +220,9 @@ if (e) {
                   className='rounded-lg bg-gray-100 border-gray-100 w-96'
                   name='name'
                   value={lname}
-                  onChange={(e) => setLName(e.target.value)}
+                  onChange={e => setLName(e.target.value)}
                 />
-                </div>
+              </div>
               <div className='flex flex-row'>
                 <label
                   htmlFor='Links'
@@ -259,7 +286,6 @@ if (e) {
                   type='url'
                   value={instagram}
                   onChange={e => setInstagram(e.target.value)}
-                
                 />
               </div>
               <div className='flex flex-row items-center mt-2  '>
@@ -274,7 +300,6 @@ if (e) {
                   type='url'
                   value={facebook}
                   onChange={e => setFacebook(e.target.value)}
-                
                 />
               </div>
               {/* <div className='flex flex-row items-center mt-2  '>

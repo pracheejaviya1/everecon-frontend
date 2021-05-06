@@ -1,4 +1,4 @@
-import { gql, useMutation } from '@apollo/client';
+import { gql, useMutation, useQuery } from '@apollo/client';
 import { Link, navigate } from 'gatsby';
 import * as React from 'react';
 import { graphqlurl } from '../../../components/config';
@@ -84,12 +84,47 @@ const CREATE_EVENT_MUTATION = gql`
     }
   }
 `;
+const SPEAKER_EMAIL_QUERY = gql`
+query speakerByEmail ($email: String) {
+    speakerByEmail (email: $email) {
+        id
+        firstName
+        lastName
+        email
+        facebook
+        instagram
+        profilePicture
+        description
+    }
+  }
+`
+
 export default function CreateEventTwo({ location }) {
+  
   const [callCreateEvent, { data }] = useMutation(CREATE_EVENT_MUTATION);
+  const [searchmeEmail,setSearchMeEmail] = React.useState('');
+  
+  const {data:speakerdata} = useQuery(SPEAKER_EMAIL_QUERY,{variables:{email:searchmeEmail}});
+
   const [startTime, setStartTime] = React.useState('2018-06-07T00:00');
   const [endTime, setEndTime] = React.useState('');
   const [maxRsvp, setmaxRsvp] = React.useState('');
+  const [speakers,setSpeakers] = React.useState([]);
+  const [speakerinput,setSpeakerInput] = React.useState('');
+  
+  React.useEffect(() => {
+    if(location.state.speakeremail){
+      setSearchMeEmail(location.state.speakeremail)
+    }
+  })
+
+  React.useEffect(() => {
+    setSpeakers([...speakers,speakerdata.speakerByEmail])
+  },[speakerdata])
   const image = location.state?.logo;
+  if(location.state?.speaker){
+    console.log(location.state.speaker)
+  }
   // TODO: input for Tags
   // const [tags, setTags] = React.useState('');
   async function uploadImage(eventid) {
@@ -243,6 +278,9 @@ export default function CreateEventTwo({ location }) {
             </div>
           </div>
         </form>
+        {
+          console.log(speakers)
+        }
         <button
           className='text-white text-sm bg-blue-400 py-2 px-4 rounded-lg font-inter'
           onClick={handleSubmit}
