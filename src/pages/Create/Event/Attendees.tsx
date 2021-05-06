@@ -59,7 +59,7 @@ function MemberCard(props) {
         <div className='flex'>
           <img
             src={mediaurl + props.memberData?.profile.profilePicture}
-            className='h-14 w-14 rounded-full'
+            className='h-14 w-14 rounded-full object-cover'
           />
           <div className='mx-10'>
             <p className='text-xl'>{props.memberData?.username}</p>

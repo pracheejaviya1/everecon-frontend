@@ -184,7 +184,10 @@ function MyCommunityCard({ name, logo, userid, communityid }) {
       className='flex flex-row items-center justify-between p-2 shadow-md mx-auto rounded-lg w-full text-left my-2 mt-3'
     >
       <div className='flex'>
-        <img className='h-20 w-30 mx-5 my-2 rounded-md' src={logo} />
+        <img
+          className='h-20 w-30 mx-5 my-2 rounded-md object-cover'
+          src={logo}
+        />
         <span className='text-2xl my-5 font-semibold mx-5 font-inter'>
           {name}
         </span>
@@ -230,10 +233,10 @@ export default function UserProfile() {
   return (
     <div className='h-screen w-screen'>
       <Header />
-      <div className='flex flex-col object-cover w-1/2 mx-auto items-center justify-center'>
+      <div className='flex flex-col w-1/2 mx-auto items-center justify-center'>
         <img
           src={mediaurl + data.myprofile.profile.profilePicture}
-          className='my-8 h-28 w-28 rounded-full'
+          className='my-8 h-28 w-28 rounded-full object-cover'
         />
         <p className='text-2xl font-mulish'>{data.myprofile.username}</p>
         <p className='text-xl font-mulish'>{data.myprofile.profile.country}</p>

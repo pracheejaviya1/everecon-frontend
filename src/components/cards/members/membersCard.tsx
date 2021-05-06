@@ -21,7 +21,10 @@ export default function MembersCard({
   return (
     <div className='flex items-center justify-between w-1/3 m-6 mx-auto'>
       <div className='flex w-1/5 items-center justify-between'>
-        <img src={communityImg} className='h-16 w-16 rounded-full' />
+        <img
+          src={communityImg}
+          className='h-16 w-16 rounded-full object-cover'
+        />
         <div className='mx-8 font-inter'>
           <p className='my-1'>{name}</p>
           <p className='my-1'>{location}</p>

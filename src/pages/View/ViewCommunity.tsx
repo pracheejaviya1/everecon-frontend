@@ -212,7 +212,7 @@ export default function ViewCommunity(props) {
       <Header />
       <div className='flex border-b-2 py-10 w-2/3 mx-auto font-inter'>
         <img
-          className='h-64 w-92 object-cover rounded-md'
+          className='h-64 w-92 object-cover rounded-md object-cover'
           src={mediaurl + data.communityById.logo}
         />
         <div className='flex ml-10 items-start justify-between h-full flex-col font-inter'>
