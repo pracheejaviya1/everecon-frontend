@@ -98,6 +98,7 @@ function MemberCard(props) {
         console.log(uncheckins);
         props.setCheckedin(checkins);
         props.setNotCheckedin(uncheckins);
+        alert('member unchecked form event');
       }
     } else {
       let { data, errors: e } = await callCheckin({
@@ -121,6 +122,7 @@ function MemberCard(props) {
         console.log(uncheckins);
         props.setCheckedin(checkins);
         props.setNotCheckedin(uncheckins);
+        alert('member checkedin event');
       }
     }
     return;

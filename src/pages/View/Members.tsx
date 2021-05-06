@@ -196,6 +196,7 @@ function MemberCard(props) {
                 return;
               } else {
                 console.log(data);
+                alert('member removed from core');
                 props.refetchfunc();
               }
             }
@@ -212,6 +213,7 @@ function MemberCard(props) {
                 return;
               } else {
                 console.log(data);
+                alert('member removed from volunteer');
                 props.refetchfunc();
               }
             }

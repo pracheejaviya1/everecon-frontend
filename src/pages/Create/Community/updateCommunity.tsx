@@ -239,6 +239,8 @@ export default function UpdateCommunity(props) {
     if (e) {
       console.log(e.graphQLErrors[0].message);
       alert(e.graphQLErrors[0].message);
+    } else {
+      alert('Successfully updated community');
     }
 
     uploadLogo(id);

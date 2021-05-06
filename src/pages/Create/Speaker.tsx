@@ -108,8 +108,10 @@ export default function UpdateEventTwo({ location }) {
 
     let r = await fetch('http://localhost:8000/graphql/', requestOptions)
       .then(response => response.json())
-      .catch(error => {console.log('error', error);
-    alert("image upload error "+JSON.stringify(error))});
+      .catch(error => {
+        console.log('error', error);
+        alert('image upload error ' + JSON.stringify(error));
+      });
 
     return r.data.updateSpeakerpicture.success;
   }
@@ -128,11 +130,14 @@ export default function UpdateEventTwo({ location }) {
       console.log(e.graphQLErrors[0].message);
       alert(e.graphQLErrors[0].message);
       return;
+    } else {
+      alert('created speaker');
     }
     if (uploadSpeakerPic(data.createSpeaker.speaker.id)) {
       let newlocation = JSON.parse(JSON.stringify(location));
       let speakeremail = data.createSpeaker.speaker.email;
       newlocation.state.speakeremail = speakeremail;
+      alert('speaker profile photo upload successful');
       navigate('/Create/Event/createEventPage2', newlocation);
     } else {
       console.error('Failed to upload Speaker Photo');
