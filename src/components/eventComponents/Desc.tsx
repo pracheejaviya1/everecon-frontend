@@ -2,10 +2,77 @@ import { Link, navigate } from 'gatsby';
 import * as React from 'react';
 import { mediaurl } from '../config';
 import SpeakerBlock from './Speaker';
+import { gql, useMutation } from '@apollo/client';
 
-const EventAction = ({ eventid, iscore, isvolunteer, isregistered }) => {
+const REGISTER4EVENT = gql`
+  mutation registerEvent($id: ID!) {
+    registerEvent(id: $id) {
+      event {
+        id
+        name
+        isregistered
+      }
+    }
+  }
+`;
+const UNREGISTER4EVENT = gql`
+  mutation unregisterEvent($id: ID!) {
+    unregisterEvent(id: $id) {
+      event {
+        id
+        name
+        isregistered
+      }
+    }
+  }
+`;
+
+const EventAction = ({
+  eventid,
+  iscore,
+  isvolunteer,
+  isregistered,
+  refetch,
+}) => {
   // TODO: handle Register
   // TODO: handle Unregister (add confirm modal)
+
+  // const [isregister, setRegistered] = React.useState(isregistered);
+  const [callRegister, dataR] = useMutation(REGISTER4EVENT);
+  const [callUnRegister, dataU] = useMutation(UNREGISTER4EVENT);
+
+  async function handlernunr() {
+    if (isregistered) {
+      let { data, errors: e } = await callUnRegister({
+        variables: {
+          id: eventid,
+        },
+      });
+      if (e) {
+        console.error(e);
+        return;
+      } else {
+        console.log(data);
+        refetch();
+        // setRegistered(data?.unregisterEvent.isregistered);
+      }
+    } else {
+      let { data, errors: e } = await callRegister({
+        variables: {
+          id: eventid,
+        },
+      });
+      if (e) {
+        console.error(e);
+        return;
+      } else {
+        console.log(data);
+        refetch();
+        // setRegistered(data?.registerEvent.isregistered);
+      }
+    }
+    return;
+  }
 
   if (iscore)
     return (
@@ -52,8 +119,13 @@ const EventAction = ({ eventid, iscore, isvolunteer, isregistered }) => {
   else if (isregistered)
     return (
       <>
-        <button className='my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
-          UnRegister
+        <button
+          className='my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'
+          onClick={() => {
+            handlernunr();
+          }}
+        >
+          Unregister
         </button>
         <Link to={`/eventattendees/${eventid}`}>
           <button className='my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
@@ -65,7 +137,12 @@ const EventAction = ({ eventid, iscore, isvolunteer, isregistered }) => {
   else
     return (
       <>
-        <button className='my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'>
+        <button
+          className='my-6 bg-blue-500 rounded-md text-white py-2 px-4 font-inter'
+          onClick={() => {
+            handlernunr();
+          }}
+        >
           Register
         </button>
         <Link to={`/eventattendees/${eventid}`}>
@@ -209,6 +286,7 @@ export default function EventDesc(props: any) {
           isvolunteer={props.eventData.isvolunteer}
           isregistered={props.eventData.isregistered}
           eventid={props.eventData.id}
+          refetch={props.refetch}
         />
         <p>
           {props.eventData.kind === 'V' ? 'Virtual Event' : 'In-Person Event'}

@@ -105,7 +105,7 @@ export default function ViewEvent(props) {
     uid = '1';
   }
 
-  const { loading, error, data } = useQuery(EVENT_QUERY, {
+  const { loading, error, data, refetch } = useQuery(EVENT_QUERY, {
     variables: { id: uid },
   });
   if (loading) {
@@ -123,8 +123,7 @@ export default function ViewEvent(props) {
           datetime={new Date(data.eventById.startTime)}
           title={data.eventById.name}
         />
-        <EventDesc eventData={data.eventById}
-        />
+        <EventDesc eventData={data.eventById} refetch={refetch} />
       </div>
     </div>
   );
