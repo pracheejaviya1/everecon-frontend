@@ -8,7 +8,7 @@ export default function TagInput({ tags, setTags }) {
         type='text'
         value={text}
         placeholder='Enter comma seperated tags'
-        className='text-gray-400 font-mulish rounded-md border border-gray-200'
+        className='text-gray-600 font-inter text-sm rounded-md border border-gray-200'
         onChange={e => setText(e.target.value)}
         onKeyUp={e => {
           if (e.key === ',') {
@@ -24,19 +24,21 @@ export default function TagInput({ tags, setTags }) {
       />
 
       {tags.map((tag, i) => (
-        <li key={i}>
-          <div className='flex flex-row'>
+        <ul key={i}>
+          <div className='flex flex-row font-inter text-blue-700 my-1 w-96'>
             {tag}
-            <button onClick={() => {
-                setTags( tags.filter(e => e !==tag))
-            }
-            }>
+            <button
+              className='mx-8'
+              onClick={() => {
+                setTags(tags.filter(e => e !== tag));
+              }}
+            >
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 className='h-6 w-6'
                 fill='none'
                 viewBox='0 0 24 24'
-                stroke='currentColor'
+                stroke='#EF4444'
               >
                 <path
                   strokeLinecap='round'
@@ -47,7 +49,7 @@ export default function TagInput({ tags, setTags }) {
               </svg>
             </button>
           </div>
-        </li>
+        </ul>
       ))}
     </>
   );

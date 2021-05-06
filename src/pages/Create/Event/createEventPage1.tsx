@@ -3,23 +3,23 @@ import { Link, navigate } from 'gatsby';
 import * as React from 'react';
 import EventImg from '../../../assets/Images/Rectangle6.png';
 import Header from '../../../components/header';
-import DD_Categories from "../../../components/dd_categories"
-import TagInput from "../../../components/taginput";
+import DD_Categories from '../../../components/dd_categories';
+import TagInput from '../../../components/taginput';
 
 const CATEGORIES_QUERY = gql`
-query categories{
-    categories{
-        id
-        name
+  query categories {
+    categories {
+      id
+      name
     }
-}
-`
+  }
+`;
 export default function CreateEventOne({ location }) {
   const communityid = location.state?.communityid;
   // check communityid else return ERROR probably 404
-  const {data:categories_data} = useQuery(CATEGORIES_QUERY);
+  const { data: categories_data } = useQuery(CATEGORIES_QUERY);
   const [logo, setLogo] = React.useState(null);
-  const [tags,setTags] = React.useState([]);
+  const [tags, setTags] = React.useState([]);
   const [logoURL, setLogoURL] = React.useState(EventImg);
   const [name, setName] = React.useState('');
   const [address, setAddress] = React.useState('');
@@ -75,7 +75,7 @@ export default function CreateEventOne({ location }) {
         <form className='flex flex-col'>
           <label className='my-2' htmlFor='Event name'>
             <input
-              className='border border-gray-400 p-2 w-80 rounded-lg font-roboto text-sm'
+              className='text-gray-600 font-inter text-sm rounded-md border border-gray-200 w-96 p-2'
               placeholder='Event name'
               name='Event name'
               value={name}
@@ -84,7 +84,7 @@ export default function CreateEventOne({ location }) {
           </label>
           <label className='my-2' htmlFor='Description'>
             <textarea
-              className='border border-gray-400 p-2 w-80 h-40 rounded-lg font-roboto text-sm'
+              className='text-gray-600 font-inter text-sm rounded-md border border-gray-200 w-96 h-40'
               placeholder='Description'
               name='Description'
               value={description}
@@ -100,12 +100,16 @@ export default function CreateEventOne({ location }) {
               value={category}
               onChange={e => setCategory(e.target.value)}
             /> */}
-            <DD_Categories categories={categories_data?.categories || []} selected_category={category} setCategory={setCategory}/>
+            <DD_Categories
+              categories={categories_data?.categories || []}
+              selected_category={category}
+              setCategory={setCategory}
+            />
           </label>
-          <TagInput tags={tags} setTags={setTags}/>
+          <TagInput tags={tags} setTags={setTags} />
           <label className='my-2' htmlFor='Event city'>
             <input
-              className='border border-gray-400 p-2 w-80 rounded-lg font-roboto text-sm'
+              className='text-gray-600 font-inter text-sm rounded-md border border-gray-200 w-96 p-2'
               placeholder='city'
               name='Event city'
               value={city}
@@ -115,7 +119,7 @@ export default function CreateEventOne({ location }) {
 
           <label className='my-2' htmlFor='Event country'>
             <input
-              className='border border-gray-400 p-2 w-80 rounded-lg font-roboto text-sm'
+              className='text-gray-600 font-inter text-sm rounded-md border border-gray-200 w-96 p-2'
               placeholder='country'
               name='Event country'
               value={country}
@@ -127,7 +131,7 @@ export default function CreateEventOne({ location }) {
           {/* if Kind is Live ask address else ask for liveURL */}
           <label className='my-2' htmlFor='Event address'>
             <textarea
-              className='border border-gray-400 p-2 w-80 h-40 rounded-lg font-roboto text-sm'
+              className='text-gray-600 font-inter text-sm rounded-md border border-gray-200 w-96 h-36 p-2'
               placeholder='address'
               name='Event address'
               value={address}

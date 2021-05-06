@@ -18,7 +18,7 @@ export default function Dropdown({
   setCategory: Function;
 }) {
   return (
-    <li className='dropdown flex items-center'>
+    <li className='dropdown flex items-center font-inter'>
       <Menu>
         {({ open }) => (
           <>
