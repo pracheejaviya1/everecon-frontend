@@ -172,7 +172,7 @@ function MemberCard(props) {
       <div className='flex'>
         <img
           src={mediaurl + props.memberData?.profile.profilePicture}
-          className='h-14 w-14 rounded-full'
+          className='h-14 w-14 rounded-full object-cover'
         />
         <div className='mx-10'>
           <p className='text-xl'>{props.memberData?.username}</p>
@@ -361,7 +361,7 @@ export default function Members(props) {
         <div>
           <img
             src={mediaurl + data?.communityById.logo}
-            className='rounded-lg mx-2 my-4 h-20 w-40'
+            className='rounded-lg mx-2 my-4 h-20 w-40 object-cover'
           />
           <h2 className='text-semibold text-xl w-40 font-mulish text-center'>
             {data?.communityById.name}

@@ -342,7 +342,7 @@ export default function SettingAccount() {
                 <label className='flex items-center'>
                   <img
                     src={profileURL}
-                    className='object-cover w-16 h-16 rounded-full'
+                    className='object-cover w-16 h-16 rounded-full object-cover'
                   />
                   <input
                     type='file'

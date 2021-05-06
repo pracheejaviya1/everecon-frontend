@@ -182,7 +182,10 @@ export default function UpdateEventTwo({ location }) {
           <div className='flex flex-col mx-auto items-center  justify-center'>
             <figure className='mt-8 mb-6'>
               <label>
-                <img src={photoURL} className='my-8 h-40 w-40 rounded-full' />
+                <img
+                  src={photoURL}
+                  className='my-8 h-40 w-40 rounded-full object-cover'
+                />
                 <input
                   type='file'
                   className='hidden'
