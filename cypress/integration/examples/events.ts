@@ -31,7 +31,7 @@ context('Actions', () => {
       'Explore Events'
     );
     cy.get(
-      '#gatsby-focus-wrapper > div > div > div:nth-child(3) > div > a > div > img'
+      '#gatsby-focus-wrapper > div > div > div:nth-child(3) > div > a:nth-child(2) > div > img'
     );
     cy.get('#gatsby-focus-wrapper > div > div > div:nth-child(3) > a > span')
       .should('contain.text', 'See more')
@@ -49,7 +49,7 @@ context('Actions', () => {
       'Explore Events'
     );
     cy.get(
-      '#gatsby-focus-wrapper > div > div > div:nth-child(3) > div > a > div > img'
+      '#gatsby-focus-wrapper > div > div > div:nth-child(3) > div > a:nth-child(2) > div > img'
     ).click();
     cy.get(
       '#gatsby-focus-wrapper > div > div > div > div.flex.items-start.justify-between.w-full.my-2.font-inter > div.w-1\\/2.my-2 > h2'
