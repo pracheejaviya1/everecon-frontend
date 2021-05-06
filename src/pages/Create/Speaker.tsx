@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Header from '../../components/header';
-import SpeakerProfile from '../../assets/Images/default.jpg';
+import SpeakerProfile from '../../assets/Images/Rectangle6.png';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import { navigate } from 'gatsby-link';
@@ -120,7 +120,7 @@ export default function UpdateEventTwo({ location }) {
         firstName: fname,
         lastName: lname,
         instagram: instagram,
-        description: "Just a speaker"
+        description: 'Just a speaker',
       },
     });
     if (e) {
@@ -129,10 +129,9 @@ export default function UpdateEventTwo({ location }) {
     }
     if (uploadSpeakerPic(data.createSpeaker.speaker.id)) {
       let newlocation = JSON.parse(JSON.stringify(location));
-      let speakeremail = data.createSpeaker.speaker.email
+      let speakeremail = data.createSpeaker.speaker.email;
       newlocation.state.speakeremail = speakeremail;
       navigate('/Create/Event/createEventPage2', newlocation);
-      
     } else {
       console.error('Failed to upload Speaker Photo');
     }

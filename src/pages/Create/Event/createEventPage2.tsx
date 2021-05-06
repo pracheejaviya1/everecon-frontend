@@ -4,16 +4,32 @@ import * as React from 'react';
 import { graphqlurl } from '../../../components/config';
 import Header from '../../../components/header';
 
-const SpeakerCard = ({speaker,removeSpeaker}) => {
+const SpeakerCard = ({ speaker, removeSpeaker }) => {
   // add CSS
   return (
     <div>
-      {speaker.id}
-      {speaker.email}
-      <button  onClick={()=> removeSpeaker(speaker.id)}> Remove </button>
+      <ul className='flex flex-row items-center justify-between w-96 border-b-2'>
+        <p className='font-inter text-gray-500'>{speaker.email}</p>
+        <button onClick={() => removeSpeaker(speaker.id)}>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            className='h-6 w-6 mx-10 my-4'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='#EF4444'
+          >
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              strokeWidth={2}
+              d='M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z'
+            />
+          </svg>{' '}
+        </button>
+      </ul>
     </div>
-  )
-}
+  );
+};
 
 const CREATE_EVENT_MUTATION = gql`
   mutation createEvent(
@@ -96,57 +112,57 @@ const CREATE_EVENT_MUTATION = gql`
   }
 `;
 const SPEAKER_EMAIL_QUERY = gql`
-query speakerByEmail ($email: String) {
-    speakerByEmail (email: $email) {
-        id
-        firstName
-        lastName
-        email
-        facebook
-        instagram
-        profilePicture
-        description
+  query speakerByEmail($email: String) {
+    speakerByEmail(email: $email) {
+      id
+      firstName
+      lastName
+      email
+      facebook
+      instagram
+      profilePicture
+      description
     }
   }
-`
+`;
 
 export default function CreateEventTwo({ location }) {
-  
   const [callCreateEvent, { data }] = useMutation(CREATE_EVENT_MUTATION);
-  const [searchmeEmail,setSearchMeEmail] = React.useState('');
+  const [searchmeEmail, setSearchMeEmail] = React.useState('');
   const [speakerinputcount, setSpeakerInputCount] = React.useState(0);
-  const {data:speakerdata} = useQuery(SPEAKER_EMAIL_QUERY,{variables:{email:searchmeEmail}});
+  const { data: speakerdata } = useQuery(SPEAKER_EMAIL_QUERY, {
+    variables: { email: searchmeEmail },
+  });
 
   const [startTime, setStartTime] = React.useState('2018-06-07T00:00');
   const [endTime, setEndTime] = React.useState('');
   const [maxRsvp, setmaxRsvp] = React.useState('');
-  const [speakers,setSpeakers] = React.useState([]);
-  const [speakerinput,setSpeakerInput] = React.useState('');
-  
-  React.useEffect(() => {
-    if(location.state && location.state.speakeremail){
-      setSearchMeEmail(location.state.speakeremail)
-    }
-    if(speakerinput){
-      setSearchMeEmail(speakerinput)
-      setSpeakerInput('')
-    }
-  },[location.state,speakerinputcount])
+  const [speakers, setSpeakers] = React.useState([]);
+  const [speakerinput, setSpeakerInput] = React.useState('');
 
   React.useEffect(() => {
-    if(speakerdata){
-    let speakersids = speakers.map(e => e.id)
-    if(speakersids.includes(speakerdata.speakerByEmail.id)){
-      return 
+    if (location.state && location.state.speakeremail) {
+      setSearchMeEmail(location.state.speakeremail);
     }
-  else{
-    setSpeakers( [...speakers,speakerdata.speakerByEmail])
+    if (speakerinput) {
+      setSearchMeEmail(speakerinput);
+      setSpeakerInput('');
+    }
+  }, [location.state, speakerinputcount]);
+
+  React.useEffect(() => {
+    if (speakerdata) {
+      let speakersids = speakers.map(e => e.id);
+      if (speakersids.includes(speakerdata.speakerByEmail.id)) {
+        return;
+      } else {
+        setSpeakers([...speakers, speakerdata.speakerByEmail]);
       }
     }
-  },[speakerdata])
+  }, [speakerdata]);
   const image = location.state?.logo;
-  if(location.state?.speaker){
-    console.log(location.state.speaker)
+  if (location.state?.speaker) {
+    console.log(location.state.speaker);
   }
   // TODO: input for Tags
   // const [tags, setTags] = React.useState('');
@@ -192,7 +208,7 @@ export default function CreateEventTwo({ location }) {
     let { data, errors: e } = await callCreateEvent({
       variables: {
         address: location.state.address,
-        category: location.state.category, 
+        category: location.state.category,
         tags: ['tag1'],
         city: location.state.city,
         name: location.state.name,
@@ -203,7 +219,7 @@ export default function CreateEventTwo({ location }) {
         kind: 'V',
         maxRsvp: maxRsvp,
         startTime: startTime,
-        speakers: speakers.map(e => e.id)
+        speakers: speakers.map(e => e.id),
       },
     });
     if (e) {
@@ -219,10 +235,10 @@ export default function CreateEventTwo({ location }) {
     }
     return;
   }
-  const removeSpeaker = (speakerid:number) => {
-      let newspeakers = speakers.filter(speaker => speaker.id !==speakerid)
-      setSpeakers(newspeakers)
-    }
+  const removeSpeaker = (speakerid: number) => {
+    let newspeakers = speakers.filter(speaker => speaker.id !== speakerid);
+    setSpeakers(newspeakers);
+  };
   return (
     <div className='h-screen w-screen'>
       <Header />
@@ -248,23 +264,25 @@ export default function CreateEventTwo({ location }) {
             Create Event
           </span>
         </div>
-        <form className='flex flex-col my-8 w-1/4'>
-          <div className='flex items-center justify-between w-full my-2'>
-            <label className='m-2  font-mulish' htmlFor='Start Time'>
+        <form className='flex flex-col my-8 w-2/5'>
+          <div className='flex flex-row items-center w-full my-2'>
+            <label className='w-48 font-mulish' htmlFor='Start Time'>
               Start Time
             </label>
             <input
               name='Start Time'
+              className='rounded-md font-mulish text-gray-500'
               type='datetime-local'
               min='2018-06-07T00:00'
               value={startTime}
               onChange={e => setStartTime(e.target.value)}
             />
-            <label className='m-2  font-mulish' htmlFor='End Time'>
+            <label className='mx-8 w-48 font-mulish' htmlFor='End Time'>
               End Time
             </label>
             <input
               name='End Time'
+              className='rounded-md font-mulish text-gray-500'
               type='datetime-local'
               min={startTime}
               value={endTime}
@@ -281,37 +299,48 @@ export default function CreateEventTwo({ location }) {
             />
           </div> */}
 
-          <label className='my-4 mx-10 font-mulish' htmlFor='limit'>
+          <label className='my-4 font-mulish' htmlFor='limit'>
             Participant Limit
           </label>
           <input
-            className='border border-gray-400 mx-10 p-2 w-80 rounded-lg font-roboto text-sm'
+            className='border border-gray-400 p-2 w-80 rounded-lg font-roboto text-sm'
             type='number'
             name='limit'
             value={maxRsvp}
             onChange={e => setmaxRsvp(e.target.value)}
           />
           <div>
-            <p className='font-mulish mx-10 my-4 mb-6'>Speaker</p>
-            <div className='flex flex-row'>
+            <p className='font-mulish my-4 mb-6'>Speaker</p>
+            <div className='flex flex-row items-center'>
               <input
                 type='text'
                 placeholder='Add Speaker'
-                className='placeholder-gray-400 mx-10 border-none rounded-md text-xs w-full bg-gray-100 font-mulish'
+                className='placeholder-gray-400 h-12 border-none rounded-md text-md w-full bg-gray-100 font-mulish'
                 value={speakerinput}
-                onChange={(e) => setSpeakerInput(e.target.value)}
+                onChange={e => setSpeakerInput(e.target.value)}
               />
-              <button className='text-white text-sm bg-blue-400 py-2 px-4 rounded-md font-inter' onClick={(e) => {e.preventDefault();setSpeakerInputCount(speakerinputcount+1)}}>
+              <button
+                className='text-white text-sm bg-blue-400 mx-8 h-8 w-24 rounded-md font-inter'
+                onClick={e => {
+                  e.preventDefault();
+                  setSpeakerInputCount(speakerinputcount + 1);
+                }}
+              >
                 Search
               </button>
-              <button className='text-white text-sm bg-blue-400 py-2 px-4 rounded-md font-inter' onClick={(e) => {e.preventDefault();navigate('/Create/Speaker',location)}}>
+              <button
+                className='text-white text-sm bg-blue-400 py-2 px-4 rounded-md font-inter'
+                onClick={e => {
+                  e.preventDefault();
+                  navigate('/Create/Speaker', location);
+                }}
+              >
                 New Speaker
               </button>
-              
             </div>
-            {
-                speakers.map(e => <SpeakerCard speaker={e} removeSpeaker={removeSpeaker}/>)
-              }
+            {speakers.map(e => (
+              <SpeakerCard speaker={e} removeSpeaker={removeSpeaker} />
+            ))}
           </div>
         </form>
         <button
