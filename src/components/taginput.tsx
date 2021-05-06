@@ -23,11 +23,14 @@ export default function TagInput({ tags, setTags }) {
         }}
       />
 
-      {tags.map((e, i) => (
+      {tags.map((tag, i) => (
         <li key={i}>
           <div className='flex flex-row'>
-            {e}
-            <button>
+            {tag}
+            <button onClick={() => {
+                setTags( tags.filter(e => e !==tag))
+            }
+            }>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 className='h-6 w-6'
@@ -43,7 +46,7 @@ export default function TagInput({ tags, setTags }) {
                 />
               </svg>
             </button>
-          </div>{' '}
+          </div>
         </li>
       ))}
     </>
