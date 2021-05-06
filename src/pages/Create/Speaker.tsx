@@ -108,7 +108,8 @@ export default function UpdateEventTwo({ location }) {
 
     let r = await fetch('http://localhost:8000/graphql/', requestOptions)
       .then(response => response.json())
-      .catch(error => console.log('error', error));
+      .catch(error => {console.log('error', error);
+    alert("image upload error "+JSON.stringify(error))});
 
     return r.data.updateSpeakerpicture.success;
   }
@@ -134,6 +135,7 @@ export default function UpdateEventTwo({ location }) {
       navigate('/Create/Event/createEventPage2', newlocation);
     } else {
       console.error('Failed to upload Speaker Photo');
+      alert('Failed to upload Speaker Photo');
     }
     return;
   }

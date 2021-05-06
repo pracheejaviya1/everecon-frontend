@@ -140,7 +140,10 @@ export default function CreateCommunityOne() {
 
     let r = await fetch(graphqlurl, requestOptions)
       .then(response => response.json())
-      .catch(error => console.log('error', error));
+      .catch(error => {
+        console.log('error', error);
+        alert('image upload error ' + JSON.stringify(error));
+      });
 
     return r.data.updateCommunitybanner.success;
   }
@@ -163,17 +166,20 @@ export default function CreateCommunityOne() {
     });
     if (e) {
       console.log(e.graphQLErrors[0].message);
+      alert(e.graphQLErrors[0].message);
       return;
     }
 
     let communityid = data.createCommunity.community.id;
 
     if (uploadLogo(communityid)) {
+      alert('community created');
       navigate('/Create/Community/createCommunityPage2', {
         state: { communityid },
       });
     } else {
       console.error('Failed to upload Community Logo');
+      alert('Failed to upload Community Logo');
     }
     return;
   }

@@ -60,6 +60,7 @@ export default function SettingSecurity() {
   const handleSubmit = () => {
     if (password !== confirmpassword) {
       console.error("Confirm Password doesn't match password");
+      alert("Confirm Password doesn't match password");
       setPassword('');
       setConfirmPassword('');
       return;
@@ -71,7 +72,10 @@ export default function SettingSecurity() {
       },
     })
       .then(r => console.log('Updated Security'))
-      .catch(e => console.error(e.graphQLErrors));
+      .catch(e => {
+        console.error(e.graphQLErrors);
+        alert(JSON.stringify(e));
+      });
     setPassword('');
     setConfirmPassword('');
   };
