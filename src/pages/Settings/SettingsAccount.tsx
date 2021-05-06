@@ -333,7 +333,10 @@ export default function SettingAccount() {
             <div className='flex items-center justify-between w-1/5'>
               <figure>
                 <label className='flex items-center'>
-                  <img src={profileURL} className='w-16 h-16 rounded-full' />
+                  <img
+                    src={profileURL}
+                    className='object-cover w-16 h-16 rounded-full'
+                  />
                   <input
                     type='file'
                     className='hidden'

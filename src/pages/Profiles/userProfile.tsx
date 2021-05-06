@@ -230,7 +230,7 @@ export default function UserProfile() {
   return (
     <div className='h-screen w-screen'>
       <Header />
-      <div className='flex flex-col w-1/2 mx-auto items-center justify-center'>
+      <div className='flex flex-col object-cover w-1/2 mx-auto items-center justify-center'>
         <img
           src={mediaurl + data.myprofile.profile.profilePicture}
           className='my-8 h-28 w-28 rounded-full'

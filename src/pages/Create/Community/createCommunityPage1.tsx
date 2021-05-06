@@ -205,7 +205,10 @@ export default function CreateCommunityOne() {
         </div>
         <figure className='mt-8 mb-6'>
           <label>
-            <img className='h-40 w-60 rounded-lg' src={logoURL} />
+            <img
+              className='w-60 rounded-lg h-64 object-contain'
+              src={logoURL}
+            />
             <input type='file' className='hidden' onChange={handleFileChange} />
             <figcaption className='py-2 text-center font-mulish'>
               Upload Community photo

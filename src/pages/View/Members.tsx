@@ -167,7 +167,7 @@ function MemberCard(props) {
     <div
       className={`${
         disp === false ? 'hidden' : ''
-      } flex items-center justify-between font-mulish border-b-2 py-4 border-gray-400`}
+      } flex items-center justify-between font-mulish border-b-2 py-4 border-gray-200`}
     >
       <div className='flex'>
         <img
@@ -349,18 +349,18 @@ export default function Members(props) {
   return (
     <div className='h-screen font-inter'>
       <Header />
-      <div className='flex w-3/4 items-start my-36 mx-auto'>
+      <div className='flex w-3/4 items-start my-16 mx-auto'>
         <div>
           <img
             src={mediaurl + data?.communityById.logo}
             className='rounded-lg mx-2 my-4 h-20 w-40'
           />
-          <h2 className='font-bold text-xl text-center'>
+          <h2 className='text-semibold text-xl w-40 font-mulish text-center'>
             {data?.communityById.name}
           </h2>
         </div>
-        <div className='flex flex-col w-2/3 mx-10 h-3/4 justify-between '>
-          <div className='flex items-center border-b-2 border-gray-400'>
+        <div className='flex flex-col w-2/3 mx-24 h-3/4 justify-between '>
+          <div className='flex items-center border-b-2 border-gray-200'>
             <Link to={'/community/' + uid}>
               <svg
                 xmlns='https://www.w3.org/2000/svg'
@@ -377,7 +377,9 @@ export default function Members(props) {
                 />
               </svg>
             </Link>
-            <h2 className='text-2xl font-bold mx-2 my-4'>Members</h2>
+            <h2 className='text-semibold text-2xl font-mulish mx-2 my-4'>
+              Members
+            </h2>
           </div>
           <ul className='flex my-6 list-none w-1/3 justify-between'>
             <li

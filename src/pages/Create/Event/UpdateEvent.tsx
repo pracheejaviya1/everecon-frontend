@@ -46,9 +46,10 @@ export default function UpdateEventTwo(props: UpdateProps) {
         <div className='flex mx-auto w-2/3 font-mulish my-4'>
           <label>
             <img
-              className='h-48 w-72 items-center justify-between rounded-lg hover:shadow-lg'
+              className='h-48 object-contain items-center justify-between rounded-lg hover:shadow-lg'
               src={EventImage}
             />
+
             <input type='file' className='hidden' />
             <figcaption className='py-2 text-center items-center justify-between text-xs font-mulish'>
               Update Event photo

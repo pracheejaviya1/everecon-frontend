@@ -171,7 +171,7 @@ export default function EventDesc(props: any) {
     <div className='flex items-start justify-between w-full my-2 font-inter'>
       <div className='w-1/2 my-2'>
         <img
-          className='rounded-md h-48 w-96'
+          className='h-64 object-contain rounded-md'
           src={mediaurl + props.eventData.featuredImage}
         />
         <h2 className='my-4 text-xl font-semibold'>Details</h2>
