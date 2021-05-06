@@ -6,6 +6,8 @@ import CommunityCard from '../../components/cards/landing/landingCommunityCard';
 import EventsCard from '../../components/cards/landing/landingEventsCard';
 import Header from '../../components/header';
 import UserContext from '../../context/usercontext.js';
+import animationData from '../../animations/atomblue.json';
+import Lottie from 'react-lottie';
 
 const ALL_COMMUNITIES_QUERY = gql`
   query communityList(
@@ -196,19 +198,29 @@ export default function Landing() {
     setMyProfile(profile_data.myprofile);
     //console.log(myprofile);
   }
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
   return (
     <div>
       <Header />
-      <div className='m-auto'>
+      <div className='m-auto mt-6'>
         <div className='m-3 flex align-items-center justify-evenly'>
-          <img
+          {/* <img
             src={landingImage}
             className='h-36 rounded-lg'
             alt='landing image'
-          />
+          /> */}
+          <Lottie options={defaultOptions} height={400} width={400} />
           <div className='w-1/2 flex flex-col align-items-center justify-evenly '>
             <h1 className='font-inter font-extralight text-2xl'>ABOUT US</h1>
-            <span className='font-mulish font-thin '>
+            <span className='font-mulish font-light mt-3 w-2/3 '>
               Communities are a way for people to come together and pursue
               similar interests. People make communities that operate like a
               small organization - they have roles (leader, core members,

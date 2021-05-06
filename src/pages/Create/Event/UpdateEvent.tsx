@@ -34,20 +34,6 @@ export default function UpdateEventTwo(props: UpdateProps) {
       <div className='flex flex-col my-8 justify-center items-center ml-12 mr-0 w-full'>
         <div className='flex items-end justify-between border-b-2 pb-4 w-2/3'>
           <div className='flex items-center justify-center'>
-            <svg
-              xmlns='https://www.w3.org/2000/svg'
-              className='h-5 w-5 mr-2'
-              fill='none'
-              viewBox='0 0 24 24'
-              stroke='currentColor'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M10 19l-7-7m0 0l7-7m-7 7h18'
-              />
-            </svg>
             <h1 className='text-2xl ml-2 font-light text-center font-mulish text-gray-700'>
               Update Event
             </h1>
