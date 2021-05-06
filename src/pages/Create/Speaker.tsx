@@ -126,6 +126,7 @@ export default function UpdateEventTwo({ location }) {
     });
     if (e) {
       console.log(e.graphQLErrors[0].message);
+      alert(e.graphQLErrors[0].message);
       return;
     }
     if (uploadSpeakerPic(data.createSpeaker.speaker.id)) {
