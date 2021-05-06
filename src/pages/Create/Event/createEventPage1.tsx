@@ -1,12 +1,21 @@
+import { gql, useQuery } from '@apollo/client';
 import { Link, navigate } from 'gatsby';
 import * as React from 'react';
 import EventImg from '../../../assets/Images/Rectangle6.png';
 import Header from '../../../components/header';
 
+const CATEGORIES_QUERY = gql`
+query categories{
+    categories{
+        id
+        name
+    }
+}
+`
 export default function CreateEventOne({ location }) {
   const communityid = location.state?.communityid;
   // check communityid else return ERROR probably 404
-
+  const {data:categories_data} = useQuery(CATEGORIES_QUERY);
   const [logo, setLogo] = React.useState(null);
   const [logoURL, setLogoURL] = React.useState(EventImg);
   const [name, setName] = React.useState('');
@@ -88,6 +97,7 @@ export default function CreateEventOne({ location }) {
               value={category}
               onChange={e => setCategory(e.target.value)}
             />
+            {/* add dd category input here */}
           </label>
           <label className='my-2' htmlFor='Event city'>
             <input

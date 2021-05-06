@@ -4,6 +4,18 @@ import * as React from 'react';
 import { graphqlurl } from '../../../components/config';
 import Header from '../../../components/header';
 
+
+const SpeakerCard = ({speaker,removeSpeaker}) => {
+  // add CSS
+  return (
+    <div>
+      {speaker.id}
+      {speaker.email}
+      <button  onClick={()=> removeSpeaker(speaker.id)}> Remove </button>
+    </div>
+  )
+}
+
 const CREATE_EVENT_MUTATION = gql`
   mutation createEvent(
     $address: String
@@ -103,7 +115,7 @@ export default function CreateEventTwo({ location }) {
   
   const [callCreateEvent, { data }] = useMutation(CREATE_EVENT_MUTATION);
   const [searchmeEmail,setSearchMeEmail] = React.useState('');
-  
+  const [speakerinputcount, setSpeakerInputCount] = React.useState(0);
   const {data:speakerdata} = useQuery(SPEAKER_EMAIL_QUERY,{variables:{email:searchmeEmail}});
 
   const [startTime, setStartTime] = React.useState('2018-06-07T00:00');
@@ -113,13 +125,25 @@ export default function CreateEventTwo({ location }) {
   const [speakerinput,setSpeakerInput] = React.useState('');
   
   React.useEffect(() => {
-    if(location.state.speakeremail){
+    if(location.state && location.state.speakeremail){
       setSearchMeEmail(location.state.speakeremail)
     }
-  })
+    if(speakerinput){
+      setSearchMeEmail(speakerinput)
+      setSpeakerInput('')
+    }
+  },[location.state,speakerinputcount])
 
   React.useEffect(() => {
-    setSpeakers([...speakers,speakerdata.speakerByEmail])
+    if(speakerdata){
+    let speakersids = speakers.map(e => e.id)
+    if(speakersids.includes(speakerdata.speakerByEmail.id)){
+      return 
+    }
+  else{
+    setSpeakers( [...speakers,speakerdata.speakerByEmail])
+      }
+    }
   },[speakerdata])
   const image = location.state?.logo;
   if(location.state?.speaker){
@@ -180,6 +204,7 @@ export default function CreateEventTwo({ location }) {
         kind: 'V',
         maxRsvp: maxRsvp,
         startTime: startTime,
+        speakers: speakers.map(e => e.id)
       },
     });
     if (e) {
@@ -195,7 +220,10 @@ export default function CreateEventTwo({ location }) {
     }
     return;
   }
-
+  const removeSpeaker = (speakerid:number) => {
+      let newspeakers = speakers.filter(speaker => speaker.id !==speakerid)
+      setSpeakers(newspeakers)
+    }
   return (
     <div className='h-screen w-screen'>
       <Header />
@@ -271,16 +299,22 @@ export default function CreateEventTwo({ location }) {
                 type='text'
                 placeholder='Add Speaker'
                 className='placeholder-gray-400 mx-10 border-none rounded-md text-xs w-full bg-gray-100 font-mulish'
+                value={speakerinput}
+                onChange={(e) => setSpeakerInput(e.target.value)}
               />
+              <button className='text-white text-sm bg-blue-400 py-2 px-4 rounded-md font-inter' onClick={(e) => {e.preventDefault();setSpeakerInputCount(speakerinputcount+1)}}>
+                Search
+              </button>
               <button className='text-white text-sm bg-blue-400 py-2 px-4 rounded-md font-inter' onClick={(e) => {e.preventDefault();navigate('/Create/Speaker',location)}}>
                 New Speaker
               </button>
+              
             </div>
+            {
+                speakers.map(e => <SpeakerCard speaker={e} removeSpeaker={removeSpeaker}/>)
+              }
           </div>
         </form>
-        {
-          console.log(speakers)
-        }
         <button
           className='text-white text-sm bg-blue-400 py-2 px-4 rounded-lg font-inter'
           onClick={handleSubmit}
