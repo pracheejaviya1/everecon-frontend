@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 context('Actions', () => {
   beforeEach(() => {
     cy.visit('https://everecon-frontend.vercel.app');
