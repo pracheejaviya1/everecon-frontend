@@ -4,7 +4,6 @@ import * as React from 'react';
 import { graphqlurl } from '../../../components/config';
 import Header from '../../../components/header';
 
-
 const SpeakerCard = ({speaker,removeSpeaker}) => {
   // add CSS
   return (
@@ -193,7 +192,7 @@ export default function CreateEventTwo({ location }) {
     let { data, errors: e } = await callCreateEvent({
       variables: {
         address: location.state.address,
-        category: 1, // need support for categories
+        category: location.state.category, 
         tags: ['tag1'],
         city: location.state.city,
         name: location.state.name,

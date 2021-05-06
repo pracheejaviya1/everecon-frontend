@@ -3,6 +3,8 @@ import { Link, navigate } from 'gatsby';
 import * as React from 'react';
 import EventImg from '../../../assets/Images/Rectangle6.png';
 import Header from '../../../components/header';
+import DD_Categories from "../../../components/dd_categories"
+
 
 const CATEGORIES_QUERY = gql`
 query categories{
@@ -20,7 +22,7 @@ export default function CreateEventOne({ location }) {
   const [logoURL, setLogoURL] = React.useState(EventImg);
   const [name, setName] = React.useState('');
   const [address, setAddress] = React.useState('');
-  const [category, setCategory] = React.useState('');
+  const [category, setCategory] = React.useState();
   const [city, setCity] = React.useState('');
   const [country, setCountry] = React.useState('');
   const [description, setDescription] = React.useState('');
@@ -90,14 +92,14 @@ export default function CreateEventOne({ location }) {
           </label>
 
           <label className='my-2' htmlFor='Event category'>
-            <input
+            {/* <input
               className='border border-gray-400 p-2 w-80 rounded-lg font-roboto text-sm'
               placeholder='category'
               name='Event category'
               value={category}
               onChange={e => setCategory(e.target.value)}
-            />
-            {/* add dd category input here */}
+            /> */}
+            <DD_Categories categories={categories_data.categories} selected_category={category} setCategory={setCategory}/>
           </label>
           <label className='my-2' htmlFor='Event city'>
             <input
@@ -138,7 +140,7 @@ export default function CreateEventOne({ location }) {
                 name: name,
                 description: description,
                 address: address,
-                category: category,
+                category: category?.id,
                 city: city,
                 country: country,
                 communityid: communityid,

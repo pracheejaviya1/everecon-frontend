@@ -1,3 +1,4 @@
+
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import * as React from 'react';
@@ -15,8 +16,9 @@ export default function Dropdown({
 }: {
   categories: Category[];
   selected_category: Category;
-  setCategory: { [key: string]: () => void };
+  setCategory:Function;
 }) {
+    console.log(categories)
   return (
     <li className='dropdown flex items-center'>
       <Menu>
@@ -55,7 +57,7 @@ export default function Dropdown({
                               className={`${
                                 active ? 'bg-violet-500' : 'text-gray-900'
                               } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
-                              onClick={setCategory[cat.id]}
+                              onClick={() => setCategory(cat)}
                             >
                               {cat.name}
                             </button>
