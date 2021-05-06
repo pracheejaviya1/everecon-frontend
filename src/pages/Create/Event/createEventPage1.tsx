@@ -99,7 +99,7 @@ export default function CreateEventOne({ location }) {
               value={category}
               onChange={e => setCategory(e.target.value)}
             /> */}
-            <DD_Categories categories={categories_data.categories} selected_category={category} setCategory={setCategory}/>
+            <DD_Categories categories={categories_data?.categories || []} selected_category={category} setCategory={setCategory}/>
           </label>
           <label className='my-2' htmlFor='Event city'>
             <input

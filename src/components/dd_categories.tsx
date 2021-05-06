@@ -18,7 +18,6 @@ export default function Dropdown({
   selected_category: Category;
   setCategory:Function;
 }) {
-    console.log(categories)
   return (
     <li className='dropdown flex items-center'>
       <Menu>
