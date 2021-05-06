@@ -85,7 +85,7 @@ function MemberCard(props) {
       });
       if (e) {
         console.error(e);
-        alert(e.graphQLErrors[0].message);
+        alert(JSON.stringify(e.graphQLErrors[0].message));
         return;
       } else {
         console.log(data);
@@ -109,7 +109,7 @@ function MemberCard(props) {
       });
       if (e) {
         console.error(e);
-        alert(e.graphQLErrors[0].message);
+        alert(JSON.stringify(e.graphQLErrors[0].message));
         return;
       } else {
         console.log(data);

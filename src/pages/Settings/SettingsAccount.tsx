@@ -136,11 +136,11 @@ export default function SettingAccount() {
         alert(JSON.stringify(error));
       });
 
-    return r.data.updateProfpic.success;
+    return r.data.updateProfpic?.success;
   }
 
-  const handleSubmit = () => {
-    call_UpdateProfile({
+  const handleSubmit = async () => {
+    await call_UpdateProfile({
       variables: {
         city: city,
         contact: contact,
@@ -149,7 +149,10 @@ export default function SettingAccount() {
         lastname: lname,
       },
     })
-      .then(r => console.log('Profile Updated'))
+      .then(r => {
+        console.log('Profile Updated');
+        alert('Profile Updated');
+      })
       .catch(e => {
         console.error(e.graphQLErrors);
         alert(JSON.stringify(e));
@@ -165,7 +168,7 @@ export default function SettingAccount() {
       setCity(userdata.myprofile.profile.city);
       setCountry(userdata.myprofile.profile.country);
       setProfileURL(userdata.myprofile.profile.profilePicture);
-      setUserid(userdata.myprofile.profile.id);
+      setUserid(userdata.myprofile.id);
     }
     return;
   }, [userdata, discard]);

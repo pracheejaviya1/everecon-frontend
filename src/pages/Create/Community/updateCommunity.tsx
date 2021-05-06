@@ -211,7 +211,7 @@ export default function UpdateCommunity(props) {
         alert('image upload error ' + JSON.stringify(error));
       });
 
-    return r.data.updateCommunitybanner.success;
+    return r.data.updateCommunitylogo?.success;
   }
 
   async function handleSubmit() {

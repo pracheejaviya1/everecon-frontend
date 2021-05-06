@@ -88,8 +88,10 @@ export default function CreateCommunityTwo({ location }) {
         //TODO:error username not found
         refetch_members();
       })
-      .catch(e => {console.error(e);
-      alert(e.graphQLErrors[0].message);});
+      .catch(e => {
+        console.error(e);
+        alert(JSON.stringify(e.graphQLErrors[0].message));
+      });
   }, [userdata]);
 
   return (

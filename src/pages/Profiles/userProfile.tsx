@@ -255,21 +255,31 @@ export default function UserProfile() {
                 </button>
               ))}
             </div>
-            <Link to='/Create/Community/createCommunityPage1'>
-              Create Community
-            </Link>
+            <div className='px-2'>
+              <Link
+                to='/Create/Community/createCommunityPage1'
+                className='mx-2'
+              >
+                Create Community
+              </Link>
+              <Link to='/Create/Speaker' className='mx-2'>
+                Add New Speaker
+              </Link>
+            </div>
           </div>
         </div>
         {selected === FOLLOWING &&
           data.myprofile.communities.map((e, i) => (
-            <CommunityCard
-              key={i}
-              name={e.name}
-              logo={mediaurl + e.logo}
-              userid={userid}
-              communityid={e.id}
-              refetch={refetch}
-            ></CommunityCard>
+            <Link to={'/community/' + e.id}>
+              <CommunityCard
+                key={i}
+                name={e.name}
+                logo={mediaurl + e.logo}
+                userid={userid}
+                communityid={e.id}
+                refetch={refetch}
+              ></CommunityCard>
+            </Link>
           ))}
         {selected === EVENTS &&
           data.myprofile.eventsAttended.map((e, i) => (

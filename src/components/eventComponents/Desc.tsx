@@ -282,7 +282,7 @@ export default function EventDesc(props: any) {
         </div>
       </div>
       <div className='flex flex-col items-center justify-around'>
-        <SpeakerBlock />
+        <SpeakerBlock speakerData={props.eventData?.speakers} />
         <EventAction
           iscore={props.eventData.iscore}
           isvolunteer={props.eventData.isvolunteer}

@@ -32,7 +32,7 @@ export default function Signin(props) {
         navigate('/Landing/landing');
         return;
       })
-      .catch(e => setError(e.graphQLErrors[0].message));
+      .catch(e => setError(JSON.stringify(e.graphQLErrors[0].message)));
   };
   const input_class: string =
     'border-gray-200 p-3 text-sm w-full my-2 rounded-xl font-roboto focus:outline-none focus:ring focus:border-green-100';

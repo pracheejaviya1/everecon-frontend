@@ -185,13 +185,25 @@ export default function Landing() {
 
   const [myprofile, setMyProfile] = React.useContext(UserContext);
   // TODO : handling GraphQL Error
-  const { data: community_data } = useQuery(ALL_COMMUNITIES_QUERY, {
-    variables: { kind: 0, length: 1, filter: '', desc: true },
-  });
-  const { data: events_data } = useQuery(ALL_EVENTS_QUERY, {
-    variables: { kind: 0, length: 1, filter: '', desc: true },
-  });
+  const { data: community_data, refetch: community_refetch } = useQuery(
+    ALL_COMMUNITIES_QUERY,
+    {
+      variables: { kind: 0, length: 1, filter: '', desc: true },
+    }
+  );
+  const { data: events_data, refetch: events_refetch } = useQuery(
+    ALL_EVENTS_QUERY,
+    {
+      variables: { kind: 0, length: 1, filter: '', desc: true },
+    }
+  );
   const { loading, error, data: profile_data } = useQuery(PROFILE_QUERY);
+
+  React.useEffect(() => {
+    community_refetch();
+    events_refetch();
+  },[]);
+
   if (loading) return null;
   if (error) return `Error! ${error}`;
   if (!loading) {

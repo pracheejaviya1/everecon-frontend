@@ -1,4 +1,4 @@
-import { gql, useMutation, useQuery } from '@apollo/client';
+import { gql, useMutation, useLazyQuery } from '@apollo/client';
 import { Link, navigate } from 'gatsby';
 import * as React from 'react';
 import { graphqlurl } from '../../../components/config';
@@ -44,6 +44,7 @@ const CREATE_EVENT_MUTATION = gql`
     $liveUrl: String
     $maxRsvp: Int
     $name: String!
+    $speakers: [ID]
     $startTime: DateTime!
     $tags: [String]
   ) {
@@ -59,6 +60,7 @@ const CREATE_EVENT_MUTATION = gql`
       liveUrl: $liveUrl
       maxRsvp: $maxRsvp
       name: $name
+      speakers: $speakers
       startTime: $startTime
       tags: $tags
     ) {
@@ -127,12 +129,16 @@ const SPEAKER_EMAIL_QUERY = gql`
 `;
 
 export default function CreateEventTwo({ location }) {
+  // console.log(location);
   const [callCreateEvent, { data }] = useMutation(CREATE_EVENT_MUTATION);
-  const [searchmeEmail, setSearchMeEmail] = React.useState('');
-  const [speakerinputcount, setSpeakerInputCount] = React.useState(0);
-  const { data: speakerdata } = useQuery(SPEAKER_EMAIL_QUERY, {
-    variables: { email: searchmeEmail },
-  });
+  const [fetch_speaker, { data: speakerdata }] = useLazyQuery(
+    SPEAKER_EMAIL_QUERY,
+    {
+      onError: e => {
+        alert(JSON.stringify(e.graphQLErrors[0]?.message));
+      },
+    }
+  );
 
   const [startTime, setStartTime] = React.useState('2018-06-07T00:00');
   const [endTime, setEndTime] = React.useState('');
@@ -141,22 +147,15 @@ export default function CreateEventTwo({ location }) {
   const [speakerinput, setSpeakerInput] = React.useState('');
 
   React.useEffect(() => {
-    if (location.state && location.state.speakeremail) {
-      setSearchMeEmail(location.state.speakeremail);
-    }
-    if (speakerinput) {
-      setSearchMeEmail(speakerinput);
-      setSpeakerInput('');
-    }
-  }, [location.state, speakerinputcount]);
-
-  React.useEffect(() => {
+    console.log(speakerdata);
     if (speakerdata) {
       let speakersids = speakers.map(e => e.id);
       if (speakersids.includes(speakerdata.speakerByEmail.id)) {
         return;
       } else {
         setSpeakers([...speakers, speakerdata.speakerByEmail]);
+        console.log(speakerdata);
+        console.log(speakers);
       }
     }
   }, [speakerdata]);
@@ -204,15 +203,17 @@ export default function CreateEventTwo({ location }) {
         alert('image upload error ' + JSON.stringify(error));
       });
 
-    return r.data.updateEventimage.success;
+    return r.data.updateEventimage?.success;
   }
 
   async function handleSubmit() {
+    let speakerarr = speakers.map(e => parseInt(e.id));
+    console.log(speakerarr);
     let { data, errors: e } = await callCreateEvent({
       variables: {
         address: location.state.address,
         category: location.state.category,
-        tags: ['tag1'],
+        tags: location.state.tags,
         city: location.state.city,
         name: location.state.name,
         community: location.state.communityid,
@@ -222,7 +223,7 @@ export default function CreateEventTwo({ location }) {
         kind: 'V',
         maxRsvp: maxRsvp,
         startTime: startTime,
-        speakers: speakers.map(e => e.id),
+        speakers: speakerarr,
       },
     });
     if (e) {
@@ -234,11 +235,13 @@ export default function CreateEventTwo({ location }) {
     alert('Event Created');
     let eventid = data.createEvent.event.id;
     console.log(eventid);
-    if (uploadImage(eventid)) {
+    let uploaded = await uploadImage(eventid);
+    if (uploaded) {
       navigate(`/event/${eventid}`);
     } else {
       console.error('Failed to upload Event Image');
       alert('Failed to upload Event Image');
+      navigate(`/event/${eventid}`);
     }
     return;
   }
@@ -330,12 +333,16 @@ export default function CreateEventTwo({ location }) {
                 className='text-white text-sm bg-blue-400 mx-8 h-8 w-24 rounded-md font-inter'
                 onClick={e => {
                   e.preventDefault();
-                  setSpeakerInputCount(speakerinputcount + 1);
+                  fetch_speaker({
+                    variables: {
+                      email: speakerinput,
+                    },
+                  });
                 }}
               >
                 Search
               </button>
-              <button
+              {/* <button
                 className='text-white text-sm bg-blue-400 py-2 px-4 rounded-md font-inter'
                 onClick={e => {
                   e.preventDefault();
@@ -343,7 +350,7 @@ export default function CreateEventTwo({ location }) {
                 }}
               >
                 New Speaker
-              </button>
+              </button> */}
             </div>
             {speakers.map(e => (
               <SpeakerCard speaker={e} removeSpeaker={removeSpeaker} />

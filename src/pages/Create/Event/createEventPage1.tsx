@@ -147,6 +147,7 @@ export default function CreateEventOne({ location }) {
                 description: description,
                 address: address,
                 category: category?.id,
+                tags: tags,
                 city: city,
                 country: country,
                 communityid: communityid,

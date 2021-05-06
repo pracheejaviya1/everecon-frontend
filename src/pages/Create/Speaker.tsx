@@ -113,35 +113,38 @@ export default function UpdateEventTwo({ location }) {
         alert('image upload error ' + JSON.stringify(error));
       });
 
-    return r.data.updateSpeakerpicture.success;
+    return r.data.updateSpeakerpicture?.success;
   }
   async function handleSubmit() {
-    let { data, error: e } = await callCreateSpeaker({
-      variables: {
-        email: email,
-        facebook: facebook,
-        firstName: fname,
-        lastName: lname,
-        instagram: instagram,
-        description: 'Just a speaker',
-      },
-    });
-    if (e) {
-      console.log(e.graphQLErrors[0].message);
-      alert(e.graphQLErrors[0].message);
-      return;
-    } else {
-      alert('created speaker');
-    }
-    if (uploadSpeakerPic(data.createSpeaker.speaker.id)) {
-      let newlocation = JSON.parse(JSON.stringify(location));
-      let speakeremail = data.createSpeaker.speaker.email;
-      newlocation.state.speakeremail = speakeremail;
-      alert('speaker profile photo upload successful');
-      navigate('/Create/Event/createEventPage2', newlocation);
-    } else {
-      console.error('Failed to upload Speaker Photo');
-      alert('Failed to upload Speaker Photo');
+    try {
+      let { data, error: e } = await callCreateSpeaker({
+        variables: {
+          email: email,
+          facebook: facebook,
+          firstName: fname,
+          lastName: lname,
+          instagram: instagram,
+          description: 'Just a speaker',
+        },
+      });
+      if (e) {
+        console.log(e.graphQLErrors[0].message);
+        alert(JSON.stringify(e.graphQLErrors[0].message));
+        return;
+      } else {
+        alert('created speaker');
+      }
+
+      if (uploadSpeakerPic(data.createSpeaker.speaker.id)) {
+        alert('speaker profile photo upload successful');
+        navigate('/Landing/landing');
+      } else {
+        console.error('Failed to upload Speaker Photo');
+        alert('Failed to upload Speaker Photo');
+      }
+    } catch (e) {
+      console.log(JSON.stringify(e.graphQLErrors[0].message));
+      alert(JSON.stringify(e.graphQLErrors[0].message));
     }
     return;
   }
@@ -157,9 +160,7 @@ export default function UpdateEventTwo({ location }) {
               fill='none'
               viewBox='0 0 24 24'
               stroke='currentColor'
-              onClick={() =>
-                navigate('/Create/Event/createEventPage2', location)
-              }
+              onClick={() => navigate('/Landing/landing')}
             >
               <path
                 strokeLinecap='round'
@@ -255,35 +256,6 @@ export default function UpdateEventTwo({ location }) {
                   onChange={e => setEmail(e.target.value)}
                 />
               </div>
-              {/* <div className='flex flex-row items-center mt-2  '>
-                <label
-                  htmlFor='website'
-                  className='mb-1 font-mulish text-lg mt-1 w-24 mx-6'
-                >
-                  Website
-                </label>
-                <input
-                  type='url'
-                  className='rounded-lg bg-gray-100 border-gray-100 w-96'
-                  value={website}
-                  onChange={e => setWebsite(e.target.value)}
-                />
-              </div> */}
-              {/* <div className='flex flex-row items-center mt-2  '>
-                <label
-                  htmlFor='linkedin url'
-                  className='mb-1 font-mulish w-24 text-lg mt-1 mx-6'
-                >
-                  LinkedIn
-                </label>
-                <input
-                  className='rounded-lg bg-gray-100 border-gray-100 w-96'  
-                  type='url'
-                  value={linkedin}
-                  onChange={e => setLinkedin(e.target.value)}
-                
-                />
-              </div> */}
               <div className='flex flex-row items-center mt-2  '>
                 <label
                   htmlFor='instagram url'
@@ -312,21 +284,6 @@ export default function UpdateEventTwo({ location }) {
                   onChange={e => setFacebook(e.target.value)}
                 />
               </div>
-              {/* <div className='flex flex-row items-center mt-2  '>
-                <label
-                  htmlFor='twitter url'
-                  className='mb-1 font-mulish w-24 text-lg mt-1 mx-6'
-                >
-                  Twitter
-                </label>
-                <input
-                  className='rounded-lg bg-gray-100 border-gray-100 w-96'
-                  type='url'
-                  value={twitter}
-                  onChange={e => setTwitter(e.target.value)}
-                
-                />
-              </div> */}
             </div>
           </div>
         </div>
