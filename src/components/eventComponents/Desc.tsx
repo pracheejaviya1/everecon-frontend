@@ -172,13 +172,13 @@ export default function EventDesc(props: any) {
       <div className='w-1/2 my-2'>
         <img
           className='rounded-md h-48 w-96'
-          src={mediaurl + props.eventData.featuredImage}
+          src={mediaurl + props.eventData?.featuredImage}
         />
         <h2 className='my-4 text-xl font-semibold'>Details</h2>
         <div>
           <div className='flex flex-row mt-6 w-4/5'>
             <p className='font-inter text-lg font-light'>
-              {props.eventData.description}
+              {props.eventData?.description}
             </p>
           </div>
           <hr className='my-4' />
@@ -186,19 +186,19 @@ export default function EventDesc(props: any) {
           <div className='flex flex-row mt-6'>
             <p className='text-xl font-mulish'>Address</p>
             <p className='font-mulish text-base mx-14 font-light'>
-              {props?.eventData.address || 'address'}
+              {props?.eventData?.address || 'address'}
             </p>
           </div>
           <div className='flex flex-row'>
             <p className=' text-xl font-mulish'>City</p>
             <p className='font-mulish text-base mx-24 font-light'>
-              {props?.eventData.city || 'city'}
+              {props?.eventData?.city || 'city'}
             </p>
           </div>
           <div className='flex flex-row'>
             <p className=' text-xl font-mulish'>Country</p>
             <p className='font-mulish text-base mx-16 font-light'>
-              {props?.eventData.country || 'country'}
+              {props?.eventData?.country || 'country'}
             </p>
           </div>
 
@@ -219,13 +219,13 @@ export default function EventDesc(props: any) {
                 Start Time
               </label>
               <p className='rounded-lg mx-5 w-96 font-inter text-green-500 mx-12 text-lg font-light'>
-                {props?.eventData.startTime || 'startTime'}
+                {props?.eventData?.startTime || 'startTime'}
               </p>
               <label htmlFor='end time' className='text-md w-48 font-inter'>
                 End Time
               </label>
               <p className='rounded-lg mx-5 w-96 font-inter text-green-500 mx-12 text-lg font-light'>
-                {props?.eventData.endTime || 'endTIme'}
+                {props?.eventData?.endTime || 'endTIme'}
               </p>
             </div>
             <div className='flex flex-row items-center mt-6'>
@@ -233,7 +233,7 @@ export default function EventDesc(props: any) {
                 Category
               </label>
               <p className='rounded-lg mx-5 w-96 font-inter text-orange-600 mx-12 text-lg font-light'>
-                {props?.eventData.category.name || 'category'}
+                {props?.eventData.category?.name || 'category'}
               </p>
             </div>
             <div className='flex flex-row items-center mt-6'>
@@ -241,7 +241,7 @@ export default function EventDesc(props: any) {
                 Tags
               </label>
               <p className='rounded-lg mx-20 w-96 font-inter text-orange-600 mx-12 text-lg font-light'>
-                {props.eventData.tags.map(e => (
+                {props.eventData?.tags.map(e => (
                   <Tag title={e.name} />
                 ))}
               </p>
@@ -266,13 +266,13 @@ export default function EventDesc(props: any) {
 
             <div className='flex flex-row items-center mt-3'>
               <p className='rounded-lg w-96 font-inter text-orange-600 text-lg font-light'>
-                {props.eventData.community.name}
+                {props.eventData.community?.name}
               </p>
             </div>
             <div className='flex flex-col items-start mt-3'>
               <p className='rounded-lg w-96 font-inter text-orange-600 text-md font-light'>
                 <a href={'mailto:' + props.eventData.community.email}>
-                  {props.eventData.community.email}
+                  {props.eventData.community?.email}
                 </a>
               </p>
             </div>
