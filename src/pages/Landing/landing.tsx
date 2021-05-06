@@ -1,7 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 import { Link } from 'gatsby';
 import * as React from 'react';
-import landingImage from '../../assets/Images/evereconLanding.png';
+import Gradient from '../../assets/Designs/gradient.png';
 import CommunityCard from '../../components/cards/landing/landingCommunityCard';
 import EventsCard from '../../components/cards/landing/landingEventsCard';
 import Header from '../../components/header';

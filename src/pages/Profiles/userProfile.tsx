@@ -205,6 +205,44 @@ function MyCommunityCard({ name, logo, userid, communityid }) {
   );
 }
 
+function DetailsCard(props: any) {
+  return (
+    <div className='p-5 w-full shadow-md mx-auto rounded-lg my-2 mt-3 font-inter flex flex-row'>
+      <div className='flex flex-col w-1/2'>
+        <div className='flex flex-row'>
+          <p className='text-gray-500 text-md w-24'> Username</p>
+          <p className='text-gray-700 text-lg mx-10'>{props.username}</p>
+        </div>
+        <h2 className='text-2xl text-blue-500 mt-2'>Contact</h2>
+        <hr className='w-16 mb-2 border border-gray-500' />
+        <div className='flex flex-row'>
+          <p className='text-gray-500 text-md w-24'> Phone No</p>
+          <p className='text-gray-700 text-lg mx-10'>{props.contact}</p>
+        </div>
+        <div className='flex flex-row'>
+          <p className='text-gray-500 text-md w-24'> Email</p>
+          <p className='text-gray-700 text-lg mx-10'>{props.email}</p>
+        </div>
+
+        <h2 className='text-2xl text-blue-500 mt-4'>Address</h2>
+        <hr className='w-16 mb-2 border border-gray-500' />
+        <div className='flex flex-row'>
+          <p className='text-gray-500 text-md w-24'> City</p>
+          <p className='text-gray-700 text-lg mx-10'>{props.city}</p>
+        </div>
+        <div className='flex flex-row'>
+          <p className='text-gray-500 text-md w-24'> Country</p>
+          <p className='text-gray-700 text-lg mx-10'>{props.country}</p>
+        </div>
+      </div>
+      <div className='items-end flex flex-col w-1/2'>
+        <p className='text-green-600'>Last Active</p>
+        <p>{props.lastLogin}</p>
+      </div>
+    </div>
+  );
+}
+
 const FOLLOWING = 0;
 const EVENTS = 1;
 const COMMUNITYSET = 2;
@@ -271,6 +309,7 @@ export default function UserProfile() {
               refetch={refetch}
             ></CommunityCard>
           ))}
+
         {selected === EVENTS &&
           data.myprofile.eventsAttended.map((e, i) => (
             <div className='w-full'>
@@ -293,7 +332,20 @@ export default function UserProfile() {
               communityid={e.id}
             ></MyCommunityCard>
           ))}
-        {selected === DETAILS ? JSON.stringify(data.myprofile) : ''}
+        {/* {selected === DETAILS ? JSON.stringify(data.myprofile) : ''
+        } */}
+        {selected === DETAILS ? (
+          <DetailsCard
+            username={data.myprofile.username}
+            city={data.myprofile.profile.city}
+            country={data.myprofile.profile.country}
+            lastLogin={data.myprofile.lastLogin}
+            email={data.myprofile.email}
+            contact={data.myprofile.profile.contact}
+          ></DetailsCard>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
