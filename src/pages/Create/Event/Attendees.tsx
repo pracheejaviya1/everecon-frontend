@@ -128,13 +128,13 @@ export default function ViewEvent(props) {
           <h2 className='font-inter text-2xl font-base'>Attendees</h2>
         </div>
 
-        <div className='flex flex-row align-center '>
+        <div className='flex flex-row align-center font-inter '>
           <button
             className={
               sel
-                ? 'text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none' +
+                ? 'text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none font-inter' +
                   activetab
-                : 'text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none'
+                : 'text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none font-inter'
             }
             onClick={() => {
               setSel(true);
@@ -145,9 +145,9 @@ export default function ViewEvent(props) {
           <button
             className={
               !sel
-                ? 'text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none' +
+                ? 'text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none font-inter' +
                   activetab
-                : 'text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none'
+                : 'text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none font-inter'
             }
             onClick={() => {
               setSel(false);

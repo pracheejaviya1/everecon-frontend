@@ -12,7 +12,7 @@ export default function CommunityCard({ logo, id, name }) {
           src={mediaurl + logo}
           alt='community logo'
         />
-        <h3 className='p-3 text-xl font-inter text-center'>{name}</h3>
+        <h3 className='p-3 w-72 text-xl font-inter text-center'>{name}</h3>
       </div>
     </Link>
   );

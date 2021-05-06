@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 context('Actions', () => {
   beforeEach(() => {
     cy.visit('https://everecon-frontend.vercel.app');
@@ -49,7 +51,7 @@ context('Actions', () => {
     cy.get(
       '#gatsby-focus-wrapper > div > div > div:nth-child(2) > div > a > div > img'
     );
-    cy.get('#gatsby-focus-wrapper > div > div > div:nth-child(2) > a > span')
+    cy.get('#gatsby-focus-wrapper > div > div > div:nth-child(2) > a')
       .should('contain.text', 'See more')
       .click();
     cy.get('#gatsby-focus-wrapper > div > div > div > h1').should(
@@ -57,7 +59,7 @@ context('Actions', () => {
       'Explore Communities'
     );
     cy.get(
-      '#gatsby-focus-wrapper > div > div > div > a > div > div.float-right > button'
+      '#gatsby-focus-wrapper > div > div > div > a:nth-child(2) > div > div.float-right > button'
     )
       .click({ waitForAnimations: true })
       .should('contain.text', 'Unfollow')
@@ -72,7 +74,7 @@ context('Actions', () => {
       'Explore Communities'
     );
     cy.get(
-      '#gatsby-focus-wrapper > div > div > div:nth-child(2) > div > a > div > img'
+      '#gatsby-focus-wrapper > div > div > div:nth-child(2) > div > a:nth-child(2) > div > img'
     ).click();
 
     cy.get(

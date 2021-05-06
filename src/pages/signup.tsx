@@ -92,12 +92,12 @@ export default function Signup() {
       .catch(e => setError(e.graphQLErrors[0].message));
   };
   const btn_class: string =
-    'p-4 my-2 rounded-xl w-full border border-solid border-gray-200 text-gray-700 font-roboto ';
+    'p-3 my-3 rounded-xl w-full text-white text-lg font-roboto bg-gradient-to-r from-indigo-500 via-blue-400 to-blue-300 shadow-lg ';
   const input_class: string =
-    'border-gray p-3 text-xs block w-full my-4 rounded-xl font-roboto';
+    'border-gray-200 p-3 text-sm w-full my-2 rounded-xl font-roboto focus:outline-none focus:ring focus:border-green-100';
 
   return (
-    <div className='flex flex-col bg-landing bg-no-repeat bg-left-bottom items-center mx-auto w-full'>
+    <div className='flex flex-col bg-landing bg-no-repeat bg-left-bottom items-center mx-auto h-screen w-full'>
       <img
         src={LandingTitle}
         width='487'
@@ -105,7 +105,9 @@ export default function Signup() {
         className='mt-10'
         alt='EveRecon'
       />
-      <span className='m-1 mt-16 font-mulish text-2xl'>Sign Up</span>
+      <span className='m-1 mt-12 font-mulish text-3xl mb-4 text-gray-600'>
+        Sign Up
+      </span>
       <form className='w-1/6'>
         <input
           type='text'
