@@ -123,8 +123,7 @@ export default function ViewEvent(props) {
           datetime={new Date(data.eventById.startTime)}
           title={data.eventById.name}
         />
-        <EventDesc eventData={data.eventById}
-        />
+        <EventDesc eventData={data.eventById} />
       </div>
     </div>
   );
