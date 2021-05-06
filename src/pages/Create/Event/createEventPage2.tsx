@@ -209,39 +209,43 @@ export default function CreateEventTwo({ location }) {
   async function handleSubmit() {
     let speakerarr = speakers.map(e => parseInt(e.id));
     console.log(speakerarr);
-    let { data, errors: e } = await callCreateEvent({
-      variables: {
-        address: location.state.address,
-        category: location.state.category,
-        tags: location.state.tags,
-        city: location.state.city,
-        name: location.state.name,
-        community: location.state.communityid,
-        country: location.state.country,
-        description: location.state.description,
-        endTime: endTime,
-        kind: 'V',
-        maxRsvp: maxRsvp,
-        startTime: startTime,
-        speakers: speakerarr,
-      },
-    });
-    if (e) {
-      console.error(e);
-      alert(JSON.stringify(e));
-      return;
-    }
+    try {
+      let { data, errors: e } = await callCreateEvent({
+        variables: {
+          address: location.state.address,
+          category: location.state.category,
+          tags: location.state.tags,
+          city: location.state.city,
+          name: location.state.name,
+          community: location.state.communityid,
+          country: location.state.country,
+          description: location.state.description,
+          endTime: endTime,
+          kind: 'V',
+          maxRsvp: maxRsvp,
+          startTime: startTime,
+          speakers: speakerarr,
+        },
+      });
+      if (e) {
+        console.error(e);
+        alert(JSON.stringify(e));
+        return;
+      }
 
-    alert('Event Created');
-    let eventid = data.createEvent.event.id;
-    console.log(eventid);
-    let uploaded = await uploadImage(eventid);
-    if (uploaded) {
-      navigate(`/event/${eventid}`);
-    } else {
-      console.error('Failed to upload Event Image');
-      alert('Failed to upload Event Image');
-      navigate(`/event/${eventid}`);
+      alert('Event Created');
+      let eventid = data.createEvent.event.id;
+      console.log(eventid);
+      let uploaded = await uploadImage(eventid);
+      if (uploaded) {
+        navigate(`/event/${eventid}`);
+      } else {
+        console.error('Failed to upload Event Image');
+        alert('Failed to upload Event Image');
+        navigate(`/event/${eventid}`);
+      }
+    } catch (e) {
+      alert(JSON.stringify(e.graphQLErrors[0].message));
     }
     return;
   }
