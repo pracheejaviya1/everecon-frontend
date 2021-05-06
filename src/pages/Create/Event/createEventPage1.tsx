@@ -4,7 +4,7 @@ import * as React from 'react';
 import EventImg from '../../../assets/Images/Rectangle6.png';
 import Header from '../../../components/header';
 import DD_Categories from "../../../components/dd_categories"
-
+import TagInput from "../../../components/taginput";
 
 const CATEGORIES_QUERY = gql`
 query categories{
@@ -19,6 +19,7 @@ export default function CreateEventOne({ location }) {
   // check communityid else return ERROR probably 404
   const {data:categories_data} = useQuery(CATEGORIES_QUERY);
   const [logo, setLogo] = React.useState(null);
+  const [tags,setTags] = React.useState([]);
   const [logoURL, setLogoURL] = React.useState(EventImg);
   const [name, setName] = React.useState('');
   const [address, setAddress] = React.useState('');
@@ -101,6 +102,7 @@ export default function CreateEventOne({ location }) {
             /> */}
             <DD_Categories categories={categories_data?.categories || []} selected_category={category} setCategory={setCategory}/>
           </label>
+          <TagInput tags={tags} setTags={setTags}/>
           <label className='my-2' htmlFor='Event city'>
             <input
               className='border border-gray-400 p-2 w-80 rounded-lg font-roboto text-sm'
