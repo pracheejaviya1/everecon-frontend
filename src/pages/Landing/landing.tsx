@@ -202,7 +202,7 @@ export default function Landing() {
   React.useEffect(() => {
     community_refetch();
     events_refetch();
-  },[]);
+  }, []);
 
   if (loading) return null;
   if (error) return `Error! ${error}`;
@@ -220,7 +220,7 @@ export default function Landing() {
     },
   };
   return (
-    <div>
+    <div className='h-screen w-screen'>
       <Header />
       <div className='m-auto mt-6'>
         <div className='m-3 flex align-items-center justify-evenly'>

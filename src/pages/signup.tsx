@@ -91,6 +91,11 @@ export default function Signup() {
       })
       .catch(e => setError(e.graphQLErrors[0].message));
   };
+  const handleSignin = () => {
+    navigate('/');
+    return;
+  };
+
   const btn_class: string =
     'p-3 my-3 rounded-xl w-full text-white text-lg font-roboto bg-gradient-to-r from-indigo-500 via-blue-400 to-blue-300 shadow-lg ';
   const input_class: string =
@@ -182,9 +187,13 @@ export default function Signup() {
         <span className='text-left font-mulish mr-1 text-sm text-black'>
           Already a user?
         </span>
-        <span className='text-left font-mulish ml-1 text-lg text-blue-600'>
-          <Link to='/Signin/signin'> SignIn </Link>
-        </span>
+        <button
+          className='text-left font-mulish ml-1 text-lg bg-white text-blue-600'
+          onClick={handleSignin}
+        >
+          Signin
+          {/* <Link to='/Signin/signin'> SignIn </Link> */}
+        </button>
       </div>
       <button className='mt-7' onClick={handleSubmit}>
         <span className={btn_class}>Create account</span>

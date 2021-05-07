@@ -5,10 +5,10 @@ import { mediaurl } from '../../config';
 export default function EventCard(props) {
   return (
     <Link to={'/event/' + props.id}>
-      <div className='event_card flex flex-row items-center justify-between p-5 shadow-lg mx-auto rounded-lg w-3/4 text-left my-4'>
+      <div className='event_card flex flex-row items-center justify-between p-5 shadow-lg mx-auto rounded-lg w-full text-left my-4'>
         <div className='flex'>
           <img
-            className='h-40 w-60 rounded-md object-cover'
+            className='h-24 w-48 rounded-md object-cover'
             src={mediaurl + props.imageurl}
           />
           <div className='flex flex-col items-start mx-5 '>
