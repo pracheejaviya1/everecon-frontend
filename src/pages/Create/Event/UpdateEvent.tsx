@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { gql, useQuery, useLazyQuery } from '@apollo/client';
 import EventImage from '../../../assets/Images/community.jpg';
-import Header from '../../../components/header';
 import DD_Categories from '../../../components/dd_categories';
+import Header from '../../../components/header';
 import TagInput from '../../../components/taginput';
-import { graphqlurl } from '../../../components/config';
 
 type UpdateProps = {
   details: string;
@@ -95,7 +94,6 @@ export default function UpdateEventTwo(props: UpdateProps) {
     }
   }, [speakerdata]);
 
-  console.log(props.location);
   return (
     <div className='h-screen w-screen'>
       <Header />
