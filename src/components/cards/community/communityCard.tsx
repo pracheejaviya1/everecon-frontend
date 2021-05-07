@@ -91,10 +91,10 @@ export default function CommunityCard(props) {
   }
   return (
     <Link to={'/community/' + props.id}>
-      <div className='community_card flex flex-row items-center justify-between p-5 shadow-md mx-auto rounded-lg w-3/4 text-left my-2 mt-3'>
+      <div className='community_card flex flex-row items-center justify-between p-5 shadow-md mx-auto rounded-lg text-left my-2 mt-3'>
         <div className='flex'>
           <img
-            className='h-30 w-40 rounded-md object-cover'
+            className='h-24 w-36 rounded-md object-cover'
             src={mediaurl + props.imageurl}
           />
           <div className='flex flex-col mx-5 '>

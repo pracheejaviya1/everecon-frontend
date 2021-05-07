@@ -60,7 +60,7 @@ export default function Header() {
         <li className='m-4'>Help</li>
       </ul>
       <ul className='flex flex-row justify-center'>
-        <li className='my-2 m-7'>
+        <li className=' mt-4 mx-8'>
           <Link to='/Settings/SettingsAccount'>
             <svg
               xmlns='http://www.w3.org/2000/svg'

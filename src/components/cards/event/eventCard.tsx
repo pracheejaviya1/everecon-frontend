@@ -5,7 +5,7 @@ import { mediaurl } from '../../config';
 export default function EventCard(props) {
   return (
     <Link to={'/event/' + props.id}>
-      <div className='event_card flex flex-row items-center justify-between p-5 shadow-lg mx-auto rounded-lg w-2/3 text-left my-4'>
+      <div className='event_card flex flex-row items-center justify-between p-5 shadow-lg mx-auto rounded-lg text-left my-4'>
         <div className='flex'>
           <img
             className='h-24 w-48 rounded-md object-cover'

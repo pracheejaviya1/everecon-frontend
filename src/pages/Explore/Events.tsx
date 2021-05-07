@@ -56,8 +56,8 @@ export default function ExploreCommunity() {
   return (
     <div className='bg-explore_events bg-fixed bg-contain bg-no-repeat bg-bottom'>
       <Header />
-      <div className='flex flex-col divide-y divide-gray-500'>
-        <div>
+      <div className='flex flex-col divide-y items-center divide-gray-500'>
+        <div className='w-2/3'>
           <h1 className='my-5 text-2xl font-mulish text-center'>
             Explore Events
           </h1>

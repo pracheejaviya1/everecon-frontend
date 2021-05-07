@@ -128,7 +128,7 @@ function MemberCard(props) {
     return;
   }
   return (
-    <div className='my-2 flex items-center border-b-2 p-2 border-gray-400'>
+    <div className='my-2 flex items-center border-b-2 p-2 border-gray-400 font-inter'>
       <div className='flex flex-row w-full'>
         <div className='flex'>
           <img

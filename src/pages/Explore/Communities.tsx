@@ -75,8 +75,8 @@ export default function ExploreCommunity() {
   return (
     <div className='bg-explore_communities bg-contain bg-fixed bg-no-repeat bg-bottom'>
       <Header />
-      <div className='flex flex-col divide-y divide-gray-500'>
-        <div>
+      <div className='flex flex-col items-center divide-y divide-gray-500'>
+        <div className='w-2/3'>
           <h1 className='my-5 text-2xl font-mulish text-center'>
             Explore Communities
           </h1>

@@ -157,7 +157,7 @@ function CommunityCard({ name, logo, userid, communityid, refetch }) {
   };
 
   return (
-    <div className='flex flex-row items-center justify-between p-2 shadow-md mx-auto rounded-lg w-full text-left my-2 mt-3'>
+    <div className='flex flex-row items-center justify-between p-2 shadow-md mx-auto rounded-lg text-left my-2 mt-3'>
       <div className='flex'>
         <img className='h-20 w-30 mx-5 my-2 rounded-md' src={logo} />
         <span className='text-2xl my-5 font-semibold mx-5 font-inter'>
@@ -181,7 +181,7 @@ function MyCommunityCard({ name, logo, userid, communityid }) {
     // <div className='flex flex-row items-center justify-between p-2 shadow-md mx-auto rounded-lg w-full text-left my-2 mt-3'>
     <Link
       to={`/community/${communityid}`}
-      className='flex flex-row items-center justify-between p-2 shadow-md mx-auto rounded-lg w-full text-left my-2 mt-3'
+      className='flex flex-row items-center justify-between p-2 shadow-md mx-auto rounded-lg text-left my-2 mt-3'
     >
       <div className='flex'>
         <img
@@ -308,7 +308,7 @@ export default function UserProfile() {
         </div>
         {selected === FOLLOWING &&
           data.myprofile.communities.map((e, i) => (
-            <Link to={'/community/' + e.id}>
+            <Link className='w-full' to={'/community/' + e.id}>
               <CommunityCard
                 key={i}
                 name={e.name}
