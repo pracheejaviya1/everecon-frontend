@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { gql, useQuery } from '@apollo/client';
+import { gql, useQuery, useLazyQuery } from '@apollo/client';
 import EventImage from '../../../assets/Images/community.jpg';
 import Header from '../../../components/header';
 import DD_Categories from '../../../components/dd_categories';
 import TagInput from '../../../components/taginput';
+import { graphqlurl } from '../../../components/config';
 
 type UpdateProps = {
   details: string;
@@ -16,6 +17,46 @@ const CATEGORIES_QUERY = gql`
     }
   }
 `;
+const SPEAKER_EMAIL_QUERY = gql`
+  query speakerByEmail($email: String) {
+    speakerByEmail(email: $email) {
+      id
+      firstName
+      lastName
+      email
+      facebook
+      instagram
+      profilePicture
+      description
+    }
+  }
+`;
+
+const SpeakerCard = ({ speaker, removeSpeaker }) => {
+  return (
+    <div>
+      <ul className='flex flex-row items-center justify-between w-96 border-b-1'>
+        <p className='font-inter text-gray-500'>{speaker.email}</p>
+        <button onClick={() => removeSpeaker(speaker.id)}>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            className='h-6 w-6 mx-10 my-4'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='#EF4444'
+          >
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              strokeWidth={2}
+              d='M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z'
+            />
+          </svg>{' '}
+        </button>
+      </ul>
+    </div>
+  );
+};
 
 export default function UpdateEventTwo(props: UpdateProps) {
   const [fields, setFields] = React.useState([{ value: null }]);
@@ -24,24 +65,35 @@ export default function UpdateEventTwo(props: UpdateProps) {
   const [tags, setTags] = React.useState([]);
   const [startTime, setStartTime] = React.useState('2018-06-07T00:00');
   const [endTime, setEndTime] = React.useState('');
+  const removeSpeaker = (speakerid: number) => {
+    let newspeakers = speakers.filter(speaker => speaker.id !== speakerid);
+    setSpeakers(newspeakers);
+  };
+  const [fetch_speaker, { data: speakerdata }] = useLazyQuery(
+    SPEAKER_EMAIL_QUERY,
+    {
+      onError: e => {
+        alert(JSON.stringify(e.graphQLErrors[0]?.message));
+      },
+    }
+  );
 
-  function handleChange(i, event) {
-    const values = [...fields];
-    values[i].value = event.target.value;
-    setFields(values);
-  }
+  const [speakers, setSpeakers] = React.useState([]);
+  const [speakerinput, setSpeakerInput] = React.useState('');
 
-  function handleAdd() {
-    const values = [...fields];
-    values.push({ value: null });
-    setFields(values);
-  }
-
-  function handleRemove(i) {
-    const values = [...fields];
-    values.splice(i, 1);
-    setFields(values);
-  }
+  React.useEffect(() => {
+    console.log(speakerdata);
+    if (speakerdata) {
+      let speakersids = speakers.map(e => e.id);
+      if (speakersids.includes(speakerdata.speakerByEmail.id)) {
+        return;
+      } else {
+        setSpeakers([...speakers, speakerdata.speakerByEmail]);
+        console.log(speakerdata);
+        console.log(speakers);
+      }
+    }
+  }, [speakerdata]);
 
   console.log(props.location);
   return (
@@ -77,14 +129,6 @@ export default function UpdateEventTwo(props: UpdateProps) {
               placeholder='Event Name'
             />
             <input
-              className=' bg-gray-100 rounded-md p-2 font-sm placeholder-gray my-3 mx-3'
-              placeholder='Date'
-            />
-            <input
-              className=' bg-gray-100 rounded-md p-2 font-sm placeholder-gray my-3 mx-3'
-              placeholder='Time'
-            />
-            <input
               className='bg-gray-100 rounded-md p-2 font-sm placeholder-gray my-3 mx-3'
               placeholder='City'
             />
@@ -92,6 +136,30 @@ export default function UpdateEventTwo(props: UpdateProps) {
               className='bg-gray-100 rounded-md p-2 font-sm placeholder-gray my-3 mx-3'
               placeholder='Country'
             />
+            <div className='col-span-2 flex flex-row items-center justify-between w-full my-2'>
+              <label className='w-36 font-inter' htmlFor='Start Time'>
+                Start Time
+              </label>
+              <input
+                name='Start Time'
+                className='rounded-md font-inter text-gray-500'
+                type='datetime-local'
+                min='2018-06-07T00:00'
+                value={startTime}
+                onChange={e => setStartTime(e.target.value)}
+              />
+              <label className='mx-4 w-36 font-inter' htmlFor='End Time'>
+                End Time
+              </label>
+              <input
+                name='End Time'
+                className='rounded-md font-inter text-gray-500'
+                type='datetime-local'
+                min={startTime}
+                value={endTime}
+                onChange={e => setEndTime(e.target.value)}
+              />
+            </div>
           </div>
           <button
             type='submit'
@@ -131,97 +199,37 @@ export default function UpdateEventTwo(props: UpdateProps) {
               </label>
               <input className='col-span-2 w-72 bg-gray-100 rounded-md p-2 font-sm placeholder-gray my-3 mx-3' />
             </div>
-            {/* <div className='flex items-center justify-between w-2/5'>
-              <label className='text-lg' htmlFor='Category'>
-                Category
-              </label>
-              <input className='col-span-2 w-72 bg-gray-100 rounded-md p-2 font-sm placeholder-gray my-3 mx-3' />
-            </div> */}
 
-            <div className='flex flex-row'>
-              <div className='flex flex-row items-center w-full my-2'>
-                <label className='w-48 font-inter' htmlFor='Start Time'>
-                  Start Time
-                </label>
-                <input
-                  name='Start Time'
-                  className='rounded-md font-inter text-gray-500'
-                  type='datetime-local'
-                  min='2018-06-07T00:00'
-                  value={startTime}
-                  onChange={e => setStartTime(e.target.value)}
-                />
-                <label className='mx-8 w-48 font-inter' htmlFor='End Time'>
-                  End Time
-                </label>
-                <input
-                  name='End Time'
-                  className='rounded-md font-inter text-gray-500'
-                  type='datetime-local'
-                  min={startTime}
-                  value={endTime}
-                  onChange={e => setEndTime(e.target.value)}
-                />
-              </div>
-            </div>
             <hr className='my-4' />
 
-            {/* <div className='flex items-start justify-between w-2/5 mt-2'>
-              <div className='flex flex-row'>
-                <p className='text-lg'>Tags</p>
-                <button type='button' onClick={() => handleAdd()}>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    className='h-6 w-6 mx-3'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    stroke='#60A5FA'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth={2}
-                      d='M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z'
-                    />
-                  </svg>
+            <div>
+              <p className='font-inter my-4 mb-6 text-bold'>Speaker</p>
+              <div className='flex flex-row items-center'>
+                <input
+                  type='text'
+                  placeholder='Add Speaker'
+                  className='placeholder-gray-400 h-12 border-none rounded-md text-md w-1/3 bg-gray-100 font-mulish'
+                  value={speakerinput}
+                  onChange={e => setSpeakerInput(e.target.value)}
+                />
+                <button
+                  className='text-white text-sm bg-blue-400 mx-8 h-8 w-24 rounded-md font-inter'
+                  onClick={e => {
+                    e.preventDefault();
+                    fetch_speaker({
+                      variables: {
+                        email: speakerinput,
+                      },
+                    });
+                  }}
+                >
+                  Search
                 </button>
               </div>
-            </div> */}
-            {/* <div className='flex flex-col w-4/5'>
-              {fields.map((field, idx) => {
-                return (
-                  <div key={`${field}-${idx}`}>
-                    <input
-                      type='text'
-                      className='w-72 bg-gray-100 rounded-md p-1 font-sm placeholder-gray my-3 border border-gray-100'
-                      placeholder='Add Tag'
-                      value={field.value || ''}
-                      onChange={e => handleChange(idx, e)}
-                    />
-                    <button
-                      type='button'
-                      className='m-3 items-center'
-                      onClick={() => handleRemove(idx)}
-                    >
-                      <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        className='h-6 w-6'
-                        fill='none'
-                        viewBox='0 0 24 24'
-                        stroke='#EF4444'
-                      >
-                        <path
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          strokeWidth={2}
-                          d='M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z'
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                );
-              })}
-            </div> */}
+              {speakers.map(e => (
+                <SpeakerCard speaker={e} removeSpeaker={removeSpeaker} />
+              ))}
+            </div>
             <label className='my-2' htmlFor='Event category'>
               {/* <input
               className='border border-gray-400 p-2 w-80 rounded-lg font-roboto text-sm'
@@ -236,7 +244,7 @@ export default function UpdateEventTwo(props: UpdateProps) {
                 setCategory={setCategory}
               />
             </label>
-            <h3 className='my-3'>Tags</h3>
+            <h3 className='my-3 text-semibold'>Tags</h3>
             <TagInput tags={tags} setTags={setTags} />
           </form>
         </div>

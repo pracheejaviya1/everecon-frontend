@@ -106,6 +106,7 @@ export default function ExploreCommunity() {
               Reset
             </span>
           </div> */}
+
           {events_data &&
             events_data.events.map(e => (
               <EventCard
