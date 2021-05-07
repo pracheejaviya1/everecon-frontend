@@ -1,17 +1,19 @@
+import { gql, useQuery } from '@apollo/client';
 import { Link, navigate } from 'gatsby';
 import * as React from 'react';
 import HeadingTitle from '../assets/Images/headingTitle.png';
-import SearchContext from '../context/searchcontext.js';
-import Dropdown from './dropdown';
-import { useQuery, gql } from '@apollo/client';
 import { mediaurl } from '../components/config';
+import SearchContext from '../context/searchcontext';
+import Dropdown from './dropdown';
+
 const PROFILE_QUERY = gql`
   query myprofile {
-    myprofile {
-      profile{
-        profilePicture
-      }
-    }`;
+    profile {
+      profilePicture
+    }
+  }
+`;
+
 export default function Header() {
   const [searchcon, setSearchcon] = React.useContext(SearchContext);
   const [search, setSearch] = React.useState('');

@@ -1,9 +1,9 @@
+import { gql, useLazyQuery, useMutation, useQuery } from '@apollo/client';
 import * as React from 'react';
-import { gql, useQuery, useLazyQuery, useMutation } from '@apollo/client';
+import { graphqlurl, mediaurl } from '../../../components/config';
 import DD_Categories from '../../../components/dd_categories';
 import Header from '../../../components/header';
 import TagInput from '../../../components/taginput';
-import { mediaurl, graphqlurl } from '../../../components/config';
 
 type UpdateProps = {
   details: string;
@@ -16,6 +16,7 @@ const CATEGORIES_QUERY = gql`
     }
   }
 `;
+
 const SPEAKER_EMAIL_QUERY = gql`
   query speakerByEmail($email: String) {
     speakerByEmail(email: $email) {
@@ -150,7 +151,7 @@ export default function UpdateEventTwo(props: UpdateProps) {
   const [description, setDescription] = React.useState('');
   const [online, setOnline] = React.useState(true);
   const { loading, error, data, refetch } = useQuery(EVENT_QUERY, {
-    variables: { id: props?.location.state.eventid },
+    variables: { id: props?.location?.state?.eventid },
   });
 
   const removeSpeaker = (speakerid: number) => {

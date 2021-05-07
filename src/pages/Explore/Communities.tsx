@@ -54,28 +54,6 @@ const LIST_COMMUNITIES = gql`
   }
 `;
 
-function Tag(props: TagProps) {
-  return (
-    <span className='flex items-center mx-2 my-2 font-mulish rounded-lg justify-between border-gray-400 border px-2 h-3/4'>
-      {props.text}{' '}
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        className='h-4 w-4'
-        fill='none'
-        viewBox='0 0 24 24'
-        stroke='currentColor'
-      >
-        <path
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          strokeWidth={2}
-          d='M6 18L18 6M6 6l12 12'
-        />
-      </svg>
-    </span>
-  );
-}
-
 export default function ExploreCommunity() {
   const [num, setNum] = React.useState(0);
   const { data, refetch } = useQuery(LIST_COMMUNITIES, {
@@ -94,8 +72,6 @@ export default function ExploreCommunity() {
     setNum(num + 1);
   }, [data]);
 
-  const input_class: string =
-    'border-gray-100 p-3 text-xs block w-80 rounded-xl font-mulish bg-gray-100';
   return (
     <div className='bg-explore_communities bg-contain bg-fixed bg-no-repeat bg-bottom'>
       <Header />
