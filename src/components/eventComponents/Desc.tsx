@@ -282,17 +282,13 @@ export default function EventDesc(props: any) {
         </div>
       </div>
       <div className='flex flex-col items-center justify-around'>
-<<<<<<< Updated upstream
         <SpeakerBlock
           speakerData={props.eventData?.speakers}
           hostData={props.eventData?.community}
         />
-=======
-        <SpeakerBlock speakerData={props.eventData?.speakers} />
         <p className='my-4 font-inter text-lg text-gray-600'>
           {props.eventData.kind === 'V' ? 'Virtual Event' : 'In-Person Event'}
         </p>
->>>>>>> Stashed changes
         <EventAction
           iscore={props.eventData.iscore}
           isvolunteer={props.eventData.isvolunteer}
