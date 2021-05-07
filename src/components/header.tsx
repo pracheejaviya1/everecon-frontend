@@ -3,10 +3,21 @@ import * as React from 'react';
 import HeadingTitle from '../assets/Images/headingTitle.png';
 import SearchContext from '../context/searchcontext.js';
 import Dropdown from './dropdown';
-
+import { useQuery, gql } from '@apollo/client';
+import { mediaurl } from '../components/config';
+const PROFILE_QUERY = gql`
+  query myprofile {
+    myprofile {
+      profile{
+        profilePicture
+      }
+    }`;
 export default function Header() {
   const [searchcon, setSearchcon] = React.useContext(SearchContext);
   const [search, setSearch] = React.useState('');
+  const { loading, error, data: profile_data } = useQuery(PROFILE_QUERY);
+  if (loading) return null;
+  if (error) return `Error! ${error}`;
   return (
     <nav
       id='header'
@@ -71,19 +82,26 @@ export default function Header() {
         </li>
         <li>
           <Link to='/Profiles/userProfile'>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              className='h-12 w-12'
-              viewBox='0 0 20 20'
-              fill='#737B7D'
-              opacity='0.4'
-            >
-              <path
-                fillRule='evenodd'
-                d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z'
-                clipRule='evenodd'
+            {profile_data?.myprofile.profile.profilePicture ? (
+              <img
+                src={mediaurl + profile_data?.myprofile.profile.profilePicture}
+                className='h-12 w-12 rounded-full my-2 mr-4 object-cover'
               />
-            </svg>
+            ) : (
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                className='h-12 w-12'
+                viewBox='0 0 20 20'
+                fill='#737B7D'
+                opacity='0.4'
+              >
+                <path
+                  fillRule='evenodd'
+                  d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z'
+                  clipRule='evenodd'
+                />
+              </svg>
+            )}
           </Link>
         </li>
       </ul>
