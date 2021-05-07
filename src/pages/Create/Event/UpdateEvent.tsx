@@ -3,7 +3,7 @@ import { gql, useQuery, useLazyQuery, useMutation } from '@apollo/client';
 import DD_Categories from '../../../components/dd_categories';
 import Header from '../../../components/header';
 import TagInput from '../../../components/taginput';
-import { mediaurl } from '../../../components/config';
+import { mediaurl, graphqlurl } from '../../../components/config';
 
 type UpdateProps = {
   details: string;
@@ -211,43 +211,48 @@ export default function UpdateEventTwo(props: UpdateProps) {
 
   async function uploadImage(eventid) {
     // upload logo if logo else return True
-    if (!logo) {
-      console.log('no image');
-      return true;
-    }
-    var myHeaders = new Headers();
-    myHeaders.append(
-      'Authorization',
-      `Bearer ${window.localStorage.getItem('token')}`
-    );
-    var formdata = new FormData();
-    formdata.append(
-      'query',
-      `mutation{
+    console.log(eventid);
+    try {
+      if (!logo) {
+        console.log('no image');
+        return true;
+      }
+      var myHeaders = new Headers();
+      myHeaders.append(
+        'Authorization',
+        `Bearer ${window.localStorage.getItem('token')}`
+      );
+      var formdata = new FormData();
+      formdata.append(
+        'query',
+        `mutation{
     updateEventimage (id: ${eventid}) {
         success
         picture
     }
 }
       `
-    );
-    formdata.append('file', logo);
+      );
+      formdata.append('file', logo);
 
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: formdata,
-      redirect: 'follow',
-    };
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: formdata,
+        redirect: 'follow',
+      };
 
-    let r = await fetch(graphqlurl, requestOptions)
-      .then(response => response.json())
-      .catch(error => {
-        console.log('error', error);
-        alert('image upload error ' + JSON.stringify(error));
-      });
+      let r = await fetch(graphqlurl, requestOptions)
+        .then(response => response.json())
+        .catch(error => {
+          console.log('error', error);
+          alert('image upload error ' + JSON.stringify(error));
+        });
 
-    return r?.data.updateEventimage?.success;
+      return r?.data.updateEventimage?.success;
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   async function handleSubmit() {
@@ -277,9 +282,9 @@ export default function UpdateEventTwo(props: UpdateProps) {
       } else {
         alert('event updated');
       }
-      let eventid = data.updateEvent.event.id;
-      console.log(eventid);
-      let uploaded = await uploadImage(eventid);
+      // let eventid = data.updateEvent.event.id;
+      // console.log(eventid);
+      let uploaded = await uploadImage(id);
       if (uploaded) {
         alert('event photo uploaded');
       } else {
@@ -287,7 +292,7 @@ export default function UpdateEventTwo(props: UpdateProps) {
         alert('Failed to upload Event Image');
       }
     } catch (e) {
-      alert(JSON.stringify(e.graphQLErrors[0].message));
+      alert(JSON.stringify(e));
     }
     return;
   }
