@@ -274,11 +274,10 @@ export default function UpdateEventTwo(props: UpdateProps) {
         console.error(e);
         alert(JSON.stringify(e));
         return;
+      } else {
+        alert('event updated');
       }
-      else{
-        alert("event updated");
-      }
-      let eventid = data.createEvent.event.id;
+      let eventid = data.updateEvent.event.id;
       console.log(eventid);
       let uploaded = await uploadImage(eventid);
       if (uploaded) {
