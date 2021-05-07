@@ -1,8 +1,8 @@
-import * as React from 'react';
 import { gql, useQuery } from '@apollo/client';
+import * as React from 'react';
 import EventImage from '../../../assets/Images/community.jpg';
-import Header from '../../../components/header';
 import DD_Categories from '../../../components/dd_categories';
+import Header from '../../../components/header';
 import TagInput from '../../../components/taginput';
 
 type UpdateProps = {
@@ -43,7 +43,6 @@ export default function UpdateEventTwo(props: UpdateProps) {
     setFields(values);
   }
 
-  console.log(props.location);
   return (
     <div className='h-screen w-screen'>
       <Header />

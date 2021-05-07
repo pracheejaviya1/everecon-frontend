@@ -44,7 +44,7 @@ export default function Dropdown({
             >
               <Menu.Items
                 static
-                className='relative top-24 right-30 w-56 h-48 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'
+                className='relative top-0 right-30 w-56 h-0 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'
               >
                 <div className='px-1 py-1 '>
                   {categories?.map(cat => {
@@ -55,7 +55,7 @@ export default function Dropdown({
                             <button
                               className={`${
                                 active ? 'bg-violet-500' : 'text-gray-900'
-                              } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                              } group flex rounded-md bg-white shadow-lg items-center w-full px-2 py-2 text-sm`}
                               onClick={e => {
                                 e.preventDefault();
                                 setCategory(cat);
