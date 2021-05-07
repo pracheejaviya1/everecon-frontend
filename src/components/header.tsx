@@ -8,8 +8,10 @@ import Dropdown from './dropdown';
 
 const PROFILE_QUERY = gql`
   query myprofile {
-    profile {
-      profilePicture
+    myprofile {
+      profile {
+        profilePicture
+      }
     }
   }
 `;

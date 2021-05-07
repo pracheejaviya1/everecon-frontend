@@ -7,7 +7,7 @@
 module.exports = {
   siteMetadata: {
     title: 'EveRecon',
-    siteUrl: `https://everecon-frontend.vercel.app/`,
+    siteUrl: `https://everecon-frontend.vercel.app`,
   },
   flags: {
     FAST_DEV: true,
