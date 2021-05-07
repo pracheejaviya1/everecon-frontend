@@ -62,7 +62,11 @@ const GET_MEMBERS = gql`
 export default function CreateCommunityTwo({ location }) {
   const communityid = location.state?.communityid;
   const [username, setUsername] = React.useState('');
-  const [fetch_user, { data: userdata }] = useLazyQuery(USERNAME_QUERY);
+  const [fetch_user, { data: userdata }] = useLazyQuery(USERNAME_QUERY, {
+    onError: e => {
+      alert(JSON.stringify(e.graphQLErrors[0]?.message));
+    },
+  });
   const [callAddMember, { data }] = useMutation(ADD_MEMBER_MUTATION);
 
   const { data: data_members, refetch: refetch_members } = useQuery(

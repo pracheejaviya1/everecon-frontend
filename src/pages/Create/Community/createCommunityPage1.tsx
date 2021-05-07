@@ -148,40 +148,45 @@ export default function CreateCommunityOne() {
     return r?.data.updateCommunitylogo?.success;
   }
   async function handleSubmit() {
-    let { data, errors: e } = await callCreateCommunity({
-      variables: {
-        email: email,
-        name: name,
-        description: description,
-        address: address,
-        discord: discord,
-        facebook: facebook,
-        instagram: instagram,
-        linkedin: linkedin,
-        twitter: twitter,
-        webpage: webpage,
-        city: city,
-        country: country,
-      },
-    });
-    if (e) {
+    try {
+      let { data, errors: e } = await callCreateCommunity({
+        variables: {
+          email: email,
+          name: name,
+          description: description,
+          address: address,
+          discord: discord,
+          facebook: facebook,
+          instagram: instagram,
+          linkedin: linkedin,
+          twitter: twitter,
+          webpage: webpage,
+          city: city,
+          country: country,
+        },
+      });
+      if (e) {
+        console.log(e.graphQLErrors[0].message);
+        alert(JSON.stringify(e.graphQLErrors[0].message));
+        return;
+      }
+
+      let communityid = data.createCommunity.community.id;
+
+      if (uploadLogo(communityid)) {
+        alert('community created');
+        navigate('/Create/Community/createCommunityPage2', {
+          state: { communityid },
+        });
+      } else {
+        console.error('Failed to upload Community Logo');
+        alert('Failed to upload Community Logo');
+      }
+      return;
+    } catch (e) {
       console.log(e.graphQLErrors[0].message);
       alert(JSON.stringify(e.graphQLErrors[0].message));
-      return;
     }
-
-    let communityid = data.createCommunity.community.id;
-
-    if (uploadLogo(communityid)) {
-      alert('community created');
-      navigate('/Create/Community/createCommunityPage2', {
-        state: { communityid },
-      });
-    } else {
-      console.error('Failed to upload Community Logo');
-      alert('Failed to upload Community Logo');
-    }
-    return;
   }
   return (
     <div className='h-screen w-screen'>
