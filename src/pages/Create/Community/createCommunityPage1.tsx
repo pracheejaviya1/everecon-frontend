@@ -145,7 +145,7 @@ export default function CreateCommunityOne() {
         alert('image upload error ' + JSON.stringify(error));
       });
 
-    return r.data.updateCommunitylogo?.success;
+    return r?.data.updateCommunitylogo?.success;
   }
   async function handleSubmit() {
     let { data, errors: e } = await callCreateCommunity({

@@ -136,7 +136,7 @@ export default function SettingAccount() {
         alert(JSON.stringify(error));
       });
 
-    return r.data.updateProfpic?.success;
+    return r?.data.updateProfpic?.success;
   }
 
   const handleSubmit = async () => {

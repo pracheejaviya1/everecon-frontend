@@ -4,6 +4,7 @@ import SpeakerProfile from '../../assets/Images/Rectangle6.png';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import { navigate } from 'gatsby-link';
+import { graphqlurl } from '../../components/config';
 
 const CREATE_SPEAKER_MUTATION = gql`
   mutation createSpeaker(
@@ -106,14 +107,14 @@ export default function UpdateEventTwo({ location }) {
       redirect: 'follow',
     };
 
-    let r = await fetch('http://localhost:8000/graphql/', requestOptions)
+    let r = await fetch(graphqlurl, requestOptions)
       .then(response => response.json())
       .catch(error => {
         console.log('error', error);
         alert('image upload error ' + JSON.stringify(error));
       });
 
-    return r.data.updateSpeakerpicture?.success;
+    return r?.data.updateSpeakerpicture?.success;
   }
   async function handleSubmit() {
     try {

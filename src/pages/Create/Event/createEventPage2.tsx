@@ -203,7 +203,7 @@ export default function CreateEventTwo({ location }) {
         alert('image upload error ' + JSON.stringify(error));
       });
 
-    return r.data.updateEventimage?.success;
+    return r?.data.updateEventimage?.success;
   }
 
   async function handleSubmit() {
