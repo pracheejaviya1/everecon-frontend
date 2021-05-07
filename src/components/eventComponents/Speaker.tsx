@@ -5,7 +5,7 @@ import { mediaurl } from '../../components/config';
 export default function SpeakerBlock(props) {
   return (
     <div className='flex flex-col bg-gray-100 py-6 px-8 rounded-lg'>
-      <div className='font-light'>{'Host - ' + props.speakerData.name}</div>
+      <div className='font-light'>{'Host - ' + props.hostData.name}</div>
       {props.speakerData.map(e => {
         return (
           <>
