@@ -3,6 +3,7 @@ import { Link, navigate } from 'gatsby';
 import * as React from 'react';
 import { graphqlurl } from '../../../components/config';
 import Header from '../../../components/header';
+import { mediaurl } from '../../../components/config';
 
 const SpeakerCard = ({ speaker, removeSpeaker }) => {
   // add CSS
@@ -11,20 +12,10 @@ const SpeakerCard = ({ speaker, removeSpeaker }) => {
       <ul className='flex flex-row items-center justify-between w-96 border-b-2'>
         <p className='font-inter text-gray-500'>{speaker.email}</p>
         <button onClick={() => removeSpeaker(speaker.id)}>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            className='h-6 w-6 mx-10 my-4'
-            fill='none'
-            viewBox='0 0 24 24'
-            stroke='#EF4444'
-          >
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              strokeWidth={2}
-              d='M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z'
-            />
-          </svg>{' '}
+          <img
+            src={mediaurl + speaker.profilePicture}
+            className='h-16 w-16 rounded-full my-2 mr-4 object-cover'
+          />
         </button>
       </ul>
     </div>
@@ -140,7 +131,7 @@ export default function CreateEventTwo({ location }) {
     }
   );
 
-  const [startTime, setStartTime] = React.useState('2018-06-07T00:00');
+  const [startTime, setStartTime] = React.useState('2020-06-07T00:00');
   const [endTime, setEndTime] = React.useState('');
   const [maxRsvp, setmaxRsvp] = React.useState('');
   const [speakers, setSpeakers] = React.useState([]);

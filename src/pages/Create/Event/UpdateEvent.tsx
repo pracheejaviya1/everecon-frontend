@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { gql, useQuery, useLazyQuery } from '@apollo/client';
-import EventImage from '../../../assets/Images/community.jpg';
+import { gql, useQuery, useLazyQuery, useMutation } from '@apollo/client';
 import DD_Categories from '../../../components/dd_categories';
 import Header from '../../../components/header';
 import TagInput from '../../../components/taginput';
+import { mediaurl } from '../../../components/config';
 
 type UpdateProps = {
   details: string;
@@ -31,26 +31,103 @@ const SPEAKER_EMAIL_QUERY = gql`
   }
 `;
 
+const EVENT_QUERY = gql`
+  query eventById($id: ID) {
+    eventById(id: $id) {
+      iscore
+      isvolunteer
+      isregistered
+      ischeckedin
+      id
+      name
+      description
+      kind
+      address
+      city
+      country
+      liveUrl
+      startTime
+      endTime
+      featuredImage
+      isActive
+      creationTime
+      maxRsvp
+      category {
+        id
+        name
+      }
+      tags {
+        name
+      }
+      speakers {
+        id
+        firstName
+        lastName
+        email
+        facebook
+        instagram
+        profilePicture
+        description
+      }
+    }
+  }
+`;
+
+const UPDATE_EVENT = gql`
+  mutation updateEvent(
+    $address: String
+    $category: ID
+    $city: String
+    $country: String
+    $description: String
+    $endTime: DateTime
+    $id: ID!
+    $kind: String
+    $liveUrl: String
+    $maxRsvp: Int
+    $name: String
+    $startTime: DateTime
+    $tags: [String]
+    $speakers: [ID]
+  ) {
+    updateEvent(
+      address: $address
+      category: $category
+      city: $city
+      country: $country
+      description: $description
+      endTime: $endTime
+      id: $id
+      kind: $kind
+      liveUrl: $liveUrl
+      maxRsvp: $maxRsvp
+      name: $name
+      startTime: $startTime
+      tags: $tags
+      speakers: $speakers
+    ) {
+      event {
+        id
+        name
+      }
+      community {
+        id
+        name
+      }
+    }
+  }
+`;
+
 const SpeakerCard = ({ speaker, removeSpeaker }) => {
   return (
     <div>
       <ul className='flex flex-row items-center justify-between w-96 border-b-1'>
         <p className='font-inter text-gray-500'>{speaker.email}</p>
         <button onClick={() => removeSpeaker(speaker.id)}>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            className='h-6 w-6 mx-10 my-4'
-            fill='none'
-            viewBox='0 0 24 24'
-            stroke='#EF4444'
-          >
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              strokeWidth={2}
-              d='M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z'
-            />
-          </svg>{' '}
+          <img
+            src={mediaurl + speaker.profilePicture}
+            className='h-16 w-16 rounded-full my-2 mr-4 object-cover'
+          />
         </button>
       </ul>
     </div>
@@ -58,12 +135,24 @@ const SpeakerCard = ({ speaker, removeSpeaker }) => {
 };
 
 export default function UpdateEventTwo(props: UpdateProps) {
-  const [fields, setFields] = React.useState([{ value: null }]);
+  const [id, setId] = React.useState();
   const { data: categories_data } = useQuery(CATEGORIES_QUERY);
   const [category, setCategory] = React.useState();
   const [tags, setTags] = React.useState([]);
-  const [startTime, setStartTime] = React.useState('2018-06-07T00:00');
+  const [startTime, setStartTime] = React.useState('2020-06-07T00:00');
   const [endTime, setEndTime] = React.useState('');
+  const [logo, setLogo] = React.useState(null);
+  const [logoURL, setLogoURL] = React.useState('');
+  const [name, setName] = React.useState('');
+  const [address, setAddress] = React.useState('');
+  const [city, setCity] = React.useState('');
+  const [country, setCountry] = React.useState('');
+  const [description, setDescription] = React.useState('');
+  const [online, setOnline] = React.useState(true);
+  const { loading, error, data, refetch } = useQuery(EVENT_QUERY, {
+    variables: { id: props?.location.state.eventid },
+  });
+
   const removeSpeaker = (speakerid: number) => {
     let newspeakers = speakers.filter(speaker => speaker.id !== speakerid);
     setSpeakers(newspeakers);
@@ -76,9 +165,133 @@ export default function UpdateEventTwo(props: UpdateProps) {
       },
     }
   );
-
+  const [callUpdateEvent, { data: update_data }] = useMutation(UPDATE_EVENT);
   const [speakers, setSpeakers] = React.useState([]);
   const [speakerinput, setSpeakerInput] = React.useState('');
+
+  React.useEffect(() => {
+    setId(props?.location.state.eventid);
+    refetch();
+  }, []);
+
+  React.useEffect(() => {
+    if (!loading) {
+      setId(props?.location.state.eventid);
+      setName(data?.eventById.name);
+      setAddress(data?.eventById.address);
+      setCity(data?.eventById.city);
+      setCountry(data?.eventById.country);
+      setDescription(data?.eventById.description);
+      setCategory(data?.eventById.category);
+      setTags(data?.eventById.tags.map(e => e.name));
+      setStartTime(
+        data?.eventById.startTime.substring(
+          0,
+          data?.eventById.startTime.length - 9
+        )
+      );
+      console.log(data?.eventById.startTime);
+      setEndTime(
+        data?.eventById.endTime.substring(0, data?.eventById.endTime.length - 9)
+      );
+      console.log(data?.eventById.endTime);
+      setLogoURL(mediaurl + data?.eventById.featuredImage);
+      setOnline(data?.eventById.kind == 'V' ? true : false);
+      setSpeakers(data?.eventById.speakers);
+    }
+  }, [data]);
+
+  const handleFileChange = (e: { target: { files: any } }) => {
+    var files = e.target.files;
+    if (files[0]) {
+      setLogo(files[0]);
+      setLogoURL(URL.createObjectURL(files[0]));
+    }
+  };
+
+  async function uploadImage(eventid) {
+    // upload logo if logo else return True
+    if (!logo) {
+      console.log('no image');
+      return true;
+    }
+    var myHeaders = new Headers();
+    myHeaders.append(
+      'Authorization',
+      `Bearer ${window.localStorage.getItem('token')}`
+    );
+    var formdata = new FormData();
+    formdata.append(
+      'query',
+      `mutation{
+    updateEventimage (id: ${eventid}) {
+        success
+        picture
+    }
+}
+      `
+    );
+    formdata.append('file', logo);
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow',
+    };
+
+    let r = await fetch(graphqlurl, requestOptions)
+      .then(response => response.json())
+      .catch(error => {
+        console.log('error', error);
+        alert('image upload error ' + JSON.stringify(error));
+      });
+
+    return r?.data.updateEventimage?.success;
+  }
+
+  async function handleSubmit() {
+    let speakerarr = speakers.map(e => parseInt(e.id));
+    console.log(speakerarr);
+    try {
+      let { data, errors: e } = await callUpdateEvent({
+        variables: {
+          address: address,
+          category: category.id,
+          city: city,
+          country: country,
+          description: description,
+          endTime: endTime,
+          id: id,
+          kind: online ? 'V' : 'P',
+          name: name,
+          startTime: startTime,
+          tags: tags,
+          speakers: speakerarr,
+        },
+      });
+      if (e) {
+        console.error(e);
+        alert(JSON.stringify(e));
+        return;
+      }
+      else{
+        alert("event updated");
+      }
+      let eventid = data.createEvent.event.id;
+      console.log(eventid);
+      let uploaded = await uploadImage(eventid);
+      if (uploaded) {
+        alert('event photo uploaded');
+      } else {
+        console.error('Failed to upload Event Image');
+        alert('Failed to upload Event Image');
+      }
+    } catch (e) {
+      alert(JSON.stringify(e.graphQLErrors[0].message));
+    }
+    return;
+  }
 
   React.useEffect(() => {
     console.log(speakerdata);
@@ -94,6 +307,13 @@ export default function UpdateEventTwo(props: UpdateProps) {
     }
   }, [speakerdata]);
 
+  if (loading) {
+    return `Loading`;
+  }
+  if (error) {
+    return `Error! ${error}`;
+  }
+
   return (
     <div className='h-screen w-screen'>
       <Header />
@@ -105,34 +325,46 @@ export default function UpdateEventTwo(props: UpdateProps) {
             </h1>
           </div>
           <ul className='flex list-none'>
-            <li className='mx-2 text-green-500 font-inter'>Save</li>
-            <li className='mx-2 text-red-500 font-inter'>Discard</li>
+            <button onClick={handleSubmit}>
+              <li className='mx-2 text-green-500 font-inter'>Save</li>
+            </button>
           </ul>
         </div>
         <div className='flex mx-auto w-2/3 font-mulish my-4'>
           <label>
             <img
-              className='h-48 w-72 object-cover items-center justify-between rounded-lg hover:shadow-lg'
-              src={EventImage}
+              className='h-48 w-72 object-cover items-center justify-between rounded-lg  hover:shadow-lg'
+              src={logoURL}
             />
-
-            <input type='file' className='hidden' />
-            <figcaption className='py-2 text-center items-center justify-between text-xs font-mulish'>
-              Update Event photo
+            <input type='file' className='hidden' onChange={handleFileChange} />
+            <figcaption className='py-2 text-center font-mulish'>
+              Upload Event photo
             </figcaption>
           </label>
           <div className='grid items-top grid-cols-2 mx-10 h-24 w-3/5 font-inter'>
             <input
               className='col-span-2 bg-gray-100 rounded-md p-2 font-sm placeholder-gray my-3 mx-3'
               placeholder='Event Name'
+              value={name}
+              onChange={e => {
+                setName(e.target.value);
+              }}
             />
             <input
               className='bg-gray-100 rounded-md p-2 font-sm placeholder-gray my-3 mx-3'
               placeholder='City'
+              value={city}
+              onChange={e => {
+                setCity(e.target.value);
+              }}
             />
             <input
               className='bg-gray-100 rounded-md p-2 font-sm placeholder-gray my-3 mx-3'
               placeholder='Country'
+              value={country}
+              onChange={e => {
+                setCountry(e.target.value);
+              }}
             />
             <div className='col-span-2 flex flex-row items-center justify-between w-full my-2'>
               <label className='w-36 font-inter' htmlFor='Start Time'>
@@ -174,7 +406,13 @@ export default function UpdateEventTwo(props: UpdateProps) {
               <label className=' text-md' htmlFor='Address'>
                 Address
               </label>
-              <input className='col-span-2 w-72 bg-gray-100 rounded-md p-2 font-sm placeholder-gray my-3 mx-3' />
+              <input
+                value={address}
+                onChange={e => {
+                  setAddress(e.target.value);
+                }}
+                className='col-span-2 w-72 bg-gray-100 rounded-md p-2 font-sm placeholder-gray my-3 mx-3'
+              />
             </div>
             <div className='flex items-center justify-between w-1/5 my-4'>
               <label htmlFor='online'>Make this event online</label>
@@ -183,19 +421,12 @@ export default function UpdateEventTwo(props: UpdateProps) {
                 placeholder='online'
                 type='checkbox'
                 name='online'
+                checked={online}
+                onClick={e => {
+                  setOnline(e.target.checked);
+                  console.log(e);
+                }}
               />
-            </div>
-            <div className='flex items-center justify-between w-2/5'>
-              <label className='text-md' htmlFor='Host'>
-                Host
-              </label>
-              <input className='col-span-2 w-72 bg-gray-100 rounded-md p-2 font-sm placeholder-gray my-3 mx-3' />
-            </div>
-            <div className='flex items-center justify-between w-2/5'>
-              <label className='text-md' htmlFor='Event URL'>
-                Event URL
-              </label>
-              <input className='col-span-2 w-72 bg-gray-100 rounded-md p-2 font-sm placeholder-gray my-3 mx-3' />
             </div>
 
             <hr className='my-4' />
@@ -250,9 +481,13 @@ export default function UpdateEventTwo(props: UpdateProps) {
 
         <div className='w-2/3 my-2 mx-auto font-inter'>
           <h2 className='font-bold my-2'>Event Details</h2>
-          <textarea className='w-1/2 h-72 rounded-md bg-gray-100 border border-gray-100'>
-            {props.details}
-          </textarea>
+          <textarea
+            className='w-1/2 h-72 rounded-md bg-gray-100 border border-gray-100'
+            value={description}
+            onChange={e => {
+              setDescription(e.target.value);
+            }}
+          ></textarea>
         </div>
       </div>
     </div>

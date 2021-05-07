@@ -104,10 +104,14 @@ export default function ViewEvent(props) {
   } else {
     uid = '1';
   }
+  React.useEffect(() => {
+    refetch();
+  }, []);
 
   const { loading, error, data, refetch } = useQuery(EVENT_QUERY, {
     variables: { id: uid },
   });
+
   if (loading) {
     return `Loading`;
   }
