@@ -22,6 +22,8 @@ export default function UpdateEventTwo(props: UpdateProps) {
   const { data: categories_data } = useQuery(CATEGORIES_QUERY);
   const [category, setCategory] = React.useState();
   const [tags, setTags] = React.useState([]);
+  const [startTime, setStartTime] = React.useState('2018-06-07T00:00');
+  const [endTime, setEndTime] = React.useState('');
 
   function handleChange(i, event) {
     const values = [...fields];
@@ -137,17 +139,29 @@ export default function UpdateEventTwo(props: UpdateProps) {
             </div> */}
 
             <div className='flex flex-row'>
-              <div className=' w-2/5'>
-                <label className='text-md' htmlFor='Start time'>
+              <div className='flex flex-row items-center w-full my-2'>
+                <label className='w-48 font-inter' htmlFor='Start Time'>
                   Start Time
                 </label>
-                <input className='col-span-2 w-72 bg-gray-100 rounded-md p-2 font-sm placeholder-gray my-3 mx-3' />
-              </div>
-              <div className=' w-2/5'>
-                <label className='text-md' htmlFor='End time'>
+                <input
+                  name='Start Time'
+                  className='rounded-md font-inter text-gray-500'
+                  type='datetime-local'
+                  min='2018-06-07T00:00'
+                  value={startTime}
+                  onChange={e => setStartTime(e.target.value)}
+                />
+                <label className='mx-8 w-48 font-inter' htmlFor='End Time'>
                   End Time
                 </label>
-                <input className='col-span-2 w-72 bg-gray-100 rounded-md p-2 font-sm placeholder-gray my-3 mx-3' />
+                <input
+                  name='End Time'
+                  className='rounded-md font-inter text-gray-500'
+                  type='datetime-local'
+                  min={startTime}
+                  value={endTime}
+                  onChange={e => setEndTime(e.target.value)}
+                />
               </div>
             </div>
             <hr className='my-4' />
