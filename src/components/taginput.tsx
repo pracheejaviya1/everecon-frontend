@@ -25,7 +25,7 @@ export default function TagInput({ tags, setTags }) {
 
       {tags.map((tag, i) => (
         <ul key={i}>
-          <div className='flex flex-row font-inter text-blue-700 my-1 w-96'>
+          <div className='flex flex-row font-inter justify-between text-blue-700 my-1 w-96'>
             {tag}
             <button
               className='mx-8'

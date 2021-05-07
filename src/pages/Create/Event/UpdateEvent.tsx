@@ -1,13 +1,27 @@
 import * as React from 'react';
+import { gql, useQuery } from '@apollo/client';
 import EventImage from '../../../assets/Images/community.jpg';
 import Header from '../../../components/header';
+import DD_Categories from '../../../components/dd_categories';
+import TagInput from '../../../components/taginput';
 
 type UpdateProps = {
   details: string;
 };
+const CATEGORIES_QUERY = gql`
+  query categories {
+    categories {
+      id
+      name
+    }
+  }
+`;
 
 export default function UpdateEventTwo(props: UpdateProps) {
   const [fields, setFields] = React.useState([{ value: null }]);
+  const { data: categories_data } = useQuery(CATEGORIES_QUERY);
+  const [category, setCategory] = React.useState();
+  const [tags, setTags] = React.useState([]);
 
   function handleChange(i, event) {
     const values = [...fields];
@@ -79,21 +93,22 @@ export default function UpdateEventTwo(props: UpdateProps) {
           </div>
           <button
             type='submit'
-            className='text-white bg-red-500 h-1/4 p-2 items-end rounded-md'
+            className='text-white bg-red-500 h-1/4 p-2 my-3 rounded-md'
             onClick={e => e.preventDefault()}
           >
             Delete Event
           </button>
         </div>
-        <div className='w-2/3 mx-auto font-mulish'>
+        <div className='w-2/3 mx-auto font-inter'>
+          <hr className='my-4' />
           <form>
             <div className='flex items-center justify-between w-2/5'>
-              <label className=' text-lg' htmlFor='Address'>
+              <label className=' text-md' htmlFor='Address'>
                 Address
               </label>
               <input className='col-span-2 w-72 bg-gray-100 rounded-md p-2 font-sm placeholder-gray my-3 mx-3' />
             </div>
-            <div className='flex items-center justify-between w-2/5 my-4'>
+            <div className='flex items-center justify-between w-1/5 my-4'>
               <label htmlFor='online'>Make this event online</label>
               <input
                 className='bg-gray-100 rounded-full border border-gray-100 h-6 w-6'
@@ -103,23 +118,23 @@ export default function UpdateEventTwo(props: UpdateProps) {
               />
             </div>
             <div className='flex items-center justify-between w-2/5'>
-              <label className='text-lg' htmlFor='Host'>
+              <label className='text-md' htmlFor='Host'>
                 Host
               </label>
               <input className='col-span-2 w-72 bg-gray-100 rounded-md p-2 font-sm placeholder-gray my-3 mx-3' />
             </div>
             <div className='flex items-center justify-between w-2/5'>
-              <label className='text-lg' htmlFor='Event URL'>
+              <label className='text-md' htmlFor='Event URL'>
                 Event URL
               </label>
               <input className='col-span-2 w-72 bg-gray-100 rounded-md p-2 font-sm placeholder-gray my-3 mx-3' />
             </div>
-            <div className='flex items-center justify-between w-2/5'>
+            {/* <div className='flex items-center justify-between w-2/5'>
               <label className='text-lg' htmlFor='Category'>
                 Category
               </label>
               <input className='col-span-2 w-72 bg-gray-100 rounded-md p-2 font-sm placeholder-gray my-3 mx-3' />
-            </div>
+            </div> */}
 
             <div className='flex flex-row'>
               <div className=' w-2/5'>
@@ -135,7 +150,9 @@ export default function UpdateEventTwo(props: UpdateProps) {
                 <input className='col-span-2 w-72 bg-gray-100 rounded-md p-2 font-sm placeholder-gray my-3 mx-3' />
               </div>
             </div>
-            <div className='flex items-start justify-between w-2/5 mt-2'>
+            <hr className='my-4' />
+
+            {/* <div className='flex items-start justify-between w-2/5 mt-2'>
               <div className='flex flex-row'>
                 <p className='text-lg'>Tags</p>
                 <button type='button' onClick={() => handleAdd()}>
@@ -155,8 +172,8 @@ export default function UpdateEventTwo(props: UpdateProps) {
                   </svg>
                 </button>
               </div>
-            </div>
-            <div className='flex flex-col w-4/5'>
+            </div> */}
+            {/* <div className='flex flex-col w-4/5'>
               {fields.map((field, idx) => {
                 return (
                   <div key={`${field}-${idx}`}>
@@ -190,9 +207,26 @@ export default function UpdateEventTwo(props: UpdateProps) {
                   </div>
                 );
               })}
-            </div>
+            </div> */}
+            <label className='my-2' htmlFor='Event category'>
+              {/* <input
+              className='border border-gray-400 p-2 w-80 rounded-lg font-roboto text-sm'
+              placeholder='category'
+              name='Event category'
+              value={category}
+              onChange={e => setCategory(e.target.value)}
+            /> */}
+              <DD_Categories
+                categories={categories_data?.categories || []}
+                selected_category={category}
+                setCategory={setCategory}
+              />
+            </label>
+            <h3 className='my-3'>Tags</h3>
+            <TagInput tags={tags} setTags={setTags} />
           </form>
         </div>
+        <hr className='my-4 w-2/3' />
 
         <div className='w-2/3 my-2 mx-auto font-inter'>
           <h2 className='font-bold my-2'>Event Details</h2>
