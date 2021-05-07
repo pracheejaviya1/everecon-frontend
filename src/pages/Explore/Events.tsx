@@ -81,10 +81,10 @@ export default function ExploreCommunity() {
   const input_class: string =
     'border-gray-100 p-3 text-xs block w-80 rounded-xl font-mulish bg-gray-100';
   return (
-    <div className='bg-explore_events bg-no-repeat bg-bottom h-screen'>
+    <div className='bg-explore_events bg-fixed bg-contain bg-no-repeat bg-bottom'>
       <Header />
-      <div className='m-6 flex flex-col divide-y divide-gray-500'>
-        <div className='m-4'>
+      <div className='flex flex-col divide-y divide-gray-500'>
+        <div>
           <h1 className='my-5 text-2xl font-mulish text-center'>
             Explore Events
           </h1>
@@ -106,6 +106,7 @@ export default function ExploreCommunity() {
               Reset
             </span>
           </div> */}
+
           {events_data &&
             events_data.events.map(e => (
               <EventCard
@@ -116,6 +117,7 @@ export default function ExploreCommunity() {
                 id={e.id}
               />
             ))}
+
           {/* <Link to='/View/ViewEvent'>
             <EventCard communityName='meh' date={new Date()} title='Title' />
           </Link> */}
