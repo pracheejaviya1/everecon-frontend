@@ -14,8 +14,8 @@ module.exports = {
     PARALLEL_SOURCING: true,
   },
   plugins: [
-    `gatsby-plugin-postcss`,
     `gatsby-plugin-sitemap`,
+    `gatsby-plugin-postcss`,
     `gatsby-theme-apollo`,
     {
       resolve: `gatsby-plugin-google-fonts`,
