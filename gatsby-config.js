@@ -7,7 +7,7 @@
 module.exports = {
   siteMetadata: {
     title: 'EveRecon',
-    siteURL: 'https://everecon.com',
+    siteUrl: `https://everecon-frontend.vercel.app/`,
   },
   flags: {
     FAST_DEV: true,
@@ -15,6 +15,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-postcss`,
+    `gatsby-plugin-sitemap`,
     `gatsby-theme-apollo`,
     {
       resolve: `gatsby-plugin-google-fonts`,

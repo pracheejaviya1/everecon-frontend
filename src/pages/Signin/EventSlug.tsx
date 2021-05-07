@@ -15,7 +15,7 @@ export const query = graphql`
   query PageQuery {
     site {
       siteMetadata {
-        siteURL
+        siteUrl
       }
     }
   }
