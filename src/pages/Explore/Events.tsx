@@ -3,9 +3,6 @@ import gql from 'graphql-tag';
 import * as React from 'react';
 import EventCard from '../../components/cards/event/eventCard';
 import Header from '../../components/header';
-type TagProps = {
-  text: string;
-};
 
 const LIST_EVENTS = gql`
   query events($kind: Int, $length: Int, $filter: String, $desc: Boolean) {
@@ -44,28 +41,6 @@ const LIST_EVENTS = gql`
   }
 `;
 
-function Tag(props: TagProps) {
-  return (
-    <span className='flex items-center mx-2 my-2 font-mulish rounded-lg justify-between border-gray-400 border px-2 h-3/4'>
-      {props.text}{' '}
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        className='h-3 w-3'
-        fill='none'
-        viewBox='0 0 24 24'
-        stroke='currentColor'
-      >
-        <path
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          strokeWidth={2}
-          d='M6 18L18 6M6 6l12 12'
-        />
-      </svg>
-    </span>
-  );
-}
-
 export default function ExploreCommunity() {
   const { data: events_data, refetch } = useQuery(LIST_EVENTS, {
     variables: {
@@ -78,8 +53,6 @@ export default function ExploreCommunity() {
   React.useEffect(() => {
     refetch();
   }, []);
-  const input_class: string =
-    'border-gray-100 p-3 text-xs block w-80 rounded-xl font-mulish bg-gray-100';
   return (
     <div className='bg-explore_events bg-fixed bg-contain bg-no-repeat bg-bottom'>
       <Header />

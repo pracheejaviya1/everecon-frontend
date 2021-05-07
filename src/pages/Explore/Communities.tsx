@@ -1,4 +1,4 @@
-import { useQuery, gql } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client';
 import * as React from 'react';
 import CommunityCard from '../../components/cards/community/communityCard';
 import Header from '../../components/header';
@@ -97,10 +97,10 @@ export default function ExploreCommunity() {
   const input_class: string =
     'border-gray-100 p-3 text-xs block w-80 rounded-xl font-mulish bg-gray-100';
   return (
-    <div className='bg-explore_communities bg-no-repeat bg-bottom h-screen'>
+    <div className='bg-explore_communities bg-contain bg-fixed bg-no-repeat bg-bottom'>
       <Header />
-      <div className='m-6 flex flex-col divide-y divide-gray-500'>
-        <div className='m-4'>
+      <div className='flex flex-col divide-y divide-gray-500'>
+        <div>
           <h1 className='my-5 text-2xl font-mulish text-center'>
             Explore Communities
           </h1>
