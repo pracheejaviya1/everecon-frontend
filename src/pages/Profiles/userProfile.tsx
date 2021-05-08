@@ -213,6 +213,11 @@ function DetailsCard(props: any) {
           <p className='text-gray-500 text-md w-24'> Username</p>
           <p className='text-gray-700 text-lg mx-10'>{props.username}</p>
         </div>
+        <div className='flex flex-row'>
+          <p className='text-gray-500 text-md w-24'> Name</p>
+          <p className='text-gray-700 text-lg ml-10'>{props.firstname}</p>
+          <p className='text-gray-700 text-lg mx-2'>{props.lastname}</p>
+        </div>
         <h2 className='text-2xl text-blue-500 mt-2'>Contact</h2>
         <hr className='w-16 mb-2 border border-gray-500' />
         <div className='flex flex-row'>
@@ -346,6 +351,8 @@ export default function UserProfile() {
         } */}
         {selected === DETAILS ? (
           <DetailsCard
+            firstname={data.myprofile.firstName}
+            lastname={data.myprofile.lastName}
             username={data.myprofile.username}
             city={data.myprofile.profile.city}
             country={data.myprofile.profile.country}
