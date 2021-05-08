@@ -26,7 +26,7 @@ context('Actions', () => {
       '#header > ul.flex.flex-row.justify-center > li:nth-child(2) > a'
     ).click();
     cy.get(
-      '#gatsby-focus-wrapper > div > div.flex.flex-col.my-8.w-1\\/2.mx-auto.items-center.justify-center > div > div > a'
+      '#gatsby-focus-wrapper > div > div.flex.flex-col.my-8.w-1\\/2.mx-auto.items-center.justify-center > div > div > div.px-2 > a:nth-child(1)'
     )
       .should('contain.text', 'Create Community')
       .click();

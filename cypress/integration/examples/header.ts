@@ -12,7 +12,7 @@ context('Actions', () => {
 
   it('header-logo', () => {
     cy.get('body').should('contain.text', 'ABOUT US');
-    cy.get('#header img').should('have.attr', 'alt', 'EveRecon').click();
+    cy.get('#header > a > img').should('have.attr', 'alt', 'EveRecon').click();
     cy.get('body').should('contain.text', 'ABOUT US');
   });
 
@@ -54,7 +54,7 @@ context('Actions', () => {
   it('header-settings', () => {
     cy.get('body').should('contain.text', 'ABOUT US');
     cy.get(
-      '#header > ul.flex.flex-row.justify-center > li.my-2.m-7 > a'
+      '#header > ul.flex.flex-row.justify-center > li.mt-4.mx-8 > a'
     ).click();
     cy.get('body').should('contain.text', 'Settings');
   });
